@@ -1,0 +1,6 @@
+Feature,Option,Specify Provider
+Customer Types,Both,
+KYC (Retail),Same as Bank,Sardine
+KYB,Same as Bank,Sardine
+KYC (Business Owner),Same as Bank,Sardine
+Transaction Monitoring/AML,Same as Bank,Sardine

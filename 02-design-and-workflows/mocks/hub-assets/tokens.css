@@ -1,0 +1,16 @@
+:root {
+  --hz-plum: #3a1c32;
+  --hz-ink: #140a14;
+  --hz-red: #eb001f;
+  --hz-red-hover: #c9001b;
+  --hz-orange: #ff6e46;
+  --hz-muted: #645573;
+  --hz-mint-50: #f8fef9;
+  --hz-mint-200: #dfe9e1;
+  --hz-white: #ffffff;
+  --hz-line: rgba(58, 28, 50, 0.24);
+  --hz-focus: rgba(235, 0, 31, 0.28);
+  --hz-font-sans: "TWK Lausanne", Inter, system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --hz-font-editorial: "PP Editorial New", Georgia, "Times New Roman", serif;
+}

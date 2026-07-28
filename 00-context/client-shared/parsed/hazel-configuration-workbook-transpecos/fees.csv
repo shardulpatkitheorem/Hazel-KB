@@ -1,0 +1,113 @@
+1,='[1]Product Type Configuration'!D3,,,,,,
+#,Category,Item,Desctiption,RT/EOM?,Bank Revenue (Charge Fintech),RT/EOM?,Fintech Revenue (Charge End User)
+1,Accounts,Monthly Account Maintenance Fee,This is the monthly fee that is charged oper account,EOM,0.25,EOM,0.5
+2,Accounts,Account Opening Fee,"This is the charge for opening an account, most FinTechs will not charge this to the end user. It includes KYC/KYB and IAV costs",EOM,5,N/A,N/A
+3,Accounts,Account Inactive Fee,"This fee is charged when an account goes Inactive, until it becomes Dormant",EOM,10,Real-Time,10
+4,ACH,Standard ACH Fee (Inbound),Fee associated to ACH Transactions coming from the Fed,EOM,0.15,Real-Time,0.25
+5,ACH,Standard ACH Fee (Outbound),Fee associated to ACH Transactions that are originated,EOM,0.15,Real-Time,0.25
+6,ACH,Same-day ACH Fee (Outbound),Fee associated to expedited ACH Transactions that are originated for sameday ,EOM,0.25,Real-Time,0.5
+7,ACH,ACH Administrative Return Fee,Fee associated to receiving an ACH Administrative Return,EOM,2,Real-Time,10
+8,ACH,ACH Unauthorized Return Fee,Fee associated to receiving an ACH Unauthorized Return,EOM,2,Real-Time,10
+9,ACH,ACH NSF Fee,Fee associated to receiving an ACH NSF Return,EOM,2,Real-Time,10
+10,ACH,ACH Research Fee,Fee associated to customer asking to research. an ACH,EOM,2,Real-Time,10
+11,ACH,Stop Payment Fee,Fee Charged when a Stop Payment Request is generated through CSR,EOM,12,Real-Time,12
+12,WIRE,Wire Transaction Fee (Outbound),Fee associated to sending a Wire,EOM,8,Real-Time,15
+13,WIRE,Wire Transaction Fee (Inbound),Fee associated to receiving a Wire,EOM,5,Real-Time,15
+14,WIRE,Wire Return Fee,Fee associated to receiving a Wire Return Request,EOM,8,Real-Time,25
+15,FEDNOW,FedNow Transaction Fee (Outbound),Fee associated to receiving an funds through FedNow rail,EOM,0.3,Real-Time,1
+16,FEDNOW,FedNow Transaction Fee (Inbound),Fees associated to sendiing funds through FedNow rail,EOM,0.3,Real-Time,0
+17,FEDNOW,FedNow Return Fee,Fees associated to sendiing funds through FedNow rail,EOM,2,Real-Time,5
+18,SYSTEM,Implementation,One TIme Implementation Fee that is run through our Admin Adjustment,Admin Adjustment,45000,N/A,N/A
+19,SYSTEM,Platform,Monthly Platform Fee the FinTech pays,EOM,15000,N/A,N/A
+,,,,,,,
+,,,,,,,
+2,='[1]Product Type Configuration'!D6,,,,,,
+#,Category,Item,Desctiption,RT/EOM?,Bank Revenue (Charge Fintech),RT/EOM?,Fintech Revenue (Charge End User)
+1,Accounts,Monthly Account Maintenance Fee,This is the monthly fee that is charged oper account,EOM,=F3+0.1,EOM,=H3+0.1
+2,Accounts,Account Opening Fee,"This is the charge for opening an account, most FinTechs will not charge this to the end user. It includes KYC/KYB and IAV costs",EOM,=F4+0.1,N/A,N/A
+3,Accounts,Account Inactive Fee,"This fee is charged when an account goes Inactive, until it becomes Dormant",EOM,=F5+0.1,Real-Time,=H5+0.1
+4,ACH,Standard ACH Fee (Inbound),Fee associated to ACH Transactions coming from the Fed,EOM,=F6+0.1,Real-Time,=H6+0.1
+5,ACH,Standard ACH Fee (Outbound),Fee associated to ACH Transactions that are originated,EOM,=F7+0.1,Real-Time,=H7+0.1
+6,ACH,Same-day ACH Fee (Outbound),Fee associated to expedited ACH Transactions that are originated for sameday ,EOM,=F8+0.1,Real-Time,=H8+0.1
+7,ACH,ACH Administrative Return Fee,Fee associated to receiving an ACH Administrative Return,EOM,=F9+0.1,Real-Time,=H9+0.1
+8,ACH,ACH Unauthorized Return Fee,Fee associated to receiving an ACH Unauthorized Return,EOM,=F10+0.1,Real-Time,=H10+0.1
+9,ACH,ACH NSF Fee,Fee associated to receiving an ACH NSF Return,EOM,=F11+0.1,Real-Time,=H11+0.1
+10,ACH,ACH Research Fee,Fee associated to customer asking to research. an ACH,EOM,=F12+0.1,Real-Time,=H12+0.1
+11,ACH,Stop Payment Fee,Fee Charged when a Stop Payment Request is generated through CSR,EOM,=F13+0.1,Real-Time,=H13+0.1
+12,WIRE,Wire Transaction Fee (Outbound),Fee associated to sending a Wire,EOM,=F14+0.1,Real-Time,=H14+0.1
+13,WIRE,Wire Transaction Fee (Inbound),Fee associated to receiving a Wire,EOM,=F15+0.1,Real-Time,=H15+0.1
+14,WIRE,Wire Return Fee,Fee associated to receiving a Wire Return Request,EOM,=F16+0.1,Real-Time,=H16+0.1
+15,FEDNOW,FedNow Transaction Fee (Outbound),Fee associated to receiving an funds through FedNow rail,EOM,=F17+0.1,Real-Time,=H17+0.1
+16,FEDNOW,FedNow Transaction Fee (Inbound),Fees associated to sendiing funds through FedNow rail,EOM,=F18+0.1,Real-Time,=H18+0.1
+17,FEDNOW,FedNow Return Fee,Fees associated to sendiing funds through FedNow rail,EOM,=F19+0.1,Real-Time,=H19+0.1
+18,SYSTEM,Implementation,One TIme Implementation Fee that is run through our Admin Adjustment,Admin Adjustment,45000,N/A,N/A
+19,SYSTEM,Platform,Monthly Platform Fee the FinTech pays,EOM,15000,N/A,N/A
+,,,,,,,
+,,,,,,,
+3,='[1]Product Type Configuration'!D9,,,,,,
+#,Category,Item,Desctiption,RT/EOM?,Bank Revenue (Charge Fintech),RT/EOM?,Fintech Revenue (Charge End User)
+1,Accounts,Monthly Account Maintenance Fee,This is the monthly fee that is charged oper account,EOM,=F26+0.1,EOM,=H26+0.1
+2,Accounts,Account Opening Fee,"This is the charge for opening an account, most FinTechs will not charge this to the end user. It includes KYC/KYB and IAV costs",EOM,=F27+0.1,N/A,N/A
+3,Accounts,Account Inactive Fee,"This fee is charged when an account goes Inactive, until it becomes Dormant",EOM,=F28+0.1,Real-Time,=H28+0.1
+4,ACH,Standard ACH Fee (Inbound),Fee associated to ACH Transactions coming from the Fed,EOM,=F29+0.1,Real-Time,=H29+0.1
+5,ACH,Standard ACH Fee (Outbound),Fee associated to ACH Transactions that are originated,EOM,=F30+0.1,Real-Time,=H30+0.1
+6,ACH,Same-day ACH Fee (Outbound),Fee associated to expedited ACH Transactions that are originated for sameday ,EOM,=F31+0.1,Real-Time,=H31+0.1
+7,ACH,ACH Administrative Return Fee,Fee associated to receiving an ACH Administrative Return,EOM,=F32+0.1,Real-Time,=H32+0.1
+8,ACH,ACH Unauthorized Return Fee,Fee associated to receiving an ACH Unauthorized Return,EOM,=F33+0.1,Real-Time,=H33+0.1
+9,ACH,ACH NSF Fee,Fee associated to receiving an ACH NSF Return,EOM,=F34+0.1,Real-Time,=H34+0.1
+10,ACH,ACH Research Fee,Fee associated to customer asking to research. an ACH,EOM,=F35+0.1,Real-Time,=H35+0.1
+11,ACH,Stop Payment Fee,Fee Charged when a Stop Payment Request is generated through CSR,EOM,=F36+0.1,Real-Time,=H36+0.1
+12,WIRE,Wire Transaction Fee (Outbound),Fee associated to sending a Wire,EOM,=F37+0.1,Real-Time,=H37+0.1
+13,WIRE,Wire Transaction Fee (Inbound),Fee associated to receiving a Wire,EOM,=F38+0.1,Real-Time,=H38+0.1
+14,WIRE,Wire Return Fee,Fee associated to receiving a Wire Return Request,EOM,=F39+0.1,Real-Time,=H39+0.1
+15,FEDNOW,FedNow Transaction Fee (Outbound),Fee associated to receiving an funds through FedNow rail,EOM,=F40+0.1,Real-Time,=H40+0.1
+16,FEDNOW,FedNow Transaction Fee (Inbound),Fees associated to sendiing funds through FedNow rail,EOM,=F41+0.1,Real-Time,=H41+0.1
+17,FEDNOW,FedNow Return Fee,Fees associated to sendiing funds through FedNow rail,EOM,=F42+0.1,Real-Time,=H42+0.1
+18,SYSTEM,Implementation,One TIme Implementation Fee that is run through our Admin Adjustment,Admin Adjustment,45000,N/A,N/A
+19,SYSTEM,Platform,Monthly Platform Fee the FinTech pays,EOM,15000,N/A,N/A
+,,,,,,,
+,,,,,,,
+4,='[1]Product Type Configuration'!E12,,,,,,
+#,Category,Item,Desctiption,RT/EOM?,Bank Revenue (Charge Fintech),RT/EOM?,Fintech Revenue (Charge End User)
+1,Accounts,Monthly Account Maintenance Fee,This is the monthly fee that is charged oper account,EOM,=F49+0.1,EOM,=H49+0.1
+2,Accounts,Account Opening Fee,"This is the charge for opening an account, most FinTechs will not charge this to the end user. It includes KYC/KYB and IAV costs",EOM,=F50+0.1,N/A,N/A
+3,Accounts,Account Inactive Fee,"This fee is charged when an account goes Inactive, until it becomes Dormant",EOM,=F51+0.1,Real-Time,=H51+0.1
+4,ACH,Standard ACH Fee (Inbound),Fee associated to ACH Transactions coming from the Fed,EOM,=F52+0.1,Real-Time,=H52+0.1
+5,ACH,Standard ACH Fee (Outbound),Fee associated to ACH Transactions that are originated,EOM,=F53+0.1,Real-Time,=H53+0.1
+6,ACH,Same-day ACH Fee (Outbound),Fee associated to expedited ACH Transactions that are originated for sameday ,EOM,=F54+0.1,Real-Time,=H54+0.1
+7,ACH,ACH Administrative Return Fee,Fee associated to receiving an ACH Administrative Return,EOM,=F55+0.1,Real-Time,=H55+0.1
+8,ACH,ACH Unauthorized Return Fee,Fee associated to receiving an ACH Unauthorized Return,EOM,=F56+0.1,Real-Time,=H56+0.1
+9,ACH,ACH NSF Fee,Fee associated to receiving an ACH NSF Return,EOM,=F57+0.1,Real-Time,=H57+0.1
+10,ACH,ACH Research Fee,Fee associated to customer asking to research. an ACH,EOM,=F58+0.1,Real-Time,=H58+0.1
+11,ACH,Stop Payment Fee,Fee Charged when a Stop Payment Request is generated through CSR,EOM,=F59+0.1,Real-Time,=H59+0.1
+12,WIRE,Wire Transaction Fee (Outbound),Fee associated to sending a Wire,EOM,=F60+0.1,Real-Time,=H60+0.1
+13,WIRE,Wire Transaction Fee (Inbound),Fee associated to receiving a Wire,EOM,=F61+0.1,Real-Time,=H61+0.1
+14,WIRE,Wire Return Fee,Fee associated to receiving a Wire Return Request,EOM,=F62+0.1,Real-Time,=H62+0.1
+15,FEDNOW,FedNow Transaction Fee (Outbound),Fee associated to receiving an funds through FedNow rail,EOM,=F63+0.1,Real-Time,=H63+0.1
+16,FEDNOW,FedNow Transaction Fee (Inbound),Fees associated to sendiing funds through FedNow rail,EOM,=F64+0.1,Real-Time,=H64+0.1
+17,FEDNOW,FedNow Return Fee,Fees associated to sendiing funds through FedNow rail,EOM,=F65+0.1,Real-Time,=H65+0.1
+18,SYSTEM,Implementation,One TIme Implementation Fee that is run through our Admin Adjustment,Admin Adjustment,45000,N/A,N/A
+19,SYSTEM,Platform,Monthly Platform Fee the FinTech pays,EOM,15000,N/A,N/A
+,,,,,,,
+,,,,,,,
+5,='[1]Product Type Configuration'!D15,,,,,,
+#,Category,Item,Desctiption,RT/EOM?,Bank Revenue (Charge Fintech),RT/EOM?,Fintech Revenue (Charge End User)
+1,Accounts,Monthly Account Maintenance Fee,This is the monthly fee that is charged oper account,EOM,=F72+0.1,EOM,=H72+0.1
+2,Accounts,Account Opening Fee,"This is the charge for opening an account, most FinTechs will not charge this to the end user. It includes KYC/KYB and IAV costs",EOM,=F73+0.1,N/A,N/A
+3,Accounts,Account Inactive Fee,"This fee is charged when an account goes Inactive, until it becomes Dormant",EOM,=F74+0.1,Real-Time,=H74+0.1
+4,ACH,Standard ACH Fee (Inbound),Fee associated to ACH Transactions coming from the Fed,EOM,=F75+0.1,Real-Time,=H75+0.1
+5,ACH,Standard ACH Fee (Outbound),Fee associated to ACH Transactions that are originated,EOM,=F76+0.1,Real-Time,=H76+0.1
+6,ACH,Same-day ACH Fee (Outbound),Fee associated to expedited ACH Transactions that are originated for sameday ,EOM,=F77+0.1,Real-Time,=H77+0.1
+7,ACH,ACH Administrative Return Fee,Fee associated to receiving an ACH Administrative Return,EOM,=F78+0.1,Real-Time,=H78+0.1
+8,ACH,ACH Unauthorized Return Fee,Fee associated to receiving an ACH Unauthorized Return,EOM,=F79+0.1,Real-Time,=H79+0.1
+9,ACH,ACH NSF Fee,Fee associated to receiving an ACH NSF Return,EOM,=F80+0.1,Real-Time,=H80+0.1
+10,ACH,ACH Research Fee,Fee associated to customer asking to research. an ACH,EOM,=F81+0.1,Real-Time,=H81+0.1
+11,ACH,Stop Payment Fee,Fee Charged when a Stop Payment Request is generated through CSR,EOM,=F82+0.1,Real-Time,=H82+0.1
+12,WIRE,Wire Transaction Fee (Outbound),Fee associated to sending a Wire,EOM,=F83+0.1,Real-Time,=H83+0.1
+13,WIRE,Wire Transaction Fee (Inbound),Fee associated to receiving a Wire,EOM,=F84+0.1,Real-Time,=H84+0.1
+14,WIRE,Wire Return Fee,Fee associated to receiving a Wire Return Request,EOM,=F85+0.1,Real-Time,=H85+0.1
+15,FEDNOW,FedNow Transaction Fee (Outbound),Fee associated to receiving an funds through FedNow rail,EOM,=F86+0.1,Real-Time,=H86+0.1
+16,FEDNOW,FedNow Transaction Fee (Inbound),Fees associated to sendiing funds through FedNow rail,EOM,=F87+0.1,Real-Time,=H87+0.1
+17,FEDNOW,FedNow Return Fee,Fees associated to sendiing funds through FedNow rail,EOM,=F88+0.1,Real-Time,=H88+0.1
+18,SYSTEM,Implementation,One TIme Implementation Fee that is run through our Admin Adjustment,Admin Adjustment,45000,N/A,N/A
+19,SYSTEM,Platform,Monthly Platform Fee the FinTech pays,EOM,15000,N/A,N/A

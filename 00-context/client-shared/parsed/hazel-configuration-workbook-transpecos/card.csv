@@ -1,0 +1,92 @@
+Infinant Onboarding Questionnaire- Card,,
+,,
+Description,Response,Notes/Questions
+"Product Type(s)? Consumer Debit, Commercial Debit",,
+Bank Visa BID# that lists Infinant as TPA (Third Party Agent),,
+How many 8-digit BINs would you like to establish? 1 BIN equals 10 million PAN,,
+a.       List the BINs,,
+How many BINs or BIN ranges are being configured up front? One 9 digit BIN Range equals 1 million PAN,,
+a.       List the BINs or BIN ranges,,
+Program ID,,
+"Card Type: Digital, Physical or both",,
+"Card Issuance Vendor
+Managed Card Vendor CPI, or other. Here is a list of the current Card Vendors that DPS Forwards supports aside from CPI:
+Fiserv, Thales, Exceet, Arroweye, ABCorp
+
+If a sponsor bank wishes to use their current card vendor and they are not already supported by DPS Forward, that would become an additional project to onboard the card vendor.   This would add additional time to then onboard the sponsor bank.",,
+"If issuing Physical cards, what return address for card? (or CPI managed returns)",,
+"What non-Visa regional PIN and POS networks wpuld you liek to use? Forward supports
+
+STAR (ATM, PIN, CNP)
+Maestro ((Domestic PIN POS only) – ATM, PIN, CNP)
+NYCE (ATM, POS)
+Pulse (ATM, POS)",,
+Mail PINs? PIN first or card first.,,
+Will you Issue EMV Dual Interface Cards? (Contact and Contactless Capable) or Just EMV (Contact Only),,
+Surcharge Free ATM networks? Foward supports Allpoint or MoneyPass,,
+"If Prepaid, what cash-load network?",,
+What customer service number will be used to service cardholders?,,
+"Do you want to provide tokenization services for digital wallet provisioning (apple pay, google pay etc.)?",,
+"If yes, do you have digital wallet agreements with Apple, Google or Samsung thru VISA?",,
+Do you want to integrate In-App Push Provisioning to Digital Wallet?,,
+"Do you wish to Integrate SDK for Digitial Card Display for Mobile, Web, Both?",,
+"Expiration of cards? E.g. 36 months, 48 months",,
+"What real-time risk engine will you be using? E.g. Sardine, Alloy, Visa DPS RSM",,
+"Auto reissue cards 1 month prior to expiring? Only for cards with activity, or reissue any active card?",,
+Do you want to allow AFT transactions? (Visa Direct),,
+Business minimum to chargeback dispute? Typically $25-50,,
+Customer Service Phone number that CPI Will Print on the back of the Card,,
+Do you pefer reports with Full PAN details or with masked PAN details,,
+Who Handles KYC/KYB and OFAC checking? Infiant Partners with Sardine,,
+Who is your target demographic?,,
+Who is your ideal cardholder?,,
+Are you PCI compliant?,,
+"Use Cases for Minimum Viable Product:
+
+Issue Debit Card to Cardholder (digital or physical or both)
+
+Card Activation and PIN Set
+
+Transaction at point-of-sale
+
+Online transaction
+
+ATM transaction with Physical Card
+
+Reissue card for lost/stolen replacement
+
+Card freeze/unfreeze
+
+Account Funding Transaction (i.e., Venmo, Cash App transaction) to pull funds from a card account to fund a push Original Credit Transaction (OCT) from a different account
+
+OCT transaction (Venmo / Cash App instant deposit) to send or push funds to an eligible card-based account resulting in a credit of funds to the cardholder’s account
+
+Stand-In Processing (STIP)
+
+Dispute Processing either using the Shared Service model or Dispute Processing where Infinant handles the entire process (depends on which Dispute Processing Service Infinant selects)
+
+Provision card in a digital wallet
+
+Preset digital card or card details (PAN, Expiration, and CVV2) in-app to customers to use for online transactions ",,
+,,
+,,
+Transaction Limits,,
+Transaction Limit,,
+Daily Limit,,
+Monthly Limit,,
+ATM Transaction Limit,,
+ATM Daily Limit,,
+ATM Monthly Limit,,
+Foreign restrictions,,
+MCC restrictions,,
+VISA DPS STIP (Stand In Processing) limit (Purchases),,
+VISA DPS STIP (Stand In Processing) limit (Cash/ATM),,
+VISA DPS STIP (Stand In Processing) limit  (Aggregate),,
+Hard Max limit (for raising limits)   what does this apply too?   Is it POS or ATM or all combined?,,
+,,
+,,
+Contacts,Name,Phone / Email
+Implementation Manager,,
+Customer Service,,
+Operations ,,
+Disputes,,

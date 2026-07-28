@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta
+      name="description"
+      content="Hazel Network prototype review hub with the latest build and version history."
+    >
+    <title>Hazel Network — Prototype Review Hub</title>
+    <link rel="stylesheet" href="./hub-assets/style.css">
+    <script src="./hub-assets/auth.js" data-hazel-auth-root="./"></script>
+    <script src="./hub-assets/app.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+
+    <header class="site-header">
+      <a class="brand" href="./" aria-label="Hazel Network prototype hub home">
+        <img
+          class="brand-logo"
+          src="./hub-assets/brand/hazel-network-logo.svg"
+          alt=""
+          width="95"
+          height="78"
+        >
+      </a>
+      <p>Prototype review hub</p>
+    </header>
+
+    <main id="main-content">
+      <section class="intro" aria-labelledby="page-title">
+        <p class="eyebrow">Member bank onboarding</p>
+        <h1 id="page-title">Review the latest Hazel prototype.</h1>
+        <p class="intro-copy">
+          Explore the current review build or return to an earlier dated version.
+          Each link preserves the experience shared for that review.
+        </p>
+      </section>
+
+      <section class="latest-section" aria-labelledby="latest-heading">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Current review build</p>
+            <h2 id="latest-heading">Latest Prototype</h2>
+          </div>
+          <p id="loading-status" class="loading-status" role="status">
+            Loading build details…
+          </p>
+        </div>
+
+        <div id="latest-build" class="latest-card" aria-live="polite">
+          <div class="loading-block" aria-hidden="true"></div>
+        </div>
+
+        <div id="load-error" class="error-panel" role="alert" hidden>
+          <h3>Build details are temporarily unavailable.</h3>
+          <p>
+            You can still open the current prototype. Refresh this page to try
+            loading the version notes again.
+          </p>
+          <a
+            class="button button-secondary"
+            href="./versions/2026-07-28/index.html"
+            target="_blank"
+            rel="noopener noreferrer"
+          >Open current prototype</a>
+        </div>
+      </section>
+
+      <section class="history-section" aria-labelledby="history-heading">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Previous review builds</p>
+            <h2 id="history-heading">Version history</h2>
+          </div>
+        </div>
+        <div id="version-history" class="history-list">
+          <p class="muted">Version history is loading.</p>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>Hazel Network · Prototype review environment</p>
+    </footer>
+  </body>
+</html>
