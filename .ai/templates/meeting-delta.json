@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0",
+  "iteration_id": "2026-07-28-example-meeting",
+  "status": "no_change",
+  "source": {
+    "transcript_path": "01-transcripts/daily-calls/2026-07-28.md",
+    "meeting_date": "2026-07-28",
+    "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+  },
+  "decisions": [],
+  "approved_changes": [],
+  "requested_changes": [],
+  "action_items": [],
+  "open_questions": [],
+  "superseded_decisions": [],
+  "final_takeaways": [
+    "No repository change was warranted by this example iteration."
+  ],
+  "implementation_recommended": false,
+  "blocking_reasons": []
+}

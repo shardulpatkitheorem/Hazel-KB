@@ -19,6 +19,12 @@ AI outputs    ─┘                └─> GitHub Actions / LFS
 - `01-transcripts/`: offsite and dated daily-call transcripts
 - `02-design-and-workflows/`: workflow prototypes, mocks, and design specifications
 - `03-intermediate-ai-outputs/`: reusable prompts and proof-of-concept outputs
+- `04-iteration-ledger/`: append-only meeting deltas, decisions, open questions, and durable lessons
+- `.ai/`: agent roles, artifact contracts, prompts, templates, and deterministic guardrails
+
+## Meeting-to-workflow AI loop
+
+See [Hazel Meeting-to-Workflow AI Loop](docs/AI-MEETING-TO-WORKFLOW-LOOP.md) for the team-facing flowchart, agent responsibilities, approval gates, file structure, and definition of done.
 
 ## Suggested document metadata
 

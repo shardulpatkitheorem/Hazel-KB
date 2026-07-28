@@ -1,0 +1,16 @@
+{
+  "allowed_files": [
+    "02-design-and-workflows/workflow-html/example.html"
+  ],
+  "protected_elements": [
+    "root_css_variables",
+    "font_imports",
+    "font_families",
+    "brand_assets"
+  ],
+  "permissions": {
+    "allow_global_styles": false,
+    "allow_brand_assets": false,
+    "allow_page_shell": false
+  }
+}
