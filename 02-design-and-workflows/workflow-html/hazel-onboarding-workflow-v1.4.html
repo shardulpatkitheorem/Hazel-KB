@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hazel Member Bank Onboarding — Workflow Schematic</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#EDF0F3;
+  --plate:#FFFFFF;
+  --ink:#0E151D;
+  --ink-2:#3D4956;
+  --ink-3:#6C7885;
+  --rule:#C6CFD8;
+  --rule-soft:#DEE4EA;
+  --signal:#2B31C4;      /* the rail / primary flow */
+  --signal-wash:#E6E7FA;
+  --watch:#B5760A;       /* conditional / exception */
+  --watch-wash:#FBF0DC;
+  --stop:#A2242D;        /* decline / block */
+  --stop-wash:#F8E3E4;
+  --live:#186F55;        /* go-live / production */
+  --live-wash:#DCEFE8;
+  --gap:clamp(14px,1.6vw,22px);
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  background:var(--paper);
+  background-image:
+    linear-gradient(var(--rule-soft) 1px,transparent 1px),
+    linear-gradient(90deg,var(--rule-soft) 1px,transparent 1px);
+  background-size:64px 64px;
+  color:var(--ink);
+  font-family:"IBM Plex Sans",system-ui,sans-serif;
+  font-size:15px;
+  line-height:1.5;
+}
+.sheet{max-width:1260px;margin:0 auto;padding:clamp(18px,3vw,44px) clamp(14px,3vw,32px) 80px}
+
+/* ---------- title block ---------- */
+.titleblock{
+  background:var(--plate);
+  border:1.5px solid var(--ink);
+  display:grid;
+  grid-template-columns:1fr auto;
+  margin-bottom:clamp(24px,4vw,48px);
+}
+.tb-main{padding:clamp(20px,3vw,34px)}
+.eyebrow{
+  font-family:"IBM Plex Mono",monospace;
+  font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--signal);margin:0 0 14px;
+}
+h1{
+  font-family:"Archivo",sans-serif;
+  font-variation-settings:"wdth" 118,"wght" 700;
+  font-size:clamp(30px,5.2vw,58px);
+  line-height:.98;letter-spacing:-.02em;margin:0 0 14px;
+  text-transform:uppercase;
+}
+.dek{margin:0;max-width:60ch;color:var(--ink-2);font-size:clamp(14px,1.4vw,16px)}
+.tb-meta{
+  border-left:1.5px solid var(--ink);
+  display:grid;
+  grid-template-rows:repeat(5,1fr);
+  min-width:250px;
+}
+.tb-cell{padding:12px 18px;border-bottom:1px solid var(--rule)}
+.tb-cell:last-child{border-bottom:0}
+.tb-k{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);display:block}
+.tb-v{font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:500;color:var(--ink)}
+
+/* ---------- legend ---------- */
+.legend{
+  display:flex;flex-wrap:wrap;gap:8px 22px;align-items:center;
+  padding:14px 18px;background:var(--plate);
+  border:1px solid var(--rule);margin-bottom:clamp(24px,4vw,44px);
+}
+.lg{display:flex;align-items:center;gap:8px;font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.05em;color:var(--ink-2)}
+.sw{width:13px;height:13px;border:1px solid var(--ink);flex:none}
+.sw.a{background:var(--signal)}
+.sw.b{background:var(--watch)}
+.sw.c{background:var(--stop)}
+.sw.d{background:var(--live)}
+.sw.e{background:var(--plate);border-style:dashed}
+
+/* ---------- phase scaffold ---------- */
+.phase{display:grid;grid-template-columns:64px 1fr;gap:0;position:relative}
+.rail{position:relative}
+.rail::before{
+  content:"";position:absolute;left:26px;top:0;bottom:0;width:3px;
+  background:var(--signal);
+}
+.phase:last-of-type .rail::before{bottom:auto;height:44px}
+.pnum{
+  position:relative;z-index:2;display:grid;place-items:center;
+  width:54px;height:54px;margin-top:2px;
+  background:var(--signal);color:#fff;border:1.5px solid var(--ink);
+  font-family:"Archivo",sans-serif;font-variation-settings:"wdth" 112,"wght" 700;
+  font-size:21px;
+}
+.phase.is-loop .pnum{background:var(--live)}
+.phase.is-loop .rail::before{background:var(--live)}
+.phase.is-pre .pnum{background:var(--plate);color:var(--ink);border-style:dashed}
+.phase.is-pre .rail::before{background:linear-gradient(var(--ink-3) 50%,transparent 0);background-size:3px 10px}
+
+.plate{
+  background:var(--plate);border:1.5px solid var(--ink);
+  margin:0 0 var(--gap) 0;padding:0 0 4px;
+  box-shadow:5px 5px 0 rgba(14,21,29,.07);
+}
+.ph-head{
+  padding:18px clamp(16px,2.4vw,26px) 14px;border-bottom:1px solid var(--rule);
+  display:grid;grid-template-columns:minmax(0,1fr) 268px;gap:clamp(14px,2vw,26px);align-items:start;
+}
+.ph-lead{min-width:0}
+
+/* stakeholder box — top right of every step */
+.stake{
+  border:1.5px solid var(--ink);background:var(--paper);
+  box-shadow:3px 3px 0 rgba(14,21,29,.06);
+}
+.stake-hd{
+  display:flex;justify-content:space-between;align-items:baseline;gap:8px;
+  padding:6px 10px;background:var(--ink);color:#fff;
+  font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.15em;text-transform:uppercase;
+}
+.stake-hd i{font-style:normal;opacity:.65;letter-spacing:.08em}
+.stake ul{list-style:none;margin:0;padding:0}
+.stake li{
+  display:grid;grid-template-columns:52px minmax(0,1fr);gap:8px;align-items:baseline;
+  padding:7px 10px;border-bottom:1px dashed var(--rule);
+}
+.stake li:last-child{border-bottom:0}
+.rl{
+  font-family:"IBM Plex Mono",monospace;font-size:8.5px;letter-spacing:.09em;
+  text-transform:uppercase;text-align:center;padding:2px 3px;border:1px solid currentColor;
+  font-weight:600;white-space:nowrap;
+}
+.rl.lead{color:var(--signal);background:var(--signal-wash)}
+.rl.dec{color:#fff;background:var(--ink);border-color:var(--ink)}
+.rl.sme{color:var(--ink-2);background:#fff}
+.rl.ext{color:var(--watch);background:var(--watch-wash);border-style:dashed}
+.rl.bank{color:var(--live);background:var(--live-wash)}
+.nm{font-size:12.5px;font-weight:600;line-height:1.25;display:block}
+.fn{font-size:11px;color:var(--ink-3);line-height:1.25;display:block}
+.ph-head h2{
+  font-family:"Archivo",sans-serif;font-variation-settings:"wdth" 116,"wght" 700;
+  font-size:clamp(19px,2.4vw,27px);line-height:1.05;margin:0 0 8px;
+  letter-spacing:-.01em;text-transform:uppercase;
+}
+.ph-goal{margin:0 0 12px;color:var(--ink-2);font-size:14.5px;max-width:78ch}
+.owners{display:flex;flex-wrap:wrap;gap:6px}
+
+/* chips */
+.chip{
+  font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.05em;
+  padding:3px 8px;border:1px solid var(--rule);background:var(--paper);
+  color:var(--ink-2);white-space:nowrap;
+}
+.chip.who{border-color:var(--signal);color:var(--signal);background:var(--signal-wash)}
+.chip.sys{border-color:var(--ink-3);color:var(--ink);background:#fff}
+.chip.sys::before{content:"▮ ";color:var(--ink-3)}
+.chip.doc{border-style:dashed;background:#fff}
+.chip.doc::before{content:"▤ ";color:var(--ink-3)}
+
+/* ---------- steps ---------- */
+.steps{list-style:none;margin:0;padding:0}
+.step{
+  display:grid;grid-template-columns:58px 1fr;gap:0;
+  border-bottom:1px solid var(--rule-soft);
+}
+.step:last-child{border-bottom:0}
+.sn{
+  font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--ink-3);
+  padding:15px 0 15px clamp(16px,2.4vw,26px);letter-spacing:.02em;
+}
+.st-body{padding:14px clamp(16px,2.4vw,26px) 14px 0}
+.st-body > p{margin:0 0 8px;font-size:14.5px}
+.st-body > p strong{font-weight:600}
+.st-tags{display:flex;flex-wrap:wrap;gap:5px}
+.sub{list-style:none;margin:8px 0 4px;padding:0 0 0 14px;border-left:2px solid var(--rule)}
+.sub li{font-size:13.5px;color:var(--ink-2);margin-bottom:5px}
+.sub li:last-child{margin-bottom:0}
+
+/* ---------- decision gate ---------- */
+.gate{margin:0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);background:var(--paper)}
+.gate + .steps{border-top:0}
+.gate-q{
+  display:flex;gap:12px;align-items:baseline;
+  padding:14px clamp(16px,2.4vw,26px) 10px;
+}
+.gate-tag{
+  font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.14em;
+  text-transform:uppercase;color:#fff;background:var(--ink);padding:3px 8px;flex:none;
+}
+.gate-q p{margin:0;font-weight:600;font-size:15px}
+.branches{display:grid;gap:0;padding:0 clamp(16px,2.4vw,26px) 16px}
+.br{
+  display:grid;grid-template-columns:96px 1fr;gap:12px;align-items:start;
+  padding:9px 0;border-top:1px dashed var(--rule);
+}
+.br-k{
+  font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.09em;
+  text-transform:uppercase;padding:3px 7px;text-align:center;font-weight:600;
+}
+.br.pass .br-k{background:var(--signal-wash);color:var(--signal);border:1px solid var(--signal)}
+.br.watch .br-k{background:var(--watch-wash);color:var(--watch);border:1px solid var(--watch)}
+.br.stop .br-k{background:var(--stop-wash);color:var(--stop);border:1px solid var(--stop)}
+.br p{margin:0;font-size:14px;color:var(--ink-2)}
+.br p b{color:var(--ink);font-weight:600}
+
+/* ---------- parallel tracks ---------- */
+.tracks{display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:1px solid var(--rule)}
+.track{padding:14px clamp(16px,2.4vw,26px) 16px;border-right:1px dashed var(--rule)}
+.track:last-child{border-right:0}
+.track h4{
+  font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--signal);margin:0 0 4px;
+}
+.track .tr-lead{font-size:13.5px;color:var(--ink-2);margin:0 0 10px}
+.track ol{margin:0;padding-left:17px;font-size:13.5px}
+.track li{margin-bottom:6px}
+.merge{
+  padding:12px clamp(16px,2.4vw,26px);border-top:1px solid var(--ink);
+  background:var(--signal-wash);font-size:14px;
+}
+.merge b{font-weight:600}
+
+/* ---------- notes / flags ---------- */
+.note{
+  margin:0;padding:12px clamp(16px,2.4vw,26px);
+  border-top:1px solid var(--rule);
+  display:grid;grid-template-columns:auto 1fr;gap:11px;align-items:start;
+  font-size:13.5px;color:var(--ink-2);
+}
+.note.open{background:var(--watch-wash)}
+.note.decided{background:var(--live-wash)}
+.note.decided .note-k{color:var(--live)}
+.note-k{
+  font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.13em;
+  text-transform:uppercase;padding:3px 7px;border:1px solid currentColor;flex:none;white-space:nowrap;
+}
+.note.open .note-k{color:var(--watch)}
+.note.info .note-k{color:var(--ink-3)}
+.note p{margin:0}
+.note p + p{margin-top:5px}
+
+/* ---------- open questions panel ---------- */
+.qbox{border-top:1.5px solid var(--signal);background:var(--signal-wash)}
+.qbox-hd{
+  display:flex;align-items:baseline;gap:10px;
+  padding:11px clamp(16px,2.4vw,26px) 6px;
+}
+.qbox-hd span{
+  font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.15em;
+  text-transform:uppercase;color:#fff;background:var(--signal);padding:3px 8px;
+}
+.qbox-hd em{font-style:normal;font-size:12px;color:var(--ink-2)}
+.qbox ol{list-style:none;margin:0;padding:0 clamp(16px,2.4vw,26px) 14px}
+.qbox li{
+  display:grid;grid-template-columns:34px minmax(0,1fr);gap:10px;align-items:baseline;
+  padding:8px 0;border-top:1px dashed var(--rule);
+}
+.qbox li:first-child{border-top:0}
+.qn{
+  font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:600;
+  color:var(--signal);letter-spacing:.04em;
+}
+.qbox b{font-weight:600;display:block;font-size:13.5px;margin-bottom:1px}
+.qbox p{margin:0;font-size:13.5px;color:var(--ink-2)}
+
+/* ---------- pipeline strip ---------- */
+.strip{margin:clamp(30px,5vw,54px) 0 0;border:1.5px solid var(--ink);background:var(--plate)}
+.strip h3,.grid-sec h3{
+  font-family:"Archivo",sans-serif;font-variation-settings:"wdth" 116,"wght" 700;
+  font-size:clamp(16px,2vw,21px);text-transform:uppercase;letter-spacing:-.005em;
+  margin:0;padding:14px clamp(16px,2.4vw,24px);border-bottom:1px solid var(--rule);
+}
+.states{display:flex;flex-wrap:wrap;gap:0;padding:16px clamp(16px,2.4vw,24px) 20px;align-items:stretch}
+.state{
+  font-family:"IBM Plex Mono",monospace;font-size:11.5px;
+  padding:8px 13px;border:1px solid var(--ink);background:#fff;
+  margin:0 16px 8px 0;position:relative;
+}
+.state::after{
+  content:"→";position:absolute;right:-14px;top:50%;transform:translateY(-50%);
+  color:var(--signal);font-size:13px;font-family:"IBM Plex Sans",sans-serif;
+}
+.state.terminal{background:var(--live-wash);border-color:var(--live);color:var(--live);font-weight:600}
+.state.exit{background:var(--stop-wash);border-color:var(--stop);color:var(--stop);font-weight:600;margin-left:8px}
+.state.provisional{background:var(--watch-wash);border-color:var(--watch);color:var(--watch)}
+.state.terminal::after,.state.exit::after{content:""}
+
+/* ---------- two-column bottom sections ---------- */
+.grid-sec{margin-top:clamp(22px,3vw,32px);display:grid;grid-template-columns:1fr 1fr;gap:clamp(18px,2.4vw,26px)}
+.card{border:1.5px solid var(--ink);background:var(--plate)}
+.card-body{padding:16px clamp(16px,2.4vw,24px) 20px}
+.sysrow{display:grid;grid-template-columns:150px 1fr;gap:12px;padding:10px 0;border-bottom:1px dashed var(--rule);font-size:13.5px}
+.sysrow:last-child{border-bottom:0}
+.sysrow b{font-family:"IBM Plex Mono",monospace;font-size:12px;font-weight:600}
+.sysrow span{color:var(--ink-2)}
+.oi{counter-reset:oi;list-style:none;margin:0;padding:0}
+.oi li{
+  padding:9px 0 9px 34px;border-bottom:1px dashed var(--rule);
+  font-size:13.5px;color:var(--ink-2);position:relative;
+}
+.oi li:last-child{border-bottom:0}
+.oi li::before{
+  counter-increment:oi;content:"⚑" counter(oi);
+  position:absolute;left:0;top:9px;
+  font-family:"IBM Plex Mono",monospace;font-size:10.5px;color:var(--watch);font-weight:600;
+}
+.oi li b{color:var(--ink);font-weight:600}
+
+footer{
+  margin-top:clamp(28px,4vw,44px);padding-top:16px;border-top:1.5px solid var(--ink);
+  font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--ink-3);
+  display:flex;flex-wrap:wrap;gap:6px 26px;justify-content:space-between;
+}
+
+/* ---------- motion ---------- */
+.plate{opacity:0;transform:translateY(10px);animation:rise .5s ease forwards}
+.phase:nth-of-type(1) .plate{animation-delay:.02s}
+.phase:nth-of-type(2) .plate{animation-delay:.06s}
+.phase:nth-of-type(3) .plate{animation-delay:.1s}
+.phase:nth-of-type(4) .plate{animation-delay:.14s}
+@keyframes rise{to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){
+  .plate{opacity:1;transform:none;animation:none}
+}
+
+/* ---------- responsive ---------- */
+@media (max-width:900px){
+  .titleblock{grid-template-columns:1fr}
+  .tb-meta{border-left:0;border-top:1.5px solid var(--ink);grid-template-rows:none;grid-template-columns:1fr 1fr}
+  .tb-cell{border-bottom:1px solid var(--rule);border-right:1px solid var(--rule)}
+  .ph-head{grid-template-columns:1fr}
+  .stake{max-width:420px}
+  .tracks{grid-template-columns:1fr}
+  .track{border-right:0;border-bottom:1px dashed var(--rule)}
+  .grid-sec{grid-template-columns:1fr}
+}
+@media (max-width:640px){
+  body{background-size:40px 40px}
+  .phase{grid-template-columns:38px 1fr}
+  .rail::before{left:15px;width:2px}
+  .pnum{width:32px;height:32px;font-size:14px}
+  .step{grid-template-columns:44px 1fr}
+  .sn{padding-left:12px;font-size:10.5px}
+  .st-body{padding-right:12px}
+  .br{grid-template-columns:1fr;gap:6px}
+  .br-k{justify-self:start}
+  .sysrow{grid-template-columns:1fr}
+}
+@media print{
+  body{background:#fff}
+  .plate{box-shadow:none;animation:none;opacity:1;transform:none;break-inside:avoid}
+  .phase{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<main class="sheet">
+
+  <!-- ============ TITLE BLOCK ============ -->
+  <div class="titleblock">
+    <div class="tb-main">
+      <p class="eyebrow">Vantage Bank · Hazel Network · Basic Tier</p>
+      <h1>Member Bank<br>Onboarding</h1>
+      <p class="dek">The end-to-end path a bank travels from first inquiry to live production on the Hazel platform — eight steps, the decision gates between them, who owns each move, and which system carries it. Dashed elements and amber flags mark what is still undecided. This is a living document, refreshed weekly; the panel at right reflects its state as of the date shown.</p>
+    </div>
+    <div class="tb-meta">
+      <div class="tb-cell"><span class="tb-k">Status</span><span class="tb-v">Living document · updated weekly</span></div>
+      <div class="tb-cell"><span class="tb-k">As of</span><span class="tb-v">28 July 2026</span></div>
+      <div class="tb-cell"><span class="tb-k">Scope</span><span class="tb-v">Basic tier · pilot banks</span></div>
+      <div class="tb-cell"><span class="tb-k">Eligible today</span><span class="tb-v">FDIC-insured US banks</span></div>
+      <div class="tb-cell"><span class="tb-k">MVP target</span><span class="tb-v">10–15 banks · H2 2026</span></div>
+    </div>
+  </div>
+
+  <!-- ============ LEGEND ============ -->
+  <div class="legend">
+    <span class="lg"><span class="sw a"></span>Main flow / pass</span>
+    <span class="lg"><span class="sw b"></span>Conditional · exception · open question</span>
+    <span class="lg"><span class="sw c"></span>Decline · block transacting</span>
+    <span class="lg"><span class="sw d"></span>Live in production</span>
+    <span class="lg"><span class="sw e"></span>Not yet built / out of scope today</span>
+    <span class="lg">▮ system &nbsp; ▤ document &nbsp; ⚑ open item</span>
+  </div>
+
+  <!-- ============ STEP 0 ============ -->
+  <section class="phase is-pre">
+    <div class="rail"><div class="pnum">00</div></div>
+    <div class="plate">
+      <div class="ph-head"><div class="ph-lead">
+        <h2>Prospecting <span style="font-variation-settings:'wdth' 100,'wght' 400;font-size:.6em;color:var(--ink-3);letter-spacing:.1em">— implied, not in the written workflow</span></h2>
+        <p class="ph-goal">Everything before a bank raises its hand. The onboarding journey proper begins only once the banker has persuaded the prospect to proceed — but who to approach is itself a data question.</p>
+        <div class="owners"><span class="chip sys">RAFA</span><span class="chip sys">Databricks Customer Data Lake (preview)</span></div></div><aside class="stake"><div class="stake-hd"><span>Stakeholders</span><i>3 roles</i></div><ul><li><span class="rl lead">Lead</span><span><span class="nm">Shawn Main</span><span class="fn">Business Development</span></span></li><li><span class="rl sme">Sup</span><span><span class="nm">Maruthi “Rudy” Dantu</span><span class="fn">Data / Databricks — CRM</span></span></li><li><span class="rl sme">Sup</span><span><span class="nm">Marketing</span><span class="fn">Campaigns, targeting</span></span></li></ul></aside>
+      </div>
+      <ol class="steps">
+        <li class="step"><span class="sn">00.1</span><div class="st-body">
+          <p>Use RAFA to decide <strong>who to prospect</strong> — asset size, key players, who the counterpart is (COO, CFO, digital banking lead).</p>
+        </div></li>
+        <li class="step"><span class="sn">00.2</span><div class="st-body">
+          <p>Log the relationship. <strong>No true CRM exists yet</strong>; the plan is to lean on Databricks' Customer Data Lake rather than build one.</p>
+        </div></li>
+        <li class="step"><span class="sn">00.3</span><div class="st-body">
+          <p>Route by relationship type.</p>
+          <ul class="sub">
+            <li><b>Direct bank</b> — the only path in scope for the first 10–15 banks.</li>
+            <li><b>Correspondent</b> — can open a direct account, but downstream nested banks add complexity. Deliberately deferred.</li>
+          </ul>
+        </div></li>
+      </ol>
+      <div class="note info"><span class="note-k">Design intent</span><p>The target experience is self-service and fintech-like: a bank finds hazelnetwork.com, picks a plan, clicks through. The BD conversation should be optional, not mandatory. Traditional bank sales cycles run ~2 years; the goal is months.</p></div>
+      <div class="note open"><span class="note-k">Open</span><p>Who at the bank actually drives this varies by size and is not yet pinned down. Whoever starts the application will need to hand parts of it to colleagues — a secure, shareable, tokenised link is the working idea.</p></div>
+      <div class="qbox"><div class="qbox-hd"><span>Questions to resolve</span><em>open to the team — not yet decided</em></div><ol><li><span class="qn">Q1</span><div><b>Entry route</b><p>How does a bank enter the first prototype: public request form, Vantage invitation, a case created internally, or some combination?</p></div></li><li><span class="qn">Q2</span><div><b>Users in v1</b><p>Which roles need access to the first version, on both the member bank side and the Vantage side?</p></div></li><li><span class="qn">Q3</span><div><b>One app or two</b><p>Separate external and internal portals, or one Hazel app that changes what it shows based on role?</p></div></li></ol></div>
+    </div>
+  </section>
+
+  <!-- ============ STEP 1 ============ -->
+  <section class="phase">
+    <div class="rail"><div class="pnum">01</div></div>
+    <div class="plate">
+      <div class="ph-head"><div class="ph-lead">
+        <h2>Eligibility Screening</h2>
+        <p class="ph-goal">A pre-NDA filter on invited and self-registered banks. Pull public data, score the bank, and green-light or turn away before anything confidential changes hands.</p>
+        <div class="owners"><span class="chip sys">RAFA (UBPR public data)</span><span class="chip sys">Prelim → DocuSign</span><span class="chip sys">HOP</span><span class="chip doc">NDA</span></div></div><aside class="stake"><div class="stake-hd"><span>Stakeholders</span><i>3 roles</i></div><ul><li><span class="rl lead">Lead</span><span><span class="nm">Shawn Main</span><span class="fn">Business Development — owner</span></span></li><li><span class="rl sme">Sup</span><span><span class="nm">Joel Olivares</span><span class="fn">Risk — RAFA composite</span></span></li><li><span class="rl sme">Sup</span><span><span class="nm">Jonathan Tate</span><span class="fn">Legal — NDA terms</span></span></li></ul></aside>
+      </div>
+      <ol class="steps">
+        <li class="step"><span class="sn">01.1</span><div class="st-body">
+          <p><strong>Bank enters — by invitation or self-registration.</strong> Two routes: Vantage selects a bank from the prospecting list and invites it in, <strong>or</strong> the bank self-registers through a <strong>public inquiry form</strong> — entering its FDIC number, website, and contact name/title/phone, then submitting interest. The applicant gets a thank-you and a confirmation email; Vantage is notified, runs RAFA, and if it passes, sends an invitation. Either way the entry feeds the same RAFA screening.</p>
+          <ul class="sub">
+            <li><b>No auto-fill search bar for MVP-1.</b> The bank types its own details rather than picking from a name lookup — a safeguard against selecting the wrong similarly-named institution and against bot-submitted fake requests.</li>
+          </ul>
+          <div class="st-tags"><span class="chip who">Shawn Main · BD</span><span class="chip">public inquiry form</span></div>
+        </div></li>
+        <li class="step"><span class="sn">01.2</span><div class="st-body">
+          <p><strong>RAFA report pulled</strong> from public UBPR data — a CAMELS-style composite computed from the bank's own public filings, run in the background on the FDIC number the bank entered. This is an <strong>internal, back-office screening step</strong>; for the first 10–15 banks it may be run <strong>manually</strong>. Auto-prefill from a name/FDIC search is deferred for MVP (see 01.1).</p>
+          <div class="st-tags"><span class="chip sys">RAFA API</span><span class="chip">banks only — no credit unions yet</span></div>
+        </div></li>
+      </ol>
+      <div class="gate">
+        <div class="gate-q"><span class="gate-tag">Gate 1</span><p>Does the bank meet pre-NDA criteria?</p></div>
+        <div class="branches">
+          <div class="br pass"><span class="br-k">Yes</span><p>RAFA composite <b>1 or 2</b> → continue.</p></div>
+          <div class="br watch"><span class="br-k">Conditional</span><p>RAFA composite <b>3 or 4</b> — on the fence → continue as <b>“yes, with a watch.”</b></p></div>
+          <div class="br stop"><span class="br-k">No</span><p>RAFA composite <b>5</b> — financially troubled or material liquidity concern → <b>Close as Declined / Deferred.</b></p></div>
+        </div>
+      </div>
+      <ol class="steps">
+        <li class="step"><span class="sn">01.3</span><div class="st-body">
+          <p><strong>Send and execute the NDA through Prelim.</strong> NDA signing runs on <strong>Prelim</strong>, which handles the document workflow and e-signature, rather than as an ad-hoc document.</p>
+          <div class="st-tags"><span class="chip sys">Prelim → DocuSign</span></div>
+        </div></li>
+        <li class="step"><span class="sn">01.4</span><div class="st-body">
+          <p><strong>Invitation email and account registration.</strong> On approval the invitation email goes out via <strong>SendGrid</strong>. The bank then <strong>registers an account</strong> — the login for <strong>HOP, the Hazel dashboard</strong>. The authentication method (MFA vs OAuth) is still open.</p>
+          <div class="st-tags"><span class="chip sys">HOP</span><span class="chip sys">SendGrid</span><span class="chip">auth: MFA / OAuth TBD</span></div>
+        </div></li>
+      </ol>
+      <div class="note decided"><span class="note-k">Decided</span><p>Entry now has <b>two routes: Vantage invitation and a self-service public inquiry form</b> — a bank can register on its own, not only by invitation. <b>NDA signing runs through Prelim.</b> The invitation email is sent via <b>SendGrid</b>. There is <b>no auto-fill search bar for MVP-1</b> (security). Once admitted, the bank registers an account for <b>HOP</b>, the Hazel dashboard. (Resolves the earlier Q1 on entry route and Q6 on email provider.)</p></div>
+      <div class="note info"><span class="note-k">Scale</span><p>Rejection is an edge case — expected under 1%, not 10–20%. Of ~4,298 banks, roughly 15 sit on the watch list. Undercapitalised banks are the clear decline.</p></div>
+      <div class="note info"><span class="note-k">What the bank sees</span><p>Not the raw 1–5 score — banks would try to reconcile it against their real regulator rating. Show a traffic light or star rating; detail only through a conversation. There is <b>no disclosure obligation</b> when turning a bank away, unlike a consumer credit denial.</p></div>
+      <div class="note open"><span class="note-k">Open</span><p>With the self-service form now in scope, <b>anti-abuse is active work</b>: verify the email is a bank domain, MFA, sit behind Cloudflare, restrict countries at launch.</p></div>
+      <div class="qbox"><div class="qbox-hd"><span>Questions to resolve</span><em>open to the team — not yet decided</em></div><ol><li><span class="qn">Q4</span><div><b>Stage boundaries</b><p>What event starts this step and what marks it complete? Does it run from expressed interest through to a fully executed NDA?</p></div></li><li><span class="qn">Q5</span><div><b>Portal access timing</b><p>When does the bank get access to the Hazel portal: before RAFA screening, after it passes, or when the NDA process begins?</p></div></li><li><span class="qn">Q7</span><div><b>Required intake fields</b><p>Which input fields are required on the very first form — the one that feeds the RAFA score — for each type of organisation joining Hazel? <b>Owner: Vantage.</b></p></div></li><li><span class="qn">Q9</span><div><b>CRM / HubSpot</b><p>Should the pipeline run on an external CRM such as HubSpot? <b>Owner: Vantage.</b></p></div></li><li><span class="qn">Q11</span><div><b>Account-registration authentication</b><p>MFA, OAuth, or another method for the dashboard login? <b>Owner: Theorem / Vantage.</b></p></div></li><li><span class="qn">Q12</span><div><b>MVP scope</b><p>FDIC banks only, or open to credit unions and trusts now? <b>Owner: Shawn.</b></p></div></li></ol></div>
+    </div>
+  </section>
+
+  <!-- ============ STEP 2 ============ -->
+  <section class="phase">
+    <div class="rail"><div class="pnum">02</div></div>
+    <div class="plate">
+      <div class="ph-head"><div class="ph-lead">
+        <h2>Intake &amp; Due Diligence</h2>
+        <p class="ph-goal">Collect documents, score the bank properly, and check for anything that forces a human review. Runs in both directions — the bank will also want to diligence Vantage/Hazel.</p>
+        <div class="owners"><span class="chip sys">Coverbase</span><span class="chip sys">Databricks</span><span class="chip sys">Vanta</span></div></div><aside class="stake"><div class="stake-hd"><span>Stakeholders</span><i>7 roles</i></div><ul><li><span class="rl lead">Lead</span><span><span class="nm">Aaron McWilliams</span><span class="fn">Issues questionnaire, product owner</span></span></li><li><span class="rl lead">Lead</span><span><span class="nm">Joel Olivares</span><span class="fn">Risk — Coverbase scoring</span></span></li><li><span class="rl sme">SME</span><span><span class="nm">Joel Castaneda</span><span class="fn">BSA — consent order check</span></span></li><li><span class="rl sme">SME</span><span><span class="nm">Marie Alonzo</span><span class="fn">Compliance — CIP questions</span></span></li><li><span class="rl sme">SME</span><span><span class="nm">SME panel</span><span class="fn">Credit · BSA/AML · IT/Cyber · Legal · Finance</span></span></li><li><span class="rl ext">Ext</span><span><span class="nm">Coverbase</span><span class="fn">TPRM vendor — assessment engine</span></span></li><li><span class="rl bank">Bank</span><span><span class="nm">Member bank</span><span class="fn">Completes questionnaire, uploads docs</span></span></li></ul></aside>
+      </div>
+      <ol class="steps">
+        <li class="step"><span class="sn">02.1</span><div class="st-body">
+          <p><strong>Receive signed NDA</strong> from the bank.</p>
+        </div></li>
+        <li class="step"><span class="sn">02.2</span><div class="st-body">
+          <p><strong>Bank added to Coverbase as a new vendor; questionnaire issued.</strong> Under 30 questions, mostly yes/no.</p>
+          <p style="color:var(--ink-2);font-size:13.5px">The applicant never sees Coverbase. The Hazel portal is the single front end; Coverbase runs headless behind an API while back-office staff work inside it. <b>Confirmed in build:</b> the member portal never exposes the internal Coverbase scoring — the bank sees only a general status.</p>
+        </div></li>
+        <li class="step"><span class="sn">02.3</span><div class="st-body">
+          <p><strong>Bank uploads the two required documents — acceptance gates due diligence.</strong> The due-diligence form stays locked until both are uploaded <b>and accepted</b>; a rejected document loops back for re-upload.</p>
+          <div class="st-tags"><span class="chip doc">Wolfsberg CBDDQ — or mini-Wolfsberg PDF</span><span class="chip doc">BSA / AML / OFAC policy</span></div>
+          <ul class="sub">
+            <li><b>Wolfsberg is conditional.</b> Not all banks hold a Wolfsberg document, even FDIC ones. If the bank has it, it uploads and continues; if not, Vantage supplies a <b>mini-Wolfsberg</b> — a shortened PDF of only the most relevant questions (not the full 16–19 pages, and not branded Wolfsberg) that the bank fills, <b>signs via DocuSign, and returns</b>, stored alongside the NDA and BSA policy. Leaning to a DocuSign PDF rather than an in-page form; whether the answers are also captured as structured data depends on whether any answer drives downstream configuration.</li>
+            <li><b>One combined flow.</b> The due-diligence intake is a single scrolling form with header sections and one Submit at the bottom — no per-section save buttons. Answers are cached client-side and written to the backend in one go; the overview separately tracks completion across the major steps (NDA, documents, due diligence, risk, review).</li>
+            <li>Coverbase AI can <b>auto-answer the questionnaire from the uploaded documents</b> — the bank then reviews each drafted answer and either <b>confirms</b>, marks <b>"unable to confirm,"</b> or <b>corrects</b> it. Risk questions stay <b>locked until the due-diligence section is complete.</b></li>
+            <li><b>Upload triggers the Coverbase intake.</b> Uploading the two documents prompts Vantage to create the Coverbase intake form. The due-diligence questions are surfaced in the Hazel experience (some dynamic, some static) and <b>pushed back to Coverbase via API</b> for the residual-risk assessment; the 32 inherent-risk questions are compared against Vantage's controls to produce the risk and residual-risk PDF.</li>
+            <li>All intake data — the uploaded documents <b>and</b> the answers collected in the Hazel experience — lands in <b>Databricks first</b>, then pushes out to Coverbase (and Prelim); the documents are held in both. See the Decided note below for the caveat on what stays Coverbase-only.</li>
+            <li>If the applicant is <b>not a regulated bank</b>, deeper diligence is required — and no intake form exists for that case yet.</li>
+          </ul>
+        </div></li>
+        <li class="step"><span class="sn">02.4</span><div class="st-body">
+          <p><strong>Reverse due diligence</strong> — the bank vets Vantage/Hazel through the Vanta trust center: request access, get approved, download the document set.</p>
+          <ul class="sub">
+            <li>The Trust Center is a Vantage skin over Vanta, packaging <b>Vantage + Custodia + Infinant</b> due-diligence data (SOC reports, financials, risk assessments) as the Hazel Network due-diligence package.</li>
+            <li><b>NDA carries over:</b> the NDA signed in intake (Step 1) auto-satisfies the Vanta NDA requirement, so the bank does not sign again — Vanta still needs it on file to prove NDA-before-disclosure to examiners.</li>
+            <li>Capture anything they ask for that <b>isn't already covered</b>, and publish the answer for every future bank. No one-offs.</li>
+            <li>A full <b>RFI/RFP</b> demand is handled as a separate side process, not part of onboarding.</li>
+          </ul>
+          <div class="st-tags"><span class="chip sys">Vanta · trust.vantage.bank</span></div>
+        </div></li>
+        <li class="step"><span class="sn">02.5</span><div class="st-body">
+          <p><strong>Consent order check.</strong> Manual today — there is no central database, so each regulator's site must be checked individually.</p>
+          <div class="st-tags"><span class="chip who">BSA · Joel Castaneda</span><span class="chip">candidate: American Bankers enforcement DB</span></div>
+        </div></li>
+        <li class="step"><span class="sn">02.6</span><div class="st-body">
+          <p><strong>Automated initial risk score run in Coverbase.</strong> Risk domains scored by percentage; final rating on a <strong>0–4 scale</strong> (a “2” is roughly 50% risk).</p>
+          <div class="st-tags"><span class="chip who">Risk · Joel Olivares</span></div>
+        </div></li>
+      </ol>
+      <div class="gate">
+        <div class="gate-q"><span class="gate-tag">Gate 2</span><p>Is an exception review triggered?</p></div>
+        <div class="branches">
+          <div class="br pass"><span class="br-k">No</span><p>In-parameter bank, all clear → <b>continue to Step 3.</b></p></div>
+          <div class="br watch"><span class="br-k">Yes</span><p>Triggered if <b>any</b> of: RAFA composite 3 or 4, or low liquidity with a high score · a <b>prohibited business type</b> in the Wolfsberg · a <b>consent or enforcement action</b> found · the automated score falls <b>below the auto-approve threshold</b>.</p></div>
+        </div>
+      </div>
+      <ol class="steps">
+        <li class="step"><span class="sn">02.7</span><div class="st-body">
+          <p><strong>[If triggered] Parallel SME reviews</strong> across Credit, BSA/AML, IT/Cyber, Legal and Finance. Exception log documented; recommended conditions noted.</p>
+          <div class="st-tags"><span class="chip who">BSA · Joel Castaneda</span><span class="chip">manual today</span></div>
+        </div></li>
+        <li class="step"><span class="sn">02.8</span><div class="st-body">
+          <p><strong>Consolidated approval package prepared</strong> with the Coverbase score, confirming the bank meets auto-approval criteria.</p>
+          <div class="st-tags"><span class="chip who">Risk</span></div>
+        </div></li>
+        <li class="step"><span class="sn">02.9</span><div class="st-body">
+          <p><strong>Internal operator review.</strong> After the bank submits, the Hazel operator opens the Coverbase assessment — <strong>risk score, risk band, findings</strong> — none of which the member ever sees. If information is missing, the operator sends it back through <strong>HOP</strong> asking the bank to supply it, then the assessment resumes.</p>
+          <div class="st-tags"><span class="chip sys">Coverbase</span><span class="chip sys">HOP</span></div>
+        </div></li>
+      </ol>
+      <div class="note info"><span class="note-k">Philosophy</span><p>These are FDIC-insured banks, so Hazel does not re-regulate them — it verifies that they are regulated and asks a narrow set of questions. Documents requested are ones banks already hold.</p></div>
+      <div class="note open"><span class="note-k">Open</span><p>The numeric thresholds that separate auto-approve, manual review and auto-reject are <b>not yet defined in Coverbase</b> — the single most-cited gap in the whole workflow.</p></div>
+      <div class="note open"><span class="note-k">Open</span><p>Rather than reject borderline banks, run the assessment <b>against the Hazel rule book</b> and return a list of deficiencies to fix. This creates a likely new state: <b>approved, but blocked from transacting</b> until conditions clear. The rule book does not exist yet.</p></div>
+      <div class="note decided"><span class="note-k">Decided</span><p>Review of the <b>Coverbase API</b> confirms everything needed here can be driven through it. <b>Storage:</b> all intake data — uploaded documents and the answers collected in the Hazel experience — lands in <b>Databricks first</b>, then pushes to Coverbase (and Prelim); the documents live in <b>both</b>. Coverbase's own residual-risk assessment and internal scoring stay in Coverbase. <b>Caveat:</b> this is Theorem's stated architecture and revises the earlier "no Q&amp;A in Databricks" position — Vantage / Shawn still to lock the final data-retention line.</p></div>
+      <div class="qbox"><div class="qbox-hd"><span>Questions to resolve</span><em>open to the team — not yet decided</em></div><ol><li><span class="qn">Q10</span><div><b>Wolfsberg auto-lookup</b><p>Wolfsberg has no API. Lead: the <b>SWIFT KYC registry</b> — SWIFT members must upload the CBDDQ and Vantage is a SWIFT member, so it may be pingable. Caveat: it is a Vantage SWIFT resource and may not survive the Hazel/Vantage separation. <b>Owner: Theorem Labs (Chris) — investigate.</b></p></div></li></ol></div>
+    </div>
+  </section>
+
+  <!-- ============ STEP 3 ============ -->
+  <section class="phase">
+    <div class="rail"><div class="pnum">03</div></div>
+    <div class="plate">
+      <div class="ph-head"><div class="ph-lead">
+        <h2>Approval</h2>
+        <p class="ph-goal">Either the system approves automatically and the committee is simply told, or the case goes to the committee to decide.</p>
+        <div class="owners"><span class="chip sys">Banking Innovation Risk Committee</span></div></div><aside class="stake"><div class="stake-hd"><span>Stakeholders</span><i>3 roles</i></div><ul><li><span class="rl dec">Dec</span><span><span class="nm">Banking Innovation Risk Cttee</span><span class="fn">Acknowledges or decides</span></span></li><li><span class="rl lead">Lead</span><span><span class="nm">Shawn Main</span><span class="fn">Business Development — presents</span></span></li><li><span class="rl sme">Sup</span><span><span class="nm">Joel Olivares</span><span class="fn">Risk — approval package</span></span></li></ul></aside>
+      </div>
+      <div class="gate">
+        <div class="gate-q"><span class="gate-tag">Gate 3</span><p>Are the auto-approval criteria met?</p></div>
+        <div class="branches">
+          <div class="br pass"><span class="br-k">Yes</span><p>In-parameter bank — composite <b>1–2</b>, clear Wolfsberg, no exceptions → <b>auto-approved.</b> The committee acknowledges at its next meeting.</p></div>
+          <div class="br watch"><span class="br-k">No</span><p>On the fence — composite <b>3 or 4</b> — or an exception case → <b>the committee decides.</b></p></div>
+        </div>
+      </div>
+      <ol class="steps">
+        <li class="step"><span class="sn">03.1</span><div class="st-body">
+          <p><strong>Committee acknowledgement or decision.</strong> Expected to be light-touch at scale: a weekly report of banks onboarded, their scores and any exceptions — not a bank-by-bank gate for hundreds of applicants.</p>
+        </div></li>
+      </ol>
+      <div class="note open"><span class="note-k">Prerequisite</span><p>The auto-approval criteria must be <b>designed, documented and codified as governance policy</b> before this step can run as intended. Board approval is not expected for Basic member banks — the bank opens an account at Vantage, not the reverse. Regulation F guidance is being confirmed.</p></div>
+      <div class="note info"><span class="note-k">Working view</span><p>“On the fence” should largely disappear. Either a bank meets hard rules, or it is admitted with rule-book conditions or capital requirements attached. Practical outcomes: approve · approve-with-conditions · rare reject.</p></div>
+    </div>
+  </section>
+
+  <!-- ============ STEP 4 ============ -->
+  <section class="phase">
+    <div class="rail"><div class="pnum">04</div></div>
+    <div class="plate">
+      <div class="ph-head"><div class="ph-lead">
+        <h2>Setup &amp; Contracting</h2>
+        <p class="ph-goal">Approval unlocks two tracks that run at the same time: build the empty tenant, and get the paperwork signed. Accounts cannot be created until both land.</p>
+        <div class="owners"><span class="chip sys">Infinant / Interlace</span><span class="chip sys">Prelim → DocuSign</span></div></div><aside class="stake"><div class="stake-hd"><span>Stakeholders</span><i>6 roles</i></div><ul><li><span class="rl lead">Lead</span><span><span class="nm">Diana Plata</span><span class="fn">BaaS — setup and configuration</span></span></li><li><span class="rl lead">Lead</span><span><span class="nm">Jonathan Tate</span><span class="fn">Legal — partner package</span></span></li><li><span class="rl sme">SME</span><span><span class="nm">Marie Alonzo</span><span class="fn">Ops — account opening, signers</span></span></li><li><span class="rl ext">Ext</span><span><span class="nm">Infinant</span><span class="fn">Provisions the tenant</span></span></li><li><span class="rl ext">Ext</span><span><span class="nm">Prelim (Norma)</span><span class="fn">Document and signature workflow</span></span></li><li><span class="rl bank">Bank</span><span><span class="nm">Member bank</span><span class="fn">Signer roster, product election, signing</span></span></li></ul></aside>
+      </div>
+      <ol class="steps">
+        <li class="step"><span class="sn">04.1</span><div class="st-body">
+          <p><strong>Collect setup information and the Infinant configuration workbook.</strong></p>
+          <ul class="sub">
+            <li>Authorised signer roster · operating account list and intended use · operations and escalation contacts</li>
+            <li>All rails offered unless the bank opts out</li>
+            <li>Participate-referred, or not</li>
+          </ul>
+          <p style="color:var(--ink-2);font-size:13.5px;margin-top:8px">May need little bank input — a prior tenant's config was simply copied. But the bank must be asked <b>which products it actually wants</b>, so cloning doesn't open accounts it then has to disclose and manage.</p>
+        </div></li>
+      </ol>
+      <div class="tracks">
+        <div class="track">
+          <h4>Track A — build the shell</h4>
+          <p class="tr-lead">Infinant creates the tenant. Manual today, ~2 weeks, no self-serve API.</p>
+          <ol>
+            <li>Submit the configuration workbook to Infinant.</li>
+            <li>Infinant clones the last tenant and provisions a new one.</li>
+            <li>Account numbers are assigned — <b>required before the signature card and wire agreement can be sent.</b></li>
+          </ol>
+        </div>
+        <div class="track">
+          <h4>Track B — get it signed</h4>
+          <p class="tr-lead">Documents go out in batches, some before provisioning and some after.</p>
+          <ol>
+            <li><b>Account-opening package</b> — ~5 PDFs. Manual PDF delivery for pilot banks; future state is a Prelim or custom workflow.</li>
+            <li><b>Partner / legal package</b> — Hazel membership agreement linking to an MSA and correspondent agreement, plus a security procedures document. <b>Non-negotiable for Basic.</b></li>
+            <li>Signer identity from the resolution doc, operating agreement or bylaws.</li>
+          </ol>
+        </div>
+      </div>
+      <div class="merge"><b>Merge point.</b> Signatures gate account creation. Working sequence (being simulated): approval → tenant shell created → bank completes account setup information → <b>account number prepared and provided</b> → agreements presented and signed via DocuSign (not yet integrated) → accepted → the two accounts are created inside the shell.</div>
+      <div class="note info"><span class="note-k">Two document sets</span><p>Steps 1–2 collect documents that <b>admit the bank to the network</b>. Step 4 collects a separate set that <b>opens the accounts</b> — signature cards, wire agreements, beneficial ownership, disclaimers.</p></div>
+      <div class="note open"><span class="note-k">Open</span><p><b>Where does the create-account API call fire from?</b> Prelim calling Interlace directly, or Prelim returning data to the Hazel app which then makes the call. Leaning toward the latter so status and documents are captured in Databricks and Hazel acts as middleware. The Prelim↔Interlace integration does not exist yet.</p></div>
+      <div class="note decided"><span class="note-k">Decided</span><p><b>No account-number-entry field.</b> A shortcut letting a bank type an existing account number was considered and dropped: a bank in initial intake has no Hazel account yet, so it must create one. There is no standalone "Participate account" to reuse either.</p></div>
+      <div class="note open"><span class="note-k">Open</span><p>Once the bank has console access it can open <b>additional operating accounts on its own</b>, with no documents generated. Those sit on Vantage's balance sheet. Direction: have the original agreements permit additional accounts inheriting the same beneficial ownership. Accounts the bank opens for <i>its own</i> customers are not Vantage's concern — Hazel is the ledgering platform there.</p></div>
+    </div>
+  </section>
+
+  <!-- ============ STEP 5 ============ -->
+  <section class="phase">
+    <div class="rail"><div class="pnum">05</div></div>
+    <div class="plate">
+      <div class="ph-head"><div class="ph-lead">
+        <h2>Technical Provisioning</h2>
+        <p class="ph-goal">The tenant becomes a working environment: console access, roles, accounts, limits, monitoring and the daily file.</p>
+        <div class="owners"><span class="chip sys">Infinant</span><span class="chip sys">Sardine</span><span class="chip sys">Custodia</span></div></div><aside class="stake"><div class="stake-hd"><span>Stakeholders</span><i>5 roles</i></div><ul><li><span class="rl lead">Lead</span><span><span class="nm">Diana Plata</span><span class="fn">BaaS — validates configuration</span></span></li><li><span class="rl sme">SME</span><span><span class="nm">Fred Flores</span><span class="fn">BSA — Sardine sub-tenant</span></span></li><li><span class="rl ext">Ext</span><span><span class="nm">Infinant</span><span class="fn">Tenant, RBAC, accounts, limits</span></span></li><li><span class="rl ext">Ext</span><span><span class="nm">Custodia</span><span class="fn">Wallet setup, mint and burn</span></span></li><li><span class="rl sme">Sup</span><span><span class="nm">IT / Cyber</span><span class="fn">Access, SFTP, connectivity</span></span></li></ul></aside>
+      </div>
+      <ol class="steps">
+        <li class="step"><span class="sn">05.1</span><div class="st-body">
+          <p><strong>Infinant production tenancy provisioned</strong> — approximately two weeks after the workbook is submitted.</p>
+          <ul class="sub">
+            <li>Hazel Bank Console access</li>
+            <li><b>RBAC roles and user permissions</b>, derived from the signer roster and signature card. Basic roles to confirm: IT Admin, Ops, Accounting/Finance, Risk.</li>
+            <li><b>Bank-owned operating accounts (tokenised)</b> and limits — minimum two: one <b>USD reserve</b> and one <b>business operating account</b>, both for the bank, not end users.</li>
+            <li>Sardine KYB / AML / fraud sub-tenant integration</li>
+            <li>Custodia wallet setup</li>
+            <li>EOD posting-file folder setup — moves by <b>SFTP</b> between bank and Infinant, not through the portal.</li>
+          </ul>
+        </div></li>
+        <li class="step"><span class="sn">05.2</span><div class="st-body">
+          <p><strong>KYB / Sardine integration confirmed.</strong> Note: there is <b>no KYB/KYC at the member-bank or operating-account level</b> — that happens only at the end-user level. What remains here is provisioning Sardine access so Vantage can monitor.</p>
+          <div class="st-tags"><span class="chip who">BSA · Fred Flores</span></div>
+        </div></li>
+        <li class="step"><span class="sn">05.3</span><div class="st-body">
+          <p><strong>Provisioning configuration validated.</strong></p>
+          <div class="st-tags"><span class="chip who">BaaS · Diana Plata</span></div>
+        </div></li>
+      </ol>
+      <div class="note info"><span class="note-k">Limits</span><p>Two layers. Vantage/Hazel sets an <b>overall program limit</b> from the bank's risk profile; account-level limits are agreed with the bank beneath it. The bank then sets its own limits within its products.</p></div>
+      <div class="note open"><span class="note-k">Open</span><p>The two-week Infinant lead time is the bottleneck — <b>the request must be raised far earlier</b>, potentially before due diligence completes. Provisioning scope and the ownership split between Infinant and Vantage still need confirming; the DDA-creation fix is pending on Infinant.</p></div>
+      <div class="note open"><span class="note-k">Open</span><p><b>Compliance model.</b> In Basic the bank outsources monitoring to Vantage, which uses Sardine as its own backstop; the bank has no Sardine contract. Two alternatives were discussed — bank dispositions natively in Sardine, or brings its own provider — both with contract and pricing consequences. Fraud alert volume will drive staffing.</p></div>
+    </div>
+  </section>
+
+  <!-- ============ STEP 6 ============ -->
+  <section class="phase">
+    <div class="rail"><div class="pnum">06</div></div>
+    <div class="plate">
+      <div class="ph-head"><div class="ph-lead">
+        <h2>Training &amp; Certification Testing</h2>
+        <p class="ph-goal">Teach the bank the console, then prove the plumbing works with real money before go-live.</p>
+        <div class="owners"><span class="chip sys">Interlace console</span></div></div><aside class="stake"><div class="stake-hd"><span>Stakeholders</span><i>4 roles</i></div><ul><li><span class="rl lead">Lead</span><span><span class="nm">Diana Plata</span><span class="fn">BaaS — training and certification</span></span></li><li><span class="rl sme">SME</span><span><span class="nm">Operations</span><span class="fn">Support model, SLAs — to define</span></span></li><li><span class="rl sme">Sup</span><span><span class="nm">Treasury / Finance</span><span class="fn">Funds the account for testing</span></span></li><li><span class="rl bank">Bank</span><span><span class="nm">Member bank</span><span class="fn">Attends training, runs penny test</span></span></li></ul></aside>
+      </div>
+      <ol class="steps">
+        <li class="step"><span class="sn">06.1</span><div class="st-body">
+          <p><strong>Bank console training delivered</strong> using user guides. No dedicated training platform and none planned — live sessions, PDFs and video links for MVP.</p>
+        </div></li>
+        <li class="step"><span class="sn">06.2</span><div class="st-body">
+          <p><strong>Certification testing plan and timeline finalised</strong> with the member bank — a guided walkthrough of the console running a defined list of tests. Nothing new to build; it happens inside Interlace.</p>
+        </div></li>
+        <li class="step"><span class="sn">06.3</span><div class="st-body">
+          <p><strong>Production penny testing.</strong> Before sending $5,000, send $1. Vantage logs in alongside the bank, confirms users and accounts, funds the account and validates.</p>
+          <div class="st-tags"><span class="chip who">Bank + BaaS</span></div>
+        </div></li>
+        <li class="step"><span class="sn">06.4</span><div class="st-body">
+          <p><strong>Pre-launch validation sign-offs collected</strong> from all required functions — a candidate feature to build into the portal.</p>
+        </div></li>
+      </ol>
+      <div class="note open"><span class="note-k">Open</span><p>The post-go-live support model — channels, hours, SLAs — is <b>undefined</b>. Operations to specify. There is no servicing model today: no call centre, no proactive status updates to deflect inbound.</p></div>
+    </div>
+  </section>
+
+  <!-- ============ STEP 7 ============ -->
+  <section class="phase">
+    <div class="rail"><div class="pnum">07</div></div>
+    <div class="plate">
+      <div class="ph-head"><div class="ph-lead">
+        <h2>Go-Live</h2>
+        <p class="ph-goal">A single checklist, signed off, then production cut-in.</p>
+        <div class="owners"><span class="chip sys">Interlace</span><span class="chip sys">Sardine · OFAC</span></div></div><aside class="stake"><div class="stake-hd"><span>Stakeholders</span><i>5 roles</i></div><ul><li><span class="rl lead">Lead</span><span><span class="nm">Diana Plata</span><span class="fn">BaaS — checklist owner, cut-in</span></span></li><li><span class="rl dec">Sign</span><span><span class="nm">All functions</span><span class="fn">Pre-launch sign-off</span></span></li><li><span class="rl sme">SME</span><span><span class="nm">Operations</span><span class="fn">On-call rotation, escalation</span></span></li><li><span class="rl sme">SME</span><span><span class="nm">BSA</span><span class="fn">Day-one monitoring lanes</span></span></li><li><span class="rl bank">Bank</span><span><span class="nm">Member bank</span><span class="fn">Acknowledges SLA, goes live</span></span></li></ul></aside>
+      </div>
+      <ol class="steps">
+        <li class="step"><span class="sn">07.1</span><div class="st-body">
+          <p><strong>Go-live checklist completed and signed off.</strong></p>
+          <ul class="sub">
+            <li>Production tenancy enabled · RBAC roles assigned · Bank Console access verified</li>
+            <li>Operating accounts seeded and reconciled</li>
+            <li>Daily posting file and balance extract validated in production</li>
+            <li>On-call rotation, escalation paths and standard SLA acknowledged</li>
+            <li>Day-one transaction monitoring confirmed across <b>Sardine, OFAC hold and reconciliation lanes</b></li>
+          </ul>
+        </div></li>
+        <li class="step"><span class="sn">07.2</span><div class="st-body">
+          <p><strong>Production cut-in</strong> — the member bank goes live on the Hazel platform.</p>
+        </div></li>
+      </ol>
+      <div class="note info"><span class="note-k">Reality check</span><p>This is not a shopping cart. It is closer to opening a business account: humans in the loop, SLAs, and a real hand-off.</p></div>
+    </div>
+  </section>
+
+  <!-- ============ STEP 8 ============ -->
+  <section class="phase is-loop">
+    <div class="rail"><div class="pnum">08</div></div>
+    <div class="plate">
+      <div class="ph-head"><div class="ph-lead">
+        <h2>Ongoing Oversight <span style="font-variation-settings:'wdth' 100,'wght' 400;font-size:.6em;color:var(--live);letter-spacing:.1em">— continuous loop</span></h2>
+        <p class="ph-goal">Onboarding does not end at go-live. The same rule book that admitted the bank keeps testing it in production.</p>
+        <div class="owners"><span class="chip sys">Coverbase Radar</span><span class="chip sys">Databricks</span><span class="chip sys">Sardine · OFAC</span></div></div><aside class="stake"><div class="stake-hd"><span>Stakeholders</span><i>6 roles</i></div><ul><li><span class="rl lead">Lead</span><span><span class="nm">BSA team</span><span class="fn">Fraud and sanctions oversight</span></span></li><li><span class="rl lead">Lead</span><span><span class="nm">Joel Olivares</span><span class="fn">Risk — KPI/KRI, rule-book scoring</span></span></li><li><span class="rl sme">SME</span><span><span class="nm">Diana Plata</span><span class="fn">BaaS — post-launch support</span></span></li><li><span class="rl dec">Dec</span><span><span class="nm">Banking Innovation Risk Cttee</span><span class="fn">Receives periodic reporting</span></span></li><li><span class="rl sme">SME</span><span><span class="nm">Jonathan Tate</span><span class="fn">Legal — breach, penalties, kill switch</span></span></li><li><span class="rl bank">Bank</span><span><span class="nm">Member bank</span><span class="fn">Maintains rule-book compliance</span></span></li></ul></aside>
+      </div>
+      <ol class="steps">
+        <li class="step"><span class="sn">08.1</span><div class="st-body">
+          <p><strong>Compliance and fraud oversight</strong> across Sardine and OFAC.</p>
+        </div></li>
+        <li class="step"><span class="sn">08.2</span><div class="st-body">
+          <p><strong>KPI / KRI monitoring</strong> and periodic reporting to the Banking Innovation Risk Committee.</p>
+        </div></li>
+        <li class="step"><span class="sn">08.3</span><div class="st-body">
+          <p><strong>Event monitoring via Coverbase Radar</strong> — daily searches for lawsuits, litigation, mergers and acquisitions on onboarded partners trigger notification and re-review.</p>
+        </div></li>
+        <li class="step"><span class="sn">08.4</span><div class="st-body">
+          <p><strong>Continuous rule-book checks.</strong> The rule book holds both risk-based and <b>transaction-based</b> controls, so it must live outside Coverbase as a separate component callable at onboarding <i>and</i> in near real time against live transaction data.</p>
+        </div></li>
+        <li class="step"><span class="sn">08.5</span><div class="st-body">
+          <p><strong>Post-launch support</strong> per the agreed SLA.</p>
+        </div></li>
+      </ol>
+      <div class="gate">
+        <div class="gate-q"><span class="gate-tag">Gate 4</span><p>Is the bank still meeting the rule book?</p></div>
+        <div class="branches">
+          <div class="br pass"><span class="br-k">Yes</span><p>Continue in production; periodic reporting only.</p></div>
+          <div class="br watch"><span class="br-k">Breach</span><p>Cure period and warnings, potentially <b>penalties or fines</b>. Terms to be defined in the rule book with Legal.</p></div>
+          <div class="br stop"><span class="br-k">Severe</span><p>Immediate <b>kill switch</b> — stop the bank's ability to transact.</p></div>
+        </div>
+      </div>
+      <div class="note open"><span class="note-k">Open</span><p><b>Liability.</b> If Hazel recommends a fix, the bank ignores it, Hazel admits them anyway and something goes wrong — where does liability sit? Direction: anchor everything in the rule book and operating rules, modelled on how established payment networks handle it.</p></div>
+      <div class="note info"><span class="note-k">Network view</span><p>Hazel behaves as a network operator and needs its own sight of the daily Interlace side-core to main-core reconciliation — delays, calculation errors, disputes — because the network becomes the final authority to complain to. Interlace transactions, Custodia mint/burn and chain-analysis data all stream into Databricks and surface as drillable dashboards: one story per bank, one for the network.</p></div>
+    </div>
+  </section>
+
+  <!-- ============ PIPELINE ============ -->
+  <div class="strip">
+    <h3>Pipeline states</h3>
+    <div class="states">
+      <span class="state">Pre-LOI Screening</span>
+      <span class="state">LOI Sent</span>
+      <span class="state">Due Diligence</span>
+      <span class="state">Approval Pending</span>
+      <span class="state">Approved</span>
+      <span class="state provisional">Approved with Conditions *</span>
+      <span class="state">Setup &amp; Contracting</span>
+      <span class="state">Provisioning</span>
+      <span class="state">Certification Testing</span>
+      <span class="state">Go-Live</span>
+      <span class="state terminal">In Production</span>
+      <span class="state exit">Declined / Deferred</span>
+    </div>
+    <div class="note info" style="border-top:1px solid var(--rule)"><span class="note-k">* proposed</span><p>Not in the current status list, but implied by the discussion: a bank that is approved with an account created yet blocked from transacting until its rule-book conditions clear. A pipeline dashboard over these states is what surfaces stuck banks — “three banks sitting in due diligence for two weeks, go call them.”</p></div>
+  </div>
+
+  <!-- ============ SYSTEMS + OPEN ITEMS ============ -->
+  <div class="grid-sec">
+    <div class="card">
+      <h3>Systems map</h3>
+      <div class="card-body">
+        <div class="sysrow"><b>RAFA</b><span>Theorem-built. Scores banks from public UBPR data. Has an API. Steps 0–1. Banks only — needs extending for credit unions, trust charters and foreign banks. <b>Open (Theorem Labs):</b> confirm which identifier drives the UBPR lookup — whether the FDIC field can be used, or another field is required.</span></div>
+        <div class="sysrow"><b>Coverbase</b><span>Third-party risk engine. Questionnaire, AI auto-fill, 0–4 scoring, control sets, Radar event monitoring. Should run headless behind the portal.</span></div>
+        <div class="sysrow"><b>Vanta</b><span>Trust center for reverse due diligence plus a real-time compliance dashboard. Deprioritised for the immediate build.</span></div>
+        <div class="sysrow"><b>Databricks</b><span>System of record. LakeBase + data lake + app hosting. All documents, analytics, transactions and CRM land here.</span></div>
+        <div class="sysrow"><b>Infinant / Interlace</b><span>The core. Tenants, console, RBAC, tokenised accounts, limits, EOD files. Manual provisioning today; API access promised.</span></div>
+        <div class="sysrow"><b>Prelim</b><span>Document and signature workflow with branching logic and multi-signer routing. Uses DocuSign underneath. Now the vehicle for <b>NDA signing (Step 1)</b> as well as account-opening (Step 4); DocuSign also carries the mini-Wolfsberg PDF.</span></div>
+        <div class="sysrow"><b>SendGrid</b><span>Email delivery for the invitation and account-registration emails. Chosen provider (Q6); being implemented by Vantage.</span></div>
+        <div class="sysrow"><b>Sardine</b><span>KYB / AML / fraud, used as Vantage's backstop. Provisioned as a sub-tenant per member bank.</span></div>
+        <div class="sysrow"><b>Custodia</b><span>Wallet setup, minting and burning for tokenised deposits.</span></div>
+        <div class="sysrow"><b>Participate</b><span>Referral source and service provider inside Infinant. ~600-bank network. There is no separate "Participate account" — Participate only debits or credits accounts already established under Hazel, so a Participate member still onboards normally. Modelled as a configuration flag naming the accounts it may debit and credit, plus a webhook on completion.</span></div>
+        <div class="sysrow"><b>HOP</b><span>Hazel Operations Portal. One app, two faces: member-facing and internal. Onboarding is its first module, not its identity.</span></div>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Open items blocking the flow</h3>
+      <div class="card-body">
+        <ol class="oi">
+          <li><b>Auto-approval criteria</b> — must be designed, documented and codified as policy before Step 3 runs as intended.</li>
+          <li><b>Coverbase score thresholds</b> — the numbers separating auto-approve, review and reject.</li>
+          <li><b>The Hazel rule book</b> — risk and transaction controls, conditions, penalties, cure periods, kill switch. Paused, needs restarting with Legal.</li>
+          <li><b>Sardine / compliance-as-a-service model</b> — who monitors, under which contract, at what staffing level.</li>
+          <li><b>Infinant scope and lead time</b> — the two-week provisioning window, the DDA fix, and exactly what data can be streamed out.</li>
+          <li><b>Contracting engine</b> — reuse Prelim or rebuild in-app, and where the create-account call fires from.</li>
+          <li><b>Basic product list</b> — which products exist, which the bank may self-open, and how product type maps to account configuration.</li>
+          <li><b>Self-provisioned accounts</b> — documentation and compliance for accounts the bank opens itself.</li>
+          <li><b>Non-bank intake</b> — credit unions, trust charters and foreign banks need their own questionnaires and data sources.</li>
+          <li><b>Consent order automation</b> — currently a manual regulator-by-regulator lookup.</li>
+          <li><b>Support and ticketing model</b> — channels, hours, SLAs, and whether ticketing is built inside Databricks.</li>
+          <li><b>Stakeholder and integration mapping</b> — which function and which system at every step. Requested, not yet done.</li>
+          <li><b>UBPR lookup field</b> — Theorem Labs to determine which identifier drives the RAFA UBPR search (FDIC field or another).</li>
+          <li><b>Legal package</b> — membership agreement, MSA, correspondent agreement and security procedures, reconciled against the embedded-bank versions before going online.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <span>Hazel Member Bank Onboarding · Basic Tier · Pilot Banks</span>
+    <span>Compiled from the workflow document and the Theorem Labs kick-off sessions, 16 July 2026</span>
+    <span>Confidential</span>
+  </footer>
+
+</main>
+</body>
+</html>

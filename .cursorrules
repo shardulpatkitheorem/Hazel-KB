@@ -9,3 +9,7 @@
 - Do not expose secrets, credentials, personal data, or restricted client information.
 - Keep raw source files unchanged; place transformations in the corresponding parsed directory.
 - Use YYYY-MM-DD dates and descriptive kebab-case filenames.
+- For prototype work, read `02-design-and-workflows/PROTOTYPE-SPEC.md` before implementation.
+- Define objectives, source references, actors, states, assumptions, acceptance criteria, and open questions before changing a prototype.
+- Reuse `02-design-and-workflows/mocks/hub-assets/tokens.css` and the canonical Hazel SVG logo.
+- Treat dated prototype directories as immutable review snapshots; create a new dated version for material changes.

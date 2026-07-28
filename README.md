@@ -20,6 +20,13 @@ AI outputs    ─┘                └─> GitHub Actions / LFS
 - `02-design-and-workflows/`: workflow prototypes, mocks, and design specifications
 - `03-intermediate-ai-outputs/`: reusable prompts and proof-of-concept outputs
 
+## Working indexes
+
+- [Client-shared Vantage context](00-context/client-shared/README.md)
+- [Daily call transcripts](01-transcripts/daily-calls/README.md)
+- [Design and workflow assets](02-design-and-workflows/README.md)
+- [Prototype development specification](02-design-and-workflows/PROTOTYPE-SPEC.md)
+
 ## Suggested document metadata
 
 Add YAML front matter to parsed Markdown documents:
@@ -31,7 +38,7 @@ document_type: "transcript | client-doc | architecture | design | prompt | poc"
 source: "client | internal | meeting | generated"
 client: "Hazel"
 date: "YYYY-MM-DD"
-status: "raw | parsed | reviewed | approved | superseded"
+status: "raw | parsed | draft | reviewed | approved | superseded"
 version: "1.0"
 owners:
   - "GitHub username or team"

@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Access page for the Hazel prototype review environment.">
+    <title>Hazel Prototype Access</title>
+    <link rel="stylesheet" href="./hub-assets/auth.css">
+    <script
+      src="./hub-assets/auth.js"
+      data-hazel-auth-root="./"
+      data-hazel-auth-page="true"
+      defer
+    ></script>
+  </head>
+  <body>
+    <main class="access-page">
+      <section class="access-card" aria-labelledby="access-title">
+        <img
+          class="access-logo"
+          src="./hub-assets/brand/hazel-network-logo.svg"
+          alt="Hazel Network"
+          width="190"
+          height="156"
+        >
+        <p class="access-eyebrow">Prototype review</p>
+        <h1 id="access-title">Hazel Prototype Access</h1>
+        <p class="access-intro">Enter the shared review password to continue.</p>
+
+        <form id="hazel-auth-form" class="access-form" novalidate>
+          <label for="hazel-password">Password</label>
+          <input
+            id="hazel-password"
+            name="password"
+            type="password"
+            autocomplete="current-password"
+            aria-describedby="hazel-password-error"
+            required
+            autofocus
+          >
+          <p id="hazel-password-error" class="access-error" role="alert" hidden>
+            Incorrect password. Please try again.
+          </p>
+          <button type="submit">Continue</button>
+        </form>
+
+        <p class="access-note">Authorized prototype reviewers only.</p>
+        <noscript>
+          <p class="access-error">JavaScript is required to access this prototype.</p>
+        </noscript>
+      </section>
+    </main>
+  </body>
+</html>

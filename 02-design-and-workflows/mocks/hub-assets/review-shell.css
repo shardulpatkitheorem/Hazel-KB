@@ -1,0 +1,105 @@
+:root {
+  --review-shell-height: 2.75rem;
+}
+
+body {
+  padding-top: var(--review-shell-height) !important;
+}
+
+.review-shell {
+  position: fixed;
+  z-index: 2147483000;
+  top: 0;
+  right: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: var(--review-shell-height);
+  padding: 0.35rem max(1rem, env(safe-area-inset-right)) 0.35rem
+    max(1rem, env(safe-area-inset-left));
+  border-bottom: 3px solid #ff6e46;
+  background: #160f16;
+  color: #ffffff;
+  font: 700 0.78rem/1.2 Inter, "Helvetica Neue", Arial, sans-serif;
+  letter-spacing: normal;
+}
+
+.review-shell__context {
+  color: #ffb3a2;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.review-shell a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.35rem;
+  color: #ffffff;
+  text-decoration: underline;
+  text-decoration-color: #ff9d87;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.2em;
+}
+
+.review-shell a::before {
+  content: "\2190";
+  margin-right: 0.45rem;
+  color: #ff9d87;
+  font-size: 1rem;
+}
+
+.review-shell a:hover {
+  background: rgba(255, 255, 255, 0.14);
+  text-decoration-color: #ffffff;
+}
+
+.review-shell a:focus-visible {
+  outline: 3px solid #ffffff;
+  outline-offset: 1px;
+  background: #3a1c32;
+}
+
+/* Keep each snapshot's existing sticky review/product header below this shell. */
+.prototype-bar,
+.public-header {
+  top: var(--review-shell-height) !important;
+}
+
+.skip:focus {
+  top: calc(var(--review-shell-height) + 0.75rem) !important;
+}
+
+@media (max-width: 30rem) {
+  :root {
+    --review-shell-height: 3rem;
+  }
+
+  .review-shell {
+    padding-inline: 0.75rem;
+  }
+
+  .review-shell__context {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .review-shell a {
+    margin-left: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .review-shell *,
+  .review-shell *::before {
+    scroll-behavior: auto;
+    transition: none !important;
+  }
+}

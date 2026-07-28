@@ -1,0 +1,9 @@
+Feature,Option,Notes
+Interest Bearing & Non-Interest Bearing Products?,Yes,"Consumer & Business accounts will offer interest bearing account products, but we will start pilot with non-interest bearing accounts"
+FInTech Revenue (Charge End User) Managed Through Interlace?,Yes,
+FinTech Revenue (Charge End User)  in Real-Time?,Real-Time,Up to Fintech to make decision (will need to test real time process)
+Bank Revenue (Charge FinTech) Managed Though Interlace?,Yes,
+Bank Revenue (Charge FinTech) in Real-Time?,EOM,
+Limits Managed Through Interlace?,Yes,
+Will there be Interest Splitting with the FinTech?,Yes,
+Outgoing Domestic Wire Cut Off Time,3:30pm CST,
