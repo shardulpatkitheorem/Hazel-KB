@@ -1,0 +1,167 @@
+---
+title: "Daily HOP Standup"
+document_type: "transcript"
+source: "meeting"
+client: "Hazel"
+date: "2026-07-24"
+status: "parsed"
+version: "1.0"
+tags:
+  - "daily-standup"
+  - "hop"
+  - "project-status"
+confidentiality: "client-confidential"
+source_file: "../raw/2026-07-24-daily-hop-standup.txt"
+---
+
+# Daily HOP Standup
+
+## Transcript
+
+Daily HOP Standup — Meeting Transcript
+Date: Friday, July 24, 2026
+Time: 12:00 PM – 12:30 PM (Central)
+Organizer: Aaron McWilliams
+Platform: Microsoft Teams
+
+============================================================
+
+[00:01:51] Shardul Patki: Hello, how is everyone doing?
+[00:01:54] Smital Lunawat: Hey, hi, Shardul. Hi, everyone.
+[00:01:56] Pallavi Bichpuriya: Hi, everybody.
+[00:01:58] Robert Ramirez: Lou.
+[00:02:02] Victoria Santiago: Hello, everyone.
+[00:02:48] Shantanu: You guys hear me?
+[00:02:53] Shardul Patki: Yeah, yeah, we can hear you.
+[00:02:56] Shantanu: The. Payable. Sam. So, we are waiting for...
+[00:03:49] Aaron McWilliams: Yes, Robert, that was more than a second, so sorry.
+[00:03:59] Shantanu: Call Singh.
+[00:04:02] Aaron McWilliams: Where should we start today?
+[00:04:04] Smital Lunawat: Yeah, so from what we have in mind, we were going through the whole flow yesterday. We saw the front end. Now we were thinking of what all back-end infrastructure that we would want to go through and, you know, let's have a discussion over that. What we had in our minds.
+[00:04:19] Shantanu: Is this weekend?
+[00:04:26] Aaron McWilliams: Shantanu, are you okay if I mute you? We got some background noise. There we go.
+[00:04:34] Smital Lunawat: Were you able to hear me or should I go again?
+[00:04:35] Aaron McWilliams: Yeah, no, I heard ya. I heard ya.
+[00:04:38] Smital Lunawat: Yeah, let me know if you guys have some other thing in mind that we want to discuss in.
+[00:04:47] Aaron McWilliams: No, David and Robert, I'm guessing you guys probably don't have anything new today.
+[00:04:53] Robert Ramirez: We actually did been working on the environment and the cloud. We were able to set up a cloud PC and all that. So David's actually setting up through Terraform and all that. So hopefully by Tuesday afternoon, we should be able to have logins for you guys.
+[00:05:09] Aaron McWilliams: Ohh. Perfect. Good news, OK.
+[00:05:16] Robert Ramirez: David, I know you want to add something else.
+[00:05:19] David Gonzalez: No, that that's all. And I'll be working on setting up the SendGrid for the e-mail notifications.
+[00:05:30] Aaron McWilliams: For the to the member banks.
+[00:05:34] David Gonzalez: For the workflows, I think they need it. e-mail going out from the hazelnetwork.com domain.
+[00:05:44] Aaron McWilliams: Okay, yeah.
+[00:05:45] David Gonzalez: I think I that's what I got from yesterday's meeting.
+[00:05:51] Aaron McWilliams: Yeah, no, I think we will need that. I mean, one question was if we wanted to, I don't know if we want that separate from Vantage as well, but at this point, we probably, it's probably best just to set it up in the same way we have all our other emails, I think.
+[00:05:54] David Gonzalez: Time. Yeah, it's gonna be separate, but yeah.
+[00:06:08] Aaron McWilliams: Oh, okay. All right, well, that's good. So, yeah, Smith, I think we can we can move forward now.
+[00:06:14] David Gonzalez: Chad.
+[00:06:17] Smital Lunawat: Mm. Shardul, do you by any chance mind presenting the PPT's slide just in case?
+[00:06:47] Pallavi Bichpuriya: I just installed the app, so I'll have to quit and reopen the app to change the settings. Chad, can you please go ahead and do that?
+[00:06:54] Smital Lunawat: Ohh.
+[00:07:00] Shardul Patki: Yes, yes, give me a second.
+[00:07:06] Smital Lunawat: Yeah, so in the meantime, so what we were thinking was we started the very first step, that is the inquiry form. And yesterday we went through Rafa, like we had a quick call with Soham to understand how Rafa was working and we realized that what Rafa uses on the back is something called as RSSDID, but definitely we can like look, we can chat more with him on in the background. Does it use the FDIC? Like can we link it up together? So I think we'll.
+[00:07:37] Aaron McWilliams: Yeah. Joel, do you know what the RSSD ID is that different from a bank's FDIC code?
+[00:07:52] Joel Olivares: I don't know that. Maybe we can do a quick search.
+[00:07:58] Aaron McWilliams: Yeah, that's what I'm looking at, but also, yeah, I mean, so you guys can work, figure that was Soham too.
+[00:08:04] Smital Lunawat: Yeah, I, yeah, I can we can check that with Soham, so that should be fine, but so Soham suggested that there were a couple of ways we could go possibly go around that, and let me bring those up in a minute, so... Yeah, so basically like we, so after we have a discussion, we would want to have a little clarity on what will be the initial fields of inquiry that we would consider because I believe Shawn yesterday mentioned that there might be a community, I think community vendors or someone who would not possibly have an FDIC score or RSSDID and what the platform that Chad showed, that Soham showed was basically it was using the public data from UBPR database, which includes, it does not include all the banks, it includes some institutions. So in those case, let's say someone registers, which is not a part of that public data set available, then we might have to use some other factor or forms in order to do a verification around those terms. So how would we go around that part? And will it, will we follow a manual review process or? Will we use the Rafa score that it automatically generates, or will we have a new set of metrics that would be designed based on how Hazel requires the metrics to be? So we can utilize Rafa APIs, or we can pick that up and, you know, have a separate set of data, like some set of scorings designed in Databricks to help us form an underlying eligibility score based on Hazel Network. So yeah, that's been about Rafa so far. So I would want to like to know your inputs. On this.
+[00:10:14] Aaron McWilliams: So I think high level, we don't have anybody on this call that maybe understands the distinctions between the two IDs. So if maybe you could research that with Soham and see if that's a requirement for the UBPR data. If so, I mean, when I go to ROF report, I type in the name of the bank.
+[00:10:26] Smital Lunawat: What is?
+[00:10:33] Aaron McWilliams: and it somehow finds it correctly. But sometimes it'll give you options like, is this the bank or is this the bank you're mentioning? It's just kind of a smart search. So I think we would want something similar for the Hazel workflow. And then, yeah, you just let us know if... we need FDIC for this or not. And to well, to your point of, we will definitely gather that for a bank, but I would think that it wouldn't be required in that first page if, because the first step is just, can we find them in the UBPR data? Once we have that, then we can ask for FDIC.
+[00:11:10] Smital Lunawat: And.
+[00:11:13] Aaron McWilliams: you know, afterwards if we're not able to get that publicly anyway. But probably at least some kind of, you have a, I feel like you have a confirmation workflow there already that's kind of behind the scenes, so I think that will. I should cover that.
+[00:11:29] Smital Lunawat: So basically what we had until yesterday in our minds was initially getting a hold of some information that would be enough for us to be able to fetch the Rafa score. But for example, I remember. So I was trying to type Wells Fargo and it just gave up like 3 branches or it might have more, but then there might be some branch that is missing, but like not just these big bank banking institutions, but consider some, you know, like a community bank or maybe let's say in Champaign there is some Champaign Public Union or something, which is not a big association, which might not have public data available. In that case, how do we make sure to do the Rafa screening? Because it is after that when we send an e-mail across to them that, okay, now you can go to the onboarding part of.
+[00:12:34] Aaron McWilliams: Yeah, I'm just showing you the example you just shared. So yeah, so we have... Wells Fargo is showing. All the look, all just, yeah, branches or something.
+[00:12:47] Smital Lunawat: Yeah, so if you see it's just showing like four or five, right? But I'm pretty sure there might be much more than that. So how do we make sure to, you know, incorporate or check all of those in the background? That's one question that struck.
+[00:12:47] Aaron McWilliams: And...
+[00:13:08] Smital Lunawat: PAIGN, like that might be a lot of things that are not available publicly, right? I believe so. So we will have to decide on form factor that we would want to. Use like this or like how do we want to do Rafa part?
+[00:13:28] Aaron McWilliams: Well, and this might be a reason to have an ID along with a bank name. So one option would be they type in the bank name, we show them the results, and then it shows the option of add FDIC or RSSD to help search or something. So yeah, so I'm fine if you guys kind of work through with Soham on, kind of recommend the best option there.
+[00:13:56] Smital Lunawat: Yeah, we could do that, but again, like the question that is, if something is not available publicly, like, so in that case, how do we, like, do we do a manual check on our ends?
+[00:14:11] Aaron McWilliams: Are you saying that if a bank is not found?
+[00:14:15] Smital Lunawat: Yeah, yeah, yeah.
+[00:14:17] Aaron McWilliams: Well, I think. I'm open to other thoughts here, but my thought is if we can't find a bank here, then we just show them the great, someone will reach out to you. Thank you for your inquiry. Someone will reach out to you soon. You know.
+[00:14:31] Smital Lunawat: Okay, and then we on the we will do it do a manual check, right? That, yeah, okay, so in that case as well, like just if Joel or someone, if you can help us with what are the minimum fields apart from, like, we we can check with Soham on the part, but apart from that, for manual integration.
+[00:14:40] Aaron McWilliams: Yeah, yeah.
+[00:14:56] Smital Lunawat: integrations, what are the other fields that we require for manual discussion that might help.
+[00:15:05] Joel Olivares: Okay, I can look into that. I think, I mean, we're talking about more basic stuff like corporate office or addresses and... Things like that, or... Are we are we talking about?
+[00:15:19] Smital Lunawat: Like, whatever would be the basic thing that would be required to fetch for, like, let's say there is some bank that is not available publicly on the UBPR data set. In that case, even if that bank wants to send an inquiry, in the internal network, we should have the available information to be able to verify them or we can use normal means such as through e-mail ID and the phone number, we talk to them, we understand and we request some documents over the mail that like all of that, it wouldn't be a smooth flow. That's why I'm just wanting to make sure that. And let's see if... In the initial inquiry form, we can also have it automate like they just search through the FDIC number or some sort of a number or a name and then it auto fills a couple of things like maybe the address or so for institutions that are already available on the public data set, we might auto fill a few pieces of form that makes it smooth. But for institutions which are not a part of this public data set, then what are the fields that we would require on our end to do the manual verification?
+[00:16:36] Aaron McWilliams: Yeah, and that's a good question. I mean, this is just a quick response. It looks like UBPR data may be for all insured commercial banks and FDIC supervised savings banks. So that seems like it fits everyone we're going after. So we might need to check that, but Yeah, I don't know what we would do for a manual check if they don't have UBPR data. So we'd have to, let me take that as a take away to ask Shawn or Joel to see if they have thoughts. And they may, since they might know more of how UBPR works, they may say, we're not worried about those banks, so just
+[00:17:07] Smital Lunawat: And so...
+[00:17:23] Aaron McWilliams: You know, we'll just have this kind of workflow and we'll judge him, but you know, one at a time kind of thing.
+[00:17:23] Smital Lunawat: Yeah, yeah, yeah. Tate.
+[00:17:30] Prashant Sarode: I think credit unions and the trust was the only two thing, credit unions and trust, those were the ones which I thought was not covered by UBPR domain and therefore can't be discovered through the UBPR API.
+[00:17:47] Aaron McWilliams: Yeah, that makes sense. And I don't think those people will be in MVP1, at least, but... but it is in the roadmap, yeah. Okay, so that's one thing we need to figure out is how will we evaluate.
+[00:17:57] Smital Lunawat: So. Right, that's...
+[00:18:03] Aaron McWilliams: FIs that are outside of, that don't have UBPR. Good.
+[00:18:07] Smital Lunawat: Right, so that is one thing that we researched on yesterday, and we will look more into Rafa with Soham. That was well, and then moving on to the next part is the... After that, yeah, so we have some e-mail vendors, I believe, that I believe Twilio and send e-mail or something that you mentioned, I think Norma handles it or something. So if we can check with that and then how, because then that would be the next step of after the Rafa verification is done in the background.
+[00:18:47] Aaron McWilliams: With the e-mail for sending the code.
+[00:18:48] Smital Lunawat: We, yeah, yeah, sending the code, like we can send a code or we can send a unique link that automatically redirects to the dashboard page for that particular bank, and then we directly have the login form pre-filled with the information because they already have filled it in the inquiry, so...
+[00:19:04] Aaron McWilliams: I like that.
+[00:19:06] Smital Lunawat: anything around those terms.
+[00:19:09] Aaron McWilliams: Yeah, well, first I like the unique link. There might be some use cases where we need a code, but we can, I don't know if that's a requirement. But then on the SendGrid for the e-mail setup, that was what David briefly mentioned earlier, that he's starting that setup so that we can, SendGrid has a really good API.
+[00:19:12] Smital Lunawat: Mhm.
+[00:19:31] Aaron McWilliams: For sending emails, and so once he gets that set up, we can we can work with David here on the call to get that help you guys get that built out.
+[00:19:42] Smital Lunawat: Yeah, that so after we understand how that thing works, then we can take a call on how the e-mail configuration or how the e-mail sending will be set up to these possible inquiries that have approved Rafa. And then after that, after we understand how the e-mail works, Then the dashboard comes into picture, so we were we were looking into the cover base APIs and all of it. So, Shardul, do you want to Shardul, do you want to share some light on it?
+[00:20:19] Shardul Patki: Yeah, so we were looking at the cover based APIs and it has a good set of API so we can Send questions, question and answers along with the documents to cover base and let cover base do its thing. And we can also fetch the results as well. So I think that that part should be good. The cover base integration should be good. On the internal side. The reviewers would have to log in to Cover Base to check for the answers or if they want any other further documents from the member banks. And that will have to go through Cover Base. But for the user, sorry, the member banks, we can show everything on the dashboard itself and then we can communicate to cover base from there. So that part should be good.
+[00:21:19] Aaron McWilliams: Great. And so that makes me think you do, is there a way that our team would be notified when a bank finishes a step that's sent to Coverbase? Is that a notification that Coverbase might have, Joel, or is that something we would need from? The HOP platform.
+[00:21:40] Shardul Patki: So... Sorry, John, go ahead.
+[00:21:42] Joel Olivares: Go ahead. It's okay. I was just going to say, well, I was just going to say that I do know we have an initial notification when they apply, but I don't get a notification of, say, when I complete the risk assessment. I'd have to go in and verify that.
+[00:22:01] Shardul Patki: I was looking at a few like webhooks and it does mention that status changes is supported.
+[00:22:01] Aaron McWilliams: And. Oh, okay.
+[00:22:09] Shardul Patki: So, we can, we can, we we should be able to then set up, like, if there are any status changes, and... Then we send out notifications to everyone.
+[00:22:24] Aaron McWilliams: Cool. Okay. That's great. And then also, did you see the e-mail from? Gage, is a gauge at cover base?
+[00:22:37] Joel Olivares: I did. I saw it. I responded to him right before this call. I was catching up with the emails. He sent that out pretty early this morning, but I did say, you know, shift it to Thursday whenever he's available so we can meet instead of Wednesday. They're having travel issues or, and so we'll We'll meet when they can. And I've gave him a little synopsis of what we want to talk about. And that's why he kind of said, okay, there's an API documentation here. This is our coverbase or docs.coverbase.com or IO or whatever it is. So he kind of gave us a heads up and that's what the team has been looking at. But yeah, we'll move it to Thursday and talk.
+[00:23:21] Aaron McWilliams: He had a follow-up question that I didn't know if it'd be helpful for Theorem to answer about existing cover-based data strategy, data structure.
+[00:23:32] Joel Olivares: Yeah, that's probably, well, that I felt like that would be a question that would be best answered in person or asked in person, because I think what he wants to know is, what he's asking is, will Theorem Labs want to know what the names of our fields are? That would be a backend database type of question.
+[00:23:55] Aaron McWilliams: Okay, well, we can wait on that then.
+[00:23:57] Joel Olivares: Yeah, that was the only one that I didn't respond to because I felt like that would be something that if we get into the details, they can ask that.
+[00:24:06] Aaron McWilliams: OK, that sounds sounds fine.
+[00:24:09] Joel Olivares: It's just unfortunate that we have to wait till next week. I know, well, now it's Friday, but we've been waiting a week already, so...
+[00:24:15] Aaron McWilliams: No, it's OK. All right, so sounds like we've got our next steps with Coverbase. What else?
+[00:24:36] Shantanu: Yeah, you want to talk about the event engine or agent code we're talking about?
+[00:24:52] Aaron McWilliams: Pallavi, did you? Catch that, you're on mute.
+[00:24:59] Pallavi Bichpuriya: So we were thinking that for every, whatever we, every time we would be calling cover base, we will be triggering an event for that purpose. So, for instance, when we are uploading those two documents, Wolf and the BSAML document, we will trigger an event to cover base and an intake form will be created, and then... the documents will be processed, sent and processed, and then the cover base will send back us an event saying that, okay, the documents have been processed. And we were thinking of using webhooks for this purpose. And we wanted to know, like, how much time do should the member bank wait for this, like to receive a response from cover base. Sometimes it might take cover base might want the member bank to rewrite their answers. And also for rewriting the answers part, do we want each and every answer to be stored in data bricks or do we just want that final answer? What will be the source of truth for that? And when the risk questions are prepared, we will again be triggering an event for that, saying that the suggestions are ready. And once everything is completed, even Vantage has reviewed all the controls and everything at their end, we will then trigger an event saying that the submission has been received. So this is what we were thinking, having an AI agent for... Every for every part that we are doing.
+[00:27:00] Aaron McWilliams: like for the cover base part and for the, as a whole.
+[00:27:03] Pallavi Bichpuriya: Yeah, yes.
+[00:27:09] Aaron McWilliams: Yeah, mhm.
+[00:27:10] Shantanu: So, Adam, basically the cover base has a good, you know, agent integration or event integration, which is good. So that gives us like more flexibility on our front end. We can do whatever we want to do. So, once we, you know, dig more into the technical part of it, we should be good. I think what we need more onto that is sandbox or cover base, so that we can play with it, like, you know, create a postman. or we write agent and see if we can talk with it and on. Maybe Mondays or Monday, Tuesdays call with the cover base, we'll talk about when can we get the sandbox for this order. And then we can play with it.
+[00:28:05] Aaron McWilliams: Yeah, I guess, Joel, we haven't had to get sandbox access to anybody. Do you know if... What can everybody status with that?
+[00:28:13] Joel Olivares: I don't. This is a new territory for me and I guess for all of us, but I again, I think that's going to be one of those asking person questions because I don't know if they provide a sandbox environment or if I just create a new instance within the cover base production platform that we have like that. we did it for Hazel and collabs and our traditional banking partners. Maybe I create a new one and we can test it in there. But as of today, we are maybe one partner is in the process of being onboarded into our Hazel network. So I feel like... If we needed to test some things, that's still a good place to do it.
+[00:28:56] Shantanu: Have to. Yeah, one more point I want to talk about is, you know, the system of record or the back end. We are trying to come up with some kind of a master sheet.
+[00:29:29] Shardul Patki: The backend assets.
+[00:29:30] Shantanu: blank document, yes, yeah, if you have any blank document, show it. At least we want to start thinking on that. What we want to do, we want to have a functional data. So, in our functions, tied up with what? workflow or the engines or the APIs in the middle and what is the data we are trying to connect. And then the next thing is, is that my system of record? So we want to build a document which will be always discussed and reviewed. What is my front print? Where is this data? What is a system of record for this data? So always we know that if I need a data of, let's say, FDIC number, am I going to go to Hazel database or am I going to go to UBPR database? or, you know, like that. So we need that understanding of which data goes where in terms of receiving it and also in terms of reading it, what is my system of record? So we want to start building that document as a master sheet for us.
+[00:30:37] Aaron McWilliams: And. Yeah, that's great. No, I think that'll be really useful. I think back to Pallavi's question on what the source of record is for these cover base questions. Well, I feel like cover base is where we need it. We don't need to say those in data bricks as well, right? I mean, so I think, yeah, I think cover base is a source of record for those questions, and I don't think we need to capture the iterations if they make changes. I think we just need the final product pushed over. But yeah, I do, it does seem complex, like how well can we understand how Coverbase is, you know, preemptively answering some of these questions and suggesting things and then the feedback it's getting, and do we have to fully reproduce that capability within HOP, or is there a way just to... Let Coverbase do that, and we just pass the information back and forth, so... That's a big question, yeah.
+[00:32:02] Smital Lunawat: And I also believe.
+[00:32:03] Shardul Patki: So, now we want to, so the documents as well, they stay in cover base and not in data bricks. The 2 documents which they upload.
+[00:32:13] Aaron McWilliams: Does that sound right, Joel?
+[00:32:14] Shantanu: So, yeah, Chad, we need Excel first. You know, we want our document and then we will put together what goes where.
+[00:32:23] Shardul Patki: Right, right, right.
+[00:32:25] Aaron McWilliams: I think that's right, Shardul, but yeah, we'll confirm it once you create the... The spreadsheet, but... M.
+[00:32:39] Shantanu: I think that's it from my side.
+[00:32:42] Aaron McWilliams: Yeah, and on the eventing engine, I mean, I think that makes sense. Would you guys, is that another tool you would bring in or would you?
+[00:32:51] Shantanu: No, we prefer not to, but I know there are, see, you know, building is not a problem until we surely know this, you know, some functionality building is going to take more time or complex to build it. Like for example, cover base has. Too many things, so we should be using maximum out of it. Databricks, we are seeing we have to use it to the maximum, you know, possible level, and then you know we should build our own building, bringing any new tool, you know, adds more dependency and all, but obviously. Once we know all the process and we feel like something is missing and some tool will help us, we'll get some more leverage, we'll think of it.
+[00:33:45] Aaron McWilliams: Which reminds me, I think Shawn sent out an e-mail about CRM and HubSpot possibility. Were you guys in that?
+[00:33:53] Shantanu: Yeah, yeah, I'm going to review that for sure. So the first thing we have to do is like what is the cost and what is that we are going to use out of it? You know, the yeah, so I'm actually looking into that and hopefully over the weekend I'll spend some time and I'll get back on that question. That's my action outcome, yes.
+[00:34:15] Aaron McWilliams: And. Okay, no, that's helpful. I mean, you know, I've been familiar with HubSpot for years and it has a lot of good functioning out there, but I also thought that maybe you all had built a CRM of sorts, right?
+[00:34:33] Shantanu: Sorry, come again.
+[00:34:34] Aaron McWilliams: Did the theorem do you guys did you guys build a CRM at some point?
+[00:34:39] Shantanu: Well, you know what we have, you know, we call it like a tacit workflows and think it this way, that CRM is a too big elephant to deal with. Many of the companies don't need that entire, you know, package altogether. you need like a 2-3 component out of it and building those is easy. So what we can think of is like for example, if we are seeing HubSpot, if it's already with the Vantage and we are using it, then we can think of like, okay, this is already in our. Technical stack then makes sense to use it, but adding more technology stack, we can avoid it, so.
+[00:35:34] Aaron McWilliams: Yeah, and that's kind of why I thought of if you all had kind of built something that maybe you could build off of the data bricks kind of customer database.
+[00:35:41] Shantanu: Absolutely, yes, yeah, yeah, yeah.
+[00:35:46] Aaron McWilliams: And I have a friend that's, you know, an expert in HubSpot as well. I may check with him just on how he currently sees where they're going. But I definitely know enough about Salesforce that I don't want to touch that again with a 10-foot pole. But there's so many CRMs out there.
+[00:36:05] Shantanu: Absolutely, yeah.
+[00:36:06] Aaron McWilliams: It's crazy. I've worked with Odoo and Zoho and some of these others that, yeah, I don't know. But I, yeah, but you're right, we probably need to define the basic functionality we want, which is really a Shawn question. So, okay.
+[00:36:13] Shantanu: Mike. Yeah, yeah. See, it's like this. If I have a car, then I'll use it to get the groceries. But if I don't have a car and my grocery shop is a close by, you know, I'll walk and come back, right? So those are some of the decisions, yeah.
+[00:36:35] Aaron McWilliams: Yeah, that's right. And most CRMs are, you know, an airplane to go to the grocery store. You don't need all that.
+[00:36:38] Shantanu: Yeah, exactly, exactly, yeah.
+[00:36:43] Aaron McWilliams: So, OK.
+[00:36:45] Shantanu: Thanks. Thanks, guys. Yeah, bye-bye.
+[00:36:47] Aaron McWilliams: Yeah, well, again, and I'll be out next week and the Monday afterwards, but Joel and Victoria will be on, and then Diana Plata, who runs Hazel Operations, will probably be able to join some next week. Maybe not every day, but should be enough to keep everything going forward. So...
+[00:37:08] Shantanu: Thanks, guys. Have a nice weekend. Bye-bye.
+[00:37:11] Aaron McWilliams: Thanks, bye.
+[00:37:11] Joel Olivares: Bye, everyone. Thanks.
+[00:37:12] Victoria Santiago: Thank you, bye. Thanks, bye.
+[00:37:12] Shardul Patki: Thank you, guys. Bye-bye.
+
+============================================================
+End of transcript.
