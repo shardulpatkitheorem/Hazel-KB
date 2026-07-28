@@ -1,0 +1,11 @@
+# Hazel Knowledge Base AI instructions
+
+- Treat this repository as client-confidential knowledge unless a document explicitly says otherwise.
+- Prefer evidence from repository documents over assumptions.
+- Cite source files with relative paths when producing summaries or recommendations.
+- Preserve YAML front matter and existing document provenance.
+- Never invent client facts, decisions, dates, owners, or architecture constraints.
+- Clearly label generated content, open questions, and unverified claims.
+- Do not expose secrets, credentials, personal data, or restricted client information.
+- Keep raw source files unchanged; place transformations in the corresponding parsed directory.
+- Use YYYY-MM-DD dates and descriptive kebab-case filenames.
