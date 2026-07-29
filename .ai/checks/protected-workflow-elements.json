@@ -1,0 +1,14 @@
+{
+  "schema_version": "1.0",
+  "brand_element_patterns": [
+    "<img\\b[^>]*>",
+    "<svg\\b[\\s\\S]*?</svg>",
+    "<[^>]+(?:id|class|alt|aria-label|src)=[\"'][^\"']*logo[^\"']*[\"'][^>]*>"
+  ],
+  "font_patterns": [
+    "@import\\s+[^;]+;",
+    "<link\\b[^>]*(?:font|stylesheet)[^>]*>",
+    "font-family\\s*:[^;}{]+;"
+  ],
+  "root_css_pattern": ":root\\s*\\{[\\s\\S]*?\\}"
+}
