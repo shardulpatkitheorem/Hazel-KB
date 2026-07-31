@@ -1,0 +1,123 @@
+Daily HOP Standup — Meeting Transcript
+Date: Thursday, July 30, 2026
+Time: 12:00 PM – 12:30 PM CDT
+Organizer: Aaron McWilliams (Vantage Bank)
+
+========================================================
+
+[00:00:14] Joel Olivares: Hey, Sean.
+
+[00:02:16] Smital Lunawat: Hi all, are we ready to begin or are we looking forward to some more folks joining us?
+
+[00:02:22] Joel Olivares: No, I'm ready to get started if you guys are ready. I didn't know who else was going to join, so I was waiting a little bit. I'm also going to mute myself a lot because I'm on another call and they're sending a lot of messages. So, but I'm here.
+
+[00:02:49] Smital Lunawat: Yeah, so we have like an almost final prototype that we can have a walk through, before we begin the actual development. Aly, do you want to start ahead?
+
+[00:03:08] Pallavi Bichpuriya: Yeah, yeah. So we are yet to push all these changes to Vercel so that you can go through it. So for now I'll present it. This is the current build. And we did not have a sign-in page before — we added that. So I'll just begin from the express interest part. It's the same as before. Fill some with the interest. We'll get a thank you screen and we can return to the Hazel network. And here we've given a user invitation tab. I'm sorry. Yeah, here we have given the user invitation tab and it takes us to this screen. We have added — I am so sorry, my screen sharing stops in the middle. Yeah, we have given the screen because we want — what if the user already has an account, they can sign in. And one more thing is that if they are coming through the email, if they got an invite in their email, they will directly come to this creating their Hazel account part. They won't get the previous screen that we had. So when the user is new, they'll get a URL. And when they click on that URL, they'll jump onto the screen where all these details, their invitation — and since it will be secured, so all these details will be pre-filled. So we will provide them a password. They can create a password and create an account. And they'll jump into the sign into the Hazel screen since their account is created. This is their onboarding journey, everything wherever in whichever, yeah.
+
+[00:05:30] Jay Leal: So, I'm sorry, didn't mean to interrupt, but so when it's creating that account and that username and password, where is it creating that? Like, are we — you've got your part of the setup you're creating? You know, credentialing for the clients.
+
+[00:05:58] Shantanu: No, Jay, I think I'll answer that. This is where the OAuth or Microsoft integration has to be ready behind. This will be the, you know, security user setup.
+
+[00:05:58] Jay Leal: Do we have it? Gone. Okay. Okay.
+
+[00:06:28] Pallavi Bichpuriya: Yes, so in the overview page, they'll get everything wherever in whichever step they are in in the current onboarding journey. Eligibility is done, registration is done, and now they can continue to the NDA signing part. So we'll continue. The NDA that was provided to us, we have uploaded it and they can preview it over here. And they can then continue and sign the NDA. So all this will be the e-sign part handled by DocuSign. We'll finish the signing in. And this pop-up will be again handled by DocuSign, so we don't know if this is the screen that will come up or something else. Cancel it. And now we can see that the NDA step is done. And we can now go ahead either to return to the overview where we can see the onboarding journey, or we can go to the document step from here. And if they do not have the Wolfsberg document, they can download the template, fill it, and then upload it. So, this document — if they want to add any supporting documents, they can do that as well. And if the documents are accepted, they can continue to do the due diligence part. And here we are just showcasing them all the documents that have been accepted or completed by the user. Their document repository. We'll continue to that due diligence part.
+
+[00:08:36] Jay Leal: So on the Wolfsberg — and maybe this is a question for Shawn. I know we had some discussions about if a bank does not have a Wolfsberg, but would, instead of just downloading a template and then having them fill it out and then upload it, would there be a process or a way that we could help them fill in the document, fill in the Wolfsberg, and then, you know, so it's not a separate process — you know, like we can say, hey, do you need to complete the Wolfsberg? Click here, and then we can collect the information that's needed to complete the Wolfsberg and then rewrite that information to the PDF for them. And then that's what's attached.
+
+[00:09:25] Shantanu: Yeah, Jay, I think we can do that. At very high level, how and what we are thinking is — majority of the organizations will have the document. So that's the MVP we are ready. If we are thinking like they need it, then we were suggesting or we were thinking like we'll give you the Excel, you upload Excel, move forward. But if we want to add three more pages or just question-answer, we can do that here. That can be additional pages in the process.
+
+[00:10:14] Jay Leal: Document completed. So, and some smaller banks may not even know what a Wolfsberg questionnaire is. So we, so we may —
+
+[00:10:24] Shantanu: Mm.
+
+[00:10:28] Jay Leal: You know, aside from updating some of the language to help people understand what it is, we may need to walk them through what this standard — because this is a standard correspondent banking due diligence document. So walking them through, completing it, and then writing the Wolfsberg for them. And, you know, so that it serves two purposes. It fills it out for us and we can use it. And then we're giving them a copy of a completed Wolfsberg that they can download and have a copy for themselves, that they can share with other correspondent banks.
+
+[00:11:02] Prashant Sarode: Yeah, so, so Jay, the question back to you on that is, theoretically, whatever you are expecting is possible. The question that we would love to have an answer is — one experience is what we are showing over here: download blank copy, and there is no guidance of what the questionnaire is, there is no training of, oh, given a question, how do I answer this, right? So if I now give you a blank Excel template and give you an HTML version of it of sorts, how does it —
+
+[00:11:46] Jay Leal: Mhm.
+
+[00:11:47] Prashant Sarode: I mean, it does make the experience look smoother, but what is the construct of helping the user fill the form? One idea is, I'm going to explain to you what is the question and where likely you will find this information. That's one idea. The other idea is — hey, we will not only educate you on a question and what the question is saying, you have to get the data yourself, but at places we will actually find data for you from some data sources. Which of these ideas of helping is what you are having in your concept?
+
+[00:12:30] Jay Leal: Yeah, I don't know if we need to have a line by line question, you know, like guidance for it. I think, you know, once somebody gets into the document, most of the questions are very apparent if it's a, you know, a backroom compliance person filling this out. It's asking, you know, do you do this? Do you have that? Who's responsible for this, who's responsible for that. So I think just being able to provide the form where they can answer the questions quickly. And then I think Chris, you made the suggestion of putting, you know, a little hyperlink in this description to provide additional information on what a Wolfsberg is and its purpose and why we're asking for it, I think is helpful. But I don't think that, I mean, it's not our role to educate them on exactly everything in the Wolfsberg, but we're also trying to make sure that they understand what the Wolfsberg is and help them fill it out.
+
+[00:13:45] Prashant Sarode: Right, I saw, I think, yeah, so I think we can figure that out from an experience perspective, but you can, as Shantanu said, is — whether to include in MVP or not include in MVP, we can decide that later on. But we over here are suggesting we do take a detour. And if the detour is mostly a much more user-friendly way of collecting information and there is no validation and/or any third-party data sources, that's fine. That's what I'm hearing.
+
+[00:14:22] Jay Leal: Yeah, and that's exactly right. It's just going to be straight input. There's not going to be any data validation, there's not any — and you know, maybe this is another question for Shawn. I mean, I don't even know if we have to write the details that are collected inside the Wolfsberg to our database or that we've got to reference.
+
+[00:14:52] Joel Olivares: One of the options we talked about yesterday was following this process but creating a mini intake type of a Wolfsberg document. One, we can't call it Wolfsberg because we can't pretend to be generating this for them. But we could create less than 132 questions and then I can use that data as part of the upload document along with the NDA in the BSA policy and drag that into Coverbase through API and then we can use that data from whatever PDF document they filled out to help answer our control set.
+
+[00:15:35] Shantanu: You know, today we have a call with Coverbase. What I'm anticipating is to check with the Coverbase if they have a construct of a project or a workflow. And if they have it, then we'll set up a workflow there and see if that can expose the question. We fill it in, we submit it, and it can be plug and play with the application.
+
+[00:16:00] Joel Olivares: Yep, that sounds good. That's at 3:30, I think. The other option is we can take the Wolfsberg questions and I can convert them into an intake and do, you know, NA, yes, no for those that are, and then a form for those they need to enter data for. Except it won't be fair for partners that already have a Wolfsberg document, then they'll have to re-answer all that. So during the intake process, I can't determine which intake form for them to apply on if they had already provided the document. So that would have been another option, but it seems to me that it's easier for them to create like a mini version of a Wolfsberg document and then upload that PDF once it's completed back to Coverbase.
+
+[00:17:00] Jay Leal: Well, all right, so, going back to the point that we're trying not to give them a lot of data to input. We want to make this as easy as possible. I think being able to upload a Wolfsberg and parse that information automatically using AI to complete the form. I just put in the chat a link to the Wolfsberg questionnaire site where it actually gives the guidance on how to complete it and why it's asking for different things. And so it's a full breakdown, similar to what you suggested, potentially of providing a line by line guidance. But it makes it seem like a really long questionnaire if we make them fill this out on the website.
+
+[00:17:58] Joel Olivares: Now, another question is, is any of this data retrievable or doubling down from whatever is in the RAFA report?
+
+[00:18:14] Shantanu: No, it is not, looks like. Yeah, maybe one or two questions, but if I go here and check — total 130 questions, so it's a complete exercise.
+
+[00:18:29] Jay Leal: Well, going back to Shawn's point, I mean, I think that, you know, from an MVP standpoint, we can work with this and then we've got to figure out exactly what we need to do to make this a little more streamlined for folks that don't have that documentation.
+
+[00:19:06] Jay Leal: Yeah, and you know the comment right now that, hey, if they're working on this, you need to have the ability to stop and restart. I think that's why we're requiring the log on so that they can save their progress as they go. I do think that there would be a benefit to, if we ask more detailed questions, if there's an option there to give the person that's filling it out the option to click a question and say, hey, I'm going to delegate this question or these sets of questions to somebody else in my organization. And then that creates some sort of workflow where they can ask another person to help them complete the documentation with them. But again, I don't know if that's MVP, but it may not be the right person who's going to know all of these answers who's doing the onboarding. I think we should continue this, but this looks really sharp.
+
+[00:20:29] Shantanu: Thanks, Jay.
+
+[00:20:41] Pallavi Bichpuriya: Okay, shall we continue then?
+
+[00:20:48] Jay Leal: Yes, please.
+
+[00:20:50] Pallavi Bichpuriya: So once all the documents have been accepted, we can go to the next step, that is due diligence. And once they fill out all the details, if they want to return to the overview, they can. And if they have submitted all the details, they can submit the form and go to risk questions. You can see now it is unlocked and we are providing every step in the navigation bar. So let us continue to risk questions now. So here we have 7 sections. And for instance, if somebody requires an input from the member bank and something that has not been suggested by Coverbase, they can provide the answer — yes, no, whatever. Save it, and you can see the count has decreased for the needed input part. 21 questions still require the review. Here the answer has been pre-filled/suggested. So yeah, I'll confirm this, saved. The required review section — the number has been decreasing now. And for the prototype, we cannot go through each and every question right now. So I'll just confirm all. This path has been provided for the review part right now. This won't be given in the final when we are building the app. So, since we have confirmed all the answers, we can review and certify. And you can see that all the thirty-two questions have been reviewed by the member bank, and they can submit the risk questionnaire. And one more thing to notice over here is that we followed the Coverbase — how we are doing in Coverbase, we have a checkbox over here. So we also provided a checkbox. If these details have been provided by Coverbase, we can change it. And this will change to corrected by the institution, as in corrected by the member bank. So yeah, this one thing I wanted to point out. And then, once the risk questions have been submitted, we'll go to Hazel Review. And simultaneously they'll get whichever step they are in in the overview and they can go back to seeing their status. Once the decision has been made by Hazel, they can continue to the account opening part. And since phase one is, I think, till Hazel review, we'll build the app till this part and then focus on the account opening later. So, for now, we did build something like — what if the prelim account gets created before the signature or after the signature? We are not sure about those things, so we have given those scenarios. But yes, this is what we have built for now. And if we could log the things so that we can start building our app.
+
+[00:24:40] Prashant Sarode: So, Pallavi, did we say version 1.5, right?
+
+[00:24:44] Pallavi Bichpuriya: Yeah, we —
+
+[00:24:45] Prashant Sarode: Yeah, I mean, we have to roll this out and give time for the Vantage team to review this independently.
+
+[00:24:49] Pallavi Bichpuriya: Correct, correct.
+
+[00:24:55] Shantanu: Correct. So what we were thinking, you know — Joel, Jay, Chris, and Shawn — like today we will release it so that you can click yourself, validate, verify, if any suggestion we'll do it. Any small content changes or navigation changes, we can fix it later. But if overall workflow is fine, from Monday we can start building the application. That is our goal. So you get entire Friday and then even Monday to review it and provide the feedback. We'll consider those feedback either in a prototype or directly in application and we'll start working on building this application from Monday.
+
+[00:25:51] Jay Leal: And so, as we're going through the workflow — so I know we jumped over to collecting the due diligence and then right to the risk questions and those are auto-filled out. I assume that there's some sort of delay from when, you know, for Coverbase to be able to generate that review and be able to answer those questions, right?
+
+[00:26:23] Shantanu: You are absolutely right. Yep, yep.
+
+[00:26:30] Jay Leal: So how are we managing that?
+
+[00:26:33] Shantanu: So no answer yet, but those discussions will start for us from today evening. We will get access to Coverbase maybe Monday or something. And we will see if we want to change something or we'll see if we can support to whatever level we are building.
+
+[00:26:59] Prashant Sarode: Shantanu, the question on the chat from Tom on bank-facing side user experience. His question is, well, all of this experience is member bank experience. What about the bank-facing experience?
+
+[00:27:19] Shantanu: Yeah, so bank-facing experience. Do you want to show, Pallavi? I think yesterday we had a few things, right?
+
+[00:27:23] Pallavi Bichpuriya: So for now, we just built a lightweight prototype from our own understanding. This is just a simulation of whatever — like the banks have been onboarded. We are currently working on North Star. So these are the sections that we have given and the Coverbase assessment score and everything is coming over here. And we will monitor if we want to send an invitation to somebody to a particular member bank or not, or decline the offer and all the things, whatever Coverbase assessment is in progress, how much time has it taken. And there were some controls we saw on Coverbase when Joel was presenting. So something like that we tried to mock up, but we still need a better understanding. I think we'll get it in today's call so we can work upon that. And whatever the documents — so when they submit the BSA/AML documents or the Wolfsberg document, the employee can accept it and then the member bank will get the review. Okay, or documents have been accepted. And there is a questions review that will come under this part — if the details provided by the member bank is correct or not. So yeah, this is what we were thinking. This is just a lightweight prototype for now. We still need clarifications.
+
+[00:29:21] Joel Olivares: I'm having a little bit of a hard time understanding the flow here. I thought we were going to send the data back to Coverbase and accept the intake form in Coverbase so that we could then create a residual risk assessment on the partner and use that score to come back and make a decision.
+
+[00:29:43] Shantanu: Yeah, so Joel, let me update it. So first of all, you know, Smital or Pallavi, change the left-hand side color so that it doesn't confuse with the external workflow. Yeah, see, we are really not sure which integration needs reskinning. Like I know we are talking about Coverbase has the detail — we can use that as our interface to review certain things. We also talked about CRM, wherein the leads can be there, tracking can be done there as well. And we came up with this experience. So we call it like a lightweight CRM application, what you see right now, or whatever we have it in Coverbase, we can see how much and what information you needed outside the Coverbase. So that discussion, we really need to have it so that we can finalize that internal workflow. But in terms of deploying the application, keeping the source code — internal application source code will be separate than external application. So that if we are modifying something, we have a release tonight, we can say this release has nothing to do with the internal application, so that validation becomes external facing. Or if we are modifying something for internal, we will deploy. We will have our work really separated for the internal testing. So application construct wise, these will be two separate applications. One is internal, one is external. And we can spend some time starting from next week for internal workflows.
+
+[00:31:53] Jay Leal: And Joel, I think it's important to underscore that our goal here is to use Databricks as the repository for the data. And so as we're building this stuff, we're going to leverage stuff like Coverbase to perform specific tasks, but ultimately what you're seeing here is writing everything back to what will be our database, to Databricks. So don't be concerned that things are happening here and not in Coverbase. We're using Coverbase as the engine to pull this stuff and surface it here. So there may be times that we've got to replicate some data over to Coverbase, or we're going to have Coverbase source data from Databricks.
+
+[00:32:54] Joel Olivares: Right. Yeah, we had already discussed that earlier in the week. So I was aware of what you just told me. What I can't figure out is how we're going to get an auto approval out of this process without the data going back to Coverbase. There may be some manual work in the Coverbase side that will have to come back, will have to get done to send it back into this screen here or this page.
+
+[00:33:27] Jay Leal: Right, we really need to create some rules that says, hey, if the inherent risk is this, it's auto approved over here. Not going to change anything within Coverbase — it's still the separate system that's doing the risk management. So somebody will need to go in there and work it and do what they need to do.
+
+[00:33:48] Joel Olivares: Right, yeah, that's the other thing we talked about, maybe sending back the PDF document with the executive summary report or using that data to generate a rating that would auto accept or review further or whatever, auto deny. So yeah, we're on the same page.
+
+[00:34:21] Jay Leal: But this is obviously my first time seeing this. The UI looks really fantastic and it's very easy to follow what steps and what's going on. So really outstanding work.
+
+[00:34:52] Joel Olivares: Yeah, if we don't have anything else, we'll regroup at the 3:30 call with Coverbase. If somebody on this call has not been invited, let me know. Jay, you may have not been invited, but I'll definitely do that if you want to join the call.
+
+[00:35:05] Jay Leal: Oh, no, I'm on the 2:30 training, so send me the other invite.
+
+[00:35:12] Joel Olivares: Okay, yeah, that's internal. The 2:30 is just for Vantage employees, and then the 3:30 is just for Theorem Labs and discussing APIs and other connections.
+
+[00:35:28] Jay Leal: Yes, please, include me.
+
+[00:35:31] Joel Olivares: All right, well then we'll regroup tomorrow.
+
+[00:35:37] Shantanu: Thank you, bye bye.
+
+========================================================
+End of transcript.

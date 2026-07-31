@@ -1,0 +1,226 @@
+---
+title: "Daily HOP Standup"
+document_type: "transcript"
+source: "meeting"
+client: "Hazel"
+date: "2026-07-29"
+status: "parsed"
+version: "1.0"
+tags:
+  - "daily-standup"
+  - "hop"
+  - "project-status"
+confidentiality: "client-confidential"
+source_file: "../raw/2026-07-29-daily-hop-standup.txt"
+---
+
+# Daily HOP Standup
+
+## Transcript
+
+Daily HOP Standup — Meeting Transcript
+Date: Wednesday, July 29, 2026
+Time: 12:00 PM – 12:30 PM CDT
+Organizer: Aaron McWilliams (Vantage Bank)
+
+========================================================================
+
+[00:00:38] Shantanu: Hello, how are you?
+
+[00:01:18] Joel Olivares: Mm-mm.
+
+[00:01:49] Smital Lunawat: Who?
+
+[00:02:23] Joel Olivares: Alright guys, are we ready to get started? Alright, I'm opening up the link now.
+
+[00:03:04] Smital Lunawat: You.
+
+[00:03:08] Joel Olivares: Do do do. Okay, we want to do we want to talk about what changes we made or what updates we have?
+
+[00:03:52] Smital Lunawat: So. I believe we are still working on a few changes in the prototype as discussed yesterday. We thought that maybe diving a little into understanding UX standards from the industry perspective would help us have a better chance and a cleaner. chance because we had a few views on whether do we have the left side of the Navil bar and then do we show the status updates or maybe in the Navil bar itself we show status updates. So we are still thinking on those terms in terms of research perspective. So in the meantime, while we do that, Chad, do you want to? Ohh, yeah.
+
+[00:04:49] Shardul Patki: Yeah, yeah, yeah, let me just.
+
+[00:04:52] Smital Lunawat: Yeah, sure.
+
+[00:04:54] Joel Olivares: Also, before I forget, I did upload the NDA that we're using for the Hazel Network yesterday. So I would like to see it here in the NDA summary or as they're signing up for it so that they get an idea of what they're about to sign or see. I also think that the onboarding menu here on the left in purple is really good. And I think we should keep that. Shawn, what do you, I know you're on the call and I don't know if you can speak, but I'd like to see that the potential partner has the... like a status of where they are and what progress they've made in their intake application.
+
+[00:05:41] Shawn Main: Yeah, no, that's good. And you know, one thing I just want to, you know, call out, obviously, what we're talking about is the initial workflow, but there'll be more workflows in the future. And we'll want to make sure this system is something that we can configure and adapt the workflow. I don't want anything to really be. hard-coded or static in that workflow. And so the menus and the screens will all have to adjust based on what that workflow is assigned to the individual. So just kind of a call out there.
+
+[00:06:19] Joel Olivares: Right. Yeah, the other thing, Shawn, I was going to ask you in particular was right now we're just focusing on the FDIC intake form, keeping in mind that in the future we could do a different type of request, like for trust centers and credit unions and all that. I would have to recreate questions.
+
+[00:06:43] Shawn Main: Yeah, I like it.
+
+[00:06:44] Joel Olivares: not be all the same as an FDIC, but that would be one of those dynamic changes that you're referring to where the questions would have to get API'd out of cover base into the intake process if it were trust or. Credit. But yeah, okay. So, is there anything that you guys need from us at this point?
+
+[00:07:27] Shantanu: So, Smith, why not discuss that one page document, the slide we were talking about in the morning?
+
+[00:07:36] Pallavi Bichpuriya: Yeah, we.
+
+[00:07:36] Shantanu: The backend, yeah, backend integration, yeah.
+
+[00:07:39] Pallavi Bichpuriya: Yeah, we've prepared that. Shadul, can you please share it?
+
+[00:07:43] Shantanu: Yeah, listen. Yeah, let's bring that up, discuss and see, is it making sense to everyone or not?
+
+[00:07:53] Shardul Patki: You guys can see my screen like...
+
+[00:08:16] Smital Lunawat: Shadul, do you want to go over it or should I? Corey.
+
+[00:08:23] Shardul Patki: Yeah, anything works. You can go over it if you want to.
+
+[00:08:31] Smital Lunawat: Okay, sure. So basically, until now, we were discussing a lot about the front end and the prototype to make sure that the views align on. How is it looking so far? So we were trying to dig a little deeper onto the services and the back end integrations that would further on follow in the prospecting part, which would be the step one where we take the eligibility inputs or maybe interest forms. from the user. It can also be an interest form or it can also be an invitation link that has been sent to the user. In that case, the entry would go to the database and after the database entry is received from the registration form, on the registration form, there would be rafa report that would be generated on the back end and then we will after the rafa report is generated and whatever the decision is, whether it is approved or not approved, we will based on the decision flow, if it is an approved decision, we will using send grid as. the service we will be sending invitation e-mail to that particular registration e-mail ID that the user had mentioned. Following the eligibility screening part in that we have the further next step would be after the registration is signed, registration account has been created by the user.
+
+[00:10:06] Shantanu: Can you make the screen bigger so that people can see it? Make a full screen, please.
+
+[00:10:10] Smital Lunawat: E.
+
+[00:10:15] Shantanu: Yep, yeah, present would be nice, yeah.
+
+[00:10:18] Smital Lunawat: Yeah, Shantanu, can you confirm if it is visible or should? Yeah, okay. Yeah.
+
+[00:10:22] Shantanu: Yes, it is. It is, yeah.
+
+[00:10:26] Smital Lunawat: And then moving forward to the, in the eligibility screening process, we will have the form, the registration form through which the user would get access to the portal by, you know, using a password. They would then be taken into the first step on the onboarding process, which would be The NDA signing part in the NDA signing. We will be using prelim and DocuSign at the back end steps. And as we discussed that we will have like viewing of the document, downloading of the document. So all of those steps would also be there. And in that case, they would be able to download it. And later on, the next step after that is upload. uploading the documents, which would be the BSAML report and the Wolfberg report. And the Wolfberg will again have two steps, which would be inclusive of if the user already has the report, they would be able to upload it. And if not, then they can download the form. they can fill it up and upload it. And in that case, we will be using our database to store these forms and also we will be sending these forms to cover base. Next step would be the due diligence part where we will have the cover base. questionnaires to and we will be using, feel free to correct me if I'm wrong here, we'll be using Vanta's database as well to check some due diligence parts if that is required from that database. And later on we will also have the risk questionnaires.
+
+[00:12:17] Joel Olivares: I, sorry, I don't know what you mean by the Vendor database. I don't know what information would be valuable out of Vanta for the intake process because we're just going to be using Vanta as far as the Hazel network goes to share data to the partners. And by data, I mean documents like... financials and security controls and policies and procedures.
+
+[00:12:48] Smital Lunawat: Okay, so due diligence apart, yeah.
+
+[00:12:50] Shawn Main: The. Oh, so you all can hear me now?
+
+[00:12:55] Joel Olivares: No, we can, yeah.
+
+[00:12:57] Shawn Main: Okay, yeah, I don't know what was happening. Got kicked out. But yeah, so all I was saying when I got, before I got cut off was just a reminder that this could be a fintech, it could be a trust company, it could be a bank. So while we're focusing on building the bank flow first workflow, I just want to make sure that we build it so that we can continually add workflows, you know, leverage an open source workflow, and you know, whatever that may be, to make sure that we can configure this as it goes, and nothing is hard-coded or static.
+
+[00:13:34] Smital Lunawat: Yeah, I think that was a question yesterday to Joel that we had pointed out. Joel, do you have any inputs on that?
+
+[00:13:45] Joel Olivares: Yeah, no, that's exactly what we've been talking about, what Shawn just said about referring to doing the FDIC one now, but keeping in mind that there's going to be potential for other type of intakes, like, well, not potential, but in the future, we're going to change the intakes to other businesses, lineup businesses like credit unions and... Trust, trust. So those questions or those questionnaires may be slightly different than if it were just an FDIC partner that that we're doing intake for. So yeah, Shawn, we have been talking about that. So for now, let's just.
+
+[00:14:29] Shawn Main: Okay, yeah, and then, and then the other thing I would say, yeah, and the other thing I would say is, you know, let's try not to get too super detailed on the questions that we ask. I don't, I'd rather us focus on getting kind of the bare bones built on what the questions are and not protecting it so that.
+
+[00:14:30] Joel Olivares: A
+
+[00:14:48] Shawn Main: Because we may shrink this questionnaire down a lot and try to get it to a much lighter version than what we do with the Wolf score questionnaire. I thought that that's all I would say. Don't let's not hang our hat on getting the screens and the questions perfect. I would say let's focus more on getting the, you know, the ability to build in out of these questions and the workflows. Uh, and focus there first, so that, because this is gonna involve pretty rapidly, and I don't want us to be stuck in a in one specific flow and one specific set of questions.
+
+[00:15:19] Joel Olivares: Yeah, that sounds great, Shawn. One thing I'll bring up that we that we discussed yesterday was, or not yesterday, but throughout the week that Fred brought up the Fred from BSA. brought up the topic or issue that not all banks and so far, Aaron, the ones that we've been working on, don't know what a Wolfberg is. So we thought of the idea of if they don't have a Wolfberg document, we'd have to create potential questions for them to answer. that would generate a PDF Wolfberg-like, like a mini Wolfberg type of document.
+
+[00:16:01] Shawn Main: Yeah, I'm not sure we could produce the Wolsburg document. I think what's more important is that we can ask the questions and assess the risk. I mean, the probability of a bank having a Wolsburg or having some sort of knowledge of that is probably like 10%. So I don't want to build that edge case. I'd rather just build. Like, what are the questions that we need to understand to assess the risk for the for the oncoming entity? So, you know, obviously being a bank initially, so that we can get to, you know, you know, get to that risk score, which is really all we're trying to understand is what is what is the risk of having this bank onboarded and can we onboard them?
+
+[00:16:49] Smital Lunawat: I believe Chris has put up an idea for the same that so that for this demo in the FDIC box, do we want to make it as a drop down? That would include credit unions, fintech, trusts, etc. And we can have them grayed out until we begin the MVP 2 part.
+
+[00:17:16] chris colson: Yeah, and then Shawn, my thought there was that way we know that's not hard-coded, that eventually we're going to have to build into that as well.
+
+[00:17:26] Shawn Main: Yeah, exactly, and and you know we can have, you know, we can have that drop-down be there, and you know, just right now, we we don't do much of thanks. Why is he not paying attention to?
+
+[00:17:43] Smital Lunawat: All right, and...
+
+[00:17:44] Shantanu: I... Sorry, go ahead.
+
+[00:17:49] Smital Lunawat: Shantu, go ahead, go ahead.
+
+[00:17:52] Shantanu: I mean, I have a few questions, but I would like to have the other document open. Can you go two slides or once, yeah, one or two slides down? Chad. And this is not understandable. Two slides down, you know, same presentation, there is another slide. Who was Siri?
+
+[00:18:27] Shardul Patki: Yeah, yeah, I'm just filling with that. Can you go see?
+
+[00:18:34] Shantanu: Yeah, can you go to the slide number 9, yeah? Nine and maximize it, yeah. Okay, so the question I have, if you see here in the workflow, step #3 and step #8, we are trying to do the DocuSign 2 times. Is that the right way? Like we are saying like, hey, sign the NDA. Obviously from step 3 to step 8, there will be 10, 15 days gone. And at the end, we will ask them to sign it again and submit it. Do we need a DocuSign and the stage number step #8 or no? That's one question.
+
+[00:19:30] Joel Olivares: Sorry, sorry, I was on mute here. What are they signing on the step? The prelim DocuSign, what document are they signing there?
+
+[00:19:42] Shantanu: So, step #3, you're signing the NDA.
+
+[00:19:45] Joel Olivares: Yeah, that's good.
+
+[00:19:47] Shantanu: Correct. Step #8 is a final submission of a Hazel onboarding form. Do you need e-sign or you don't need? That is basically taking you to the account opening.
+
+[00:20:06] Joel Olivares: Yeah, I that Norma, can you help with that one?
+
+[00:20:07] Norma Saenz: Is. Is there a way though that they can electronically acknowledge and not have to e-sign like do an e-signature in DocuSign? Is that?
+
+[00:20:18] Shantanu: Yeah, that should be fine. So we can do that. So you're saying on step #8, we don't need a sign, electronic except should be good, right?
+
+[00:20:30] Norma Saenz: That's the question. So with the NDA, can we do an electronic acknowledgement opposed? Okay. Okay. And we would like to do electronic. Yeah, electronic acknowledgement, I think would make more sense for this process, right?
+
+[00:20:35] Shantanu: We can do both. Yeah, we can do both. OK, step step #8 and same thing for step #3 or step #3 you want to have a DocuSign or your signature for a NDA.
+
+[00:20:46] Norma Saenz: And. I think that would be, I don't know if that's a question that legal would need to answer, help us answer if that can be an electronic acknowledgement. Can we?
+
+[00:21:10] Joel Olivares: Okay, that's a great question. Sorry, Norma, I didn't mean to interrupt you, but that's a great question. I need to take that back to legal too, because we are asking for an NDA during the Vanta due diligence request, but I think this would be a slightly different NDA. This is the one for the Hazel Network. not for the document, the document request. So I would lean on, yes, we need a DocuSign so that I can then put that NDA signed PDF back into cover base as a document collection process. So it'll be like the NDA, the BSA. And if they have the Wolfberg, the Wolfberg, so three documents would come back into the cover base data storage.
+
+[00:21:58] Shantanu: Okay, okay, so that was one question. The second question was, you know what, I'm visualizing the workflow and my back end component design from this particular presentation. And some of my questions are. So Rafa will be used as a read-only, right? There is nothing we are writing in the Rafa, if I understand correctly, right? There is nothing this correct. So this process is not writing anything in Rafa good. Hopefully we'll have some API to read the details. The eligibility details.
+
+[00:22:26] Joel Olivares: That's correct.
+
+[00:22:39] Shantanu: registration details. Is there an existing, you know, Vantage database which we should consider or should we think of designing something new?
+
+[00:22:55] Joel Olivares: I need to, I need to, I need to, that's going to be a take away on my end. I would need to talk to the data governance team. If Shawn were still on the call, he would probably be able to answer that since he manages that team. But I would need Beto or somebody else on the call to ask him that.
+
+[00:22:57] Shantanu: E.
+
+[00:23:19] Joel Olivares: Because I think that they would want to, I would think that they would want to take that data and put it back into data bricks or something like that.
+
+[00:23:26] Shantanu: Correct, correct. So behind the data bricks, there should be some database. We would like to know what database would be. And, you know, then basically we will need the test instance, production instance, if that have any API, what is the schema and all that question will be there.
+
+[00:23:40] Joel Olivares: Mhm.
+
+[00:23:46] Shantanu: Another question I want to ask is like step number one, two, or maybe one, two, three are kind of relatively easy. There is nothing much involved. There is an e-mail communication at the end of the registration or at the beginning of the registration. But my question is, step #4 to step #8, it might happen that someone submit the form details and stay there for eight days. Or maybe for one month. Should we have some kind of a reminder?
+
+[00:24:27] Joel Olivares: Oh, that's brilliant. Yes, I think that would be a great idea.
+
+[00:24:32] Shantanu: Okay, so there should be some thought process behind. how many days one application can stay in given status, right? That's basically the workflows step we want to understand. So for example, if someone is at the eligibility state, we can say fine, you stay there indefinitely. But if we are talking with someone and we are asking them to submit the due diligence, then we should have some predefined 8 days, 10 days to be identified so that they finish the work in that time.
+
+[00:25:18] Joel Olivares: That's correct.
+
+[00:25:19] Shantanu: Okay, now when we talk about that, you know, document, due diligence, risk question and all, we are trying to maintain a similar session or similar account into the cover base for that particular account. Right, because internal users will be using the cover base, at least for the initial phase, until we build right now. Is there any way in Coverbase wherein, I mean, my kind of a question is like it should not happen that someone deletes something from Coverbase. Right, because an external user is expecting some workflow doing something. We want to make sure that data in cover base stays there untouched for. Certain amount of period.
+
+[00:26:23] Joel Olivares: Yeah, no, that's not an issue. I don't think that any of the users that have the ability to delete, including myself, would just go delete profiles or archive potential partners that were in the onboarding process. Now, we could keep it for a certain amount of time and then remove it, but because I don't want to have multiple incomplete accounts in the system. Right, you're right on that one.
+
+[00:26:58] Shantanu: Okay, so now if I think from the backend perspective, definitely we have one database question. Rafa is a second database we are going to look for. These are the second, that's the second backend component. For e-mail, obviously we need some send grid or something for the e-mail.
+
+[00:27:13] Joel Olivares: Mhm.
+
+[00:27:18] Shantanu: Fourth is a DocuSign, which we will need as an integration. Fifth is a cover base we need it as an integration. Other than that, what is Vendor will be doing?
+
+[00:27:39] Joel Olivares: Vanta is just holding data due diligence documents for Vantage Bank, Castaneda, and Infinite, so...
+
+[00:27:53] Shantanu: Is it like a document store? Vendor is like a document store.
+
+[00:27:53] Joel Olivares: The. Well, it does other things, but for what we're using it for cover base, I mean for Hazel Network is just so that the partner can go and download our due diligence information so that they can do their due diligence as we're doing it for them. Except ours is lighter than theirs will be. And in what is considered a due diligence package for the Hazel Network will include due diligence review on Custodia and Infinite, and of course, all the due diligence documents for Vantage. So that's all that Vantage is going to be doing for us. They're just going to, what we could do is have a redirect link to the trust, to the trust.vantage.bank site so that the partner can request access to it in step 5.
+
+[00:28:56] Shantanu: Okay, I think I think I'm good with this question. There was the last thing I think is a cover base call. Is it going to happen today or tomorrow?
+
+[00:29:05] Joel Olivares: Tomorrow is our cover-based call. Tomorrow we have two cover base calls, actually. The first one is general overall, you know, training how to at 2.30. And then the next one for us is at 3.30 Central for, you know, more detailed questions, particularly around. that you may have that Durham Labs may have for cover base and vice versa. So the first one is for the entire team, them potentially be up to 70 people because it's more of a training. And then the second one is just going to be the people in this call and If they want to join, because it'll be more technical, but the people in this call and Durham Labs and Cover Base. Do you have the invitation for the 3:30 one?
+
+[00:30:00] Shantanu: I think I have a 331 which is cover based theorem labs, but the but the one which you mentioned before that I don't have that invitation.
+
+[00:30:05] Joel Olivares: That, okay. Okay, let me forward that to you. Does everybody else need it or can I just send it to you and then you forward it to your team? Okay, got it.
+
+[00:30:29] Shantanu: Okay, I think I'm good. No more questions from my side.
+
+[00:30:33] Joel Olivares: Santiago, can you drop your e-mail on the chat so that I can just copy it pretty quickly?
+
+[00:30:38] Shantanu: Yes, I'm gonna do that right away.
+
+[00:30:51] Smital Lunawat: I think we have also got a couple of questions to look into, so.
+
+[00:31:00] Joel Olivares: Okay, we, some of us have a hard stop at 3.30 today, but we can definitely pick this up tomorrow or the e-mail, were the questions for me or for within the team.
+
+[00:31:07] Smital Lunawat: Mm. The questions that Shantanu just asked were like, I guess...
+
+[00:31:27] Joel Olivares: Oh, I think, I think it would, were you referring, you said we have some questions that need to be answered. Were you referring that you wanted to ask me the questions or was it between you and your team?
+
+[00:31:38] Smital Lunawat: No, no, I believe I said that we have the answers to a couple of questions that Chan Dantu asked, helped us clarify what we, so yeah.
+
+[00:31:45] Joel Olivares: Okay, got it. Um, Chan, uh, Cantu, I just sent you the uh invitation, so if you can just forward it to your team, uh, that'd be great.
+
+[00:31:49] Shantanu: Rick. Thank you. Thanks.
+
+[00:31:59] Joel Olivares: Okay, we'll catch up tomorrow. Everything, everything looks good, right?
+
+[00:32:03] Shantanu: Yep, on board.
+
+[00:32:04] Joel Olivares: Okay. Thank you guys. Thanks everyone. Bye.
+
+[00:32:04] Smital Lunawat: Yeah. Thank you. Thank you. Thank you.
+
+[00:32:06] Shantanu: Thank you, bye bye.

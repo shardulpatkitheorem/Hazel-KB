@@ -1,0 +1,150 @@
+---
+title: "Daily HOP Standup"
+document_type: "transcript"
+source: "meeting"
+client: "Hazel"
+date: "2026-07-31"
+status: "parsed"
+version: "1.0"
+tags:
+  - "daily-standup"
+  - "hop"
+  - "project-status"
+confidentiality: "client-confidential"
+source_file: "../raw/2026-07-31-daily-hop-standup.txt"
+---
+
+# Daily HOP Standup
+
+## Transcript
+
+Daily HOP Standup — Meeting Transcript
+Date: Friday, July 31, 2026
+Meeting: Daily HOP Standup (recurring midday Teams standup)
+Organizer: Aaron McWilliams, Vantage Bank
+------------------------------------------------------------
+
+[00:01:35] Joel Olivares: We ready to get started, guys. I have a couple updates that were just developed earlier today, so I wanted to reach out and let you guys know about them. But as soon as we're ready to get started, just let me know on the Theorem side.
+
+[00:01:49] Shantanu: Yeah, I think we can get going here.
+
+[00:01:52] Joel Olivares: Okay, a quick update on my part. I created the sandbox environment and I sent access to the five view on the team. And then I am in the process of creating the control set, the intake form, and setting up the...
+
+[00:01:53] Shantanu: Please.
+
+[00:02:12] Joel Olivares: Well I set up the APIs, I just don't know how to get you the key. I think I'm supposed to give you a key and I have the key, but I don't know if that's what you need. So if we can talk about what you need from that to make a good connection, let me know. The other thing I wanted to talk to you guys about that's pretty important is that we've decided to make the Wolfberg document optional for those that have it and for those that don't. We don't want to make it mandatory. So we're not going to make them fill out that form, the PDF form. The reason for that is we did go through a customer experience with our team and it just seems a little cumbersome to go through different stages. I will probably still go through some of my controls about it, and then if I want to follow up with them, I'll just follow up through cover base.
+
+[00:03:04] Shantanu: Yeah, yeah, I think that makes sense. At least for MVP, that should be okay. Yeah.
+
+[00:03:13] Joel Olivares: Yeah, yeah, and the goal is still to try to do the intake as fast as possible. So, I know that there is a little bottleneck on the cover-based side, or there will be, which is running the residual risk and generating the report, getting that average out so that we can give them a yes/no result. That part cannot be automated as it does require manual oversight and potentially even sending it out to some of my SMEs internally to review. I doubt that that will be the case because most of it will be straightforward, especially with the FDIC Accounts. But that's so those are all the updates I have for today. Does anybody else have anything?
+
+[00:04:09] Shantanu: So from our side, we know we are trying to focus more on to the back end design. What we would be getting access to core base is definitely good. So I tried logging into. When I log in, it says 2 vendors. One is Adobe Vendor and Cover Base Vendor. You know, I think we will need a little more time or maybe if there are some videos, we'll go through the video, understand what it is, more time.
+
+[00:04:45] Joel Olivares: Can you share that screen with me, Shantanu?
+
+[00:04:48] Shantanu: Oh, okay, sure. So... Do you see my screen?
+
+[00:04:58] Joel Olivares: It come in.
+
+[00:05:04] Shantanu: You see it?
+
+[00:05:05] Joel Olivares: It's coming. I think I'm pretty far away from the office, so it's going real slow. Okay, I got it.
+
+[00:05:09] Robert Ramirez: You can see it.
+
+[00:05:14] Shantanu: Alright, so I got an e-mail link and that's what I clicked and I went inside and initial some user ID password I set up. So when I click on Vendor I see Adobe and Coverbase.
+
+[00:05:21] Joel Olivares: Mmh.
+
+[00:05:34] Shantanu: These are the things I have. Intake, contract, database, nothing available, assessment.
+
+[00:05:46] Joel Olivares: So we don't have anything yet. This is a blank dashboard or a sandbox environment. And if you click on risk domains. Oh yeah, so click on API keys there. I believe I already created some, so I call it Durham Labs API export and import.
+
+[00:06:08] Shantanu: Yeah, so we got an API URL and create a key. Okay, I think we should be able to create a key from here. So this is the mandatory thing we need is a URL and a key so we can get going from here.
+
+[00:06:12] Joel Olivares: Okay, so I can delete my key, right? Because I do have a key.
+
+[00:06:31] Shantanu: I think so.
+
+[00:06:31] Joel Olivares: If you're gonna regen, it looks like you're gonna regenerate it anyway, so...
+
+[00:06:34] Shantanu: Yeah, we can. I think we can generate it from here, or you hold your key for now. These are the operations or a field.
+
+[00:06:36] Joel Olivares: Okay, great. Yeah, those are the export fields. And then if you click on the other tab, you'll see the import fields as well.
+
+[00:06:47] Shantanu: So basically these are the... not sure how the whole thing works, but report contains an array of. These are all get. We might need something as a post. So.
+
+[00:07:03] Joel Olivares: Perfect. Yes, so it's on the tab next to it at the top left. You'll see the import API. That's a post.
+
+[00:07:26] Shantanu: Perfect. I think, yeah, there are good things here. At least we'll definitely spend 8 hours or one or two days to understand what it is. Another thing here, somehow if you can give us, create some...
+
+[00:07:34] Joel Olivares: Mhm.
+
+[00:07:45] Shantanu: You know, kind of application or some test bank or something that would be.
+
+[00:07:57] Joel Olivares: Yeah, so I haven't got that far yet. I'm still bringing in the intake form and I'm bringing in the control sets. So that's going to take probably the better part of today and then we'll be ready to go Monday morning.
+
+[00:08:13] Shantanu: Sure, sure, and somehow.
+
+[00:08:14] Joel Olivares: And I'll create some fake banks and stuff like that. In fact, to create a fake bank, click on intake, but don't do it today because I haven't done the intake form, but you'll click on intake in the left and then click on new request. And then we'll go from there. But again, this is not active yet because I haven't finished the intake questions, but I'll do them today.
+
+[00:08:39] Shantanu: Sure, so once you are set up, we'll keep on creating our dummy data here and we'll see how the API works or what is available in API and then we'll try to see if we can connect with it.
+
+[00:08:53] Joel Olivares: Okay, great.
+
+[00:08:54] Shantanu: Okay, I think this is good thing for us. Yeah. Some of the other questions we were having, like we need some connections for DocuSign and all. Maybe we can discuss that tomorrow or later. All the components we have to.
+
+[00:09:11] Joel Olivares: Okay, Monday.
+
+[00:09:14] Shantanu: Yeah, Monday I think should be fine, yeah. Any other question you have with Michel or? Anyone?
+
+[00:09:30] Smital Lunawat: Not right now.
+
+[00:09:32] Pallavi Bichpuriya: Not right now.
+
+[00:09:34] Joel Olivares: Perfect.
+
+[00:09:35] Robert Ramirez: And just to give you an update on the infrastructure side and the tenant side and cloud PCs, all that set up, we're just waiting on cyber to go over it. And then probably next week, we can create an account, the cloud PC account for you all. I know we're having a meeting with Databricks on Monday. And then on Tuesday or Wednesday, we probably can create the cloud PCs.
+
+[00:10:01] Shantanu: Super, yeah, yeah. What else? Anything else? Trying to close this, and I'm not able to.
+
+[00:10:13] Smital Lunawat: Just wanted to check, is there a decision made on the NDA signing part? Like, I think we are trying to reduce using DocuSign or prelims to 1 use case. Either it is NDA or the account creation part.
+
+[00:10:30] Joel Olivares: That's still under discussion. We can review that on Monday. One of the things that I did notice that I'd like to just bring it up. I know when we do the DocuSign, we have the employee or the partner signer put their name and their title and the date. But at the very top of that NDA, it talks about who the relationship is between and it doesn't auto fill their information. So maybe we can get that from an API from Coverbase, I don't know. But to make sure that that PDF document that is digitally signed, they actually refer to the partner that is actually signing it. So if we can just look into that, that'd be pretty great.
+
+[00:11:18] Smital Lunawat: Yeah, sounds good.
+
+[00:11:19] Joel Olivares: And honestly, we might leave that NDA because I do need the NDA in the Aventa or Trust Center side. So I'm going to keep that as an automatic for compliance. We talked about the idea of having the NDA where we have it now through the life cycle of a partner, because we might share information with them back and forth long before they get to the trust center. So we'll need an NDA long before that. So what will make it smoother, and I think it's going to help us dramatically, is making the Wolfberg optional. Of course, this is only going to be for FDIC accounts. So yeah, I know that there was a lot of like hot points, like the NDA requirement at the beginning, the Wolfberg PDF, we're going to remove all that if we can. So that they don't have to see that they have to input it or update it and then re-upload it. If they have it, great. If they don't, then we move on.
+
+[00:12:33] Smital Lunawat: All right, and is there any way like in the initial form that we take up, is there any way that we check through some APIs that the FDIC number that the person is trying to input is right, or only after the submission of the form we'll be checking that the institution name and FDIC number is matching? And everything.
+
+[00:12:55] Joel Olivares: I think after the form, I don't know how to do it before that. Do you have any ideas?
+
+[00:13:04] Smital Lunawat: We will have to check.
+
+[00:13:06] Joel Olivares: Okay. Yeah, unless when they're signing up, we can verify that it's a true FDIC institution before we give them a login, then that would work. Otherwise, we'll have to wait till after we get the account.
+
+[00:13:23] Joel Olivares: Or the login to verify.
+
+[00:13:29] Pallavi Bichpuriya: We were thinking if while entering the FDIC number, we send them to some API that verifies something called, I think, Bank FDIC API is available. So it can go to that and does the validation.
+
+[00:13:47] Joel Olivares: That's great. Then that means that there wouldn't be a fake account being created, right? You'd verify that the partner name matches the FDIC license key or number.
+
+[00:13:58] Pallavi Bichpuriya: Yes, and post that we can do the Rafa scoring check once they submit the form.
+
+[00:14:08] Joel Olivares: Alright, is that something we can see on Monday?
+
+[00:14:13] Pallavi Bichpuriya: We still have to see, do more research on it, but that is the higher level details that we found out right now.
+
+[00:14:28] Smital Lunawat: Well, I think that's about it today, then, if anyone...
+
+[00:14:35] Joel Olivares: No, yeah, I just want to make sure you have all the resources you need. I think with the CoverBase API connection and the user accounts, you'll stay pretty busy. Okay, I guess that's it for today. All right, guys, thank you. We'll see you on Monday.
+
+[00:14:54] Shantanu: Thank you. Thank you. Bye.
+
+[00:14:55] Smital Lunawat: Thank you. Happy Friday.
+
+[00:14:56] Robert Ramirez: Thank you. Bye bye.
+
+------------------------------------------------------------
+End of transcript.
