@@ -35,7 +35,7 @@ If any precondition fails, stop.
 3. Reuse existing markup patterns, classes, CSS variables, fonts, spacing, icons, and assets.
 4. Preserve logos and brand elements byte-for-byte unless specifically authorized.
 5. Preserve unrelated content, open questions, approvals, and superseded decisions.
-6. Add or update iteration artifacts without rewriting earlier iterations.
+6. Add or update iteration artifacts without rewriting earlier meetings.
 7. Run the guardrail verifier after editing.
 8. If verification fails, change only the failed scope and rerun.
 

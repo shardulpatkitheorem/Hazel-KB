@@ -24,7 +24,7 @@ import sys
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[2]
-LEDGER = REPO / "04-iteration-ledger"
+LEDGER = REPO / "04-ledger"
 
 KINDS = {
     "decision": {"dir": LEDGER / "decisions", "prefix": "DEC", "width": 3},

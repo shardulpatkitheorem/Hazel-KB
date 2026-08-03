@@ -6,7 +6,7 @@
   "additionalProperties": false,
   "required": [
     "schema_version",
-    "iteration_id",
+    "meeting_id",
     "change_id",
     "base_commit",
     "candidate_commit",
@@ -18,7 +18,7 @@
   ],
   "properties": {
     "schema_version": { "const": "1.0" },
-    "iteration_id": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}-[a-z0-9-]+$" },
+    "meeting_id": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}-[a-z0-9-]+$" },
     "change_id": { "type": "string", "pattern": "^CHG-[0-9]{4,}$" },
     "base_commit": { "type": "string", "pattern": "^[a-f0-9]{7,40}$" },
     "candidate_commit": { "type": "string", "pattern": "^[a-f0-9]{7,40}$" },

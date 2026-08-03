@@ -12,7 +12,7 @@ Create a reliable, reviewable pipeline that converts Hazel meeting transcripts i
 - Implementation changes only approved files and sections.
 - Existing CSS, typography, layout, assets, and logos are preserved unless the change manifest explicitly authorizes them.
 - The shared workflow retains unresolved questions, approvals, ownership, and superseded history.
-- Every iteration produces an append-only delta, including iterations with no code change.
+- Every iteration produces an append-only delta, including meetings with no code change.
 - Durable agent-behavior lessons are separated from meeting-specific facts.
 
 ## Architecture
@@ -34,7 +34,7 @@ Human scope approval separates planning from implementation. Human PR approval s
 
 `verification-report.json` records every automated and human-required check, failures, changed files/sections, and final disposition.
 
-All artifacts include `schema_version`, `iteration_id`, and stable item IDs. IDs are never reused.
+All artifacts include `schema_version`, `meeting_id`, and stable item IDs. IDs are never reused.
 
 ## Design preservation
 

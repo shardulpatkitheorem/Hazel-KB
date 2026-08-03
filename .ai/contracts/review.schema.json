@@ -7,7 +7,7 @@
   "additionalProperties": false,
   "required": [
     "schema_version",
-    "iteration_id",
+    "meeting_id",
     "delta_path",
     "delta_sha256",
     "reviewed_by",
@@ -16,36 +16,53 @@
     "not_promoted_reviewed"
   ],
   "properties": {
-    "schema_version": { "const": "1.0" },
-
-    "iteration_id": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}-[a-z0-9-]+$" },
-
-    "delta_path": { "type": "string", "minLength": 1 },
-
+    "schema_version": {
+      "const": "1.0"
+    },
+    "meeting_id": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}-[a-z0-9-]+$"
+    },
+    "delta_path": {
+      "type": "string",
+      "minLength": 1
+    },
     "delta_sha256": {
       "type": "string",
       "pattern": "^[a-f0-9]{64}$",
       "description": "Hash of the delta as reviewed. Binds this review to exactly what was on screen; re-extracting invalidates it."
     },
-
-    "reviewed_by": { "type": "string", "minLength": 1 },
-    "reviewed_at": { "type": "string", "format": "date-time" },
-
+    "reviewed_by": {
+      "type": "string",
+      "minLength": 1
+    },
+    "reviewed_at": {
+      "type": "string",
+      "format": "date-time"
+    },
     "outcomes": {
       "type": "array",
       "minItems": 1,
-      "description": "One entry per candidate in the delta. Every candidate must be accounted for — no silent drops.",
+      "description": "One entry per candidate in the delta. Every candidate must be accounted for \u2014 no silent drops.",
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": ["candidate_id", "outcome"],
+        "required": [
+          "candidate_id",
+          "outcome"
+        ],
         "properties": {
           "candidate_id": {
             "type": "string",
             "pattern": "^CAND-(DEC|Q)-[0-9]{3,}$"
           },
           "outcome": {
-            "enum": ["accepted", "accepted_amended", "rejected", "deferred"],
+            "enum": [
+              "accepted",
+              "accepted_amended",
+              "rejected",
+              "deferred"
+            ],
             "description": "accepted_amended means the librarian changed the statement, owner or routing before promoting. deferred means it stays a candidate for a later review."
           },
           "record_id": {
@@ -65,57 +82,152 @@
             "items": {
               "type": "object",
               "additionalProperties": false,
-              "required": ["field", "from", "to"],
+              "required": [
+                "field",
+                "from",
+                "to"
+              ],
               "properties": {
-                "field": { "type": "string", "minLength": 1 },
-                "from": { "type": "string" },
-                "to": { "type": "string" },
-                "note": { "type": "string", "maxLength": 300 }
+                "field": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "from": {
+                  "type": "string"
+                },
+                "to": {
+                  "type": "string"
+                },
+                "note": {
+                  "type": "string",
+                  "maxLength": 300
+                }
               }
             }
           }
         },
         "allOf": [
           {
-            "if": { "properties": { "outcome": { "enum": ["accepted", "accepted_amended"] } } },
-            "then": { "required": ["record_id"] }
+            "if": {
+              "properties": {
+                "outcome": {
+                  "enum": [
+                    "accepted",
+                    "accepted_amended"
+                  ]
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "record_id"
+              ]
+            }
           },
           {
-            "if": { "properties": { "outcome": { "enum": ["rejected", "deferred"] } } },
-            "then": { "required": ["reason"] }
+            "if": {
+              "properties": {
+                "outcome": {
+                  "enum": [
+                    "rejected",
+                    "deferred"
+                  ]
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "reason"
+              ]
+            }
           },
           {
-            "if": { "properties": { "outcome": { "const": "accepted_amended" } } },
-            "then": { "required": ["amendments"] }
+            "if": {
+              "properties": {
+                "outcome": {
+                  "const": "accepted_amended"
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "amendments"
+              ]
+            }
           }
         ]
       }
     },
-
     "not_promoted_reviewed": {
       "type": "boolean",
-      "description": "The librarian confirms they read the extractor's not_promoted list. False means the gate was only half applied — what the extractor discarded went unexamined."
+      "description": "The librarian confirms they read the extractor's not_promoted list. False means the gate was only half applied \u2014 what the extractor discarded went unexamined."
     },
-
     "promoted_from_not_promoted": {
       "type": "array",
       "description": "Items the extractor declined to propose that the librarian promoted anyway. These are the extractor's misses and are worth reviewing periodically to tune the rubric.",
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": ["topic", "record_id", "note"],
+        "required": [
+          "topic",
+          "record_id",
+          "note"
+        ],
         "properties": {
-          "topic": { "type": "string", "minLength": 1 },
-          "record_id": { "type": "string", "pattern": "^(DEC|Q)-[0-9]{3,}$" },
-          "note": { "type": "string", "minLength": 1, "maxLength": 300 }
+          "topic": {
+            "type": "string",
+            "minLength": 1
+          },
+          "record_id": {
+            "type": "string",
+            "pattern": "^(DEC|Q)-[0-9]{3,}$"
+          },
+          "note": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 300
+          }
         }
       }
     },
-
     "note": {
       "type": "string",
       "maxLength": 1000,
       "description": "Optional overall remark on this review."
+    },
+    "added_by_librarian": {
+      "type": "array",
+      "description": "Records the extractor did NOT propose at all, added by the librarian during review. Distinct from promoted_from_not_promoted, where the extractor saw the material and declined it. These are outright misses and are the strongest signal for tuning the extraction rubric.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "record_id",
+          "reason_missed",
+          "note"
+        ],
+        "properties": {
+          "record_id": {
+            "type": "string",
+            "pattern": "^(DEC|Q)-[0-9]{3,}$"
+          },
+          "reason_missed": {
+            "enum": [
+              "stated_descriptively_not_as_a_decision",
+              "spread_across_the_source",
+              "assumed_as_background",
+              "outside_the_extracted_range",
+              "unclear"
+            ],
+            "description": "Why the extractor did not see it. Reviewed periodically against the rubric."
+          },
+          "note": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 300
+          }
+        }
+      }
     }
   }
 }

@@ -6,7 +6,7 @@ This file contains reusable rules that should change future agent behavior. Meet
 
 A lesson may be added only when all answers are yes:
 
-1. Is it reusable across future iterations?
+1. Is it reusable across future meetings?
 2. Is it supported by an iteration, verification failure, or approved review comment?
 3. Does it define a concrete trigger and required behavior?
 4. Is it not already covered by an existing lesson or contract?

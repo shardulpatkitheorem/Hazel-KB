@@ -43,8 +43,8 @@ except ImportError:
 
 REPO = Path(__file__).resolve().parents[2]
 CONTRACTS = REPO / ".ai" / "contracts"
-LEDGER = REPO / "04-iteration-ledger"
-ITERATIONS = REPO / "iterations"
+LEDGER = REPO / "04-ledger"
+MEETINGS = REPO / "meetings"
 
 # Which contract governs which artifacts.
 ARTIFACT_MAP = [
@@ -132,13 +132,13 @@ def validate_schemas(
         if directory.is_dir():
             for path in sorted(directory.glob("*.json")):
                 targets.append((path, contract))
-    if ITERATIONS.is_dir():
-        for path in sorted(ITERATIONS.glob("*/meeting-delta.json")):
+    if MEETINGS.is_dir():
+        for path in sorted(MEETINGS.glob("*/meeting-delta.json")):
             targets.append((path, "meeting-delta.schema.json"))
 
     if not targets:
         f.warn("repository", "no artifacts found to validate",
-               "expected records under 04-iteration-ledger/ or iterations/")
+               "expected records under 04-ledger/ or meetings/")
 
     for path, contract_name in targets:
         validator = validators.get(contract_name)

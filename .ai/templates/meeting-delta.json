@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "iteration_id": "2026-07-28-example-meeting",
+  "meeting_id": "2026-07-28-example-meeting",
   "status": "no_change",
   "source": {
     "transcript_path": "01-transcripts/daily-calls/2026-07-28.md",

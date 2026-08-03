@@ -24,7 +24,7 @@ flowchart LR
     H --> I{"Vantage + Theorem review"}
     I -->|Changes requested| D
     I -->|Approved| J["Merge"]
-    J --> K["Append iteration ledger"]
+    J --> K["Append ledger"]
     K --> L["Promote durable lessons"]
 ```
 
@@ -80,7 +80,7 @@ Checks the implementation independently. It blocks the pull request when:
 
 ## Iteration memory
 
-Each meeting creates an append-only folder under `04-iteration-ledger/iterations/`. It contains the meeting delta, summary, approved change manifest, verification report, and final diff. Even a no-change meeting creates a delta stating why no implementation was warranted.
+Each meeting creates an append-only folder under `04-ledger/meetings/`. It contains the meeting delta, summary, approved change manifest, verification report, and final diff. Even a no-change meeting creates a delta stating why no implementation was warranted.
 
 `lessons.md` contains only durable operating rules that should change future agent behavior. Meeting-specific facts remain in their iteration record. Superseded decisions remain visible and link to their replacement.
 
@@ -105,12 +105,12 @@ Each meeting creates an append-only folder under `04-iteration-ledger/iterations
     ├── protected-workflow-elements.json
     └── verify-workflow-guardrails.py
 
-04-iteration-ledger/
+04-ledger/
 ├── README.md
 ├── decisions.md
 ├── open-questions.md
 ├── lessons.md
-└── iterations/
+└── meetings/
     └── YYYY-MM-DD-meeting-slug/
         ├── meeting-delta.json
         ├── summary.md

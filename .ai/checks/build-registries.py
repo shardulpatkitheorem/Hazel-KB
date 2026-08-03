@@ -2,7 +2,7 @@
 """
 Generate the markdown registries from the JSON records.
 
-04-iteration-ledger/decisions.md and open-questions.md describe themselves as
+04-ledger/decisions.md and open-questions.md describe themselves as
 derived indexes. Nothing generated them, so they were a hand-maintained second
 source of truth that drifted from the records. This makes the claim true.
 
@@ -25,7 +25,7 @@ from datetime import date
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[2]
-LEDGER = REPO / "04-iteration-ledger"
+LEDGER = REPO / "04-ledger"
 
 BANNER = (
     "<!-- GENERATED FILE — DO NOT EDIT.\n"
@@ -92,7 +92,7 @@ def build_decisions(records: list[dict]) -> str:
     superseded = sorted([r for r in records if r.get("status") == "superseded"], key=by_decided)
 
     lines = [
-        BANNER.format(source="04-iteration-ledger/decisions/*.json",
+        BANNER.format(source="04-ledger/decisions/*.json",
                       digest=records_digest(records)),
         "# Decision Registry",
         "",
@@ -173,7 +173,7 @@ def build_questions(records: list[dict]) -> str:
                       key=by_decided)
 
     lines = [
-        BANNER.format(source="04-iteration-ledger/questions/*.json",
+        BANNER.format(source="04-ledger/questions/*.json",
                       digest=records_digest(records)),
         "# Open Questions",
         "",

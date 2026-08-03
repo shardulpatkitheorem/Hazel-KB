@@ -17,8 +17,8 @@ uncertainty into the authoritative record.
 ## Constraints
 
 - **Read-only.** Do not modify the source. Do not write to
-  `04-iteration-ledger/decisions/`, `questions/`, or any registry.
-- **One output file:** `iterations/<iteration-id>/meeting-delta.json`.
+  `04-ledger/decisions/`, `questions/`, or any registry.
+- **One output file:** `meetings/<iteration-id>/meeting-delta.json`.
 - **Never invent an owner or a date.** If the source does not name one, write
   `"unknown"`. This is a correct answer, not a failure.
 - **Every claim needs an anchor that resolves.** At least one evidence item
@@ -30,6 +30,14 @@ uncertainty into the authoritative record.
   Validation now resolves every anchor: it finds the excerpt in the source and
   checks which timestamp governs it. An excerpt that does not appear, or an
   anchor more than two minutes from where it actually appears, is an error.
+
+  **Choose the anchor type that actually locates the quote.** Some sources
+  attribute many speakers to one microphone — a single timestamped block can run
+  for twenty minutes and thousands of words. A `t:` anchor on such a block is
+  correct but useless: it does not tell a reader where to look. In that case use
+  a **line anchor** (`l:472`) pointing at the line the quote is on. Rule of
+  thumb: if the quote is more than a screen away from the timestamp above it,
+  anchor by line. Validation will tell you the line number to use.
 - Validate before finishing: `python .ai/checks/validate.py`.
 
 ## Procedure
@@ -46,7 +54,7 @@ uncertainty into the authoritative record.
 2. **Read the whole source before extracting anything.** A statement at 3:00 is
    frequently reversed by 6:00. Extracting linearly produces records that the
    same meeting already overturned.
-3. **Read the existing registry** at `04-iteration-ledger/decisions.md`. You
+3. **Read the existing registry** at `04-ledger/decisions.md`. You
    need it to spot restatements and reversals.
 4. **Classify** every substantive exchange using the rubric below.
 5. **Write the delta**, including `not_promoted`.

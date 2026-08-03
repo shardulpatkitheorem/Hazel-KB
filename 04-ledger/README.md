@@ -1,4 +1,4 @@
-# Hazel Iteration Ledger
+# Hazel Ledger
 
 This directory is the audit trail for meeting-driven changes shared by Vantage and Theorem.
 
@@ -7,7 +7,7 @@ This directory is the audit trail for meeting-driven changes shared by Vantage a
 Create:
 
 ```text
-iterations/YYYY-MM-DD-meeting-slug/
+meetings/YYYY-MM-DD-meeting-slug/
 ├── meeting-delta.json
 ├── summary.md
 ├── change-manifest.json

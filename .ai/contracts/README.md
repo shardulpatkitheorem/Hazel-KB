@@ -66,7 +66,7 @@ reference"; this makes it checkable.
 
 ## Mutability
 
-Append-only applies to `iterations/`. Records here have a lifecycle, so the line
+Append-only applies to `meetings/`. Records here have a lifecycle, so the line
 must be explicit:
 
 | Immutable once written | May change |

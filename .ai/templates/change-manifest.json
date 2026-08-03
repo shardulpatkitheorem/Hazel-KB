@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "iteration_id": "2026-07-28-example-meeting",
+  "meeting_id": "2026-07-28-example-meeting",
   "change_id": "CHG-0001",
   "change_type": "no_change",
   "base_commit": "0000000",

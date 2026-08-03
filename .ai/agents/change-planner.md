@@ -9,8 +9,8 @@ A validated meeting delta may require a change to the shared Hazel workflow or r
 - Valid `meeting-delta.json`.
 - Current `main`.
 - Current workflow HTML and CSS.
-- `04-iteration-ledger/decisions.md`.
-- `04-iteration-ledger/open-questions.md`.
+- `04-ledger/decisions.md`.
+- `04-ledger/open-questions.md`.
 - `.ai/contracts/design-preservation.md`.
 - `.ai/contracts/change-manifest.schema.json`.
 

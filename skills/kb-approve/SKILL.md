@@ -29,16 +29,16 @@ do not decide, and you do not persuade.
 
 ### 1. Load
 
-Read the delta at `iterations/<iteration-id>/meeting-delta.json` and hash it:
+Read the delta at `meetings/<iteration-id>/meeting-delta.json` and hash it:
 
 ```
-python .ai/checks/hash-source.py iterations/<id>/meeting-delta.json
+python .ai/checks/hash-source.py meetings/<id>/meeting-delta.json
 ```
 
 That hash goes in the review record and binds the review to exactly what was on
 screen. If the delta is re-extracted afterwards, the review no longer applies.
 
-Read `04-iteration-ledger/decisions.md` too — you need it to spot restatements
+Read `04-ledger/decisions.md` too — you need it to spot restatements
 and contradictions.
 
 ### 2. Orient
@@ -96,6 +96,30 @@ If the librarian promotes something from this list, it goes in the review
 record's `promoted_from_not_promoted` — those entries are the signal for tuning
 the extraction rubric later.
 
+### 4b. Ask what is missing entirely
+
+`not_promoted` shows what the extractor considered and declined. It cannot show
+what the extractor never saw.
+
+Decisions stated **descriptively** are the common miss: nobody says "let's
+require this", they discuss an existing requirement as settled fact. The
+extractor looks for decision moments and finds none, so the requirement is never
+proposed — and never appears in `not_promoted` either.
+
+So ask directly: **is anything settled in this source that no candidate covers?**
+
+If the librarian names something:
+
+1. Find it in the source and quote it verbatim.
+2. Anchor it — a line anchor if the block is long.
+3. Write the record as normal, with the librarian as `approval.approved_by`.
+4. Record it in the review's `added_by_librarian` with a `reason_missed`.
+
+Do not treat this as optional tidying. A missing record breaks supersession: a
+later decision that reverses this one will have no `DEC-` id to cite, so the
+reversal is recorded as though it were a fresh decision and the history of the
+change is lost.
+
 ### 5. Write the records
 
 For each accepted or amended candidate:
@@ -104,9 +128,9 @@ For each accepted or amended candidate:
 python .ai/checks/next-id.py decision      # or: question
 ```
 
-Write `04-iteration-ledger/decisions/DEC-nnn.json` against
+Write `04-ledger/decisions/DEC-nnn.json` against
 `.ai/contracts/decision.schema.json`, or
-`04-iteration-ledger/questions/Q-nnn.json` against the question contract.
+`04-ledger/questions/Q-nnn.json` against the question contract.
 
 Carry forward unchanged: `statement` (unless amended), `evidence`, `origin`.
 Set from the review: `owner`, `routing`, `status: active`,
@@ -120,8 +144,14 @@ record's `supersedes`, and the old record's `superseded_by` and
 
 ### 6. Write the review record
 
-`iterations/<iteration-id>/review.json`, against
-`.ai/contracts/review.schema.json`. One outcome per candidate, no exceptions.
+`meetings/<iteration-id>/review.json`, against
+`.ai/contracts/review.schema.json`. One outcome per candidate, no exceptions,
+plus `promoted_from_not_promoted` and `added_by_librarian` where they apply.
+
+Those last two arrays are the extractor's error log. `promoted_from_not_promoted`
+is material it saw and misjudged; `added_by_librarian` is material it never saw.
+The second is the more serious failure, and the `reason_missed` codes are what
+make the rubric improvable rather than merely criticised.
 
 ### 7. Verify
 

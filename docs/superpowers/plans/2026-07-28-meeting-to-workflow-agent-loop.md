@@ -96,14 +96,14 @@
 - [x] Implement file allowlist, `:root`, font, and logo comparison.
 - [x] Run passing and failing fixtures and confirm exit codes.
 
-### Task 5: Append-only iteration ledger
+### Task 5: Append-only ledger
 
 **Files:**
-- Create: `04-iteration-ledger/README.md`
-- Create: `04-iteration-ledger/decisions.md`
-- Create: `04-iteration-ledger/open-questions.md`
-- Create: `04-iteration-ledger/lessons.md`
-- Create: `04-iteration-ledger/iterations/.gitkeep`
+- Create: `04-ledger/README.md`
+- Create: `04-ledger/decisions.md`
+- Create: `04-ledger/open-questions.md`
+- Create: `04-ledger/lessons.md`
+- Create: `04-ledger/meetings/.gitkeep`
 
 **Interfaces:**
 - Consumes: approved deltas, manifests, reports, PR links.

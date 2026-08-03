@@ -23,7 +23,7 @@ Do not skip a role or combine implementation with verification.
 - Protect logos, assets, global CSS tokens, fonts, page shell, and unrelated workflow sections.
 - Preserve open questions, approvals, and superseded decisions.
 - Append an iteration record even when no repository change is warranted.
-- Put meeting facts in their iteration. Put only reusable behavior rules in `04-iteration-ledger/lessons.md`.
+- Put meeting facts in their iteration. Put only reusable behavior rules in `04-ledger/lessons.md`.
 - Stop and request human resolution when evidence conflicts or scope is ambiguous.
 
 ## Artifact validation

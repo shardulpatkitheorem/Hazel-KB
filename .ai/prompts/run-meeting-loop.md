@@ -30,5 +30,5 @@ Phase 4:
 - Independently verify evidence, scope, acceptance criteria, protected elements, retained questions/approvals, and visual stability.
 - Produce the schema-valid verification report.
 - Create or update a draft PR only when required checks pass.
-- Append the iteration ledger after merge; promote only durable behavioral rules to lessons.md.
+- Append the ledger after merge; promote only durable behavioral rules to lessons.md.
 ```
