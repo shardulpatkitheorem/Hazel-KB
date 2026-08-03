@@ -21,15 +21,28 @@ uncertainty into the authoritative record.
 - **One output file:** `iterations/<iteration-id>/meeting-delta.json`.
 - **Never invent an owner or a date.** If the source does not name one, write
   `"unknown"`. This is a correct answer, not a failure.
-- **Every claim needs an anchor.** At least one evidence item with a real
-  location: `t:MM:SS` for a timestamp, `s:<heading>` for a section, `l:<n>` or
-  `l:<n>-<m>` for a line range. Quote the source verbatim in `excerpt`.
+- **Every claim needs an anchor that resolves.** At least one evidence item
+  whose `excerpt` is copied **verbatim** from the source and whose `location`
+  is the source's **own timestamp, copied exactly**. A transcript reading
+  `[00:13:59]` gives the anchor `t:0:13:59`. Do not round, estimate, or reuse
+  one timestamp for several excerpts from different moments.
+
+  Validation now resolves every anchor: it finds the excerpt in the source and
+  checks which timestamp governs it. An excerpt that does not appear, or an
+  anchor more than two minutes from where it actually appears, is an error.
 - Validate before finishing: `python .ai/checks/validate.py`.
 
 ## Procedure
 
-1. **Hash the source.**
-   `python .ai/checks/hash-source.py <path>` → goes in `source.content_sha256`.
+1. **Hash the source by running the script.** Do not compute a digest
+   yourself — the digest covers the transcript body only, excluding
+   frontmatter, and a hash computed any other way will fail validation.
+
+   ```
+   python .ai/checks/hash-source.py <path>
+   ```
+
+   Paste its output verbatim into `source.content_sha256`.
 2. **Read the whole source before extracting anything.** A statement at 3:00 is
    frequently reversed by 6:00. Extracting linearly produces records that the
    same meeting already overturned.
@@ -37,7 +50,10 @@ uncertainty into the authoritative record.
    need it to spot restatements and reversals.
 4. **Classify** every substantive exchange using the rubric below.
 5. **Write the delta**, including `not_promoted`.
-6. **Validate**, then stop. Report what you found and hand off to the librarian.
+6. **Validate.** `python .ai/checks/validate.py` must pass with no errors. If
+   an anchor fails to resolve, fix the anchor or the excerpt — never loosen
+   the check.
+7. Stop. Report what you found and hand off to the librarian.
 
 ## The rubric
 
@@ -77,6 +93,12 @@ somebody's week; a decision changes what the system does.
 When a candidate reverses something already in the registry, set
 `supersedes_id` to that record's real `DEC-` id. Do not edit the existing
 record — approval handles that.
+
+If the source clearly reverses an earlier decision but **no `DEC-` record
+exists yet**, you cannot cite one. Say so plainly in your report: name the
+meeting that established the earlier position and state that it needs
+backfilling before this candidate can be approved. Do not silently promote a
+reversal as though it were a fresh decision — the supersession would be lost.
 
 ## What must NOT be promoted
 

@@ -7,7 +7,8 @@ contracts. This does. It runs three passes:
 
   1. SCHEMA      every artifact validates against its contract
   2. INTEGRITY   every cross-reference resolves; no orphans, no cycles
-  3. PROVENANCE  every content_sha256 matches the bytes of the source it names
+  3. PROVENANCE  every content_sha256 matches the source it names
+  4. ANCHORS     every quoted excerpt appears where its anchor says
 
 Exit code 0 if clean, 1 if any error. Warnings do not fail the run.
 
@@ -28,6 +29,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from content_hash import hash_body
+from anchors import check_evidence
 
 try:
     from jsonschema import Draft202012Validator
@@ -340,6 +342,12 @@ def validate_integrity(collected: dict[str, list[dict]], f: Findings) -> None:
 
 
 def validate_provenance(collected: dict[str, list[dict]], f: Findings) -> None:
+    """Re-derive every content_sha256 from the source it names.
+
+    Covers meeting deltas as well as records. A delta whose hash does not match
+    is extracted from a source that has since changed, and nothing downstream
+    of it can be trusted.
+    """
     cache: dict[Path, str] = {}
 
     def digest(path: Path) -> str | None:
@@ -353,6 +361,24 @@ def validate_provenance(collected: dict[str, list[dict]], f: Findings) -> None:
         cache[path] = h
         return h
 
+    def verify(record_path: Path, src_rel: str, claimed: str, field: str) -> None:
+        source = REPO / src_rel
+        if not source.is_file():
+            f.error(rel(record_path), f"{field} not found: {src_rel}")
+            return
+        actual = digest(source)
+        if actual is None:
+            f.error(rel(record_path), f"cannot hash {src_rel}")
+        elif actual != claimed:
+            f.error(
+                rel(record_path),
+                f"content_sha256 does not match {src_rel}",
+                f"recorded {claimed[:12]}…, actual {actual[:12]}… — either the "
+                f"source body changed after this was written, or the digest was "
+                f"computed differently. Regenerate with: "
+                f"python .ai/checks/hash-source.py {src_rel}",
+            )
+
     for kind in ("decision", "open-question"):
         for rec in collected[kind]:
             doc, path = rec["doc"], rec["path"]
@@ -360,30 +386,80 @@ def validate_provenance(collected: dict[str, list[dict]], f: Findings) -> None:
             claimed = origin.get("content_sha256")
             if not claimed:
                 continue
-
-            src_field = "transcript_path" if origin.get("kind") == "meeting" \
+            field = "transcript_path" if origin.get("kind") == "meeting" \
                 else "document_path"
-            src_rel = origin.get(src_field)
-            if not src_rel:
-                continue
+            src_rel = origin.get(field)
+            if src_rel:
+                verify(path, src_rel, claimed, f"origin.{field}")
 
-            source = REPO / src_rel
-            if not source.is_file():
-                f.error(rel(path), f"origin.{src_field} not found: {src_rel}")
-                continue
+    for rec in collected["meeting-delta"]:
+        doc, path = rec["doc"], rec["path"]
+        source = doc.get("source", {})
+        claimed = source.get("content_sha256")
+        src_rel = source.get("transcript_path")
+        if claimed and src_rel:
+            verify(path, src_rel, claimed, "source.transcript_path")
 
-            actual = digest(source)
-            if actual is None:
-                f.error(rel(path), f"cannot hash {src_rel}")
-            elif actual != claimed:
-                f.error(
-                    rel(path),
-                    f"content_sha256 does not match {src_rel}",
-                    f"recorded {claimed[:12]}…, actual {actual[:12]}… — the "
-                    f"transcript body changed after this record was written. "
-                    f"Frontmatter edits do not affect the digest, so this is a "
-                    f"change to the transcript itself.",
-                )
+
+def validate_anchors(collected: dict[str, list[dict]], f: Findings) -> None:
+    """Verify that every quoted excerpt appears where its anchor says.
+
+    An anchor nobody can follow is worse than no anchor: it looks like
+    provenance and is not.
+    """
+    bodies: dict[Path, str | None] = {}
+
+    def body_of(src_rel: str) -> str | None:
+        path = REPO / src_rel
+        if path in bodies:
+            return bodies[path]
+        try:
+            with path.open(encoding="utf-8", newline="") as fh:
+                text = fh.read()
+            from content_hash import split_frontmatter
+            _, body = split_frontmatter(text)
+        except (OSError, UnicodeDecodeError):
+            body = None
+        bodies[path] = body
+        return body
+
+    def walk(record_path: Path, src_rel: str, items, label: str) -> None:
+        body = body_of(src_rel)
+        if body is None:
+            return
+        for index, ev in enumerate(items or []):
+            anchor = ev.get("location", "")
+            excerpt = ev.get("excerpt", "")
+            ok, level, message = check_evidence(body, anchor, excerpt)
+            if not message:
+                continue
+            where = f"{label}[{index}] {anchor}"
+            if level == "error" or not ok:
+                f.error(rel(record_path), f"{where}: {message}",
+                        f"source: {src_rel}")
+            else:
+                f.warn(rel(record_path), f"{where}: {message}")
+
+    for kind in ("decision", "open-question"):
+        for rec in collected[kind]:
+            doc, path = rec["doc"], rec["path"]
+            origin = doc.get("origin", {})
+            src_rel = origin.get("transcript_path") or origin.get("document_path")
+            if src_rel:
+                walk(path, src_rel, doc.get("evidence"), "evidence")
+
+    delta_arrays = ("decisions", "approved_changes", "requested_changes",
+                    "action_items", "open_questions", "superseded_decisions",
+                    "not_promoted")
+    for rec in collected["meeting-delta"]:
+        doc, path = rec["doc"], rec["path"]
+        src_rel = doc.get("source", {}).get("transcript_path")
+        if not src_rel:
+            continue
+        for array in delta_arrays:
+            for item in doc.get(array, []):
+                label = f"{array}.{item.get('id') or item.get('topic', '?')[:40]}"
+                walk(path, src_rel, item.get("evidence"), label)
 
 
 # ---------------------------------------------------------------------------
@@ -434,6 +510,7 @@ def main() -> int:
     if f.ok:
         validate_integrity(collected, f)
         validate_provenance(collected, f)
+        validate_anchors(collected, f)
     else:
         f.warn("validation", "integrity and provenance passes skipped",
                "fix schema errors first")
