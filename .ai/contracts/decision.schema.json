@@ -138,6 +138,7 @@
         "properties": {
           "repo": {
             "enum": [
+              "hop-frontend-demo",
               "react-frontend",
               "wf-orchestration",
               "integration-wrapper",

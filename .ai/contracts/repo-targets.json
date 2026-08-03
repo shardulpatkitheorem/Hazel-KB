@@ -1,0 +1,47 @@
+{
+  "$comment": "Maps the abstract repo names used in decision routing to concrete GitHub targets. Kept out of the schemas so retargeting a layer is a config change, not a contract change. A repo with no entry here, or with dispatch false, cannot receive tickets.",
+
+  "repos": {
+    "hop-frontend-demo": {
+      "github": "shardulpatkitheorem/hop-frontend-demo",
+      "description": "Applicant-facing React front end for HOP. Demo stand-in for the eventual react-frontend repo.",
+      "owner": "unassigned",
+      "dispatch": true
+    },
+    "react-frontend": {
+      "github": "shardulpatkitheorem/hop-frontend-demo",
+      "description": "Applicant and ops portal UI. Currently served by hop-frontend-demo until the real repo exists.",
+      "owner": "unassigned",
+      "dispatch": true
+    },
+    "wf-orchestration": {
+      "github": null,
+      "description": "Back-end APIs and workflow orchestration. Not yet created.",
+      "owner": "unassigned",
+      "dispatch": false
+    },
+    "integration-wrapper": {
+      "github": null,
+      "description": "Third-party provider abstraction. Not yet created.",
+      "owner": "unassigned",
+      "dispatch": false
+    },
+    "hazel-kb": {
+      "github": "Smital-Theoremlabs/Hazel-KB",
+      "description": "This repository. Living current-state documents only.",
+      "owner": "Shardul Patki",
+      "dispatch": false
+    },
+    "none": {
+      "github": null,
+      "description": "Process or policy decision requiring no software change.",
+      "owner": null,
+      "dispatch": false
+    }
+  },
+
+  "labels": {
+    "default": ["from-ledger"],
+    "by_repo": {}
+  }
+}
