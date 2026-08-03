@@ -1,0 +1,119 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://hazel.example/schemas/ticket.schema.json",
+  "title": "Hazel dispatch ticket",
+  "description": "The artifact that crosses from the knowledge base to a product repository. Generated from an approved decision; carries the direction, the reasoning, and the evidence so the receiving engineer needs no other context.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "id",
+    "decision_id",
+    "title",
+    "target",
+    "direction",
+    "reasoning",
+    "acceptance_criteria",
+    "evidence",
+    "authorized_by",
+    "status"
+  ],
+  "properties": {
+    "schema_version": { "const": "1.0" },
+
+    "id": { "type": "string", "pattern": "^TKT-[0-9]{4,}$" },
+
+    "decision_id": {
+      "type": "string",
+      "pattern": "^DEC-[0-9]{3,}$",
+      "description": "The approved decision this ticket carries. A ticket cannot exist without one."
+    },
+
+    "title": { "type": "string", "minLength": 1, "maxLength": 120 },
+
+    "target": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["repo", "area"],
+      "description": "Taken from the decision's routing. One ticket per routing entry; a decision affecting three repos produces three tickets sharing a decision_id.",
+      "properties": {
+        "repo": {
+          "enum": [
+            "react-frontend",
+            "wf-orchestration",
+            "integration-wrapper",
+            "hazel-kb"
+          ]
+        },
+        "area": { "type": "string", "minLength": 1 },
+        "owner": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Repository owner at time of dispatch. Optional; resolved from repo ownership if absent."
+        }
+      }
+    },
+
+    "direction": {
+      "type": "string",
+      "minLength": 1,
+      "description": "What must change, stated as behaviour. Never an implementation instruction — the receiving engineer writes the spec, not this ticket."
+    },
+
+    "reasoning": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Why. Carried forward so the engineer does not have to reconstruct intent from the decision statement alone."
+    },
+
+    "acceptance_criteria": {
+      "type": "array",
+      "minItems": 1,
+      "description": "Observable conditions that make this ticket done. Each should be checkable without reading the code.",
+      "items": { "type": "string", "minLength": 1 }
+    },
+
+    "evidence": {
+      "type": "array",
+      "minItems": 1,
+      "description": "Carried unchanged from the decision so provenance survives the repository boundary.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["location", "excerpt"],
+        "properties": {
+          "location": { "type": "string", "minLength": 1 },
+          "excerpt": { "type": "string", "minLength": 1, "maxLength": 500 }
+        }
+      }
+    },
+
+    "authorized_by": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["librarian", "authorized_at"],
+      "description": "The same librarian approval that confirmed the decision. Dispatch is not a second gate.",
+      "properties": {
+        "librarian": { "type": "string", "minLength": 1 },
+        "authorized_at": { "type": "string", "format": "date-time" }
+      }
+    },
+
+    "status": {
+      "enum": ["draft", "dispatched", "accepted", "spec_changed", "done", "rejected"],
+      "description": "draft before dispatch; spec_changed once the receiving engineer has amended the spec; done when the implementing PR merges."
+    },
+
+    "dispatched_to": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Where the ticket landed — issue URL or file path in the target repo. Absent while status is draft."
+    },
+
+    "related_questions": {
+      "type": "array",
+      "description": "Open questions the receiving engineer should be aware of. Does not block the ticket.",
+      "items": { "type": "string", "pattern": "^Q-[0-9]{3,}$" }
+    }
+  }
+}

@@ -1,0 +1,121 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://hazel.example/schemas/review.schema.json",
+  "title": "Hazel librarian review",
+  "description": "The outcome of the librarian gate for one delta. Records what was accepted, rejected and amended, and why. This is the audit trail of the gate itself: without it the ledger shows what was approved but not what was declined, and a reviewer cannot tell a considered rejection from an oversight.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "iteration_id",
+    "delta_path",
+    "delta_sha256",
+    "reviewed_by",
+    "reviewed_at",
+    "outcomes",
+    "not_promoted_reviewed"
+  ],
+  "properties": {
+    "schema_version": { "const": "1.0" },
+
+    "iteration_id": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}-[a-z0-9-]+$" },
+
+    "delta_path": { "type": "string", "minLength": 1 },
+
+    "delta_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$",
+      "description": "Hash of the delta as reviewed. Binds this review to exactly what was on screen; re-extracting invalidates it."
+    },
+
+    "reviewed_by": { "type": "string", "minLength": 1 },
+    "reviewed_at": { "type": "string", "format": "date-time" },
+
+    "outcomes": {
+      "type": "array",
+      "minItems": 1,
+      "description": "One entry per candidate in the delta. Every candidate must be accounted for — no silent drops.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["candidate_id", "outcome"],
+        "properties": {
+          "candidate_id": {
+            "type": "string",
+            "pattern": "^CAND-(DEC|Q)-[0-9]{3,}$"
+          },
+          "outcome": {
+            "enum": ["accepted", "accepted_amended", "rejected", "deferred"],
+            "description": "accepted_amended means the librarian changed the statement, owner or routing before promoting. deferred means it stays a candidate for a later review."
+          },
+          "record_id": {
+            "type": "string",
+            "pattern": "^(DEC|Q)-[0-9]{3,}$",
+            "description": "The id issued on acceptance. Required for accepted and accepted_amended."
+          },
+          "reason": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500,
+            "description": "Required for rejected and deferred. Why this is not becoming a record."
+          },
+          "amendments": {
+            "type": "array",
+            "description": "Required for accepted_amended. What the librarian changed and why.",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["field", "from", "to"],
+              "properties": {
+                "field": { "type": "string", "minLength": 1 },
+                "from": { "type": "string" },
+                "to": { "type": "string" },
+                "note": { "type": "string", "maxLength": 300 }
+              }
+            }
+          }
+        },
+        "allOf": [
+          {
+            "if": { "properties": { "outcome": { "enum": ["accepted", "accepted_amended"] } } },
+            "then": { "required": ["record_id"] }
+          },
+          {
+            "if": { "properties": { "outcome": { "enum": ["rejected", "deferred"] } } },
+            "then": { "required": ["reason"] }
+          },
+          {
+            "if": { "properties": { "outcome": { "const": "accepted_amended" } } },
+            "then": { "required": ["amendments"] }
+          }
+        ]
+      }
+    },
+
+    "not_promoted_reviewed": {
+      "type": "boolean",
+      "description": "The librarian confirms they read the extractor's not_promoted list. False means the gate was only half applied — what the extractor discarded went unexamined."
+    },
+
+    "promoted_from_not_promoted": {
+      "type": "array",
+      "description": "Items the extractor declined to propose that the librarian promoted anyway. These are the extractor's misses and are worth reviewing periodically to tune the rubric.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["topic", "record_id", "note"],
+        "properties": {
+          "topic": { "type": "string", "minLength": 1 },
+          "record_id": { "type": "string", "pattern": "^(DEC|Q)-[0-9]{3,}$" },
+          "note": { "type": "string", "minLength": 1, "maxLength": 300 }
+        }
+      }
+    },
+
+    "note": {
+      "type": "string",
+      "maxLength": 1000,
+      "description": "Optional overall remark on this review."
+    }
+  }
+}
