@@ -1,0 +1,45 @@
+{
+  "schema_version": "1.0",
+  "id": "DEC-003",
+  "title": "CoverBase risk scoring is internal-only; the member portal shows a general status",
+  "statement": "The member bank portal never surfaces the CoverBase risk assessment score, risk band or findings. Applicants see only a general application status. The internal Hazel operator opens the CoverBase assessment section to see the score, band and findings, and returns to the HOP portal to request missing information from the bank.",
+  "status": "active",
+  "decided_on": "2026-07-27",
+  "recorded_on": "2026-08-03",
+  "owner": "unknown",
+  "origin": {
+    "kind": "meeting",
+    "meeting_id": "2026-07-27-daily-hop-standup",
+    "transcript_path": "01-transcripts/daily-calls/parsed/2026-07-27-daily-hop-standup.md",
+    "meeting_date": "2026-07-27",
+    "content_sha256": "e5e61b478b2b88899ef4b4e3cbda9d826a56643c643d87e93a51fcf70791da48"
+  },
+  "evidence": [
+    {
+      "location": "l:49",
+      "excerpt": "From this point forward, the member bank only sees the appropriate general status. They will never get to know about the internal Cover Base scoring in the member portal."
+    },
+    {
+      "location": "l:49",
+      "excerpt": "the internal Hazel operator can open the Cover assessment section and they will get the internal-only review where they will get the risk assessment score, risk band, findings, and related details. And if they find some information is missing, they'll come back to the HOP portal and ask the member bank to provide whatever information is required."
+    }
+  ],
+  "routing": [
+    {
+      "repo": "react-frontend",
+      "area": "member-portal"
+    },
+    {
+      "repo": "wf-orchestration",
+      "area": "risk-assessment"
+    }
+  ],
+  "spec_impact": "pending",
+  "implemented_by": [],
+  "supersedes": null,
+  "superseded_by": null,
+  "approval": {
+    "approved_by": "Shardul Patki",
+    "approved_at": "2026-08-03T17:55:31Z"
+  }
+}

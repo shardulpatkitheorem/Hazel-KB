@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0",
+  "id": "Q-004",
+  "title": "Which two documents gate due diligence, and where was that requirement decided?",
+  "question": "Which two documents must be in place before a member bank can continue to the due diligence part, and in which session was that requirement decided? It is reported here as a change already made, attributed to an earlier call that is not in the ledger, so the requirement has no DEC- id to cite.",
+  "status": "open",
+  "owner": "unknown",
+  "raised_on": "2026-07-27",
+  "recorded_on": "2026-08-03",
+  "due_date": "unknown",
+  "origin": {
+    "kind": "meeting",
+    "meeting_id": "2026-07-27-daily-hop-standup",
+    "transcript_path": "01-transcripts/daily-calls/parsed/2026-07-27-daily-hop-standup.md",
+    "meeting_date": "2026-07-27",
+    "content_sha256": "e5e61b478b2b88899ef4b4e3cbda9d826a56643c643d87e93a51fcf70791da48"
+  },
+  "evidence": [
+    {
+      "location": "l:49",
+      "excerpt": "last time we talked about it, it was mentioned that first we need to have these two documents in place, and then only the member bank can continue to the due diligence part. So we made that change."
+    }
+  ],
+  "blocking": [],
+  "routing": [
+    {
+      "repo": "react-frontend",
+      "area": "step-03-documents"
+    }
+  ],
+  "answer": null
+}

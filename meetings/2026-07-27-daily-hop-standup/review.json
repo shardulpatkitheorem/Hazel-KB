@@ -1,0 +1,82 @@
+{
+  "schema_version": "1.0",
+  "meeting_id": "2026-07-27-daily-hop-standup",
+  "delta_path": "meetings/2026-07-27-daily-hop-standup/meeting-delta.json",
+  "delta_sha256": "de12d3691c63b20c6a3527398d80fe11763804269cb62ab4df636000afb41f29",
+  "reviewed_by": "Shardul Patki",
+  "reviewed_at": "2026-08-03T17:55:31Z",
+  "outcomes": [
+    {
+      "candidate_id": "CAND-DEC-001",
+      "outcome": "accepted",
+      "record_id": "DEC-001"
+    },
+    {
+      "candidate_id": "CAND-DEC-002",
+      "outcome": "accepted",
+      "record_id": "DEC-002"
+    },
+    {
+      "candidate_id": "CAND-DEC-003",
+      "outcome": "rejected",
+      "reason": "Not relevant to the current state of the workflow."
+    },
+    {
+      "candidate_id": "CAND-DEC-004",
+      "outcome": "accepted",
+      "record_id": "DEC-003"
+    },
+    {
+      "candidate_id": "CAND-DEC-005",
+      "outcome": "deferred",
+      "reason": "Demonstrated as built with no owner and no deliberation; revisit when someone owns it."
+    },
+    {
+      "candidate_id": "CAND-DEC-006",
+      "outcome": "accepted",
+      "record_id": "DEC-004"
+    },
+    {
+      "candidate_id": "CAND-Q-001",
+      "outcome": "accepted",
+      "record_id": "Q-001"
+    },
+    {
+      "candidate_id": "CAND-Q-002",
+      "outcome": "rejected",
+      "reason": "There is no authoritative registry to check Wolfsberg status against a bank name, so there is nothing to track."
+    },
+    {
+      "candidate_id": "CAND-Q-003",
+      "outcome": "rejected",
+      "reason": "Not relevant to the current state of the workflow."
+    },
+    {
+      "candidate_id": "CAND-Q-004",
+      "outcome": "accepted",
+      "record_id": "Q-002"
+    },
+    {
+      "candidate_id": "CAND-Q-005",
+      "outcome": "accepted_amended",
+      "record_id": "Q-003",
+      "amendments": [
+        {
+          "field": "owner",
+          "from": "Robert Ramirez",
+          "to": "unknown",
+          "note": "Robert Ramirez was named by Shantanu Wadodkar and never confirmed in the source, so the ownership was attributed rather than accepted."
+        }
+      ]
+    }
+  ],
+  "not_promoted_reviewed": true,
+  "promoted_from_not_promoted": [
+    {
+      "topic": "Required documents must be accepted before due diligence unlocks",
+      "record_id": "Q-004",
+      "note": "Promoted as an open question, not a decision. The requirement is reported as already built and attributed to an earlier session that is not in the ledger, so its provenance and the identity of the two documents both need establishing."
+    }
+  ],
+  "note": "CAND-DEC-006 was initially marked for amendment, but the librarian confirmed the statement itself is correct; the reservation was feasibility — whether the CoverBase APIs support it — and was carried outside the ledger rather than recorded as a question. The remaining three not_promoted items were reviewed and left unpromoted."
+}

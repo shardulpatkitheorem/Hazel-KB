@@ -1,0 +1,45 @@
+{
+  "schema_version": "1.0",
+  "id": "DEC-004",
+  "title": "The bank confirms, corrects or declines CoverBase-prepared answers, with the source document shown",
+  "statement": "Risk answers prepared by CoverBase are returned to the member bank for review. For each one the bank may confirm it, correct it, or state \"I'm unable to confirm\". The portal tells the bank which already-supplied document each prepared answer was drawn from.",
+  "status": "active",
+  "decided_on": "2026-07-27",
+  "recorded_on": "2026-08-03",
+  "owner": "unknown",
+  "origin": {
+    "kind": "meeting",
+    "meeting_id": "2026-07-27-daily-hop-standup",
+    "transcript_path": "01-transcripts/daily-calls/parsed/2026-07-27-daily-hop-standup.md",
+    "meeting_date": "2026-07-27",
+    "content_sha256": "e5e61b478b2b88899ef4b4e3cbda9d826a56643c643d87e93a51fcf70791da48"
+  },
+  "evidence": [
+    {
+      "location": "l:49",
+      "excerpt": "the bank will review, correct, or certify the prepared answers that are returned by Cover Base. Here we will be suggesting: okay, we are taking this information from the documents that you have already provided."
+    },
+    {
+      "location": "l:49",
+      "excerpt": "The member bank can confirm, or if they are not able to provide the answer, they will say \"I'm unable to confirm,\" or they can correct their answers."
+    }
+  ],
+  "routing": [
+    {
+      "repo": "react-frontend",
+      "area": "step-04-risk-questions"
+    },
+    {
+      "repo": "integration-wrapper",
+      "area": "coverbase"
+    }
+  ],
+  "spec_impact": "pending",
+  "implemented_by": [],
+  "supersedes": null,
+  "superseded_by": null,
+  "approval": {
+    "approved_by": "Shardul Patki",
+    "approved_at": "2026-08-03T17:55:31Z"
+  }
+}

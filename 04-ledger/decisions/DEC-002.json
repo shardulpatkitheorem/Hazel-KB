@@ -1,0 +1,45 @@
+{
+  "schema_version": "1.0",
+  "id": "DEC-002",
+  "title": "Signing the NDA in Hazel onboarding satisfies the Vanta trust-center NDA requirement",
+  "statement": "The applicant bank signs one NDA, in the Hazel onboarding flow. That signature satisfies the NDA that Vanta requires before Hazel's due diligence package is released through the Trust Center, so the bank is not asked to execute a second NDA there.",
+  "status": "active",
+  "decided_on": "2026-07-27",
+  "recorded_on": "2026-08-03",
+  "owner": "Shawn",
+  "origin": {
+    "kind": "meeting",
+    "meeting_id": "2026-07-27-daily-hop-standup",
+    "transcript_path": "01-transcripts/daily-calls/parsed/2026-07-27-daily-hop-standup.md",
+    "meeting_date": "2026-07-27",
+    "content_sha256": "e5e61b478b2b88899ef4b4e3cbda9d826a56643c643d87e93a51fcf70791da48"
+  },
+  "evidence": [
+    {
+      "location": "t:0:20:15",
+      "excerpt": "He's saying that if you sign the NDA through the Hazel onboarding or intake, then the NDA for Vanta would be automatic."
+    },
+    {
+      "location": "t:0:20:21",
+      "excerpt": "So then the NDA that we do with the member banks is the one that we need to upload, and we're good over there. Okay, so I think I'm good over there."
+    }
+  ],
+  "routing": [
+    {
+      "repo": "integration-wrapper",
+      "area": "vanta"
+    },
+    {
+      "repo": "wf-orchestration",
+      "area": "step-02-nda"
+    }
+  ],
+  "spec_impact": "pending",
+  "implemented_by": [],
+  "supersedes": null,
+  "superseded_by": null,
+  "approval": {
+    "approved_by": "Shardul Patki",
+    "approved_at": "2026-08-03T17:55:31Z"
+  }
+}

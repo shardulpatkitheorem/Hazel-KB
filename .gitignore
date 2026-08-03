@@ -7,3 +7,5 @@ __pycache__/
 # Working artifacts from tooling runs
 KB-AUDIT.md
 SCHEMA-DUMP.md
+
+GATE-AUDIT.md

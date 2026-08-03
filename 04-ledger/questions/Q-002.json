@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0",
+  "id": "Q-002",
+  "title": "Must intake process documents be stored in Databricks?",
+  "question": "Does the intake process have to store the documents it collects into Databricks? Named as an outstanding piece to lock down.",
+  "status": "open",
+  "owner": "Joel Olivares",
+  "raised_on": "2026-07-27",
+  "recorded_on": "2026-08-03",
+  "due_date": "unknown",
+  "origin": {
+    "kind": "meeting",
+    "meeting_id": "2026-07-27-daily-hop-standup",
+    "transcript_path": "01-transcripts/daily-calls/parsed/2026-07-27-daily-hop-standup.md",
+    "meeting_date": "2026-07-27",
+    "content_sha256": "e5e61b478b2b88899ef4b4e3cbda9d826a56643c643d87e93a51fcf70791da48"
+  },
+  "evidence": [
+    {
+      "location": "t:0:32:17",
+      "excerpt": "I think we still have to figure out if we have to store the intake process documents into Databricks. So let's lock that piece down as well, Joel."
+    }
+  ],
+  "blocking": [],
+  "routing": [
+    {
+      "repo": "wf-orchestration",
+      "area": "data-storage"
+    }
+  ],
+  "answer": null
+}

@@ -1,0 +1,36 @@
+{
+  "schema_version": "1.0",
+  "id": "Q-003",
+  "title": "Is GitHub access ready for the build team?",
+  "question": "What is the status of GitHub readiness and access provisioning for the team? Deferred to a later call.",
+  "status": "open",
+  "owner": "unknown",
+  "raised_on": "2026-07-27",
+  "recorded_on": "2026-08-03",
+  "due_date": "unknown",
+  "origin": {
+    "kind": "meeting",
+    "meeting_id": "2026-07-27-daily-hop-standup",
+    "transcript_path": "01-transcripts/daily-calls/parsed/2026-07-27-daily-hop-standup.md",
+    "meeting_date": "2026-07-27",
+    "content_sha256": "e5e61b478b2b88899ef4b4e3cbda9d826a56643c643d87e93a51fcf70791da48"
+  },
+  "evidence": [
+    {
+      "location": "t:0:32:17",
+      "excerpt": "And is there any update from the GitHub side in terms of readiness, etc.?"
+    },
+    {
+      "location": "t:0:33:04",
+      "excerpt": "I think Robert is tracking that — getting the access and all. Maybe in the next call we can discuss."
+    }
+  ],
+  "blocking": [],
+  "routing": [
+    {
+      "repo": "none",
+      "area": "infrastructure"
+    }
+  ],
+  "answer": null
+}

@@ -1,0 +1,49 @@
+{
+  "schema_version": "1.0",
+  "id": "DEC-001",
+  "title": "The Wolfsberg questionnaire is not mandatory; a fallback question set is asked in Hazel onboarding",
+  "statement": "A bank that does not hold a Wolfsberg questionnaire is not blocked. It answers an equivalent set of questions inside the Hazel onboarding flow instead, and that data is pushed to CoverBase. The questions are asked by the Hazel-built onboarding rather than by CoverBase directly. A bank that does hold a Wolfsberg document continues on the existing path.",
+  "status": "active",
+  "decided_on": "2026-07-27",
+  "recorded_on": "2026-08-03",
+  "owner": "Joel Olivares",
+  "origin": {
+    "kind": "meeting",
+    "meeting_id": "2026-07-27-daily-hop-standup",
+    "transcript_path": "01-transcripts/daily-calls/parsed/2026-07-27-daily-hop-standup.md",
+    "meeting_date": "2026-07-27",
+    "content_sha256": "e5e61b478b2b88899ef4b4e3cbda9d826a56643c643d87e93a51fcf70791da48"
+  },
+  "evidence": [
+    {
+      "location": "t:0:16:02",
+      "excerpt": "Yeah, I think that would be our best approach. Now, I can incorporate some of those questions into Cover Base, but I believe it's better if they come from the Hazel onboarding that the team is working on."
+    },
+    {
+      "location": "t:0:27:38",
+      "excerpt": "Right. Yeah. If they have a Wolfsberg, keep going. If they don't have a Wolfsberg, answer these questions."
+    },
+    {
+      "location": "t:0:28:04",
+      "excerpt": "I think Shawn is mentioning that — we will ask them, do you have that? And if not, then we'll ask those questions."
+    }
+  ],
+  "routing": [
+    {
+      "repo": "react-frontend",
+      "area": "step-03-documents"
+    },
+    {
+      "repo": "wf-orchestration",
+      "area": "step-03-documents"
+    }
+  ],
+  "spec_impact": "pending",
+  "implemented_by": [],
+  "supersedes": null,
+  "superseded_by": null,
+  "approval": {
+    "approved_by": "Shardul Patki",
+    "approved_at": "2026-08-03T17:55:31Z"
+  }
+}

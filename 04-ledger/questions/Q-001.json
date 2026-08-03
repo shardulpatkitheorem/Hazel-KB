@@ -1,0 +1,38 @@
+{
+  "schema_version": "1.0",
+  "id": "Q-001",
+  "title": "What form does the Wolfsberg fallback take — dynamic questions, an optional field, or a template upload?",
+  "question": "When a bank has no Wolfsberg document, is the fallback presented as dynamic in-flow questions, as an optional field offering either upload or answers, as a pop-up or page, or as a downloadable template the bank fills in and uploads? Deferred until the number and type of questions is known.",
+  "status": "open",
+  "owner": "unknown",
+  "raised_on": "2026-07-27",
+  "recorded_on": "2026-08-03",
+  "due_date": "unknown",
+  "origin": {
+    "kind": "meeting",
+    "meeting_id": "2026-07-27-daily-hop-standup",
+    "transcript_path": "01-transcripts/daily-calls/parsed/2026-07-27-daily-hop-standup.md",
+    "meeting_date": "2026-07-27",
+    "content_sha256": "e5e61b478b2b88899ef4b4e3cbda9d826a56643c643d87e93a51fcf70791da48"
+  },
+  "evidence": [
+    {
+      "location": "t:0:25:34",
+      "excerpt": "So would it be dynamic questions, or would that part be like an optional field to either upload the document or answer the questions? It can be either way, right?"
+    },
+    {
+      "location": "t:0:26:02",
+      "excerpt": "We can figure it out once we see the number of questions and type of questions."
+    }
+  ],
+  "blocking": [
+    "DEC-001"
+  ],
+  "routing": [
+    {
+      "repo": "react-frontend",
+      "area": "step-03-documents"
+    }
+  ],
+  "answer": null
+}
