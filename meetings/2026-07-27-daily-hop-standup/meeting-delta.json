@@ -1,0 +1,422 @@
+{
+  "schema_version": "1.1",
+  "meeting_id": "2026-07-27-daily-hop-standup",
+  "status": "ready",
+  "source": {
+    "transcript_path": "01-transcripts/daily-calls/parsed/2026-07-27-daily-hop-standup.md",
+    "meeting_date": "2026-07-27",
+    "content_sha256": "e5e61b478b2b88899ef4b4e3cbda9d826a56643c643d87e93a51fcf70791da48"
+  },
+  "decisions": [
+    {
+      "id": "CAND-DEC-001",
+      "title": "The Wolfsberg questionnaire is not mandatory; a fallback question set is asked in Hazel onboarding",
+      "statement": "A bank that does not hold a Wolfsberg questionnaire is not blocked. It answers an equivalent set of questions inside the Hazel onboarding flow instead, and that data is pushed to CoverBase. The questions are asked by the Hazel-built onboarding rather than by CoverBase directly. A bank that does hold a Wolfsberg document continues on the existing path.",
+      "evidence": [
+        {
+          "location": "t:0:16:02",
+          "excerpt": "Yeah, I think that would be our best approach. Now, I can incorporate some of those questions into Cover Base, but I believe it's better if they come from the Hazel onboarding that the team is working on."
+        },
+        {
+          "location": "t:0:27:38",
+          "excerpt": "Right. Yeah. If they have a Wolfsberg, keep going. If they don't have a Wolfsberg, answer these questions."
+        },
+        {
+          "location": "t:0:28:04",
+          "excerpt": "I think Shawn is mentioning that — we will ask them, do you have that? And if not, then we'll ask those questions."
+        }
+      ],
+      "owner": "Joel Olivares",
+      "confidence": "medium",
+      "confidence_note": "The conditional path is stated flatly by Joel Olivares, restated by Shantanu Wadodkar and confirmed (\"Perfect\"). How the fallback is presented is not settled — Joel said \"I don't know if that's my decision\" about making it dynamic (CAND-Q-001). The question set does not exist yet.",
+      "routing": [
+        {
+          "repo": "react-frontend",
+          "area": "step-03-documents"
+        },
+        {
+          "repo": "wf-orchestration",
+          "area": "step-03-documents"
+        }
+      ]
+    },
+    {
+      "id": "CAND-DEC-002",
+      "title": "Signing the NDA in Hazel onboarding satisfies the Vanta trust-center NDA requirement",
+      "statement": "The applicant bank signs one NDA, in the Hazel onboarding flow. That signature satisfies the NDA that Vanta requires before Hazel's due diligence package is released through the Trust Center, so the bank is not asked to execute a second NDA there.",
+      "evidence": [
+        {
+          "location": "t:0:20:15",
+          "excerpt": "He's saying that if you sign the NDA through the Hazel onboarding or intake, then the NDA for Vanta would be automatic."
+        },
+        {
+          "location": "t:0:20:21",
+          "excerpt": "So then the NDA that we do with the member banks is the one that we need to upload, and we're good over there. Okay, so I think I'm good over there."
+        }
+      ],
+      "owner": "Shawn",
+      "confidence": "medium",
+      "confidence_note": "Shawn is not on the call; Joel Olivares reads his chat answer aloud and endorses it, and Prashant Sarode accepts it as resolving his objection. Only a first name is given. It states the intended outcome — nobody said who builds the Vanta hand-off or whether Vanta supports it today.",
+      "routing": [
+        {
+          "repo": "integration-wrapper",
+          "area": "vanta"
+        },
+        {
+          "repo": "wf-orchestration",
+          "area": "step-02-nda"
+        }
+      ]
+    },
+    {
+      "id": "CAND-DEC-003",
+      "title": "Onboarding does not offer entry of an existing account number",
+      "statement": "The onboarding flow does not ask an applicant whether it already holds an account, and does not accept an existing account number. A bank going through intake has no account with Hazel by definition — Participate does not issue accounts, it debits and credits accounts already established under a Hazel member bank — so the option has no case to serve.",
+      "evidence": [
+        {
+          "location": "t:0:24:07",
+          "excerpt": "There's no such thing as a Participate account. Participate is only going to debit or credit the member banks' accounts that are already established."
+        },
+        {
+          "location": "t:0:24:37",
+          "excerpt": "So we do not give them the option to enter an account number, because they don't have an account number to enter to begin with, or they wouldn't be following those steps of onboarding."
+        },
+        {
+          "location": "t:0:30:57",
+          "excerpt": "It was just an initial \"should we do that,\" and now, with your help, we decided no. So she's going to continue the way she had it, Pallavi."
+        }
+      ],
+      "owner": "Joel Olivares",
+      "confidence": "low",
+      "confidence_note": "Joel proposed this earlier in the same call, then withdrew it — on its own not a decision. Promoted under the named-authority exception: he is chairing, rules it out with a reason, says \"we decided no\", and Diana Plata confirms. The outcome is the status quo, so it changes no code.",
+      "routing": [
+        {
+          "repo": "react-frontend",
+          "area": "account-opening"
+        }
+      ]
+    },
+    {
+      "id": "CAND-DEC-004",
+      "title": "CoverBase risk scoring is internal-only; the member portal shows a general status",
+      "statement": "The member bank portal never surfaces the CoverBase risk assessment score, risk band or findings. Applicants see only a general application status. The internal Hazel operator opens the CoverBase assessment section to see the score, band and findings, and returns to the HOP portal to request missing information from the bank.",
+      "evidence": [
+        {
+          "location": "l:49",
+          "excerpt": "From this point forward, the member bank only sees the appropriate general status. They will never get to know about the internal Cover Base scoring in the member portal."
+        },
+        {
+          "location": "l:49",
+          "excerpt": "the internal Hazel operator can open the Cover assessment section and they will get the internal-only review where they will get the risk assessment score, risk band, findings, and related details. And if they find some information is missing, they'll come back to the HOP portal and ask the member bank to provide whatever information is required."
+        }
+      ],
+      "owner": "unknown",
+      "confidence": "low",
+      "confidence_note": "Presented by Pallavi Bichpuriya as behaviour already built, not deliberated here. Nobody objected and Joel Olivares told her to continue as she had it. Promoted because it is a hard disclosure rule; the librarian should decide whether the deciding record belongs to an earlier session.",
+      "routing": [
+        {
+          "repo": "react-frontend",
+          "area": "member-portal"
+        },
+        {
+          "repo": "wf-orchestration",
+          "area": "risk-assessment"
+        }
+      ]
+    },
+    {
+      "id": "CAND-DEC-005",
+      "title": "Applicant progress is saved for return, and risk questions stay locked until due diligence completes",
+      "statement": "The application preserves the bank's progress so a user can save and return to the form at any time. The risk questions are not reachable until the due diligence section is complete.",
+      "evidence": [
+        {
+          "location": "l:49",
+          "excerpt": "Hazel will preserve the bank's progress locally so the user can save and return to the form whenever they want. The risk questions remain locked until the due diligence part is completed."
+        }
+      ],
+      "owner": "unknown",
+      "confidence": "low",
+      "confidence_note": "Demonstrated as built rather than decided. No objection was raised and no owner is named. \"Locally\" is not defined in the source — whether progress is held client-side or server-side is not stated, and that difference matters for a spec.",
+      "routing": [
+        {
+          "repo": "react-frontend",
+          "area": "step-03-due-diligence"
+        },
+        {
+          "repo": "wf-orchestration",
+          "area": "step-03-due-diligence"
+        }
+      ]
+    },
+    {
+      "id": "CAND-DEC-006",
+      "title": "The bank confirms, corrects or declines CoverBase-prepared answers, with the source document shown",
+      "statement": "Risk answers prepared by CoverBase are returned to the member bank for review. For each one the bank may confirm it, correct it, or state \"I'm unable to confirm\". The portal tells the bank which already-supplied document each prepared answer was drawn from.",
+      "evidence": [
+        {
+          "location": "l:49",
+          "excerpt": "the bank will review, correct, or certify the prepared answers that are returned by Cover Base. Here we will be suggesting: okay, we are taking this information from the documents that you have already provided."
+        },
+        {
+          "location": "l:49",
+          "excerpt": "The member bank can confirm, or if they are not able to provide the answer, they will say \"I'm unable to confirm,\" or they can correct their answers."
+        }
+      ],
+      "owner": "unknown",
+      "confidence": "low",
+      "confidence_note": "Presented as built in the same walkthrough, unopposed but not deliberated. What happens downstream when a bank answers \"I'm unable to confirm\" — whether it blocks submission or routes to review — is not stated anywhere in the source.",
+      "routing": [
+        {
+          "repo": "react-frontend",
+          "area": "step-04-risk-questions"
+        },
+        {
+          "repo": "integration-wrapper",
+          "area": "coverbase"
+        }
+      ]
+    }
+  ],
+  "approved_changes": [],
+  "requested_changes": [],
+  "action_items": [
+    {
+      "id": "ACT-001",
+      "statement": "Follow up with Homer and Hector on the email address provisioned for Shardul Patki, who cannot log in to Teams or SharePoint.",
+      "evidence": [
+        {
+          "location": "t:0:06:03",
+          "excerpt": "Okay, that was created by Homer and Hector. Send me the emails and I'll get with them."
+        }
+      ],
+      "owner": "Robert Ramirez",
+      "due_date": "unknown"
+    },
+    {
+      "id": "ACT-002",
+      "statement": "Finish the Azure tenant setup. It is blocked on Microsoft's verification of a brand-new tenant; legal is being consulted on what evidence may be sent. Cloud PCs exist but are unusable until the tenant is complete.",
+      "evidence": [
+        {
+          "location": "t:0:07:05",
+          "excerpt": "Since this is such a new tenant, Microsoft is asking for verification on setting up some of these. So that's what we're working on right now. I'm actually talking to legal right now to see what we can send them, what we're authorized for."
+        }
+      ],
+      "owner": "Robert Ramirez",
+      "due_date": "unknown"
+    },
+    {
+      "id": "ACT-003",
+      "statement": "Forward the sample Wolfsberg document received from Diana Plata to the build team so the fallback question set can be derived from what the report actually contains.",
+      "evidence": [
+        {
+          "location": "t:0:30:22",
+          "excerpt": "I already got the Wolfsberg document from Diana, so I'll forward that to you guys"
+        }
+      ],
+      "owner": "Joel Olivares",
+      "due_date": "unknown"
+    },
+    {
+      "id": "ACT-004",
+      "statement": "Attend the CoverBase employee training this week, and the follow-on CoverBase / Theorem Labs session later in the week, to identify how intake data can be pushed back into CoverBase for the residual risk assessment questionnaire.",
+      "evidence": [
+        {
+          "location": "t:0:30:57",
+          "excerpt": "this week, we also have the Cover Base employee training that I've invited Theorem Labs to join, so that we can get a better understanding of how it's navigated and how to enter intake and offboard and all that."
+        },
+        {
+          "location": "t:0:30:57",
+          "excerpt": "So that Theorem Labs can identify a way to push the data that they gather from the intake back into Cover Base for the residual risk assessment questionnaire."
+        }
+      ],
+      "owner": "unknown",
+      "due_date": "unknown"
+    }
+  ],
+  "open_questions": [
+    {
+      "id": "CAND-Q-001",
+      "title": "What form does the Wolfsberg fallback take — dynamic questions, an optional field, or a template upload?",
+      "question": "When a bank has no Wolfsberg document, is the fallback presented as dynamic in-flow questions, as an optional field offering either upload or answers, as a pop-up or page, or as a downloadable template the bank fills in and uploads? Deferred until the number and type of questions is known.",
+      "evidence": [
+        {
+          "location": "t:0:25:34",
+          "excerpt": "So would it be dynamic questions, or would that part be like an optional field to either upload the document or answer the questions? It can be either way, right?"
+        },
+        {
+          "location": "t:0:26:02",
+          "excerpt": "We can figure it out once we see the number of questions and type of questions."
+        }
+      ],
+      "owner": "unknown",
+      "due_date": "unknown",
+      "confidence": "high",
+      "routing": [
+        {
+          "repo": "react-frontend",
+          "area": "step-03-documents"
+        }
+      ]
+    },
+    {
+      "id": "CAND-Q-002",
+      "title": "Can a bank's Wolfsberg status be verified automatically from the bank name?",
+      "question": "If a bank enters its name, is there an automated way to check whether it is in the Wolfsberg programme or has a Wolfsberg report, rather than taking the bank's word for it? Raised by Chris and explicitly recorded as a takeaway.",
+      "evidence": [
+        {
+          "location": "t:0:28:22",
+          "excerpt": "I think Chris has a follow-up question: if the bank enters the name, then is there some automatic way to check what Wolfsberg report they have?"
+        },
+        {
+          "location": "t:0:28:37",
+          "excerpt": "I think that's going to have to be a takeaway, because I don't know if there would be a way to verify that just by the bank name."
+        }
+      ],
+      "owner": "unknown",
+      "due_date": "unknown",
+      "confidence": "high",
+      "routing": [
+        {
+          "repo": "integration-wrapper",
+          "area": "wolfsberg"
+        }
+      ]
+    },
+    {
+      "id": "CAND-Q-003",
+      "title": "Is the account number issued before or after the account-opening documents are signed?",
+      "question": "In the preliminary account-opening step, does the bank complete the account setup information and receive the account number before signing, or is the account number issued only after all documents are submitted and signed? Both orderings were simulated in the build because the answer was unknown.",
+      "evidence": [
+        {
+          "location": "l:49",
+          "excerpt": "Now the thing is, we were not sure about whether the account number has to be provided before the signature or after the signature. So there are parts that we simulated"
+        }
+      ],
+      "owner": "unknown",
+      "due_date": "unknown",
+      "confidence": "high",
+      "confidence_note": "Raised in Pallavi Bichpuriya's walkthrough, interrupted, never returned to. The 2026-07-16 kickoff delta has a candidate saying accounts cannot be created until documents are signed, which would answer this — but it is a candidate, not an approved record, so it cannot be cited.",
+      "routing": [
+        {
+          "repo": "wf-orchestration",
+          "area": "account-opening"
+        },
+        {
+          "repo": "react-frontend",
+          "area": "account-opening"
+        }
+      ]
+    },
+    {
+      "id": "CAND-Q-004",
+      "title": "Must intake process documents be stored in Databricks?",
+      "question": "Does the intake process have to store the documents it collects into Databricks? Named as an outstanding piece to lock down.",
+      "evidence": [
+        {
+          "location": "t:0:32:17",
+          "excerpt": "I think we still have to figure out if we have to store the intake process documents into Databricks. So let's lock that piece down as well, Joel."
+        }
+      ],
+      "owner": "Joel Olivares",
+      "due_date": "unknown",
+      "confidence": "medium",
+      "confidence_note": "Prashant Sarode addresses Joel by name, but Joel does not answer in the source and the meeting ends moments later, so ownership is asserted rather than accepted. Note this reopens ground the 2026-07-16 kickoff appeared to settle — that everything, including documents, lives in Databricks.",
+      "routing": [
+        {
+          "repo": "wf-orchestration",
+          "area": "data-storage"
+        }
+      ]
+    },
+    {
+      "id": "CAND-Q-005",
+      "title": "Is GitHub access ready for the build team?",
+      "question": "What is the status of GitHub readiness and access provisioning for the team? Deferred to a later call.",
+      "evidence": [
+        {
+          "location": "t:0:32:17",
+          "excerpt": "And is there any update from the GitHub side in terms of readiness, etc.?"
+        },
+        {
+          "location": "t:0:33:04",
+          "excerpt": "I think Robert is tracking that — getting the access and all. Maybe in the next call we can discuss."
+        }
+      ],
+      "owner": "Robert Ramirez",
+      "due_date": "unknown",
+      "confidence": "medium",
+      "confidence_note": "Shantanu Wadodkar names Robert Ramirez as tracking it, hedged with \"I think\". Robert does not confirm anywhere in the source, so the owner is attributed rather than accepted.",
+      "routing": [
+        {
+          "repo": "none",
+          "area": "infrastructure"
+        }
+      ]
+    }
+  ],
+  "superseded_decisions": [],
+  "not_promoted": [
+    {
+      "topic": "Required documents must be accepted before due diligence unlocks",
+      "evidence": [
+        {
+          "location": "l:49",
+          "excerpt": "last time we talked about it, it was mentioned that first we need to have these two documents in place, and then only the member bank can continue to the due diligence part. So we made that change."
+        }
+      ],
+      "reason": "restates_existing_record",
+      "note": "Explicitly attributed to a prior session and reported here as work already delivered. The decision registry is empty, so there is no DEC- id to cite; the earlier session needs backfilling before this can be treated as recorded."
+    },
+    {
+      "topic": "Removing the Wolfsberg document requirement outright while still asking for the document",
+      "evidence": [
+        {
+          "location": "t:0:13:59",
+          "excerpt": "I don't know what our next steps will be — if we want to remove the requirement of the Wolfsberg document but still ask for it, or if we want to ask questions around what it would require to get that information out of a partner."
+        }
+      ],
+      "reason": "no_agreement_reached",
+      "note": "Joel's opening framing of the problem, offered as two alternatives with no preference. The session later converged on the conditional fallback instead — see CAND-DEC-001."
+    },
+    {
+      "topic": "That tenant verification is one-time and will unblock OAuth and the rest of the setup",
+      "evidence": [
+        {
+          "location": "t:0:07:36",
+          "excerpt": "I think this will be one time, but once we do that, the rest of the thing will fall in line, right? Including the OAuth and all this stuff."
+        },
+        {
+          "location": "t:0:07:51",
+          "excerpt": "I'm hoping for that, yes."
+        }
+      ],
+      "reason": "speculation_without_commitment",
+      "note": "Answered with a hope, not a confirmation. Nothing was committed about what the tenant unblocks."
+    },
+    {
+      "topic": "Sending the meeting transcript to attendees",
+      "evidence": [
+        {
+          "location": "t:0:08:12",
+          "excerpt": "And Joel, can you just try to see if, by the end of the meeting, you can send us the transcript?"
+        }
+      ],
+      "reason": "out_of_scope",
+      "note": "Meeting administration. Agreed to, but it affects no system and no work stream."
+    }
+  ],
+  "final_takeaways": [
+    "Nothing in this delta is authoritative. Every item is a candidate for librarian review.",
+    "6 candidate decisions, 5 open questions, 4 action items, 4 items deliberately not promoted.",
+    "The decision registry is empty, so no candidate could cite a supersedes_id.",
+    "Only one topic was genuinely deliberated: what happens when a bank has no Wolfsberg questionnaire. That produced CAND-DEC-001 and CAND-Q-001.",
+    "Four candidates are low confidence: CAND-DEC-003 (a withdrawn proposal closed by the chair) and CAND-DEC-004, -005, -006 (behaviour demonstrated as built, unopposed but never deliberated).",
+    "CAND-Q-004 reopens whether intake documents live in Databricks, which the 2026-07-16 kickoff appeared to settle."
+  ],
+  "implementation_recommended": false,
+  "blocking_reasons": [
+    "All candidates require librarian approval before any record or ticket can be created.",
+    "CAND-DEC-001 cannot be built until the Wolfsberg fallback question set exists (ACT-003) and its presentation is chosen (CAND-Q-001).",
+    "The decision registry is empty, so a candidate that restates or narrows an earlier session's call has nothing to cite."
+  ]
+}

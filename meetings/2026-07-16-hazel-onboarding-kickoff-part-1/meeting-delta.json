@@ -1,0 +1,1429 @@
+{
+  "schema_version": "1.1",
+  "meeting_id": "2026-07-16-hazel-onboarding-kickoff-part-1",
+  "status": "ready",
+  "source": {
+    "transcript_path": "01-transcripts/daily-calls/parsed/2026-07-16-hazel-onboarding-kickoff-part-1.md",
+    "meeting_date": "2026-07-16",
+    "content_sha256": "82fc1e15670cb0836c65f34eab2e9d9992bbf1aab6ad0e8f9ecdaa65def1f29b"
+  },
+  "decisions": [
+    {
+      "id": "CAND-DEC-001",
+      "title": "MVP onboarding covers direct member banks only",
+      "statement": "The onboarding journey is built for banks joining Hazel directly. Correspondent relationships with downstream nested banks are out of scope for now.",
+      "evidence": [
+        {
+          "location": "l:97-98",
+          "excerpt": "I would say we focus on just direct bank right now, because correspondent will get complicated."
+        },
+        {
+          "location": "l:99-100",
+          "excerpt": "but then they have downstream nested banks beneath them, and I don't think we need to plan for that."
+        }
+      ],
+      "owner": "unknown",
+      "confidence": "medium",
+      "confidence_note": "Phrased as \"I would say\", but nobody dissented and the rest of the session assumed direct banks. Speaker is the shared boardroom microphone, so the deciding authority cannot be named.",
+      "routing": [
+        {
+          "repo": "wf-orchestration",
+          "area": "onboarding-scope"
+        }
+      ]
+    },
+    {
+      "id": "CAND-DEC-002",
+      "title": "Eligibility scope is FDIC-insured US banks; risk data model must be expandable",
+      "statement": "Initial eligibility screening covers FDIC-insured/chartered US banks only. The architecture must support later expansion of the risk-assessment data model to credit unions, trust charters and foreign institutions.",
+      "evidence": [
+        {
+          "location": "t:15:40",
+          "excerpt": "So yeah, maybe an asterisk on that of, today we'll focus on banks. I think that's just because it's what we have and what we know, but credit unions could be in scope in the future."
+        },
+        {
+          "location": "t:15:40",
+          "excerpt": "let's not hang our hat on that being the sole data point for the risk assessment in the review. We may have to expand that. And so the architecture itself needs to support future expansion of that data model."
+        },
+        {
+          "location": "t:38:03",
+          "excerpt": "at this point, we are only working with regulated banks, FDIC insured."
+        }
+      ],
+      "owner": "unknown",
+      "confidence": "medium",
+      "confidence_note": "The expansion requirement is stated directively (\"the architecture itself needs to support\"), but the boundary of MVP scope is expressed as an \"asterisk\" rather than a formal exclusion, and no owner is named.",
+      "routing": [
+        {
+          "repo": "wf-orchestration",
+          "area": "eligibility-screening"
+        },
+        {
+          "repo": "integration-wrapper",
+          "area": "rafa-report"
+        }
+      ]
+    },
+    {
+      "id": "CAND-DEC-003",
+      "title": "Rafa/UBPR pre-screen runs before the NDA and can auto-decline",
+      "statement": "The Rafa report is queried as a pre-screen at the start of the journey, before any NDA, and an ineligible bank is told it is not eligible at that point.",
+      "evidence": [
+        {
+          "location": "t:27:57",
+          "excerpt": "The Rafa portal will pre-screen that. So we'll know ahead of time."
+        },
+        {
+          "location": "t:28:18",
+          "excerpt": "But that's a pre-NDA stage. Right, exactly. Because we're pulling up the name, it's doing the dip into Rafa."
+        }
+      ],
+      "owner": "unknown",
+      "confidence": "medium",
+      "confidence_note": "Substance and sequencing are unambiguous and confirmed back (\"Right, exactly\"), but the speaker is the boardroom microphone so no authority can be named.",
+      "routing": [
+        {
+          "repo": "react-frontend",
+          "area": "step-01-eligibility"
+        },
+        {
+          "repo": "wf-orchestration",
+          "area": "eligibility-screening"
+        },
+        {
+          "repo": "integration-wrapper",
+          "area": "rafa-report"
+        }
+      ]
+    },
+    {
+      "id": "CAND-DEC-004",
+      "title": "Applicants are not shown the Rafa risk score or its CAMELS-style components",
+      "statement": "The Rafa risk assessment routes an internal workflow rather than being displayed to the applicant bank, and the CAMELS-derived scoring is not presented or named as such to them.",
+      "evidence": [
+        {
+          "location": "l:284",
+          "excerpt": "I'd rather have it route a workflow than the banks see it."
+        },
+        {
+          "location": "l:284-285",
+          "excerpt": "I wouldn't want to call it camel. Yeah, yeah, for sure, for sure. No, they would freak out."
+        },
+        {
+          "location": "l:291-293",
+          "excerpt": "Well, I think maybe we just deal with it as, you know, if they're either green, good, you know, yellow or red, and then if they need detail, that's a reach out conversation."
+        }
+      ],
+      "owner": "unknown",
+      "confidence": "medium",
+      "confidence_note": "Not showing the score is stated firmly and unopposed; the replacement presentation (green/yellow/red) is only floated as \"maybe\" and should not be treated as settled.",
+      "routing": [
+        {
+          "repo": "react-frontend",
+          "area": "step-01-eligibility"
+        }
+      ]
+    },
+    {
+      "id": "CAND-DEC-005",
+      "title": "No adverse-action disclosure is given to a declined bank",
+      "statement": "Hazel is not required to and will not disclose the reasons a bank is turned away; the applicant is told only that it is not eligible.",
+      "evidence": [
+        {
+          "location": "l:294-295",
+          "excerpt": "But are we, from a regulation perspective, are we required to give them that information if we reject? No, no, this is all up to us."
+        },
+        {
+          "location": "t:28:38",
+          "excerpt": "And is there some kind of disclosure required if we turn away a bank?"
+        },
+        {
+          "location": "t:28:49",
+          "excerpt": "Nope. We would probably just say, yeah, sorry, you're not eligible if you'd like to be representative."
+        }
+      ],
+      "owner": "unknown",
+      "confidence": "medium",
+      "confidence_note": "The regulatory answer (\"no, this is all up to us\") is given twice without dissent; the wording of what the applicant actually sees is still hedged (\"we would probably just say\").",
+      "routing": [
+        {
+          "repo": "react-frontend",
+          "area": "step-01-eligibility"
+        },
+        {
+          "repo": "none",
+          "area": "decline-policy"
+        }
+      ]
+    },
+    {
+      "id": "CAND-DEC-006",
+      "title": "The NDA becomes an in-flow click-through rather than an executed document",
+      "statement": "The generic NDA is presented inside the onboarding flow as a terms-and-conditions style click-through, replacing today's separately executed NDA.",
+      "evidence": [
+        {
+          "location": "l:178-180",
+          "excerpt": "And so if we were just thinking about it as an onboarding flow, that seems like a terms and conditions click through that they can."
+        },
+        {
+          "location": "t:23:59",
+          "excerpt": "then it's like a online NDA kind of check box thing. And then answer the questionnaire to get to the next phase of the risk assessment."
+        }
+      ],
+      "owner": "unknown",
+      "confidence": "medium",
+      "confidence_note": "First raised as \"we can probably\", then restated as the agreed flow and explicitly endorsed (\"I like your explanation\"). Legal has not signed off in this source.",
+      "routing": [
+        {
+          "repo": "react-frontend",
+          "area": "step-02-nda"
+        },
+        {
+          "repo": "wf-orchestration",
+          "area": "step-02-nda"
+        }
+      ]
+    },
+    {
+      "id": "CAND-DEC-007",
+      "title": "The applicant portal is the only interface; CoverBase is never surfaced to the applicant",
+      "statement": "The Hazel-built portal collects all applicant data and documents and pushes them to CoverBase over its API. Applicants never see or are redirected to CoverBase; back-office staff work in CoverBase directly.",
+      "evidence": [
+        {
+          "location": "l:456-458",
+          "excerpt": "Yeah, I'd rather have it not surface Cover Base. I mean, like, give them one unified experience, and then you're sending data over to Cover Base."
+        },
+        {
+          "location": "t:33:44",
+          "excerpt": "Well, no, no, you can't think of it that way. If the starting point would be this portal that we're creating, this application that we're building, it's going to collect the data and send it over to Coverbase to do what it needs to do."
+        }
+      ],
+      "owner": "unknown",
+      "confidence": "medium",
+      "confidence_note": "Stated as a correction to a competing proposal and accepted by the group (Diana Plata: \"Okay, got it\"). Owner cannot be named — the speaker is the boardroom microphone.",
+      "routing": [
+        {
+          "repo": "react-frontend",
+          "area": "step-03-due-diligence"
+        },
+        {
+          "repo": "integration-wrapper",
+          "area": "coverbase"
+        }
+      ]
+    },
+    {
+      "id": "CAND-DEC-008",
+      "title": "Databricks is the system of record for all onboarding data and documents",
+      "statement": "All onboarding data, documents, analytics and security records are stored in Databricks first; CoverBase is then told where the documents are rather than being the collection point.",
+      "evidence": [
+        {
+          "location": "t:34:06",
+          "excerpt": "Yeah, we're going to put, we're going to store all data in Databricks. Everything from the analytics, the security, the documents, everything is going to live in Databricks."
+        },
+        {
+          "location": "t:34:06",
+          "excerpt": "If Coverbase is collecting this, then we're having to send it back over to Databricks. If here instead, this process collects it, stores it in Databricks, and then I go tell Coverbase, hey, here's the document, that's a better process."
+        }
+      ],
+      "owner": "unknown",
+      "confidence": "medium",
+      "confidence_note": "Stated flatly and read back for confirmation by Diana Plata, who accepted it. No named authority attached to the call.",
+      "routing": [
+        {
+          "repo": "wf-orchestration",
+          "area": "data-storage"
+        }
+      ]
+    },
+    {
+      "id": "CAND-DEC-009",
+      "title": "Ops staff no longer create the bank or upload documents in CoverBase manually",
+      "statement": "Creating the client record in CoverBase and uploading its documents is automated from the portal. Ops involvement in catching documents and pushing them to CoverBase is eliminated.",
+      "evidence": [
+        {
+          "location": "t:36:23",
+          "excerpt": "So if you have the external portal day one and the experience becomes self-service after the NDA is signed, ops people don't get involved in catching the documents and pushing it to cover base."
+        },
+        {
+          "location": "t:36:23",
+          "excerpt": "That would be a process we want to eliminate right now."
+        },
+        {
+          "location": "t:37:38",
+          "excerpt": "We don't want somebody physically doing that. We want that automated."
+        }
+      ],
+      "owner": "unknown",
+      "confidence": "medium",
+      "confidence_note": "Explicit and repeated, and CoverBase API availability was confirmed in the same exchange. Owner is the boardroom microphone.",
+      "routing": [
+        {
+          "repo": "integration-wrapper",
+          "area": "coverbase"
+        },
+        {
+          "repo": "wf-orchestration",
+          "area": "step-03-due-diligence"
+        }
+      ]
+    },
+    {
+      "id": "CAND-DEC-010",
+      "title": "Reverse due diligence is provided only after the NDA is signed",
+      "statement": "Hazel's own due diligence package (the Vanta trust center) is released to a prospect only after the NDA is in place, because the material is confidential.",
+      "evidence": [
+        {
+          "location": "t:42:15",
+          "excerpt": "it wouldn't be pre-NDA because we've got to provide this after NDA. Yeah, this has to be brought after NDA. This is all very confidential, mostly confidential."
+        }
+      ],
+      "owner": "unknown",
+      "confidence": "medium",
+      "confidence_note": "Answers a direct challenge (\"wouldn't we do this as pre-NDA activity?\") with a reasoned refusal that is immediately echoed and not contested. Speaker unnamed.",
+      "routing": [
+        {
+          "repo": "wf-orchestration",
+          "area": "reverse-due-diligence"
+        },
+        {
+          "repo": "react-frontend",
+          "area": "reverse-due-diligence"
+        }
+      ]
+    },
+    {
+      "id": "CAND-DEC-011",
+      "title": "MVP delivers reverse due diligence as a link to the Vanta trust center",
+      "statement": "For MVP the applicant is given a link to the Hazel-specific Vanta trust center rather than an API-driven or embedded experience.",
+      "evidence": [
+        {
+          "location": "l:588",
+          "excerpt": "Yeah, for MVP, we could have a link."
+        },
+        {
+          "location": "t:42:15",
+          "excerpt": "maybe MVP is in the link, but maybe future is just embed the same portal like Jay did right here"
+        }
+      ],
+      "owner": "unknown",
+      "confidence": "low",
+      "confidence_note": "Both statements are hedged (\"we could\", \"maybe MVP is in the link\"). Promoted because the MVP/future split was assumed thereafter, but the librarian should confirm it was actually settled.",
+      "routing": [
+        {
+          "repo": "react-frontend",
+          "area": "reverse-due-diligence"
+        },
+        {
+          "repo": "integration-wrapper",
+          "area": "vanta"
+        }
+      ]
+    },
+    {
+      "id": "CAND-DEC-012",
+      "title": "RFI/RFP responses are handled as a side process, not part of onboarding",
+      "statement": "Banks that require a formal RFI/RFP process are routed to a separate process outside the onboarding journey; onboarding does not implement RFP handling.",
+      "evidence": [
+        {
+          "location": "l:684",
+          "excerpt": "So I'd say we keep that as a side process."
+        },
+        {
+          "location": "l:689",
+          "excerpt": "But again, I think that could be a side process, not part of onboarding right now."
+        }
+      ],
+      "owner": "unknown",
+      "confidence": "medium",
+      "confidence_note": "The exclusion is stated twice and accepted, but the mechanism for routing such banks (a \"tag out\" or a yes/no question at the start) was floated and never settled.",
+      "routing": [
+        {
+          "repo": "none",
+          "area": "onboarding-scope"
+        }
+      ]
+    },
+    {
+      "id": "CAND-DEC-013",
+      "title": "The rule book assessment is a separate component callable at onboarding and continuously",
+      "statement": "Checking a bank against the Hazel network rule book is built as a component independent of the onboarding workflow, invoked both during onboarding and on an ongoing monitoring cadence.",
+      "evidence": [
+        {
+          "location": "t:57:57",
+          "excerpt": "Let us treat it like a separate component, which can be called both at the time of onboarding as well as a regular time."
+        },
+        {
+          "location": "t:59:43",
+          "excerpt": "Yeah, that does. And that would be part of, Aaron didn't discuss it and that kind of goes more into detail, but step 7 would be of the onboarding process would be ongoing monitoring."
+        }
+      ],
+      "owner": "unknown",
+      "confidence": "medium",
+      "confidence_note": "There is explicit agreement from the room and from Joel Olivares, and substance is unambiguous. Only the deciding authority is unidentifiable. Note the rule book itself does not yet exist — see CAND-Q-015.",
+      "routing": [
+        {
+          "repo": "wf-orchestration",
+          "area": "rule-book-assessment"
+        }
+      ]
+    },
+    {
+      "id": "CAND-DEC-014",
+      "title": "\"Approved with conditions\" is a distinct state that blocks transacting",
+      "statement": "A bank may be approved and have its account created while being prevented from transacting until named exceptions against the rule book are cleared and accepted. This is a distinct application status.",
+      "evidence": [
+        {
+          "location": "t:1:14:42",
+          "excerpt": "We can create your account, but you can't do anything yet."
+        },
+        {
+          "location": "t:1:15:38",
+          "excerpt": "No, yeah, I agree. That's correct, Jay. That's exactly the process."
+        },
+        {
+          "location": "t:1:18:00",
+          "excerpt": "I think that there would be, but we wouldn't allow them to transact until those exceptions are cleared and accepted."
+        },
+        {
+          "location": "t:1:18:00",
+          "excerpt": "there may be some that are approved with conditions. It's like a new status. Yeah, approved with condition."
+        }
+      ],
+      "owner": "unknown",
+      "confidence": "medium",
+      "confidence_note": "Explicitly confirmed by Joel Olivares, who addresses the deciding speaker as \"Jay\" — but the transcript attributes the speech to the boardroom microphone, so the owner is not stated in the source.",
+      "routing": [
+        {
+          "repo": "wf-orchestration",
+          "area": "approval-states"
+        },
+        {
+          "repo": "react-frontend",
+          "area": "application-status"
+        }
+      ]
+    },
+    {
+      "id": "CAND-DEC-015",
+      "title": "Portal signup is gated by bank-domain email verification, MFA and country restrictions",
+      "statement": "Before an application can proceed, the applicant's email is verified as belonging to a bank domain and a multi-factor step is required. The portal is placed behind Cloudflare and access is restricted by country initially.",
+      "evidence": [
+        {
+          "location": "t:1:02:10",
+          "excerpt": "I feel that there would be some sort of off process where, hey, put in your e-mail address."
+        },
+        {
+          "location": "t:1:02:10",
+          "excerpt": "Then we're gonna verify that it's a bank domain, a bank domain, um, and then..."
+        },
+        {
+          "location": "t:1:02:10",
+          "excerpt": "thing, but, but to to, yeah, and so we will need to restrict countries initially."
+        }
+      ],
+      "owner": "unknown",
+      "confidence": "low",
+      "confidence_note": "Raised in response to a security concern and elaborated by several speakers, but phrased as \"I feel that there would be\" and \"we probably want to\". Only the country restriction is stated as a need. Nobody was assigned it.",
+      "routing": [
+        {
+          "repo": "react-frontend",
+          "area": "portal-signup"
+        },
+        {
+          "repo": "wf-orchestration",
+          "area": "portal-signup"
+        }
+      ]
+    },
+    {
+      "id": "CAND-DEC-016",
+      "title": "Prelim is used for MVP account-opening document collection and e-signature",
+      "statement": "Rather than rebuilding branching document collection, beneficial-ownership questions and multi-signer e-signature, MVP reuses Prelim (which signs via DocuSign) with a customised workflow built for Hazel bank onboarding.",
+      "evidence": [
+        {
+          "location": "t:2:03:54",
+          "excerpt": "Yeah, and I would say for MVP, yeah, if it's not a heavy lift, use prelim, make the small adjustments and configurations."
+        },
+        {
+          "location": "t:2:18:45",
+          "excerpt": "Absolutely, there will be a customized workflow just for this Angel bank."
+        }
+      ],
+      "owner": "unknown",
+      "confidence": "medium",
+      "confidence_note": "Conditional on \"if it's not a heavy lift\", and an internal meeting to firm this up was called for in the same session (see ACT-003). The long-term question of removing Prelim was left open (CAND-Q-013).",
+      "routing": [
+        {
+          "repo": "integration-wrapper",
+          "area": "prelim"
+        },
+        {
+          "repo": "wf-orchestration",
+          "area": "account-opening"
+        }
+      ]
+    },
+    {
+      "id": "CAND-DEC-017",
+      "title": "A basic member bank is provisioned with exactly two accounts",
+      "statement": "Provisioning creates one USD reserve account and one business operating account per member bank. Any additional accounts are handled outside this workflow.",
+      "evidence": [
+        {
+          "location": "t:1:51:37",
+          "excerpt": "It's one USD reserve, and then again, if you're going to go out there and process, open an operating account for a business and transact under a business, in essence, that's all you would need, the USD reserve and the business operating account."
+        },
+        {
+          "location": "t:1:52:00",
+          "excerpt": "So, at a minimum, they need two accounts. They need an operating account and a reserve account."
+        },
+        {
+          "location": "t:1:52:09",
+          "excerpt": "So to me, that should just be part of this workflow and then any other accounts we do outside of this workflow."
+        }
+      ],
+      "owner": "unknown",
+      "confidence": "medium",
+      "confidence_note": "Diana Plata states the account set authoritatively and it is read back and accepted. The instruction to keep other accounts out of the workflow comes from the unnamed boardroom speaker.",
+      "routing": [
+        {
+          "repo": "wf-orchestration",
+          "area": "account-provisioning"
+        },
+        {
+          "repo": "integration-wrapper",
+          "area": "infinant"
+        }
+      ]
+    },
+    {
+      "id": "CAND-DEC-018",
+      "title": "Accounts cannot be created until documents are signed; Prelim controls that gate",
+      "statement": "Account creation in Infinant is contingent on the account-opening documents being signed. Prelim controls that flow as a single workflow, and the onboarding stage waits on it.",
+      "evidence": [
+        {
+          "location": "t:2:05:01",
+          "excerpt": "You cannot create dot counts. Is that a? That's right, and prelim would control that flow. Yeah, it'd be 1 workflow. Yeah, one workflow."
+        }
+      ],
+      "owner": "unknown",
+      "confidence": "medium",
+      "confidence_note": "Posed as a question and answered \"that's right\" with immediate agreement from a second speaker. Substance is clear; no named authority.",
+      "routing": [
+        {
+          "repo": "wf-orchestration",
+          "area": "account-opening"
+        },
+        {
+          "repo": "integration-wrapper",
+          "area": "prelim"
+        }
+      ]
+    },
+    {
+      "id": "CAND-DEC-019",
+      "title": "Hazel is the middleware: Prelim returns data to the Hazel app, which calls Infinant",
+      "statement": "Prelim sends collected data and signatures back to the Hazel onboarding application, and the Hazel application makes the Infinant/Interlace account-creation calls. Hazel acts as the proxy between all third-party systems so status and data land in the data lake and future automations have a single place to live.",
+      "evidence": [
+        {
+          "location": "t:2:09:07",
+          "excerpt": "So yeah, it's probably best to send it back to the Hazel app instead of, you know, and Hazel will be effectively the. The middleware or the proxy between all the different systems"
+        },
+        {
+          "location": "t:2:09:07",
+          "excerpt": "And so that is going to have to be built some, you know, either by them or I think it would be better to be built in Hazel. That way we have optionality in the future if we need to do other things."
+        }
+      ],
+      "owner": "unknown",
+      "confidence": "medium",
+      "confidence_note": "Framed as brainstorming (\"really, I'm just trying to brainstorm here\") but a clear preference is stated with reasons and accepted without objection. No owner named.",
+      "routing": [
+        {
+          "repo": "wf-orchestration",
+          "area": "integration-architecture"
+        },
+        {
+          "repo": "integration-wrapper",
+          "area": "infinant"
+        }
+      ]
+    },
+    {
+      "id": "CAND-DEC-020",
+      "title": "No KYC/KYB is performed on member banks; the KYB step is removed from provisioning",
+      "statement": "KYC/KYB via Sardine is performed only at the end-user level. It is not performed when opening member banks or their operating accounts, and the KYB step is removed from the provisioning phase of the onboarding process.",
+      "evidence": [
+        {
+          "location": "t:2:19:50",
+          "excerpt": "That is only done at the end user level. Aaron, there's no KYBKYC done when we're opening member banks or operating accounts."
+        },
+        {
+          "location": "t:2:20:02",
+          "excerpt": "Okay, so we'll remove that step."
+        }
+      ],
+      "owner": "Diana Plata",
+      "confidence": "high",
+      "routing": [
+        {
+          "repo": "wf-orchestration",
+          "area": "step-05-provisioning"
+        }
+      ]
+    },
+    {
+      "id": "CAND-DEC-021",
+      "title": "Hazel is a technology platform, not a bank; member banks own their customers' KYC/KYB",
+      "statement": "Hazel is not liable for CIP/KYC/KYB on a member bank's customers. Each member bank is responsible for its own customers' identification and their transactions.",
+      "evidence": [
+        {
+          "location": "l:2073-2075",
+          "excerpt": "Hazel's a technology platform. I'm not a bank, so we're not liable for that. The bank will be responsible for the KYCKYB."
+        },
+        {
+          "location": "t:2:23:40",
+          "excerpt": "Technically, each bank is responsible for their own customer's own transactions, so we're not responsible for that."
+        }
+      ],
+      "owner": "unknown",
+      "confidence": "medium",
+      "confidence_note": "Stated as settled fact in answer to a direct liability question, unopposed. But the immediately following exchange about the network's own monitoring duty was parked (CAND-Q-006), so the boundary is not fully drawn.",
+      "routing": [
+        {
+          "repo": "none",
+          "area": "compliance-model"
+        }
+      ]
+    },
+    {
+      "id": "CAND-DEC-022",
+      "title": "Under the basic model Vantage performs all screening; banks get no direct Sardine access",
+      "statement": "In the basic tier, transaction monitoring and screening are outsourced to Vantage and included in the offering. Member banks are not given direct access to Sardine to view that information.",
+      "evidence": [
+        {
+          "location": "t:2:22:30",
+          "excerpt": "In that, in the basic mode, it's always us monitoring, it's our accounts"
+        },
+        {
+          "location": "t:2:23:40",
+          "excerpt": "because the basic model is they're outsourcing that to us, so we don't need to give them direct access to the sardine to to view the information"
+        },
+        {
+          "location": "l:2091-2093",
+          "excerpt": "We're always doing, Vantage is always doing the screening. It's only when they get into the more advanced scenarios that we start to see this."
+        }
+      ],
+      "owner": "unknown",
+      "confidence": "medium",
+      "confidence_note": "Who does the monitoring in the basic tier is stated firmly. How Sardine is wired up was explicitly left unknown in the same exchange (CAND-Q-007), so only the service model should be treated as decided.",
+      "routing": [
+        {
+          "repo": "none",
+          "area": "compliance-model"
+        },
+        {
+          "repo": "integration-wrapper",
+          "area": "sardine"
+        }
+      ]
+    },
+    {
+      "id": "CAND-DEC-023",
+      "title": "Participate-referred banks use the identical onboarding; Participate is a config flag",
+      "statement": "A bank referred by Participate goes through exactly the same onboarding process; the Participate relationship is a flag in the tenant configuration. The webhook notifying Participate that onboarding completed is not required for MVP.",
+      "evidence": [
+        {
+          "location": "t:1:25:29",
+          "excerpt": "So it's just a small, it's a flag in the configuration."
+        },
+        {
+          "location": "t:1:27:14",
+          "excerpt": "Yep, everything is the same for that bank."
+        },
+        {
+          "location": "t:1:27:40",
+          "excerpt": "So really, once that bank onboard and we know that they came from participate, we just need to eventually inform them through some process. So we don't have to do that MVP."
+        }
+      ],
+      "owner": "unknown",
+      "confidence": "medium",
+      "confidence_note": "Direct answer to Diana Plata's question, accepted. The related idea of an onboarding screen asking \"are you a member of Participate?\" was speculative and is recorded separately as a marketplace idea.",
+      "routing": [
+        {
+          "repo": "integration-wrapper",
+          "area": "participate"
+        },
+        {
+          "repo": "wf-orchestration",
+          "area": "onboarding-scope"
+        }
+      ]
+    },
+    {
+      "id": "CAND-DEC-024",
+      "title": "Basic-tier legal agreements are non-negotiable",
+      "statement": "The Hazel membership agreement, MSA and correspondent agreement are presented as non-negotiable for the basic tier; one-off legal exceptions are not accommodated.",
+      "evidence": [
+        {
+          "location": "t:2:15:56",
+          "excerpt": "These legal agreements are not negotiable. Not for basic, they're not negotiable. Yeah, not for basic."
+        },
+        {
+          "location": "t:2:15:56",
+          "excerpt": "our goal on that agreement is not to create a bunch of one-off legal exceptions."
+        }
+      ],
+      "owner": "unknown",
+      "confidence": "medium",
+      "confidence_note": "Stated and immediately echoed by a second speaker. A caveat followed that some liability sections may still be negotiated, and that was deferred to a separate agenda.",
+      "routing": [
+        {
+          "repo": "none",
+          "area": "legal-agreements"
+        }
+      ]
+    },
+    {
+      "id": "CAND-DEC-025",
+      "title": "Programme target is 10 to 15 banks onboarded by the end of 2026",
+      "statement": "The MVP target for H2 2026 is roughly 10 to 15 member banks onboarded, accepting manual or clunky steps to get there.",
+      "evidence": [
+        {
+          "location": "t:0:21",
+          "excerpt": "The goal is roughly 10 to 15 banks by the end of the year onboarded, no matter how clunky, manual or otherwise."
+        }
+      ],
+      "owner": "unknown",
+      "confidence": "medium",
+      "confidence_note": "Stated as the goal in answer to a direct question, not proposed. It constrains MVP scope but no owner is named and it is a programme target rather than a system requirement.",
+      "routing": [
+        {
+          "repo": "none",
+          "area": "program-scope"
+        }
+      ]
+    },
+    {
+      "id": "CAND-DEC-026",
+      "title": "Ticketing is built inside the Hazel application on Databricks, not a third-party tool",
+      "statement": "Rather than provisioning SharePoint and an external Microsoft ticket platform over OAuth, a lightweight ticketing capability is built within Databricks and serviced inside the Hazel application, pushing tickets out to Vantage's existing tooling where needed.",
+      "evidence": [
+        {
+          "location": "l:2148-2150",
+          "excerpt": "So to me, it sounds like it makes infinitely, no pun, more sense to build a lightweight ticketing system within Databricks and service it within the application."
+        },
+        {
+          "location": "l:2172-2173",
+          "excerpt": "We are focused on onboarding right now. So that would be, again, kind of future state."
+        }
+      ],
+      "owner": "unknown",
+      "confidence": "low",
+      "confidence_note": "A clear preference with agreement (\"that would make a cleaner and more future-ready\"), but explicitly labelled future state and outside the onboarding MVP in the same breath.",
+      "routing": [
+        {
+          "repo": "wf-orchestration",
+          "area": "ticketing"
+        }
+      ]
+    },
+    {
+      "id": "CAND-DEC-027",
+      "title": "The portal pre-populates from public and known data instead of asking applicants to type it",
+      "statement": "Where information can be obtained from public or already-known data sources, the application pre-populates it and asks the applicant only to verify, rather than requiring them to enter it.",
+      "evidence": [
+        {
+          "location": "l:83-85",
+          "excerpt": "You know, why, why make them type in addresses and blah blah blah? You know, if there's other data sources that we can pull in to pre-populate and they just have to verify, that's a great process."
+        },
+        {
+          "location": "t:35:57",
+          "excerpt": "Yes, that would be the hope. So if there's anything that we can collect from public data or known data, then yes, we should do that."
+        }
+      ],
+      "owner": "unknown",
+      "confidence": "low",
+      "confidence_note": "A design principle repeated across the session and answered \"yes, we should do that\", but never converted into a specific requirement or assigned to anyone. Promoted because it shapes every form in the journey.",
+      "routing": [
+        {
+          "repo": "react-frontend",
+          "area": "application-form"
+        },
+        {
+          "repo": "wf-orchestration",
+          "area": "data-prefill"
+        }
+      ]
+    },
+    {
+      "id": "CAND-DEC-028",
+      "title": "Transaction limits are two-tier: Hazel sets the programme limit, the bank sets account limits within it",
+      "statement": "Vantage or Hazel sets an overall programme limit for a member bank based on its risk profile at onboarding. The member bank then sets its own limits at the account and product level, not to exceed the programme limit.",
+      "evidence": [
+        {
+          "location": "t:1:26:35",
+          "excerpt": "There is an overall program limit and then at the account level and things like that, we would work with the bank to go ahead and establish those, not to exceed that."
+        },
+        {
+          "location": "t:1:26:46",
+          "excerpt": "the program, as an example, is something that Bank Vantage or Hazel would set and say, this bank is this risk profile, this is the limit that we set for their initial onboarding. And then the bank would set their own limits within their own products"
+        }
+      ],
+      "owner": "unknown",
+      "confidence": "medium",
+      "confidence_note": "Diana Plata states the two-tier structure and the boardroom speaker elaborates it without dissent. It is described as how limits work rather than decided as a requirement, and where limits are captured during onboarding was not settled — see CAND-Q-010.",
+      "routing": [
+        {
+          "repo": "wf-orchestration",
+          "area": "account-provisioning"
+        },
+        {
+          "repo": "integration-wrapper",
+          "area": "infinant"
+        }
+      ]
+    },
+    {
+      "id": "CAND-DEC-029",
+      "title": "An internal pipeline dashboard shows onboarding status by stage",
+      "statement": "The back end provides an internal dashboard showing where each applicant bank sits in the onboarding stages, which are approved and rejected, and which are stalled, so staff can reach out to banks stuck in a stage.",
+      "evidence": [
+        {
+          "location": "l:630-631",
+          "excerpt": "you definitely are going to have to have states and then the back end is going to need a portal to say, here's the number of banks."
+        },
+        {
+          "location": "t:1:13:11",
+          "excerpt": "I think it's more of a dashboard. Here's where everybody's at, here's the stages, your banks were rejected, your banks were accepted."
+        },
+        {
+          "location": "t:1:13:56",
+          "excerpt": "Well, that would be handy just for our onboarding specialist or whatever the role is to go and be like, oh, hey, I've got three banks and I've been sitting in due diligence for two weeks, so I'm going to reach out."
+        }
+      ],
+      "owner": "unknown",
+      "confidence": "low",
+      "confidence_note": "The need for onboarding states and an internal view is stated firmly (\"you definitely are going to have to have states\") and agreed by Joel Olivares, but the dashboard itself is framed as \"handy\" rather than committed, and it was not placed in or out of MVP.",
+      "routing": [
+        {
+          "repo": "react-frontend",
+          "area": "internal-dashboard"
+        },
+        {
+          "repo": "wf-orchestration",
+          "area": "application-status"
+        }
+      ]
+    },
+    {
+      "id": "CAND-DEC-030",
+      "title": "Hazel governs itself; Vantage's current processes are not the template",
+      "statement": "Hazel will have its own governance process, which may not reflect what Vantage does today. Vantage becomes a sponsor bank to Hazel, and Vantage's due diligence is on Hazel itself rather than on Hazel's member banks.",
+      "evidence": [
+        {
+          "location": "t:1:19:44",
+          "excerpt": "I would also preface this with, you know, this will have its own governance process within Hazel."
+        },
+        {
+          "location": "t:1:20:03",
+          "excerpt": "Vantage will, you know, effectively, you know, potentially just become a, you know, a sponsor bank to Hazel. And so you'll be doing your due diligence will only be on Hazel itself. Hazel will have its own governance."
+        }
+      ],
+      "owner": "unknown",
+      "confidence": "low",
+      "confidence_note": "Offered as framing (\"I would also preface this with\") and the sponsor-bank relationship is hedged with \"potentially\". Promoted because it determines whether Vantage's existing onboarding practice is authoritative for Hazel's design, which several other candidates assume.",
+      "routing": [
+        {
+          "repo": "none",
+          "area": "compliance-model"
+        }
+      ]
+    }
+  ],
+  "approved_changes": [],
+  "requested_changes": [],
+  "action_items": [
+    {
+      "id": "ACT-001",
+      "statement": "Produce the onboarding journey map from this session's captured discussion, identifying the stages and the touchpoints where friction can be removed.",
+      "evidence": [
+        {
+          "location": "t:35:57",
+          "excerpt": "my hope is that what we're saying now is being captured by AI and then we'll use that to map out what that journey is."
+        }
+      ],
+      "owner": "unknown",
+      "due_date": "unknown"
+    },
+    {
+      "id": "ACT-002",
+      "statement": "Send Marie Alonzo and Sandra the CoverBase questions that were built from the CIP document they provided.",
+      "evidence": [
+        {
+          "location": "t:1:07:03",
+          "excerpt": "And Marie, I owe you and Sandra, a response you sent me that CIP document, the key questions you asked there, and we worked those into the cover base questions that you all created."
+        }
+      ],
+      "owner": "unknown",
+      "due_date": "unknown"
+    },
+    {
+      "id": "ACT-003",
+      "statement": "Hold an internal meeting to settle Prelim versus building in-app, and firm up the final list of documents requiring signature.",
+      "evidence": [
+        {
+          "location": "t:2:01:51",
+          "excerpt": "So I do think we probably one of our next internal meetings is to talk through prelim versus DocuSign and just firm up, you know, the final list of."
+        }
+      ],
+      "owner": "unknown",
+      "due_date": "unknown"
+    },
+    {
+      "id": "ACT-004",
+      "statement": "Review the MSA and correspondent agreement drafted by Tate against the embedded-bank MSA to confirm alignment before publishing them online.",
+      "evidence": [
+        {
+          "location": "t:2:15:56",
+          "excerpt": "I'll take a look at it because Tate has been going back and forth on certain things I want to make sure."
+        }
+      ],
+      "owner": "unknown",
+      "due_date": "unknown"
+    },
+    {
+      "id": "ACT-005",
+      "statement": "Produce a stakeholder map and an integration touch-point map for each onboarding phase.",
+      "evidence": [
+        {
+          "location": "t:1:20:03",
+          "excerpt": "Yeah, I think we need to do that stakeholder mapping as well as integration touch points."
+        }
+      ],
+      "owner": "unknown",
+      "due_date": "unknown"
+    },
+    {
+      "id": "ACT-006",
+      "statement": "Confirm with Infinant whether operating accounts a member bank self-provisions from the console tie back to the USD reserve account, and which product types should be exposed to a member bank.",
+      "evidence": [
+        {
+          "location": "t:1:52:19",
+          "excerpt": "the only thing that we need to figure out though, Jay, and confirm with Infinite is that member bank, once they have access to the console and things like that, they're going to have the ability on their end to open additional operating accounts if needed"
+        }
+      ],
+      "owner": "unknown",
+      "due_date": "unknown"
+    }
+  ],
+  "open_questions": [
+    {
+      "id": "CAND-Q-001",
+      "title": "What CoverBase risk score separates automatic approval, further review and rejection?",
+      "question": "What numeric CoverBase risk rating (0 to 4, with risk domains scored by percentage) is the threshold for an automatic approval, for additional review, and for automatic rejection? The auto-approval criteria have not been written.",
+      "evidence": [
+        {
+          "location": "t:1:02:10",
+          "excerpt": "And again, we haven't written the auto-approval criteria, but that'll be part of this."
+        },
+        {
+          "location": "t:1:14:09",
+          "excerpt": "one thing that I think we need to hone in on is what that score is going to be before I can say, well, this was rejected because it was a two"
+        }
+      ],
+      "owner": "unknown",
+      "due_date": "unknown",
+      "confidence": "high",
+      "routing": [
+        {
+          "repo": "wf-orchestration",
+          "area": "approval-states"
+        }
+      ]
+    },
+    {
+      "id": "CAND-Q-002",
+      "title": "Who at a member bank is the audience for the onboarding journey, and who may authorise the account?",
+      "question": "Which role at the applicant bank goes through the onboarding process (COO, treasurer, digital banking lead, ops), and separately, who has the authority to actually open the account?",
+      "evidence": [
+        {
+          "location": "l:102-104",
+          "excerpt": "Who's going through this process at the bank? Is it Treasurer? Is it someone in Ops? Oh yeah, who's the audience? That's a good question. I think we need to nail that down."
+        },
+        {
+          "location": "l:106",
+          "excerpt": "But then we have who has the authority to actually open an account for that."
+        }
+      ],
+      "owner": "unknown",
+      "due_date": "unknown",
+      "confidence": "high",
+      "routing": [
+        {
+          "repo": "react-frontend",
+          "area": "application-form"
+        }
+      ]
+    },
+    {
+      "id": "CAND-Q-003",
+      "title": "What counts as low liquidity for triggering a deeper review?",
+      "question": "Low liquidity is listed as a trigger for deeper subject-matter-expert review, but no definition of low liquidity exists.",
+      "evidence": [
+        {
+          "location": "t:1:02:10",
+          "excerpt": "We noted low liquidity, but we don't have a definition of what low liquidity would be."
+        }
+      ],
+      "owner": "unknown",
+      "due_date": "unknown",
+      "confidence": "high",
+      "routing": [
+        {
+          "repo": "wf-orchestration",
+          "area": "eligibility-screening"
+        }
+      ]
+    },
+    {
+      "id": "CAND-Q-004",
+      "title": "Can the consent order and enforcement action check be automated, and from which source?",
+      "question": "Consent order and enforcement action checks are currently a manual step because each regulatory body must be looked up on its own website. Can the American Bankers Association enforcement action database be used instead, and is it current enough?",
+      "evidence": [
+        {
+          "location": "l:703-704",
+          "excerpt": "Is there a way to automate that? Probably not. I mean, they're website lookups. It's not a database. And you would have to identify every regulatory body to go look up."
+        },
+        {
+          "location": "l:717",
+          "excerpt": "Yes, maybe we use that."
+        }
+      ],
+      "owner": "unknown",
+      "due_date": "unknown",
+      "confidence": "high",
+      "routing": [
+        {
+          "repo": "integration-wrapper",
+          "area": "enforcement-actions"
+        }
+      ]
+    },
+    {
+      "id": "CAND-Q-005",
+      "title": "Is build versus buy settled for the ongoing risk assessment, and is it in MVP scope?",
+      "question": "The ongoing rule book and risk assessment component needs an owner. Has the build versus buy decision already been made, and does it belong in MVP?",
+      "evidence": [
+        {
+          "location": "t:1:00:35",
+          "excerpt": "is the decision of. Build versus buy already done. That's what I was trying to figure out. And is it relevant for the MVP?"
+        }
+      ],
+      "owner": "unknown",
+      "due_date": "unknown",
+      "confidence": "medium",
+      "confidence_note": "The question is asked plainly and answered only with \"Yeah\", which does not resolve either half of it. The librarian should confirm this was left open rather than answered off-mic.",
+      "routing": [
+        {
+          "repo": "wf-orchestration",
+          "area": "rule-book-assessment"
+        }
+      ]
+    },
+    {
+      "id": "CAND-Q-006",
+      "title": "What monitoring and screening responsibility does the network itself carry?",
+      "question": "If a member bank opts to use its own fraud and screening tooling, what responsibility does the Hazel network retain for monitoring and screening the activity flowing across it?",
+      "evidence": [
+        {
+          "location": "t:2:23:40",
+          "excerpt": "I get that, but what responsibilities does the network have to monitor? And now as well as screening."
+        },
+        {
+          "location": "t:2:23:40",
+          "excerpt": "but it sounds like we need, I would say, just put a pin in that, we need to figure that out."
+        }
+      ],
+      "owner": "unknown",
+      "due_date": "unknown",
+      "confidence": "high",
+      "routing": [
+        {
+          "repo": "none",
+          "area": "compliance-model"
+        }
+      ]
+    },
+    {
+      "id": "CAND-Q-007",
+      "title": "Does Hazel integrate with Sardine directly, or does Infinant provision it in the background?",
+      "question": "Is Sardine a direct integration for Hazel, or is it part of a background process that Infinant already performs when provisioning a tenant?",
+      "evidence": [
+        {
+          "location": "l:2082-2083",
+          "excerpt": "So I'm going to say we put an ash trick on, like, do you actually integrate with Rd. or is it part of a backing process that Infinite does? We don't know that yet"
+        }
+      ],
+      "owner": "unknown",
+      "due_date": "unknown",
+      "confidence": "high",
+      "routing": [
+        {
+          "repo": "integration-wrapper",
+          "area": "sardine"
+        }
+      ]
+    },
+    {
+      "id": "CAND-Q-008",
+      "title": "Will Infinant's provisioning API be available in time for MVP?",
+      "question": "Infinant's CEO has said API access for tenant and account provisioning will come, but tenant creation is a two-week manual process today. Will the API be ready for MVP?",
+      "evidence": [
+        {
+          "location": "t:1:20:03",
+          "excerpt": "we have been told from their CEO that we will have API access so that we can do this ourselves. So whether that will be ready for MDP or not. We don't know."
+        }
+      ],
+      "owner": "unknown",
+      "due_date": "unknown",
+      "confidence": "high",
+      "routing": [
+        {
+          "repo": "integration-wrapper",
+          "area": "infinant"
+        }
+      ]
+    },
+    {
+      "id": "CAND-Q-009",
+      "title": "What compliance and documentation is required for operating accounts a bank self-provisions?",
+      "question": "Once a member bank has console access it can open additional operating accounts on Vantage's balance sheet without triggering the onboarding workflow. What documentation, beneficial ownership evidence or agreement provisions are required for those accounts?",
+      "evidence": [
+        {
+          "location": "t:2:14:18",
+          "excerpt": "We need to think about what operating accounts mean, and if they're on Vantage's balance sheet and they're opening them on behalf of Vantage, what do we want from a compliance and documentation perspective for every account?"
+        }
+      ],
+      "owner": "unknown",
+      "due_date": "unknown",
+      "confidence": "high",
+      "routing": [
+        {
+          "repo": "wf-orchestration",
+          "area": "account-provisioning"
+        }
+      ]
+    },
+    {
+      "id": "CAND-Q-010",
+      "title": "Which products are available to a basic member bank, and what documents does each require?",
+      "question": "The product types available to a basic Hazel member bank have not been defined, nor which documents each product requires from the member bank.",
+      "evidence": [
+        {
+          "location": "t:2:02:14",
+          "excerpt": "once we actually see the list of products, what type of documents we would need from that member bank for that specific product"
+        },
+        {
+          "location": "t:2:02:25",
+          "excerpt": "But I don't even know what the different products would be for basic hazel banks."
+        }
+      ],
+      "owner": "unknown",
+      "due_date": "unknown",
+      "confidence": "high",
+      "routing": [
+        {
+          "repo": "wf-orchestration",
+          "area": "account-provisioning"
+        }
+      ]
+    },
+    {
+      "id": "CAND-Q-011",
+      "title": "What are the minimum intake requirements for trust charters, credit unions and foreign banks?",
+      "question": "The configured CoverBase intake covers FDIC banks only. What should the intake and questionnaire look like for trust-chartered institutions such as Ripple, credit unions and foreign banks, and what minimum requirements apply to them?",
+      "evidence": [
+        {
+          "location": "t:1:06:31",
+          "excerpt": "I think we're just, the only intake that I've configured is for FDIC banks. So definitely if that needs to change from startups like Ripple, then the intake or questionnaire process would probably be a little different than it would be for a standard FDIC."
+        },
+        {
+          "location": "t:1:06:53",
+          "excerpt": "So that's probably something we can discuss on what the minimal requirements would be."
+        }
+      ],
+      "owner": "unknown",
+      "due_date": "unknown",
+      "confidence": "high",
+      "routing": [
+        {
+          "repo": "integration-wrapper",
+          "area": "coverbase"
+        }
+      ]
+    },
+    {
+      "id": "CAND-Q-012",
+      "title": "Does recommending remediation that a bank ignores create liability for Hazel?",
+      "question": "If Hazel identifies deficiencies, recommends remediation, the bank does not act on it, and the bank is admitted anyway, does that create liability for Hazel or the network for that bank's transactions?",
+      "evidence": [
+        {
+          "location": "t:52:31",
+          "excerpt": "a liability to us or to the network because we said, we made the recommendation, they didn't follow it, we still accepted them and their transactions."
+        }
+      ],
+      "owner": "unknown",
+      "due_date": "unknown",
+      "confidence": "medium",
+      "confidence_note": "The question was redirected into the rule book discussion rather than answered. It should be confirmed with legal, not with the workflow team.",
+      "routing": [
+        {
+          "repo": "none",
+          "area": "compliance-model"
+        }
+      ]
+    },
+    {
+      "id": "CAND-Q-013",
+      "title": "Should Prelim be eliminated from the stack long term?",
+      "question": "Prelim is proposed for MVP because its branching document collection and multi-signer flows already exist. Long term, should that additional third party be removed and the capability built into the Hazel application?",
+      "evidence": [
+        {
+          "location": "t:2:03:40",
+          "excerpt": "But I do have that question of, you know, long term, should we look at eliminating that additional third party coming into this mix?"
+        }
+      ],
+      "owner": "unknown",
+      "due_date": "unknown",
+      "confidence": "high",
+      "routing": [
+        {
+          "repo": "integration-wrapper",
+          "area": "prelim"
+        }
+      ]
+    },
+    {
+      "id": "CAND-Q-014",
+      "title": "What are the servicing expectations during onboarding?",
+      "question": "Onboarding is not a shopping-cart flow, so applicants will need support. Is there a call centre, what call volume is expected, and what proactive status updates should be sent to reduce inbound calls? Nothing exists today.",
+      "evidence": [
+        {
+          "location": "t:1:15:38",
+          "excerpt": "So is there any servicing expectation? Is there a call center, calls that will come more or less?"
+        },
+        {
+          "location": "t:1:15:38",
+          "excerpt": "That is a really good point, and we we we don't have that today, but we we've gotta set that up."
+        }
+      ],
+      "owner": "unknown",
+      "due_date": "unknown",
+      "confidence": "high",
+      "routing": [
+        {
+          "repo": "react-frontend",
+          "area": "application-status"
+        }
+      ]
+    },
+    {
+      "id": "CAND-Q-015",
+      "title": "When will the Hazel network rule book exist?",
+      "question": "The rule book governs admission terms, deficiency remediation and ongoing monitoring, and several decisions in this session depend on it. The work stream slipped and was paused. When will it exist?",
+      "evidence": [
+        {
+          "location": "t:54:54",
+          "excerpt": "Shawn, how far along are we on building a network rule book?"
+        },
+        {
+          "location": "t:54:54",
+          "excerpt": "No, yeah, I, we, that was the word stream that slipped."
+        }
+      ],
+      "owner": "unknown",
+      "due_date": "unknown",
+      "confidence": "medium",
+      "confidence_note": "The answer is garbled speech-to-text; what is clear is that the work stream slipped and was paused. Whether Jonathan or Shawn now owns it is not stated in the source.",
+      "routing": [
+        {
+          "repo": "hazel-kb",
+          "area": "network-rule-book"
+        }
+      ]
+    }
+  ],
+  "superseded_decisions": [],
+  "not_promoted": [
+    {
+      "topic": "Using the Databricks customer data lake product as the CRM behind prospecting",
+      "evidence": [
+        {
+          "location": "l:201-202",
+          "excerpt": "customer data lake or something like that, our hope is that they'll be able to spin that up. That is basically a modern CRM."
+        },
+        {
+          "location": "t:15:24",
+          "excerpt": "No, not in detail, but I know they're still also in the preview phase. I don't think it's completely launched out to GA yet. So maybe it's a good time for us to explore."
+        }
+      ],
+      "reason": "speculation_without_commitment",
+      "note": "Expressed as a hope about a product still in preview. Nobody committed to evaluating it and no date was named."
+    },
+    {
+      "topic": "Onboarding foreign banks and applying non-US regulatory frameworks",
+      "evidence": [
+        {
+          "location": "l:258-259",
+          "excerpt": "However, I have had quite a few foreign banks ask about us potentially bringing them into the network."
+        },
+        {
+          "location": "l:264",
+          "excerpt": "Interesting in theory, yes."
+        }
+      ],
+      "reason": "speculation_without_commitment",
+      "note": "Raised as inbound interest and left at \"interesting in theory\". The scope decision in the same passage is CAND-DEC-002."
+    },
+    {
+      "topic": "A marketplace of optional partner integrations selected during onboarding",
+      "evidence": [
+        {
+          "location": "l:1338-1339",
+          "excerpt": "So that's kind of the marketplace idea down the road where they go, yes, I want to be a part of these things."
+        }
+      ],
+      "reason": "speculation_without_commitment",
+      "note": "Explicitly placed \"down the road\" and \"doesn't have to be their day one\"."
+    },
+    {
+      "topic": "An agent that converts an inbound RFI into an RFP response",
+      "evidence": [
+        {
+          "location": "l:687-688",
+          "excerpt": "And so now we would just need a future agent to say, anytime you submit an RFI, the agent just takes the RFI and then spits out an RFP based on our information."
+        }
+      ],
+      "reason": "speculation_without_commitment",
+      "note": "The exclusion of RFPs from onboarding is proposed as CAND-DEC-012; the agent itself was named as a future possibility only."
+    },
+    {
+      "topic": "Penalties or fines before cutting off a bank that violates the rule book",
+      "evidence": [
+        {
+          "location": "t:1:01:44",
+          "excerpt": "Yeah, there may be penalties, there may be fines."
+        },
+        {
+          "location": "t:1:02:10",
+          "excerpt": "Yeah, we'll define all that in the rowbook, which..."
+        }
+      ],
+      "reason": "explicitly_parked",
+      "note": "Marie Alonzo asked how many days before cut-off; the answer deferred the whole question to the rule book, which does not yet exist."
+    },
+    {
+      "topic": "Provisioning SharePoint for Hazel member banks alongside the ticket platform",
+      "evidence": [
+        {
+          "location": "t:2:23:40",
+          "excerpt": "Well, we may not need the SharePoint. for Hazel Banks if everything's living in Databricks."
+        }
+      ],
+      "reason": "no_agreement_reached",
+      "note": "Raised as an existing embedded-banking pattern, then immediately questioned and never resolved either way."
+    },
+    {
+      "topic": "Three compliance service models (Hazel does it, bank uses Sardine natively, bank brings its own provider)",
+      "evidence": [
+        {
+          "location": "t:2:22:30",
+          "excerpt": "I always kind of thought there was maybe 3 models, maybe we just haven't talked about it"
+        }
+      ],
+      "reason": "speculation_without_commitment",
+      "note": "Offered as one person's mental model, acknowledged as not previously discussed. Only the basic tier was decided (CAND-DEC-022)."
+    },
+    {
+      "topic": "Reusing the Hazel onboarding flow for embedded banking and fintech program onboarding",
+      "evidence": [
+        {
+          "location": "t:1:59:44",
+          "excerpt": "You may end up wanting to use this for fintech prospects too. I don't know. I mean, in the back of my mind, that's the idea is that what we're doing here could be repurposed for embedded banking and onboarding fintech programs."
+        }
+      ],
+      "reason": "speculation_without_commitment",
+      "note": "Stated as an idea in the back of the speaker's mind, with an explicit \"I don't know\"."
+    },
+    {
+      "topic": "Whether the Infinant configuration workbook questions are asked of the member bank",
+      "evidence": [
+        {
+          "location": "l:1370-1373",
+          "excerpt": "I did kind of jump the gun a little bit on this, collecting the setup for the config workbook. In the beginning, we thought that was going to be questions we were going to need to ask the banks, but really, I think we know what we need to know."
+        },
+        {
+          "location": "t:1:49:57",
+          "excerpt": "So that's the only thing I would change on this, Aaron, on the collect setup and configuration workbook."
+        }
+      ],
+      "reason": "no_agreement_reached",
+      "note": "The speaker withdrew the step, then Diana Plata argued part of it back because product choices must be asked of the bank before accounts are opened. Left unresolved; see CAND-Q-010."
+    },
+    {
+      "topic": "A paid ad-free tier for the network",
+      "evidence": [
+        {
+          "location": "l:1344-1345",
+          "excerpt": "Are we going to offer an ad-free experience? The right price, yeah."
+        }
+      ],
+      "reason": "out_of_scope",
+      "note": "Banter closing the fintech-experience analogy. Not a product proposal."
+    },
+    {
+      "topic": "Whether all payment rails are included or the bank selects them during onboarding",
+      "evidence": [
+        {
+          "location": "t:1:25:29",
+          "excerpt": "So, Shawn, is the assumption that they sign up for Hazel, they're going to get all of our payment rails or all the payment rails are included with that?"
+        },
+        {
+          "location": "t:1:25:29",
+          "excerpt": "We would provide all options, but I think the bank would make the choice, be my assumptions or anything."
+        }
+      ],
+      "reason": "no_agreement_reached",
+      "note": "Answered with an explicit assumption rather than a call, and immediately diverted into limits and the configuration workbook. The underlying product list is CAND-Q-010."
+    },
+    {
+      "topic": "Separate internal and external journey maps, with a Teams agent notifying staff of stalled applicants",
+      "evidence": [
+        {
+          "location": "t:1:15:38",
+          "excerpt": "a state machine or a journey map which is internal versus a summarized journey map which is external. We don't tell everything."
+        },
+        {
+          "location": "t:1:15:38",
+          "excerpt": "So maybe that's where you've got your Teams app, Teams agent that sends a notification to that."
+        }
+      ],
+      "reason": "speculation_without_commitment",
+      "note": "Floated as \"maybe that's where\" while answering the servicing question (CAND-Q-014), which was itself left open. The internal view is proposed separately as CAND-DEC-029."
+    }
+  ],
+  "final_takeaways": [
+    "Nothing in this delta is authoritative. Every item is a candidate for librarian review.",
+    "30 candidate decisions, 15 open questions, 6 action items, 12 items deliberately not promoted.",
+    "The decision registry is empty, so no candidate could cite a supersedes_id. Nothing in this source reverses a recorded decision.",
+    "Almost every call in this source is spoken by the shared boardroom microphone, so owner is \"unknown\" on all but one candidate and confidence is capped at medium accordingly.",
+    "Six candidates are low confidence and need a close look: CAND-DEC-011, CAND-DEC-015, CAND-DEC-026, CAND-DEC-027, CAND-DEC-029, CAND-DEC-030.",
+    "Several MVP-critical inputs remain undefined: approval score thresholds, the network rule book, and Infinant API availability."
+  ],
+  "implementation_recommended": false,
+  "blocking_reasons": [
+    "All candidates require librarian approval before any record or ticket can be created.",
+    "CAND-Q-001 (approval score thresholds) and CAND-Q-015 (the network rule book does not yet exist) gate the decisioning and rule-book candidates.",
+    "This source is part 1 of the kick-off; the session broke for lunch mid-topic and continues in a further transcript."
+  ]
+}
