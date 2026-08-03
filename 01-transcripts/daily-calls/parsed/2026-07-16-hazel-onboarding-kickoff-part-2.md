@@ -12,6 +12,7 @@ tags:
   - "requirements"
 confidentiality: "client-confidential"
 source_file: "../raw/2026-07-16-hazel-onboarding-kickoff-part-2.pdf"
+content_sha256: "c07a9bb7fd7a65f9399765e448b8f9389439a105b9b6274e89ec514ac91ce78d"
 ---
 
 # Hazel Onboarding Kick-Off — Part 2
@@ -53,9 +54,6 @@ Intra ID, but that this Intra Infrastructure is Hazel specific, correct? This is
 specific database, this is Hazel specific Intra ID. Now, think about member banks over
 here, right?
 So these are the member banks.
-
----
-
 This is member bank one, there is another one, but in addition to that, we also have
 Vantage, correct? Yes, so there is a Vantage as a member bank. I mean, it doesn't
 care, right? So now, hey, this...
@@ -94,9 +92,6 @@ we started building the app, and then we started using Joel to react to it. Hey,
 do you want in this screen?
 What do you want in that?
 And we, we, we, the spec was earlier, we we did it in an interactive way. Maybe we'll
-
----
-
 now write us open spec. Are you guys familiar with open spec dot open spec right
 now? Open and open spec is a new standard wherein you.
 You write everything in English, you feed it to a copilot or you feed it to a cloud, and
@@ -135,9 +130,6 @@ That's the immediate one ask of us of you, and then basically coding assistant s
 And then third is access to.
 Access to the databricks is going on, right? That those are the three.
 things that are like a prerequisite for not prerequisite weekends. So this is 1 track. I
-
----
-
 would call it as infra.
 Infrastructure and maybe Chris stuff can get started now as well. So this is the
 infrastructure. The second part is.
@@ -176,9 +168,6 @@ it's like what, 5 steps, but those five steps has internally, right, like anothe
 dozen steps in it. And those half a dozen steps are crisscrossing, let's say one team
 versus another team. It's not like that one team is going to be the sole.
 Stakeholder, but even if you say, hey, steps one through 4.
-
----
-
 These are the three teams, so, so, so, so who is the general contractor and who is the
 vertical? I mean, that is like such a big problem, yeah, right? So, so we don't want to
 then...
@@ -213,9 +202,6 @@ just to get that moving forward. Cover this is number one, next is interlace.
 I don't think Vanta is that important for us. That's what we are changing. And then
 third is...
 Ileana, I think, yes.
-
----
-
 Yeah, and um, well, you know, with the internet internet platform, we're trying to
 think what is ready for them.
 To integrate with their, I mean, even if we, I mean, here's the thing, right? We are not
@@ -249,9 +235,6 @@ the recording of this call, or we can send you all the recording. Give us the re
 sir. Yeah, it's recording and you'll have a transcript as well. I have my notes as well, so
 we'll mix multiple things. Ileana, do you mind to send out the recording to...
 Prashant and Chatnu after this.
-
----
-
 Ileana Martell 17:26
 Yeah, that's fine. I can do that.
 FortWorth-MuseumPlace-Boardroom 17:27
@@ -283,9 +266,6 @@ Yeah, so green attacks. Well, how do we do we have any technology to figure out 
 what traffic is coming to us? Yeah, so we got all of that and so road meter just
 reconfigure that for for the new tenant and and domains.
 So, there is infrastructure work stream, there is a journey work stream, and then there
-
----
-
 is an integration work stream. That's how I see, yeah, since we have, yeah.
 That was.
 Organizing construct perspective.
@@ -321,9 +301,6 @@ That's right, yeah, and it has the concept of, I think, boards, right? So we can
 three separate boards, and yeah, it has it has tickets, it has all sorts, yeah, different
 tracking is also, so, so I already allow us to access GitHub, well, it's actually, yeah,
 yeah, that's just certain teams.
-
----
-
 Ohh.
 Well, luckily, this is all outside of. That's right. So maybe we're not involved in any of
 this. I like it. Ignore the very fast, great things. Yes.
@@ -359,9 +336,6 @@ how you configure apps against LinkBase. There are skills for Databricks for you
 do these things, get these things deployed. The whole idea is everything, the whole
 stack is sitting on top of Databricks, like, you know, the database side of the
 compute, deployment, etc.
-
----
-
 Anything else that we should have talked that we haven't talked?
 No, I think you know with the idea of doing the standing meeting, so that you know
 we we get some some traction, I think is good. Most of the teams that you would
@@ -397,9 +371,6 @@ well how do you do this weightage calculation? So that kind of discovery process
 what we are trying to stand up.
 That clarified the medallion layer. It clarified the assumptions that we had in our area.
 It started making progress fast. All this time, I thought you had by coded yourself the
-
----
-
 Rafa. I did, and then we they realized how broken it was when they.
 We can tell you that.
 It's awesome. This is why we can go so fast. Yeah.
@@ -435,9 +406,6 @@ person team already set up, right?
 So that team is already being wrapped up. Today is probably the first day of that
 team from an official perspective, which is why we were talking about getting them
 the access and all that. Like what we did for ACE, like what we did for Rafa, once we
-
----
-
 understand what needs to be done at a functional level.
 Once we understand they are the business objectives more towards building a point
 deck version right away at the first go, or is there an incremental approach to
@@ -473,9 +441,6 @@ engineers. They start working and, obviously, I know Sean or Sean both basically
 adjust that basically on how much they really do. So, I'm not too worried about that. I
 think the key thing is, you know, once we get a good understanding of what we want
 to build,
-
----
-
 We would like to set some, like, here's some clear goals and political things you want
 to shoot for. Yeah.
 I would think kind of phase one, like your depth diagramming out here too, is also
@@ -511,9 +476,6 @@ well, and that's what I'm saying. I don't think it has to say in its current for
 obviously, the...
 UI and stuff that you build is perfect, right? But we expanded after we guys handed it
 over to you guys. Yeah, well, like why not just take that and start expanding this into
-
----
-
 the larger portal, right? So you can think about those things. Okay, I'm sorry. So, but I
 haven't seen the latest step. No, we haven't changed it. Yeah, no, we haven't changed
 it. Y'all don't know.
@@ -549,9 +511,6 @@ what you are saying is like, hey, why don't you start on journey to and not wait
 the Hazel databricks piece of it, right? That's what is is the you take what you have
 now, start going on that, yeah, and then you can port that into this.
 Once it's done, and so you've got the UVPR piece already built, which is 1 menu item
-
----
-
 or stage or whatever, yeah, and then you just keep from there into the new feature
 functionality for onboarding, and for clarity, the are they going to create a?
 or port Rafa into the Hazel tenant. So, yeah, they're not going to rely on the existing.
@@ -587,9 +546,6 @@ sense. I mean, I, I, it's all a means, but this is the first. I mean, to me, thi
 is Hazel Business Center or something, some functional name, which is...
 Larger than onboarding, no, it is, it is right, larger than onboarding, onboarding is, it's
 the operational port, yeah, it's just like ACE, it's gonna have all our workflows, that's
-
----
-
 staff, yeah, well, they're still on the names, so, okay, I, I like Hop and I like the bunny,
 and so, like, it's the Hazel, Hazel.
 Operations portal, but then that's fine, or if you keep the business information,
@@ -625,9 +581,6 @@ So, but so, so hop dot, I mean, hop in external dot hop dot Vantage, no Vantage,
 it will probably be hop.hazelnetwork.com, right, and then hop.vantage.com.
 For the for the inside view, yes, we could do that right for the inside, and then hop,
 yeah, so, so word goes in hop insider.
-
----
-
 versus what goes hop member versus hop associate.
 So, hub associate portal, hub member portal, member portal, right? And then
 member portal will have different kinds of personas. We do not just know, because
@@ -659,9 +612,6 @@ That's okay, I will take it from you.
 The last piece here of phase five is the end of day file, posting file. So we just need to
 work with the member bank to get some kind of SFTP process to send them, set up
 with Infinite so that we can send that file at the end of each step.
-
----
-
 Hmm, and so...
 Yeah, we haven't, we haven't had to do that yet, but that's the member bank to
 infinite, infinite, infinite, yeah, and Diana is not through the portal, right? It's a, that's
@@ -695,9 +645,6 @@ And then there's some kind of ongoing oversight, which I, yeah, I don't really k
 I would be there. So what would be like a setup? How do you test a sample
 transaction once everything gets done?
 in production. So for a member bank, who I went through this entire eight-step
-
----
-
 workflow with in step three of maybe four or five, there is a two-week custom activity
 on interlaced side.
 No.
@@ -731,9 +678,6 @@ and how much detail as in? I'm sorry, I'm sorry, so, so, so, so in has a same.
 back end, which is our data bricks, or they have their own? No, what we're setting up
 is the API to stream the transaction, the data out of Interlace into our databricks.
 So, from infinite, we will have a streams coming into, and so then you, you, so on
-
----
-
 whoever's building the other applications, you know, the widgets, whatever.
 So, that's the design of right now, or that's so development work right now. Has to
 be DBD. Yeah, well, see, that's what I wasn't sure, because you can see all all the you
@@ -766,9 +710,6 @@ probably so that on the chain analysis and...
 And the T.R.N. T.R.N. right, so those two vendors are going to give you wallet level
 observability keys, yes, wallet level fraud and that kind of stuff, right?
 So do we care to bring that data into database at some point, if not now?
-
----
-
 Diana Plata 55:34
 So...
 So Jay, quick, and I'm sorry to interrupt, but when you're talking about data, what
@@ -797,9 +738,6 @@ that.
 FortWorth-MuseumPlace-Boardroom 56:52
 Is.
 Diana Plata 57:11
-
----
-
 But once we drill down into fraud cases and things like that, I mean, I would want to
 make sure that we have a list of the type of data that we would want to receive and
 make sure that they're able to provide.
@@ -828,9 +766,6 @@ and define on the day one, we need this data coming out from the platform.
 We all can conclude, is that right, yes or no? And if we conclude, yes, we want to
 present it to the customer, and then we can go back to them saying, like, we need
 this from you, let's plan and design. That's right. I mean, at the end of the day, Diana,
-
----
-
 what my mental model, and I think the mental model that Shanti is talking about as
 well, Long Jay.
 Is, as a network owner, I need to know that interlace daily activity of side core to
@@ -861,9 +796,6 @@ visibility that the Hazel network wants for MVP one? Yeah.
 For a basic implementation, what are the risks that we have to be able to be ready to
 handle based on 10 banks as our initial scope of?
 GTM.
-
----
-
 Right, and yeah, I, I, I don't know what that would look like, but I think we'll have to,
 really, day one is all onboarding, so...
 Diana Plata 1:00:53

@@ -12,6 +12,7 @@ tags:
   - "requirements"
 confidentiality: "client-confidential"
 source_file: "../raw/2026-07-16-hazel-onboarding-kickoff-part-1.pdf"
+content_sha256: "b13cf4795088ca3a945a27d46a203a373de6f7b5a4ac52ecd2bccf646cf4cdd1"
 ---
 
 # Hazel Onboarding Kick-Off — Part 1
@@ -51,9 +52,6 @@ moving forward and get the blockchain related technical configuration as well to
 part of the onboarding. Yeah, there's no, there's no blockchain, but it would, no, it's
 really just interacting with something like Infinite to actually set up all their accounts,
 set up their configurations.
-
----
-
 You know, get them, you know, live effectively. And when we say live, we're talking,
 we have a model that we call basic. And basic is literally just opening an account for
 these member banks. That's really kind of the initial goal. The other stuff is way more
@@ -89,9 +87,6 @@ everybody, you know, first principle thinking, if we don't think we need this, o
 process seems odd or redundant or relying on something manual when we can
 automate it, let's think about that. You know, so let's reduce these things down if we
 can, you know, that that would be better.
-
----
-
 than trying to recreate what we've got today, just because today is what we can do
 today. But let's try to think about what should we be doing tomorrow. And one other
 piece that I think is important, because I've seen this in other third-party platforms, is
@@ -127,9 +122,6 @@ COO, and the other one was a digital banking lead.
 But then we have who has the authority to actually open an account for that. Right.
 And there may be questions that they want to defer to somebody else on their team
 to answer. So I see, you know, today in CoverBase, which we use for third-party risk
-
----
-
 management, it
 fires up a portal, and I'm not suggesting this is the right way to do it, but they fire up
 a portal that is a unique URL with a token attached to it, and anybody who has that
@@ -159,9 +151,6 @@ FortWorth-MuseumPlace-Boardroom 9:26
 Yeah.
 Yeah, you want to go ahead and just kind of walk through the process now, Sean?
 Yeah, yeah. I think let's at least show the team and everybody what the current idea
-
----
-
 for the onboarding is. I think that will inform us all on how we potentially think about
 kind of next steps.
 Let me do just a brief overview, just show you one slide, and then we'll actually kind
@@ -197,9 +186,6 @@ not advanced or enterprise or...
 One.
 Dedicated.
 Play.
-
----
-
 I don't know if this matters, but what timing do we think is, because the NDA alone
 makes legal team, that's probably weak, right? And due diligence plus reverse due
 diligence is.
@@ -235,9 +221,6 @@ Marketing campaigns and, you know, tracking on an individual level of.
 So that I would say is going to be the CRM. Let's just assume that that CRM is going
 to give us the data we need. And let's just understand what the data inputs are from
 that. Because my hope would be is that Databricks employs that. They really want
-
----
-
 that live.
 Yeah, don't want to build it, but yeah.
 Now, there's probably some...
@@ -271,9 +254,6 @@ But then just figure it out. Yeah. I've got a quick question on that front. Does
 include data only for financial, for banks, or does it also cover credit unions? Today,
 just banks. So yeah. We may have to expand it or do something later on.
 Because the scope of Hazel is not just banks, it's also credit unions. Yeah, it's a good
-
----
-
 question.
 Breaking in data on.
 And I would, you think so, have something.
@@ -309,9 +289,6 @@ are the key players, what is the risk of that bank? And we do it through our own
 know, it says camels, it's not, they're not real scores. There are a version of Campos.
 And then we come up with a final score that two up top in this particular case.
 says, you know, this bank is satisfactory based on our metrics that we've calculated
-
----
-
 off their own public data. So, you know, obviously we would probably just embed
 this somewhere in that portal and then tie some of the data sets back to the
 onboarding workflow phase.
@@ -347,9 +324,6 @@ Venmo or Starbucks or whatever it might be, go click a few buttons, walk through
 the process, you're onboarded.
 It's mostly just notified.
 Our guesstimate, our...
-
----
-
 Just so that I can understand, what is our guesstimate of banks that we would turn
 away?
 Is it 1% or is it going to be? I mean any bank that's undercapitalized for sure.
@@ -383,9 +357,6 @@ Whereas right now, it's just it's a manual, a couple of manual steps.
 And so phase two is going to be more of the due diligence, and that's where we'll
 answer more of your question, Marie. So we get an NDA, and then we're using
 CoverBase right now. That's our third-party risk management solution. And we will
-
----
-
 set up a user in there, and we can walk through all if you want.
 I've been kind of doing some testing here. Basically, this is an online form that we
 send to someone. I think the question, we have around under, I think it's under 30
@@ -418,9 +389,6 @@ Marie Alonzo 27:26
 I might be jumping ahead, but on the watch list, is that tied to a number, just when
 we think about onboarding, if that's one of the first things that we would capture,
 maybe not having one of these banks or credit unions have to go through the whole
-
----
-
 process if it's someone that we're going to decline right off the bat. So
 Is that watch list tied to like an insurance verification number for the bank?
 FortWorth-MuseumPlace-Boardroom 27:46
@@ -446,9 +414,6 @@ Marie Alonzo 28:38
 And is there some kind of disclosure required if we turn away a bank? Because today,
 a consumer, right, if we turn them away, we have to give them.
 FortWorth-MuseumPlace-Boardroom 28:44
-
----
-
 Ohh.
 No.
 Marie Alonzo 28:48
@@ -482,9 +447,6 @@ We're launching Coverbase, and Coverbase is asking for the documents and
 providing the answering the questionnaire that he just showed on the screen, but we
 can pass that information from an application portal that y'all build and say, "Hey,
 thanks, you know, here."
-
----
-
 You signed the MDA. We need 3 documents to get started. Please upload these
 three documents. Or...
 Or an agent, AI agent on Vantage side could running databricks could get notified
@@ -519,9 +481,6 @@ portal from, let's say, an internal employee side as just being a quick link int
 Coverbase, right? Like, yeah, it's front end for my Coverbase. Yeah.
 Call Kishi.
 Diana Plata 33:36
-
----
-
 But to his point, all this data or all these documents that are being collected are
 being initially what stored in cover base.
 FortWorth-MuseumPlace-Boardroom 33:44
@@ -550,9 +509,6 @@ Databricks and...
 FortWorth-MuseumPlace-Boardroom 35:08
 Yeah, we need to do the assessment and then spit out the results of that assessment,
 and then we're going to send that back over to...
-
----
-
 Diana Plata 35:08
 Okay, got it.
 FortWorth-MuseumPlace-Boardroom 35:17
@@ -581,9 +537,6 @@ Marie Alonzo 36:22
 Perfect.
 FortWorth-MuseumPlace-Boardroom 36:23
 So if you have the external portal day one and the experience becomes self-service
-
----
-
 after the NDA is signed, ops people don't get involved in catching the documents
 and pushing it to cover base. So now beyond the people who need to monitor.
 That cover these from a perspective of pay house that is assessment showing up.
@@ -613,9 +566,6 @@ requesting, the Rafa report and the Wolfsburg, that documentation gives us insig
 into who has authority to request an account to go ahead and be open on behalf of
 the member banks?
 FortWorth-MuseumPlace-Boardroom 38:03
-
----
-
 No, I think, well, I mean, Aaron will go through the whole process that y'all have
 talked through, but the assumption would be this is just gathering information. This
 isn't opening the account yet. So we will have to understand who are authorized
@@ -651,9 +601,6 @@ hey...
 Would you like to receive our due diligence package? If so, you know, and so there,
 this I don't know, if Vendor has an API that we can automatically go in and have that
 request and send that information out. For any pay, we can just have a link.
-
----
-
 Yeah, for MVP, we could have a link. You know, maybe, because I don't know how
 this will sort out in the future if it's a separate entity, right? We may have our own
 SOC report and own data, then we have kind of third, fourth party data that we're
@@ -685,9 +632,6 @@ information, or I have access to this information." You put that in, and maybe M
 in the link, but maybe future is just embed the same portal like Jay did right here,
 and then they've got it right there in front of them that they can.
 Just click download all and send it to someone internally as well. Quick questions on
-
----
-
 this. One is, how often does this change? In theory, it's supposed to change on a
 quarterly basis for the documents, but in Vendor, there's additional information
 shown there, which is real time.
@@ -723,9 +667,6 @@ And our goal is if we're asked for something by one bank.
 We're gonna put it in the the the port the bank of portal, so that it's available to
 everybody, because we we don't wanna have these ones, no, ones.
 The what concerns me is 2 things: one, they brought up the hey, go fill out this form,
-
----
-
 right? So maybe that's a theorem thing where there's an agent that takes this
 information and...
 Does the bespoke Excel or? In theory, Vanta is supposed to have that option. So
@@ -761,9 +702,6 @@ probably want to build. We already basically built the RP. We just.
 Yeah, I mean, I feel like we've done a big lift. We've done a big lift, but it's still a lift.
 Yeah. And so now we would just need a future agent to say, anytime you submit an
 RFI, the agent just takes the RFI and then spits out an RFP based on our information.
-
----
-
 But again, I think that could be a side process, not part of onboarding right now.
 Yeah, and because that stuff wouldn't touch any of the Databricks stuff, necessarily,
 just a big slowdown and something that we gotta, yeah, yeah, no, but I think, yeah.
@@ -799,9 +737,6 @@ Um...
 See that, actually.
 See, we're changing as we go. So the cover base will give us a score and you want,
 what is that, a one to five or something?
-
----
-
 It's a percentage. A percentage of risk. So it'll come up with, you know, this is 60%
 risk. I don't know. It doesn't score. So we need a...
 Joel Olivares 50:56
@@ -830,9 +765,6 @@ Yeah, the program.
 FortWorth-MuseumPlace-Boardroom 52:24
 Or is that does that just fall into like, hey, y'all, you know, that's between you and
 your regulator.
-
----
-
 Joel Olivares 52:31
 Right.
 FortWorth-MuseumPlace-Boardroom 52:31
@@ -862,9 +794,6 @@ FortWorth-MuseumPlace-Boardroom 53:53
 You did it so fast. It's got to be easy. Well, I mean, we, you know, obviously, as we get
 to building the solutions and we start walking through these, I think that's when we
 kind of dive into some of these like underlying details of things we may have to
-
----
-
 adjust or pivot on.
 So...
 Joel Olivares 54:09
@@ -896,9 +825,6 @@ for. The rule book will set the terms and which will effectively say if you're n
 capitalized highly. Exactly right. You're not going to be able to.
 That's where, you know, we can run that assessment, how well are they aligned to the
 rule book, and then come back and say, all right, to be accepted into Hazel, you'll
-
----
-
 need to address these five, 10 deficiencies in your program.
 Yeah, that's something we can definitely explain to them, right? Right. Why are you
 rejecting? Well, the rule book says X, Y, and Z. These is where we feel like you have a
@@ -930,9 +856,6 @@ party.
 FortWorth-MuseumPlace-Boardroom 57:57
 Yeah, so thank you. So then, is that, so then what it feels to me that the rule book is
 already there in cover base, right? So that, that for us in cover base, it's just a
-
----
-
 different set of controls that it's looking against or integrating against, so.
 We may do a risk assessment, and that risk assessment is really checking against that
 rule book, and then we can spit back out and say, hey, these are 10 things that you
@@ -965,9 +888,6 @@ based, but then also transaction-based, so that rule book.
 Controls, we'll just call them controls, would also have to live outside of cover base
 because you're going to have to have this checking against data bricks and the
 transactions that are flowing through exactly what Kash just talked about. So
-
----
-
 Joel Olivares 1:00:34
 Right.
 FortWorth-MuseumPlace-Boardroom 1:00:35
@@ -995,9 +915,6 @@ Yeah, I forgot to talk about stuff like that. Yeah, there may be penalties, ther
 fines.
 Marie Alonzo 1:01:50
 Yeah.
-
----
-
 FortWorth-MuseumPlace-Boardroom 1:01:56
 before we cut them off.
 Marie Alonzo 1:01:59
@@ -1028,9 +945,6 @@ Um, and we can talk, you know, on a risk level, if if that includes time.
 So on the next stage, we just need to define kind of what our decision criteria is. We
 have a few things listed here to answer your earlier question, Marie, on what would
 trigger deeper reviews by our subject matter experts. So it could be one of those
-
----
-
 Rafa scores we're watching.
 We noted low liquidity, but we don't have a definition of what low liquidity would be.
 But a prohibited business type in Wallaceburg, a consent enforcement action found,
@@ -1062,9 +976,6 @@ ongoing monitoring from the due diligence perspective, not so much the.
 The other side.
 FortWorth-MuseumPlace-Boardroom 1:06:06
 Joe, did I hear you right that you said that we won't?
-
----
-
 that it's not going to allow or it asks if you've merged or you're in Tenovo Bank and
 you got to be at least three years. I mean.
 Some, some of these.
@@ -1094,9 +1005,6 @@ exactly, but kind of walk through many things that we're looking at. Aaron, can 
 pause for a second? Yeah. So what? Let me share something.
 When we do.
 based portals, depending on how they're configured, there is the ability to AI auto
-
----
-
 fill.
 The information that's being requested, the questionnaire with with the documents,
 so...
@@ -1132,9 +1040,6 @@ Cost implications of that a little bit, but you are not onboarding. We're not ta
 about hundreds of thousands. I, I don't see much issue. I mean, cover bases, we can
 upload it from our side, they can do AI on their side, or we can, yeah, and then you
 bring it back, or we can, we can actually extract out.
-
----
-
 bulk of the information. So instead of just saying, hey, add this bank, here's the meta
 information, and here are the documents, you do the magic, or we simply do the
 magic on this side.
@@ -1166,9 +1071,6 @@ FortWorth-MuseumPlace-Boardroom 1:12:30
 Adam, these are the only four phases we have it, or we have few more? Dom, he's
 got more. This is two of two of four, we're on page two of four.
 I feel like we've gone through most of the heavy.
-
----
-
 Have your stuff.
 But on approvals, what do we need, Joel? Like a...
 just a report from this portal of here are the banks that were on boarded this week
@@ -1199,9 +1101,6 @@ for two weeks, so I'm going to reach out. So that kind of dashboard view, yeah,
 would be.
 Joel Olivares 1:14:09
 Right.
-
----
-
 And that will happen, Aaron. I mean, I know that will happen. So I think so far, the
 one thing that I think we need to hone in on is what that score is going to be before I
 can say, well, this was rejected because it was a two or this was, and keep in mind
@@ -1232,9 +1131,6 @@ So, throughout this process, let's assume this is automated, but there would be
 humans in the group, and the human in the group may have an SLA which, so this is
 just at a surface level, it feels like this is not like a shopping cart kind of a thing, right?
 You upload something and voila, you have it, it's not, right? It's not like setting up a
-
----
-
 recipient, a recipient in a cell.
 right when you start transacting. Exactly. So is there any servicing expectation? Is
 there a call center, calls that will come more or less? Do we need to send some
@@ -1268,9 +1164,6 @@ yeah, copies of everything, ohh, yeah, yeah, that is true, but right now, yeah, 
 yeah.
 And so your question, Diana, you're like, would there be any scenarios where a bank
 may not meet the criteria and their approval is still granted? I think that there would
-
----
-
 be, but we wouldn't allow them to transact until those exceptions are cleared and
 accepted.
 So again, it goes back to the, I think it's going to be less than 1% that we're rejecting.
@@ -1299,9 +1192,6 @@ Joel Olivares 1:19:50
 Okay, got it.
 FortWorth-MuseumPlace-Boardroom 1:20:03
 may not exactly reflect what Vantage is doing today. So, you know, let's try to keep
-
----
-
 that in mind too. Vantage will, you know, effectively, you know, potentially just
 become a, you know, a sponsor bank to Hazel. And so you'll be doing your due
 diligence will only be on Hazel itself. Hazel will have its own governance.
@@ -1337,9 +1227,6 @@ finally there. Yeah. And I've got a few things here listed and we're, again, we'
 kind of refining the setup. But yeah, which users will be accessing it? We have a basic
 list of operating accounts that each bank will give. They may want to add to it.
 do that. We only have a few rails that are live. We'll be adding that. So in the future,
-
----
-
 they might be able to pick and choose on.
 And then Participate is a part of with ours that can automate payments for people.
 So they have a network of about 600 banks that they already do this with. And so
@@ -1369,9 +1256,6 @@ No.
 Diana Plata 1:25:05
 And then Hazel.
 FortWorth-MuseumPlace-Boardroom 1:25:05
-
----
-
 Okay, yeah, it's just you're saying I have one new integration. That one integration is
 participate and we can pre-configure that integration for them. Basically, participate
 refers the bank to us. We set them up the exact same. The only difference is
@@ -1403,9 +1287,6 @@ Yeah, the program, as an example, is something that Bank Vantage or Hazel would
 set and say, this bank is this risk profile, this is the limit that we set for their initial
 onboarding. And then the bank would set their own limits within their own products
 and so forth.
-
----
-
 Diana Plata 1:26:46
 Up.
 Question real quickly, Shawn, on this, because we said Hazel refers some banks to us,
@@ -1437,9 +1318,6 @@ found them and then there, like, you also participate. Right. And then there cou
 other networks or groups that we integrate. So if, so, so, so there is a chance that you
 could have a bank coming to you.
 Who is also a participant member, right? A participant has not yet referred them,
-
----
-
 exactly right. Yeah, and it doesn't make a difference to us. I mean, we're not, yeah,
 the participant doesn't get a, you know, a referral fee, so to speak. It's just we want to
 be able to integrate, and then they can settle their payments.
@@ -1475,9 +1353,6 @@ And do you have any of these other like TV partners or providers and you check t
 box? All right. I want HBO Go and I want Netflix. I'm just going to click those. Yep, I
 participate. Okay, I want that. So that's kind of the marketplace idea down the road
 where they go, yes, I want to be a part of these things.
-
----
-
 or integrate or turn these things on. Again, it doesn't have to be their day one. I think
 it's just something we add as like optionality in the future for how that flow works.
 Yeah, we're trying to make a very fintech kind of like experience, even though banks
@@ -1513,9 +1388,6 @@ the setup for the config workbook. In the beginning, we thought that was going t
 be questions we were going to need to ask the banks, but really, I think we know
 what we need to know. We just need to send it to Infinite at this stage. So the other
 two pieces are similar, but it's basically
-
----
-
 We need signatures. So account opening package is similar to what we've done with
 correspondent banking partners in the past. We've tried to trim that down so we
 have kind of five PDFs that we need signatures from. Some of them are...
@@ -1546,9 +1418,6 @@ FortWorth-MuseumPlace-Boardroom 1:49:36
 It's very much like opening a business account, you know.
 Diana Plata 1:49:57
 I don't know, just an operating account for business, things like that. We want to
-
----
-
 avoid opening a lot of accounts that they have to manage on the back end, that
 those operating accounts would then tie into consumer products and things like that
 that are not necessarily needed at this stage. So we would have to identify some type
@@ -1577,9 +1446,6 @@ And then as a member bank, because those accounts are open, they have to go out
 there and disclose that and manage that and things like that, even though there's
 not transactional. So we want to ensure that we don't give those member banks
 additional work.
-
----
-
 Marie Alonzo 1:51:28
 Right.
 FortWorth-MuseumPlace-Boardroom 1:51:33
@@ -1606,9 +1472,6 @@ Yeah, the only thing that we need to figure out though, Jay, and confirm with In
 is that member bank, once they have access to the console and things like that,
 they're going to have the ability on their end to open additional operating accounts
 if needed, which is fine.
-
----
-
 The configuration that Infinite is doing in the back end, would all those accounts that
 they're opening tie back to that USD reserve account, or do they need the additional
 operating accounts that they're setting up today to go ahead and tie with those? So
@@ -1638,9 +1501,6 @@ Diana Plata 1:54:12
 Yeah, so it would no longer be BPM, Marie. It would have to be on infinite.
 FortWorth-MuseumPlace-Boardroom 1:54:13
 That, that would be somebody.
-
----
-
 Marie Alonzo 1:54:14
 That.
 Right, right, right. So, but you know, we, I guess you talked about Jay, you said
@@ -1669,9 +1529,6 @@ have them available to send them?
 to that member bank to sign and return, or is our ask not to use prelim and have that
 documentation fillable and have to fill that out and send it to the member bank via
 DocuSign.
-
----
-
 FortWorth-MuseumPlace-Boardroom 1:55:52
 See that.
 Marie Alonzo 1:55:53
@@ -1702,9 +1559,6 @@ today for the business side, and because there's a lot of branching logic, you s
 have to do...
 beneficial ownership checks and all these other little things. As far as opening that
 account, it's already presenting the documentation, it's already doing a lot of these
-
----
-
 things. It's got multi-stage capabilities where it says, hey, you know, Shantanu is one
 of the signers, Jay is one of the signers, I need to send it to him and send it to him
 and get it signed. So there's a lot of those little nuanced details that I think
@@ -1731,9 +1585,6 @@ FortWorth-MuseumPlace-Boardroom 1:58:35
 Bing.
 Marie Alonzo 1:58:37
 Okay.
-
----
-
 FortWorth-MuseumPlace-Boardroom 1:58:38
 I got it.
 Marie Alonzo 1:58:47
@@ -1763,9 +1614,6 @@ in the back of my mind, that's the idea is that what we're doing here could be
 repurposed for embedded banking and onboarding fintech programs. So they can,
 we can.
 You know, onboard them quickly.
-
----
-
 But then is interlacing world even in that flow? Yes, it's the exact same thing. It's the
 same platform.
 So the step of creating a separate tenant and based on some additional instructions
@@ -1796,9 +1644,6 @@ The final package here, where we need signatures.
 Diana Plata 2:02:14
 Yeah, and in addition to that, Aaron, once we actually see the list of products, what
 type of documents we would need from that member bank for that specific product,
-
----
-
 right? It may be the same across the board for all, but we can go out there and
 define these are the products that are going to be available. And if a member bank is
 onboarding to this product, these are the documentations we would need from
@@ -1828,9 +1673,6 @@ And.
 FortWorth-MuseumPlace-Boardroom 2:03:40
 that in this application. But I do have that question of, you know, long term, should
 we look at eliminating that additional third party coming into this mix?
-
----
-
 Marie Alonzo 2:03:53
 Yeah.
 Diana Plata 2:03:54
@@ -1859,9 +1701,6 @@ our end?
 FortWorth-MuseumPlace-Boardroom 2:05:01
 Yes.
 No, no, we would we we have prelim or us, we either one can do it, set up the APIs to
-
----
-
 push that data into infinite.
 So, effectively, the...
 You are, after the approval is done, you are actually on 2 parallel tracks, right? It's not
@@ -1897,9 +1736,6 @@ which is a tenant creation. It seems like an engineering activity which is manua
 mean, it's done fast. It's done fast, but it doesn't have an API. Like Amazon API is
 where you say, for Kubernetes, we don't have that. But somebody manually will do it
 and the shell is created. The moment the shell is created, step 2 is not really account
-
----
-
 opening package. Step 2 is.
 Choose the account, choose the product types, right? And, in this case, the default
 will be you're gonna need an operational account and a USDA reserve account. Yeah,
@@ -1933,9 +1769,6 @@ data out of the onboarding and signers and all those kind of things. So we'll wa
 some of that data. So yeah, it's probably best to send it back to the Hazel app
 instead of, you know, and Hazel will be effectively the.
 The middleware or the proxy between all the different systems, yeah, it is, you know,
-
----
-
 where we can, and and and prelim supports that, you can send it to anywhere, they
 don't care, it's just, here's the data, here's the API call, and really, I'm just trying to
 brainstorm here, because we don't have the integration today between prelim and...
@@ -1967,9 +1800,6 @@ They decide to open.
 FortWorth-MuseumPlace-Boardroom 2:11:59
 Well, yeah, I mean, yeah, I think those are some of the things we're going to have to
 flesh out. I like the idea of let's just get them to bare minimums and then, and then,
-
----
-
 you know, maybe they add on future accounts and then, you know, change or, you
 know, modify accounts in the future. Those are going to have to be separate
 workflows, I think, you know, so. Yeah, but I hear what you're asking, Diana, because
@@ -1997,9 +1827,6 @@ Documents.
 FortWorth-MuseumPlace-Boardroom 2:13:02
 or have them sign account for additional accounts that they can self-provision. And
 are you talking about self-provisioning the like operating accounts, Diana? Yeah.
-
----
-
 Diana Plata 2:13:08
 Yeah.
 Yeah.
@@ -2029,9 +1856,6 @@ FortWorth-MuseumPlace-Boardroom 2:14:18
 Agreed, Diana. And so this is where I think we just need to make sure that the
 original agreements that they sign include whatever provisions that say you're
 allowed to open additional operating accounts, but they're going to have all the
-
----
-
 same beneficial ownership. They're going to be styled exactly like
 your original operating account.
 Yeah, well, and again, we probably won't solve it today. We probably should move on
@@ -2065,9 +1889,6 @@ I don't know how much input that requires from the banker.
 Off.
 If they're with participate, we have a little AI.
 Acknowledgement from at this level, too, so...
-
----
-
 These legal agreements are not negotiable.
 Not for basic, they're not negotiable. Yeah, not for basic.
 An account with us is operating.
@@ -2099,9 +1920,6 @@ So just FYI, today, it still requires a person to open up account in prelim. And
 workflow process, we may have a potential duplication of process. So a new
 workflow would have to be built out because today's workflow starts with asking for
 documents.
-
----
-
 So we would still need to build out a workflow for it just to be skinny down to open
 the account.
 FortWorth-MuseumPlace-Boardroom 2:18:45
@@ -2133,9 +1951,6 @@ I don't, is that where the sardine cases are worked? I don't, yeah, you're right
 sardine, but they don't have a contract with sardine, right?
 Diana Plata 2:20:42
 Third.
-
----
-
 FortWorth-MuseumPlace-Boardroom 2:20:46
 Well, they're not, yeah, the bank is not working cases we are.
 Third week, Paul.
@@ -2164,12 +1979,9 @@ When it be, when it be inside, just like a fintech, they go in and have their ow
 in Sardi, and they would, no, I, yeah, all of that, that's true, but...
 I think there may be another contract.
 Involved that with sardine.
-
----
-
 Pintax.
-ourselves.
 So with sardine, the way that we're doing it right now is we're using sardine for
+ourselves.
 So it's our backstop, our choice. Theoretically, we don't have to have Sardine installed
 for all of our fintechs. We're absorbing the cost of that today. And so, but we still
 require, so all of our other programs, all of our payment facilitators.
@@ -2198,9 +2010,6 @@ But...
 FortWorth-MuseumPlace-Boardroom 2:23:40
 that scenario. So if you do give them the option, they opt to use their own stuff. We
 stop.
-
----
-
 viewing those transactions.
 Yeah, yeah, it's not our customer, it's not our bank, we're not responsible for them,
 so, but it is our network.
@@ -2236,9 +2045,6 @@ SharePoint and a ticket platform, those are both kind of Microsoft stuff, so tha
 can open up tickets with us. Yeah, as in who interlace or the end users or the
 member banks can open up.
 Problem tickets with us saying, "Hey, you know, why did this transaction post, or, or if
-
----
-
 if we're doing those, so that's a service monitor capability, yeah, so, so that that'll use
 OAuth to to come in, they can create tickets, and then there's a...
 a web portal that we're doing for our embedded banking customers that we're able
@@ -2274,9 +2080,6 @@ Two banks correctly. Dashboards or data streams. They can consume them however
 they need to. We will have pre-configured dashboards and data sets and exports and
 things like that. But for the bigger banks, they're going to want that as a live feed
 directly into their systems. And so Databricks supports all of those capabilities, both.
-
----
-
 Batch streaming delivery, but I want to be able to capture as much of that
 information as possible, so that Hazel can deliver it, not infinite, not, yeah, whatever, I
 get it, I get it, but from an MVP perspective, I'm still struggling with the question that
@@ -2312,9 +2115,6 @@ We would need to talk about ticketing and so that the tickets are there within t
 application itself. They don't have to click out to a third party application. No, yeah,
 we don't want them to click out. I mean, and we would want all that service ticket
 data and customer, you know, issues, blah blah, sort as data in Databricks. That's
-
----
-
 going to be key to our CRM.
 How we track all that, but I think that, yeah.
 Vantage could choose to.
@@ -2350,9 +2150,6 @@ business names for both these internal and external apps, yeah, and then the fib
 Fiverr, what's the bad guy? No, the big guy, big, ohh, big work.
 Don't do we want that one. Well, and so yeah, I mean, you can refresh the slide if you
 need to, but yeah, obviously they're going to, the bank is going to be automatically
-
----
-
 provisioned into the Hazel app, so you can see the status of their, you know,
 onboarding and then probably tickets and other things would be the external side,
 internal side.
@@ -2388,9 +2185,6 @@ The Hazel operating team or the team that's running Hazel, it could be Diana, bu
 just assume it's just like any other business, it's a group that's operating and running
 in. They would be managing those tickets inside the application. The bank should
 have visibility into the tickets they've submitted and so forth. But again,
-
----
-
 We are focused on onboarding right now. So that would be, again, kind of future
 state. What else was this app going to support? Yes, it's, you can see your tickets.
 You now have ongoing, you know, support and convenience and those types of
