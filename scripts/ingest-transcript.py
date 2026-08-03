@@ -24,6 +24,10 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parent.parent
 TRANSCRIPTS_ROOT = REPO_ROOT / "01-transcripts"
 
+# Shared with validate.py and hash-source.py so all three agree on the digest.
+sys.path.insert(0, str(REPO_ROOT / ".ai" / "checks"))
+from content_hash import hash_text  # noqa: E402
+
 WORD_NS = "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}"
 
 # Link label used in the index for each original source type.
@@ -169,6 +173,11 @@ def build_document(
     The frontmatter is written literally rather than through a YAML serialiser
     so that quoting and indentation match the existing parsed files exactly.
     """
+    # Digest covers the BODY ONLY, so correcting a title or adding a tag
+    # never invalidates a decision record citing this transcript. Altering the
+    # transcript itself always does. See .ai/checks/content_hash.py.
+    content_sha256 = hash_text(body)
+
     lines = [
         "---",
         f'title: "{title}"',
@@ -182,6 +191,7 @@ def build_document(
         *[f'  - "{tag}"' for tag in tags],
         'confidentiality: "client-confidential"',
         f'source_file: "../raw/{source_name}"',
+        f'content_sha256: "{content_sha256}"',
         "---",
         "",
         f"# {title}",
@@ -407,6 +417,7 @@ def ingest(args: argparse.Namespace) -> int:
     if copy_raw:
         print(f"{action.replace('write', 'copy')} {_rel(raw_path)}  <- {source}")
     print(f"{action} {_rel(parsed_path)}  ({len(body.splitlines())} lines of transcript)")
+    print(f"  content_sha256: {hash_text(body)}")
     if updated_readme is not None:
         print(f"{action.replace('write', 'index')} {_rel(readme_path)}")
         print(f"  {row}")

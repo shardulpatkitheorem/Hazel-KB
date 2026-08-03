@@ -12,6 +12,7 @@ tags:
   - "project-status"
 confidentiality: "client-confidential"
 source_file: "../raw/2026-07-29-daily-hop-standup.txt"
+content_sha256: "1f877b0ee7ca800a7552063221f1dd6a20120098031996749ce0c1201b679874"
 ---
 
 # Daily HOP Standup

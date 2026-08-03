@@ -20,12 +20,14 @@ Usage:
 from __future__ import annotations
 
 import argparse
-import hashlib
 import json
 import re
 import sys
 from dataclasses import dataclass, field
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from content_hash import hash_body
 
 try:
     from jsonschema import Draft202012Validator
@@ -341,11 +343,12 @@ def validate_provenance(collected: dict[str, list[dict]], f: Findings) -> None:
     cache: dict[Path, str] = {}
 
     def digest(path: Path) -> str | None:
+        """Body-only digest — see .ai/checks/content_hash.py."""
         if path in cache:
             return cache[path]
         try:
-            h = hashlib.sha256(path.read_bytes()).hexdigest()
-        except OSError:
+            h = hash_body(path)
+        except (OSError, UnicodeDecodeError):
             return None
         cache[path] = h
         return h
@@ -377,7 +380,9 @@ def validate_provenance(collected: dict[str, list[dict]], f: Findings) -> None:
                     rel(path),
                     f"content_sha256 does not match {src_rel}",
                     f"recorded {claimed[:12]}…, actual {actual[:12]}… — the "
-                    f"source changed after this record was written",
+                    f"transcript body changed after this record was written. "
+                    f"Frontmatter edits do not affect the digest, so this is a "
+                    f"change to the transcript itself.",
                 )
 
 
