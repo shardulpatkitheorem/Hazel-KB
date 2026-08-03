@@ -1,2 +1,9 @@
 __pycache__/
 *.py[cod]
+
+# Skill replicas — authored in skills/, installed to ~/.claude/skills/
+.claude/skills/
+
+# Working artifacts from tooling runs
+KB-AUDIT.md
+SCHEMA-DUMP.md
