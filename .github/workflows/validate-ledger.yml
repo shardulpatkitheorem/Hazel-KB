@@ -1,0 +1,58 @@
+name: Validate ledger
+
+# Every artifact in the knowledge base must match its contract, resolve its
+# cross-references, and prove its provenance. This runs on every pull request
+# and every push to main, so a malformed record cannot land.
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: python -m pip install --quiet jsonschema
+
+      - name: Validate artifacts
+        run: python .ai/checks/validate.py
+
+      - name: Check the registries are current
+        run: python .ai/checks/build-registries.py --check
+
+      - name: Confirm no source transcript was modified
+        if: github.event_name == 'pull_request'
+        run: |
+          set -euo pipefail
+          git fetch --no-tags --depth=1 origin "${{ github.base_ref }}"
+
+          # Sources are immutable. Editing one invalidates the content_sha256
+          # of every record citing it, so a modification is always a mistake —
+          # even a well-intentioned one, like fixing a typo.
+          MODIFIED=$(git diff --name-only --diff-filter=M \
+                     "origin/${{ github.base_ref }}"...HEAD \
+                     -- '01-transcripts/**/raw/**' || true)
+
+          if [ -n "$MODIFIED" ]; then
+            echo "::error::A raw transcript was modified. Sources are immutable."
+            echo "$MODIFIED" | sed 's/^/  /'
+            echo ""
+            echo "If the source genuinely changed, ingest it under a new name"
+            echo "rather than editing the original."
+            exit 1
+          fi
+
+          echo "No raw transcript modified."

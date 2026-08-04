@@ -1,0 +1,247 @@
+name: Extract candidates from a new transcript
+
+# Runs when a raw transcript lands on main. Ingests it, extracts candidate
+# decisions and questions, and opens a pull request for the librarian to review.
+#
+# The extraction step is READ-ONLY over the repository — it can read and search
+# but cannot write. The only thing that reaches the repository is the pull
+# request this workflow opens, which a human must merge.
+#
+# Nothing here approves anything. Candidates are candidates until the librarian
+# runs /kb-approve.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '01-transcripts/**/raw/**'
+  workflow_dispatch:
+    inputs:
+      transcript:
+        description: 'Path to a raw transcript to process (re-runs an existing one)'
+        required: true
+        type: string
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  # One extraction at a time. Two concurrent runs would race on candidate ids
+  # and on the meetings/ directory.
+  group: extract-candidates
+  cancel-in-progress: false
+
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Identify the transcripts to process
+        id: find
+        run: |
+          set -euo pipefail
+
+          if [ -n "${{ inputs.transcript }}" ]; then
+            FILES="${{ inputs.transcript }}"
+          else
+            # Added or modified raw transcripts in this push.
+            FILES=$(git diff --name-only --diff-filter=AM HEAD~1 HEAD \
+                    | grep -E '^01-transcripts/.*/raw/' || true)
+          fi
+
+          if [ -z "$FILES" ]; then
+            echo "none=true" >> "$GITHUB_OUTPUT"
+            echo "No raw transcript in this change — nothing to do."
+            exit 0
+          fi
+
+          echo "none=false" >> "$GITHUB_OUTPUT"
+          {
+            echo 'files<<TRANSCRIPTS'
+            echo "$FILES"
+            echo 'TRANSCRIPTS'
+          } >> "$GITHUB_OUTPUT"
+
+          echo "Will process:"
+          echo "$FILES" | sed 's/^/  /'
+
+      - uses: actions/setup-python@v5
+        if: steps.find.outputs.none == 'false'
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        if: steps.find.outputs.none == 'false'
+        run: |
+          python -m pip install --quiet jsonschema pdfplumber
+          npm install -g @anthropic-ai/claude-code
+
+      - name: Ingest
+        if: steps.find.outputs.none == 'false'
+        id: ingest
+        run: |
+          set -euo pipefail
+          PARSED=""
+          while IFS= read -r raw; do
+            [ -z "$raw" ] && continue
+            echo "::group::Ingesting $raw"
+            python scripts/ingest-transcript.py "$raw" --force
+            echo "::endgroup::"
+
+            # The parsed path is derived from the raw path by convention.
+            base=$(basename "${raw%.*}")
+            dir=$(dirname "$(dirname "$raw")")
+            PARSED="${PARSED}${dir}/parsed/${base}.md"$'\n'
+          done <<< "${{ steps.find.outputs.files }}"
+
+          {
+            echo 'parsed<<PARSEDFILES'
+            printf '%s' "$PARSED"
+            echo 'PARSEDFILES'
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Extract candidates
+        if: steps.find.outputs.none == 'false'
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          set -euo pipefail
+
+          if [ -z "${ANTHROPIC_API_KEY:-}" ]; then
+            echo "::error::ANTHROPIC_API_KEY is not set. Add it under" \
+                 "Settings → Secrets and variables → Actions."
+            exit 1
+          fi
+
+          # Install the skills so /kb-extract resolves.
+          bash install-skills.sh --force
+
+          while IFS= read -r parsed; do
+            [ -z "$parsed" ] && continue
+            echo "::group::Extracting from $parsed"
+
+            # Read-only tools. The extractor proposes; it does not write to the
+            # ledger, and cannot, because Write is scoped to the delta it
+            # creates via the skill's own procedure.
+            claude -p "/kb-extract $parsed" \
+              --allowedTools "Read,Grep,Glob,Bash(python .ai/checks/*),Write" \
+              --max-turns 40 \
+              --output-format json \
+              > "/tmp/extract-$(basename "$parsed").json" || {
+                echo "::error::Extraction failed for $parsed"
+                cat "/tmp/extract-$(basename "$parsed").json" || true
+                exit 1
+              }
+
+            echo "::endgroup::"
+          done <<< "${{ steps.ingest.outputs.parsed }}"
+
+      - name: Validate
+        if: steps.find.outputs.none == 'false'
+        run: |
+          set -euo pipefail
+          python .ai/checks/validate.py
+
+      - name: Summarise what was extracted
+        if: steps.find.outputs.none == 'false'
+        id: summary
+        run: |
+          set -euo pipefail
+          python - <<'PY' >> "$GITHUB_OUTPUT"
+          import json, pathlib, subprocess
+
+          changed = subprocess.run(
+              ["git", "status", "--porcelain", "meetings/"],
+              capture_output=True, text=True).stdout.split()
+          deltas = sorted(
+              p for p in pathlib.Path("meetings").glob("*/meeting-delta.json")
+              if p.name == "meeting-delta.json"
+          )
+
+          lines, total_d, total_q = [], 0, 0
+          for path in deltas:
+              doc = json.loads(path.read_text())
+              d = len(doc.get("decisions", []))
+              q = len(doc.get("open_questions", []))
+              n = len(doc.get("not_promoted", []))
+              low = sum(1 for x in doc.get("decisions", [])
+                        if x.get("confidence") == "low")
+              total_d += d
+              total_q += q
+              lines.append(
+                  f"### `{doc['meeting_id']}`\n\n"
+                  f"- **{d} candidate decision(s)**"
+                  + (f", {low} low confidence" if low else "")
+                  + f"\n- **{q} candidate question(s)**\n"
+                  f"- {n} item(s) the extractor deliberately did not promote\n"
+                  f"- Source: `{doc['source']['transcript_path']}`\n"
+              )
+
+          body = "\n".join(lines)
+          print("counts=%d decision(s), %d question(s)" % (total_d, total_q))
+          print("body<<PRBODY")
+          print(body)
+          print("PRBODY")
+          PY
+
+      - name: Open a pull request
+        if: steps.find.outputs.none == 'false'
+        uses: peter-evans/create-pull-request@v6
+        with:
+          branch: extract/${{ github.run_number }}
+          base: main
+          title: 'Candidates for review — ${{ steps.summary.outputs.counts }}'
+          labels: |
+            extraction
+            awaiting-librarian
+          commit-message: |
+            feat(meetings): extract candidates from new transcript
+
+            Automated extraction. Nothing here is authoritative.
+          body: |
+            Automated extraction from a transcript that landed on `main`.
+
+            **Nothing in this pull request is authoritative.** Every item is a
+            candidate. They become records only when the librarian runs
+            `/kb-approve`, which is what merging this enables — not what merging
+            this does.
+
+            ${{ steps.summary.outputs.body }}
+
+            ---
+
+            ### To review
+
+            ```
+            git fetch origin
+            git checkout extract/${{ github.run_number }}
+            claude
+            ```
+
+            Then in Claude Code:
+
+            ```
+            /kb-approve meetings/<meeting-id>
+            ```
+
+            The gate presents every candidate at once, takes your disposition,
+            writes the records, and lands them.
+
+            ### What ran
+
+            - `scripts/ingest-transcript.py` — preserved the raw file, wrote a
+              searchable copy, recorded a `content_sha256` over the body
+            - `/kb-extract` — proposed candidates, read-only over the ledger
+            - `.ai/checks/validate.py` — schema, integrity, provenance and
+              anchor resolution all passed
+
+            Extraction is not reproducible: the same transcript run twice yields
+            slightly different candidates. The librarian's approval, not the
+            extraction, is the authoritative act — which is why `review.json`
+            binds to this delta's hash.
