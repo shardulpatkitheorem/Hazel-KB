@@ -98,7 +98,7 @@
               "out_of_scope"
             ]
           },
-          "note": { "type": "string", "maxLength": 300 }
+          "note": { "type": "string", "maxLength": 1200 }
         }
       }
     },
@@ -148,7 +148,7 @@
         "confidence": { "$ref": "#/$defs/confidence" },
         "confidence_note": {
           "type": "string",
-          "maxLength": 300,
+          "maxLength": 1200,
           "description": "Required when confidence is medium or low. Say what is uncertain."
         },
         "routing": {
@@ -188,7 +188,7 @@
           ]
         },
         "confidence": { "$ref": "#/$defs/confidence" },
-        "confidence_note": { "type": "string", "maxLength": 300 },
+        "confidence_note": { "type": "string", "maxLength": 1200 },
         "blocking": {
           "type": "array",
           "items": { "type": "string", "minLength": 1 }
