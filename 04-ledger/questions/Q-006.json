@@ -1,0 +1,38 @@
+{
+  "schema_version": "1.0",
+  "id": "Q-006",
+  "title": "Has Jonathan confirmed that an electronic NDA acknowledgement is acceptable?",
+  "question": "Is capturing the customer's name, title and date as an electronic agreement acceptable as acknowledgement of the NDA, instead of executing it through DocuSign? Norma Saenz sent the proposal to the team for review and is waiting to hear back from Jonathan.",
+  "status": "open",
+  "owner": "unknown",
+  "raised_on": "2026-08-03",
+  "recorded_on": "2026-08-04",
+  "due_date": "unknown",
+  "origin": {
+    "kind": "meeting",
+    "meeting_id": "2026-08-03-daily-hop-standup",
+    "transcript_path": "01-transcripts/daily-calls/parsed/2026-08-03-daily-hop-standup.md",
+    "meeting_date": "2026-08-03",
+    "content_sha256": "63ca4d4307ea494acfd867d33404f1c5a948fb4ac3219d78590adff26db7638c"
+  },
+  "evidence": [
+    {
+      "location": "t:0:11:31",
+      "excerpt": "I was just waiting to hear back from Jonathan to see if it was. That was what we were aiming towards just to make it a more seamless experience instead of having to do DocuSign several times throughout the journey if we could just do it all electronic."
+    },
+    {
+      "location": "t:0:13:18",
+      "excerpt": "Of course, if we do need wet ink or a true e-sign, then sure, for whatever, if there's a legal reason for that."
+    }
+  ],
+  "blocking": [
+    "DEC-005"
+  ],
+  "routing": [
+    {
+      "repo": "wf-orchestration",
+      "area": "step-02-nda"
+    }
+  ],
+  "answer": null
+}

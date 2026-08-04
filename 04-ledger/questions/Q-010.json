@@ -1,0 +1,36 @@
+{
+  "schema_version": "1.0",
+  "id": "Q-010",
+  "title": "How are duties split between the infrastructure team and the build team?",
+  "question": "What are the respective duties and responsibilities of David Gonzalez and Zeb on infrastructure versus Shantanu Wadodkar's build team on development? Deferred to a 1 o'clock call on the day of the meeting.",
+  "status": "open",
+  "owner": "Shawn Main",
+  "raised_on": "2026-08-03",
+  "recorded_on": "2026-08-04",
+  "due_date": "2026-08-03",
+  "origin": {
+    "kind": "meeting",
+    "meeting_id": "2026-08-03-daily-hop-standup",
+    "transcript_path": "01-transcripts/daily-calls/parsed/2026-08-03-daily-hop-standup.md",
+    "meeting_date": "2026-08-03",
+    "content_sha256": "63ca4d4307ea494acfd867d33404f1c5a948fb4ac3219d78590adff26db7638c"
+  },
+  "evidence": [
+    {
+      "location": "t:0:15:18",
+      "excerpt": "so we can align on what their duties and responsibilities will be versus yours?"
+    },
+    {
+      "location": "t:0:15:41",
+      "excerpt": "Again, the goal of that call is, yeah, make sure we segregate duties."
+    }
+  ],
+  "blocking": [],
+  "routing": [
+    {
+      "repo": "none",
+      "area": "infrastructure"
+    }
+  ],
+  "answer": null
+}

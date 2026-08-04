@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0",
+  "id": "DEC-007",
+  "title": "The blank Wolfsberg questionnaire PDF is removed; upload only for banks that hold one",
+  "statement": "The onboarding flow no longer offers a blank Wolfsberg questionnaire PDF. A potential partner that already holds a completed questionnaire is given the option to upload it; a partner that does not have one is not blocked and continues. This came out of the user-experience session with Norma Saenz and Mary Campos.",
+  "status": "active",
+  "decided_on": "2026-08-03",
+  "recorded_on": "2026-08-04",
+  "owner": "Joel Olivares",
+  "origin": {
+    "kind": "meeting",
+    "meeting_id": "2026-08-03-daily-hop-standup",
+    "transcript_path": "01-transcripts/daily-calls/parsed/2026-08-03-daily-hop-standup.md",
+    "meeting_date": "2026-08-03",
+    "content_sha256": "63ca4d4307ea494acfd867d33404f1c5a948fb4ac3219d78590adff26db7638c"
+  },
+  "evidence": [
+    {
+      "location": "t:0:10:23",
+      "excerpt": "We wanted to revisit the whole NDA, make sure that we remove the blank Wolfberg questionnaire PDF. So give the option to upload it for those For the potential partners that do have it, and then if they don't, we keep moving"
+    },
+    {
+      "location": "t:0:10:23",
+      "excerpt": "We did meet with Norma and Mary Campos for user experience, and those are some of the major suggestions that we took away from that."
+    }
+  ],
+  "routing": [
+    {
+      "repo": "react-frontend",
+      "area": "step-03-documents"
+    }
+  ],
+  "spec_impact": "pending",
+  "implemented_by": [],
+  "supersedes": null,
+  "superseded_by": null,
+  "approval": {
+    "approved_by": "Shardul Patki",
+    "approved_at": "2026-08-04T21:24:21Z"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0",
+  "id": "Q-007",
+  "title": "Which Databricks components are used, and is data in a database or lakehouse tables?",
+  "question": "Which Databricks components will the end-to-end workflow leverage, which of them are serverless, and is application data stored in a database or as lakehouse tables? Raised as an open design item with the conclusion targeted for the same day.",
+  "status": "open",
+  "owner": "Shantanu Wadodkar",
+  "raised_on": "2026-08-03",
+  "recorded_on": "2026-08-04",
+  "due_date": "2026-08-03",
+  "origin": {
+    "kind": "meeting",
+    "meeting_id": "2026-08-03-daily-hop-standup",
+    "transcript_path": "01-transcripts/daily-calls/parsed/2026-08-03-daily-hop-standup.md",
+    "meeting_date": "2026-08-03",
+    "content_sha256": "63ca4d4307ea494acfd867d33404f1c5a948fb4ac3219d78590adff26db7638c"
+  },
+  "evidence": [
+    {
+      "location": "t:0:05:41",
+      "excerpt": "What would be the serverless component? And if we are looking for setting up a data, is it going to be the data into the database? Do we want to have a database outside or is it going to be the lake? you know, like this tables into the database. So those discussions are on and we are trying to put together."
+    }
+  ],
+  "blocking": [],
+  "routing": [
+    {
+      "repo": "wf-orchestration",
+      "area": "architecture"
+    }
+  ],
+  "answer": null
+}

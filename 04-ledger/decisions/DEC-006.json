@@ -1,0 +1,49 @@
+{
+  "schema_version": "1.0",
+  "id": "DEC-006",
+  "title": "Authentication and authorization run outside Databricks, on Azure",
+  "statement": "User authentication and authorization — including the authorization API and Azure External ID — sit outside the Databricks deployment, in Azure, because there is no advantage to placing them inside Databricks. This is the named exception to running everything in Databricks. The public application UI is likewise a separate deployment outside the Databricks deployment.",
+  "status": "active",
+  "decided_on": "2026-08-03",
+  "recorded_on": "2026-08-04",
+  "owner": "Shawn Main",
+  "origin": {
+    "kind": "meeting",
+    "meeting_id": "2026-08-03-daily-hop-standup",
+    "transcript_path": "01-transcripts/daily-calls/parsed/2026-08-03-daily-hop-standup.md",
+    "meeting_date": "2026-08-03",
+    "content_sha256": "63ca4d4307ea494acfd867d33404f1c5a948fb4ac3219d78590adff26db7638c"
+  },
+  "evidence": [
+    {
+      "location": "t:0:09:27",
+      "excerpt": "OK, OK, but definitely some of the components which are like, you know, Azure authentication and all, which cannot be part of it, will be separated."
+    },
+    {
+      "location": "t:0:09:34",
+      "excerpt": "Yeah, yeah, yeah, just like, yeah, you know, Azure external IDs, things like that."
+    },
+    {
+      "location": "t:0:05:41",
+      "excerpt": "Our Azure. You know, cloud will have authentication or authorization, user authentication, authorization API. Staying separate may not be part of the data bricks because we feel staying outside will be easy and better."
+    }
+  ],
+  "routing": [
+    {
+      "repo": "wf-orchestration",
+      "area": "architecture"
+    },
+    {
+      "repo": "react-frontend",
+      "area": "authentication"
+    }
+  ],
+  "spec_impact": "pending",
+  "implemented_by": [],
+  "supersedes": null,
+  "superseded_by": null,
+  "approval": {
+    "approved_by": "Shardul Patki",
+    "approved_at": "2026-08-04T21:24:21Z"
+  }
+}

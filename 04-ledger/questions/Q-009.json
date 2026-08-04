@@ -1,0 +1,36 @@
+{
+  "schema_version": "1.0",
+  "id": "Q-009",
+  "title": "What are the membership stages, what qualifies a bank for each, and what limits apply?",
+  "question": "How many onboarding stages are there, what does a bank get at each one, what risk criteria qualify it, and what transaction limits and permitted use cases attach to each stage? Chris Colson proposed a three-stage model taken from The Clearing House's RTP onboarding; Shawn Main accepted the risk-adjusted direction but said the requirements still have to be worked out.",
+  "status": "open",
+  "owner": "unknown",
+  "raised_on": "2026-08-03",
+  "recorded_on": "2026-08-04",
+  "due_date": "unknown",
+  "origin": {
+    "kind": "meeting",
+    "meeting_id": "2026-08-03-daily-hop-standup",
+    "transcript_path": "01-transcripts/daily-calls/parsed/2026-08-03-daily-hop-standup.md",
+    "meeting_date": "2026-08-03",
+    "content_sha256": "63ca4d4307ea494acfd867d33404f1c5a948fb4ac3219d78590adff26db7638c"
+  },
+  "evidence": [
+    {
+      "location": "t:0:18:20",
+      "excerpt": "would it make sense to break that up just so you could show more membership up front without having them to go through all of the due diligence and maybe not even transact? they can kind of move along with their own pace if you would. That was just the thought."
+    },
+    {
+      "location": "t:0:19:46",
+      "excerpt": "So I wanted to see if we could think about that risk adjusted approach. That way it's easier for banks to onboard and start leveraging it without having to go through a ton of questionnaires and other things."
+    }
+  ],
+  "blocking": [],
+  "routing": [
+    {
+      "repo": "wf-orchestration",
+      "area": "onboarding"
+    }
+  ],
+  "answer": null
+}
