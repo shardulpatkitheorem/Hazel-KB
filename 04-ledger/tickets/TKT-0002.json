@@ -1,0 +1,45 @@
+{
+  "schema_version": "1.0",
+  "id": "TKT-0002",
+  "decision_id": "DEC-005",
+  "title": "The NDA is acknowledged electronically, not by DocuSign; one full signature at the end",
+  "target": {
+    "repo": "react-frontend",
+    "area": "step-02-nda"
+  },
+  "direction": "The applicant bank acknowledges the NDA as an electronic agreement \u2014 name, title and date captured, accept and move on \u2014 instead of executing it through DocuSign. No e-sign workflow runs at the NDA step. A single full signature is taken at the end of the journey, so the partner is not asked to sign through DocuSign several times.",
+  "reasoning": "Recorded as DEC-005 from the 2026-08-03 meeting, decided by Joel Olivares.",
+  "acceptance_criteria": [
+    "A spec change exists in react-frontend covering the behaviour in DEC-005, in the step-02-nda area.",
+    "Every requirement added or modified by that change cites [DEC-005] in its requirement text.",
+    "Each new or modified requirement has at least one scenario.",
+    "The implementation satisfies the changed spec, and the PR references this issue."
+  ],
+  "evidence": [
+    {
+      "location": "t:0:11:31",
+      "excerpt": "how the customer was going to acknowledge that NDA instead of it being a DocuSign, it being an electronic agreement, capturing their name, their title, and the date like Jonathan had suggested"
+    },
+    {
+      "location": "t:0:12:57",
+      "excerpt": "So basically we are saying let's not have any e-sign workflow as part of NDA. Have it a digital signature or accept, I accept and move on."
+    },
+    {
+      "location": "t:0:13:10",
+      "excerpt": "Yeah, and then at the very end, you know, we'll do the full signature and..."
+    },
+    {
+      "location": "t:0:13:18",
+      "excerpt": "you don't you don't go onto a FinTech website anymore and sign a legal agreement with DocuSign. Everybody's just doing, you know, accept terms and conditions. I think the more that we can lean that direction, the better."
+    }
+  ],
+  "authorized_by": {
+    "librarian": "Shardul Patki",
+    "authorized_at": "2026-08-04T21:24:21Z"
+  },
+  "status": "dispatched",
+  "related_questions": [
+    "Q-006"
+  ],
+  "dispatched_to": "https://github.com/shardulpatkitheorem/hop-frontend-demo/issues/3"
+}
