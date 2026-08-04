@@ -1,11 +1,11 @@
 <!-- GENERATED FILE — DO NOT EDIT.
      Source of truth: 04-ledger/questions/*.json
      Regenerate:      python .ai/checks/build-registries.py
-     Records hash:    a74ef6ee137cb19c -->
+     Records hash:    c280d1e24db22540 -->
 
 # Open Questions
 
-4 outstanding · 0 answered · generated 2026-08-03
+5 outstanding · 0 answered · generated 2026-08-03
 
 ## Outstanding
 
@@ -15,6 +15,7 @@
 | `Q-002` | Must intake process documents be stored in Databricks? | Joel Olivares | ⚠ no date | 2026-07-27 | — |
 | `Q-003` | Is GitHub access ready for the build team? | ⚠ unowned | ⚠ no date | 2026-07-27 | — |
 | `Q-004` | Which two documents gate due diligence, and where was that requirement decided? | ⚠ unowned | ⚠ no date | 2026-07-27 | — |
+| `Q-005` | Does Coverbase accept a fallback answer payload in place of extracted Wolfsberg content? | ⚠ unowned | ⚠ no date | 2026-08-03 | `DEC-001` |
 
 ## Detail
 
@@ -54,3 +55,13 @@ Which two documents must be in place before a member bank can continue to the du
 - **Raised** 2026-07-27 · `01-transcripts/daily-calls/parsed/2026-07-27-daily-hop-standup.md` (2026-07-27)
 - **Evidence** `l:49`
 - **Concerns** react-frontend/step-03-documents
+
+### Q-005 — Does Coverbase accept a fallback answer payload in place of extracted Wolfsberg content?
+
+DEC-001 requires that answers to the fallback question set are pushed to Coverbase in place of content that would otherwise be extracted from a Wolfsberg CBDDQ. Nothing confirms Coverbase's intake accepts such a payload, or how it maps to the control set. If it does not, DEC-001 is not implementable as recorded.
+
+- **Owner** unknown · no committed date
+- **Raised** 2026-08-03 · internal — Shardul Patki
+- **Evidence** `s:Requirement: Fallback answers are persisted and pushed to Coverbase`
+- **Blocks** `DEC-001`
+- **Concerns** integration-wrapper/coverbase

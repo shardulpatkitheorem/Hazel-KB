@@ -1,0 +1,25 @@
+{
+  "schema_version": "1.0",
+  "id": "Q-005",
+  "title": "Does Coverbase accept a fallback answer payload in place of extracted Wolfsberg content?",
+  "question": "DEC-001 requires that answers to the fallback question set are pushed to Coverbase in place of content that would otherwise be extracted from a Wolfsberg CBDDQ. Nothing confirms Coverbase's intake accepts such a payload, or how it maps to the control set. If it does not, DEC-001 is not implementable as recorded.",
+  "status": "open",
+  "owner": "unknown",
+  "raised_on": "2026-08-03",
+  "recorded_on": "2026-08-03",
+  "due_date": "unknown",
+  "origin": {
+    "kind": "internal",
+    "rationale": "Surfaced while implementing DEC-001 in hop-frontend-demo. No meeting has raised it.",
+    "raised_by": "Shardul Patki"
+  },
+  "evidence": [
+    {
+      "location": "s:Requirement: Fallback answers are persisted and pushed to Coverbase",
+      "excerpt": "MUST then be pushed to Coverbase in place of the content that would otherwise have been extracted from a Wolfsberg CBDDQ"
+    }
+  ],
+  "blocking": ["DEC-001"],
+  "routing": [{ "repo": "integration-wrapper", "area": "coverbase" }],
+  "answer": null
+}
