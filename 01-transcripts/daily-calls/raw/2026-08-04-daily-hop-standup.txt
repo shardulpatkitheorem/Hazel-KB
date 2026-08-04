@@ -1,0 +1,139 @@
+DAILY HOP STANDUP — MEETING TRANSCRIPT
+Date: Tuesday, August 4, 2026
+Time: 12:00 PM – 12:30 PM (Central Time)
+Organizer: Aaron McWilliams
+=====================================================================
+
+[00:00:11] Pallavi Bichpuriya: Hello, all.
+[00:00:13] Aaron McWilliams: Hello, hello.
+[00:00:16] Joel Olivares: Boy, am I happy to see you.
+[00:00:21] Aaron McWilliams: I was going through all the notes of the calls last week and one of them said, I'm like, I think it was from you, it was like, our goal is just to keep things moving until Aaron gets back. I was like, "Ohh, no!"
+[00:00:37] Joel Olivares: That was really early on because things got a little granular after that.
+[00:00:42] Aaron McWilliams: Well, it looks like there are some big changes, yeah, big ideas discussed, so... Well, that's why I love AI. I went to my copilot last night. I was like, all right. I had already gone through most of my e-mail, but I was like, catch me up on everything hop related, like where are we at and what are the key details? So I'm prepared with questions.
+[00:01:08] Joel Olivares: You'll be fine.
+[00:01:11] Aaron McWilliams: Yeah, no, you all are great. All looks good.
+[00:01:45] Shantanu: Welcome back, Aaron.
+[00:01:48] Aaron McWilliams: Hey, thanks. Let's see, I saw that Shawn is out this week, but... So, well, Smith will join us here.
+[00:02:09] Shantanu: Yeah, so, yeah, ohh, yes, we still have some... some DMU work so she's not going to join the party today.
+[00:02:19] Aaron McWilliams: I have. Great, well, I've got a list of questions from everything I reviewed last week, but if you guys already had an agenda today, we can, I don't want to supersede that.
+[00:02:38] Shantanu: Ohh. Not like a spatial agenda, but I think a few updates from our side is yesterday we got a feedback that e-sign NDA needs to be changed to just a digital click and we should have NDA at the end. So, I think Pallavi is working on, yeah, at the end, so that is what Pallavi is working on. We'll cover that.
+[00:03:04] Aaron McWilliams: At the end.
+[00:03:14] Shantanu: Maybe tomorrow or day after tomorrow, but one thing for sure that This will have a final, this will be the final document, right? Like in our review steps, what we talked about is you submitted, then it's a Hazel review, internal review, then internal review might have some questions. So there will be to and fro. And once that is all final, we are ready and we are seeing like this is all done final. That is a time we will. Send it for resign. So it's a final, final version will go for resign. That's what we are putting it together in a workflow. That will change some kind of screens for us, but should be okay.
+[00:04:07] Aaron McWilliams: Yeah, I didn't see anything about in the meeting recordings about it being moved to the end of. The process in in this.
+[00:04:19] Joel Olivares: Yeah, that so the deal is Aaron that they want to just do a digital signature for the NDA initially. And then at the very end is when they do that whole DocuSign process. Like, I don't know what the term was. Norma, what's the term for just like the signature? Or like a...
+[00:04:43] Norma Saenz: Yeah, we were wanting to get the electronic acknowledgement opposed to a DocuSign being sent out to the customer. Just because of the way this is all laid out and the purpose of it, we were trying to keep it more, DocuSign kind of might be a little bit more antiquated, I guess, in the process moving forward.
+[00:04:48] Joel Olivares: Mm.
+[00:05:02] Norma Saenz: So electronic acknowledgement was what we were looking for.
+[00:05:06] Aaron McWilliams: Yeah, I talked to Tate about 30 minutes ago and he said with the NDA that what he still thinks we need is the signature, name, and date. Can we get those three things in the electronic acknowledgement?
+[00:05:21] Shantanu: Yes, yes, yes, I think that we, yes.
+[00:05:21] Norma Saenz: Yep, yeah.
+[00:05:25] Aaron McWilliams: Great, OK.
+[00:05:27] Norma Saenz: Yeah, that was it was one of the things that I'd sent him as a mock-up, and Joel, I know I had sent it over to you and I was just waiting for him to say if that was good, but it was like the name of the user, the individual, their title, and the date, and then their electronic acknowledgement of what they're doing, and then we could knock it down into a PDF for record keeping. But I haven't heard back from him. So yeah, I can send it over to you as well, Aaron.
+[00:05:53] Aaron McWilliams: Yeah, why don't you just resend it to him and copy me just so it's a reminder to.
+[00:05:56] Norma Saenz: Sure, sure, yeah.
+[00:05:59] Aaron McWilliams: That's good. OK. All right, so we'll verify that, but sounds like the NDA is figured out. Well, I guess, Joel, one, you and I didn't get to touch base this morning, but I know that Shawn doesn't want, you know, the NDA to come up again from Vanta, but the question is, how do we prevent that? So is that, do we just need to get it? The different Vanta account for Hazel. Or can we create a separate, we can't do a separate flow within the Vanta, right?
+[00:06:39] Joel Olivares: That sounds like a, well, I don't think we're ready for a separate Vanta right now for like a different tenant. That's why we're using Vanta just to share Hazel Network data through the Trust Center. I don't know.
+[00:06:56] Aaron McWilliams: Right, but it has that NDA the second, basically it brings up the NDA a second time.
+[00:06:58] Joel Olivares: Yeah, I don't think we can get rid of that no matter what because we're going to need... We're gonna need to, we're gonna need evidence of that for, I mean, that's what Vendor does. It's trying to regulate our procedures for security so that we can get SOC certified. So if we're already like trying to cut out some steps, then we... That's not a good indication that we're trying to be compliant to begin with. So I don't know. I don't know.
+[00:07:29] Aaron McWilliams: But we're just we're moving that step to the the hop platform.
+[00:07:34] Joel Olivares: Yeah, but Vendor can't know that. Like, Vendor won't know that we did that. It's like a checkbox or something like that. But we can see if we can remove it. Let me talk to Rocio and see if she can figure something out on removing the NDA part. And what that means, though, that anybody is just going to ask for access. I just going to have to figure out a way to know that they are active already started the. the onboarding process through the Hazel Network website.
+[00:08:05] Aaron McWilliams: Yeah, yeah, which is another manual step.
+[00:08:07] Joel Olivares: And so I would have to go back and look to make sure Rio Bank exists and they're not just asking for data randomly.
+[00:08:17] Aaron McWilliams: So yeah, so that's another item we need to figure out how to work through.
+[00:08:24] Joel Olivares: Yes, Sir.
+[00:08:29] Aaron McWilliams: Okay, what else, Santiago?
+[00:08:32] Shantanu: Yeah, yesterday we had a call with Zeb. That was another good discussion. I know this NDA is getting signed and all, but we were talking about we should have some discussion once that formal paperwork is signed up.
+[00:08:41] Joel Olivares: Be.
+[00:08:51] Shantanu: so that we know what. you know, how to structure the work, you know, what Zeb will do, what we will do. From the call, we tentatively figured out that most of the CICD and Databricks Infrastructure, they will cover. database Infrastructure, databricks and CICD, and some of the security from the databricks. Those are the three, four things they will cover. But there has to be a partnership, so we will keep on working together. Maybe in a few days we can have those guys in our call, or maybe we can have... alternate the or maybe daily call with those guys at least to figure it out for initial few days.
+[00:09:49] Aaron McWilliams: Yeah, David, were you on that call earlier with them?
+[00:09:52] David Gonzalez: Yeah, I was on the call with them. They were actually open to being on this daily call. Um, at least for for the, you know, to get the initial context of the project and everything, so you might want to extend an invite to them to Zeb.
+[00:10:10] Aaron McWilliams: Yeah, I feel like that's gonna be... a lot more technical and so I don't know if we want to have separate touch bases like we've really been dealing with the workflow and the UX pieces here. I just don't want them to jump on here and sit around or something but.
+[00:10:25] David Gonzalez: No, I get it, yeah.
+[00:10:28] Shantanu: Yeah, with you.
+[00:10:29] David Gonzalez: Well, perhaps it could just be more technically focused, like a just a quick catch-up call with Diram and Zeb and the tech tech from our side.
+[00:10:38] Shantanu: Yeah, yeah, that.
+[00:10:43] David Gonzalez: If that's okay with DRM, like, I mean, I, it does, yeah, it'll probably be best, Aaron, like you said, I could more focus towards that, because it's a completely different discussion, yeah.
+[00:10:46] Shantanu: Ohh yeah, yeah, yeah, absolutely.
+[00:10:55] Aaron McWilliams: Yeah, okay. Well, I'll follow up with you after this meeting, David, and get contact info and I can help schedule kind of the next step there.
+[00:11:10] Shantanu: Some of the access discussion, I think they will we were following yesterday, right? Like, data bricks access for our C1. Yeah, so that I think is...
+[00:11:22] David Gonzalez: Yeah, the environment is already built, Aaron. We're just verifying it through with the security to make sure that they're okay and to invite people into the tenant.
+[00:11:34] Aaron McWilliams: Okay, cool.
+[00:11:34] David Gonzalez: After that happens, we could start onboarding, we could start onboarding any any of the guests into or any anyone into the Hazel tenant.
+[00:11:46] Aaron McWilliams: Okay, great.
+[00:11:46] Shantanu: So, yeah, he is for Azure, and then Databricks, right?
+[00:11:51] David Gonzalez: Correct, yes. It's a Databricks is hosted within Azure, in this case, yes.
+[00:11:59] Shantanu: Yeah, I think that will give us the solid start to the development. Right now, we are going to do some work on our local, but until we get the Azure account, it will be tough to visualize and see where we are in terms of a development.
+[00:12:21] Aaron McWilliams: But yesterday we got you, we got you all access with your dev boxes. Is that right, Santana?
+[00:12:21] Shantanu: We, we are. Not here.
+[00:12:28] David Gonzalez: No, I don't think that's happened yet, Aaron. Yeah, yeah, that's we just need Nathan to review or just give the blessing that it's all right, and then we could send invites, but it it's all ready though, like, as soon as that happens, we'll I just haven't we just haven't had a time to connect with Nathan, so as soon as that happens, we'll proceed.
+[00:12:36] Aaron McWilliams: Oh, that's what it is. Okay, good. Yeah, and I can bug them from the side too. Sam.
+[00:13:00] Shantanu: I think there is a call today with Joel to go over the cover base kind of configuration. That's the another thing we are planning today.
+[00:13:14] Aaron McWilliams: Okay. Yeah, I think I'm on that.
+[00:13:15] Shantanu: Yeah, that's it.
+[00:13:17] Joel Olivares: Yeah, I'll be, I'll be, I'll be ready. Two 30, right? Or what time was it? Two o'clock?
+[00:13:23] Aaron McWilliams: Two, I think, or time, yeah.
+[00:13:27] Shantanu: Yeah, I think that's pretty much it from our side. Anything you have, Shardul, you have anything?
+[00:13:38] Pallavi Bichpuriya: No, we got the clarifications regarding the prototype, so we'll work upon it.
+[00:13:46] Shardul Patki: Yeah, nothing from you, Jehan.
+[00:13:47] Aaron McWilliams: On the. Bye, Charbel.
+[00:13:50] Pallavi Bichpuriya: E.
+[00:13:52] Shardul Patki: I know I said nothing from me as well got. The answers to the questions.
+[00:14:04] Aaron McWilliams: So, Pallavi, did we get you feedback on the prototype that you all were wanting? Is that what you're saying?
+[00:14:08] Pallavi Bichpuriya: Yes, yes.
+[00:14:14] Aaron McWilliams: Great, and so I know that I think yesterday Chris and Shawn kind of brought up the concept of an easier onboarding with less due diligence and maybe a limit of how much someone could transact, kind of like the clearing house does. It seemed like that didn't change anything. Any of the current plans yet? Is that correct? I think it was yesterday.
+[00:14:45] Diana Plata: I don't know if it was for this meeting, Aaron. I thought I think that was a, if I understand correctly, that was a discussion we were having with Josh.
+[00:14:53] Aaron McWilliams: Ohh, on the, yeah, that call, OK. Okay, well then, then I'll follow up with Shawn on that, seeing what he wants to do, because there were some ideas that would change this flow, or maybe just kind of break it apart a little bit. So we'll try and get that firmed up this week to see if we needed to make any changes there, but... I've not had a chance to look at the prototype, but did you probably, did you specifically get Sean's feedback on that this week?
+[00:15:32] Pallavi Bichpuriya: Yeah, we did make some changes today. So let me share it. For the NDA part. So we do not have the e-sign right now. We are giving a checkbox.
+[00:15:56] Aaron McWilliams: Mhm.
+[00:15:56] Pallavi Bichpuriya: For them to accept the IND. And once this is done, they will go to documents and for the documents, we previously we were showing them as mandatory, but now they are not. Only this one is required. So. Should we remove it or is this also optional? The.
+[00:16:25] Joel Olivares: No, that one can definitely not be optional. That one we do need to require. But on the top one, maybe say if applicable, completed Wolfberg correspondent bank due diligence questionnaire. Like, because the way it is right now, it still implies that they need to upload it.
+[00:16:43] Pallavi Bichpuriya: Okay, okay. And we wanted to understand if under this tab should we be showing the mutual NDA or is it fine if we are showing it under the document repository? So we upload any documents. They all come under the document repository. So do you want us to show the mutual IND that was signed before or is this fine?
+[00:17:20] Aaron McWilliams: You mean show it so they can see it or just show it like they can see the actual document or just show what you have there?
+[00:17:27] Pallavi Bichpuriya: Yeah, just the activity that this has been done.
+[00:17:33] Aaron McWilliams: I think that's good.
+[00:17:34] Pallavi Bichpuriya: Okay and. After the hit.
+[00:17:39] Aaron McWilliams: Sometimes people might want the like a PDF version for themselves, which I think maybe Norma mentioned. So will there be a way for them to download it at some point or?
+[00:17:52] Pallavi Bichpuriya: Yeah, we can do that. We can provide them the option to download the document over here. Yeah, okay.
+[00:18:00] Aaron McWilliams: And then you are going to add the kind of E-sign capability, he said.
+[00:18:06] Pallavi Bichpuriya: Yes, yes. So based on our understanding before today's call, we just added the e-sign part. We don't know what will come over here, so we just gave that. This is a placeholder. And the rest remains the same as we were doing in the NDA before.
+[00:18:22] Aaron McWilliams: Mhm.
+[00:18:27] Pallavi Bichpuriya: Continue to acknowledgement. And signing it, adding the initials.
+[00:18:36] Aaron McWilliams: Okay, yeah.
+[00:18:37] Norma Saenz: Yeah, it looks.
+[00:18:38] Aaron McWilliams: So, Norma, that looks good for you.
+[00:18:40] Norma Saenz: Yeah, that looks good. opposed to having to send another DocuSign and wait for it to come back. That looks clean. Yeah.
+[00:18:49] Diana Plata: Where does the process if they don't have a Wolfberg? Like where does the questionnaire start for them?
+[00:18:49] Aaron McWilliams: Okay, that'd be cool.
+[00:18:58] Pallavi Bichpuriya: If they do not have the Wolfsburg document, then they'll go to, they won't upload it, of course. They'll go to due diligence, they'll complete the due diligence. Once due diligence is submitted, they'll go to the risk questions. Support. So these are the questionnaire part. All the questions.
+[00:19:24] Aaron McWilliams: So, Joel, are we?
+[00:19:24] Diana Plata: Support.
+[00:19:25] Aaron McWilliams: Or go, Diana.
+[00:19:27] Diana Plata: So for example, if so, is there, so if you go back to the part, like if they do submit the due diligence, the, I'm sorry, the Wolfburg, does this area get shaded like gray so they know they don't have to go through it? Or like, or if they don't upload the Wolfburg, does this become a required field? For them, too.
+[00:19:47] Joel Olivares: No, Diana, there are two different things. They have to go through this anyway.
+[00:19:51] Diana Plata: Okay, so, but so what happens again, going back to Wolf, are these the questions that we are going to require, even though they do have it? So what about the questions in the Wolfberg? Where are those going to go in?
+[00:20:06] Joel Olivares: We're not going to address them at all. We're not going to ask for them. That was a decision by Shawn and people above our pay grade that they want to make it as smooth as possible. Now, I do still have controls in cover base against that information that's not provided. So if the... If the residual risk score is low, we can always address some of those controls to up the score if we wanted a relationship with that vendor. But upfront data gathering, like, you know, a blank PDF, is not going to, it's not something that they want to do. Mary and Norma, we had met with them and they gave us some great insight on, you know, a smooth user experience and that was definitely a hiccup in the process. So we just decided all together to just take out the Wolfberg. If they have it, great. We'll get it and we'll use that data to create, run it against our controls and get a good residual risk score. If they don't have it, we're not going to ask questions about it. And then their residual risk score may not be great, but we can always follow up with them and say, well, we'd like a little bit more information on this and that.
+[00:21:26] Diana Plata: Mm.
+[00:21:26] Joel Olivares: to increase the residual risk score. But for now, they just want to keep moving to make it as smooth as possible.
+[00:21:34] Aaron McWilliams: And was Castaneda good with that or?
+[00:21:37] Joel Olivares: Yeah, actually.
+[00:21:41] Aaron McWilliams: Well, yeah, I definitely think that will help because that's where I've been getting some pushback already, so.
+[00:21:54] Pallavi Bichpuriya: OK, we'll make the changes from today's call, and then we will release it on Versil.
+[00:22:03] Aaron McWilliams: Tate. All right, and you guys are good, just Theorem Labs, you guys are good with your access to SharePoint and the Teams and all those kind of things.
+[00:22:23] Pallavi Bichpuriya: Yeah, I'm good. I think Chad was having some, yeah.
+[00:22:26] Shardul Patki: Yeah, I was having issues accessing the SharePoint.
+[00:22:37] Aaron McWilliams: Well, if you want to hang on a second while Hector is here, maybe we can... I'll work on that a little bit.
+[00:22:45] Hector Garcia: Let me, let me check the access. Had you been able to access it before or no? Never.
+[00:22:55] Shardul Patki: No, yeah.
+[00:22:56] Hector Garcia: Okay, but you are able to log in though, right?
+[00:23:02] Shardul Patki: Uh, like I didn't, I didn't receive any like credentials at all.
+[00:23:07] Hector Garcia: Okay, you didn't get him? Okay, let me send that to you. I think I have your e-mail, send it through e-mail.
+[00:23:14] Shardul Patki: Got it. Thank you.
+[00:23:15] Aaron McWilliams: Rights. Okay, anything else today?
+[00:23:34] Pallavi Bichpuriya: You're good, you.
+[00:23:37] Aaron McWilliams: Great, okay. Well, thanks guys. Let's see, so we've got, I'll follow up as well with Nathan to get finished the Dev Box access. I'll schedule, work with David to schedule something with Zeb. Is Zeb somebody's name or is it the name of the company? I can't remember.
+[00:23:56] Pallavi Bichpuriya: It's the name of the company.
+[00:23:58] Aaron McWilliams: Okay, thanks. Joel, you're checking with Rocio on our Vanta options. And Olivia, you got a couple of changes with the e-signature and the Wolfsburg optional you'll make. And yeah, we confirmed the Wolfsburg is optional. And I think that's all our action items today. Oh, and Hector is resend in the invite to start dual, so. Thanks, everybody.
+[00:24:35] Shantanu: Thank you. Bye bye.
+
+=====================================================================
+End of transcript.
