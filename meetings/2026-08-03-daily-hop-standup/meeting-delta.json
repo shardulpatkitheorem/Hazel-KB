@@ -1,0 +1,637 @@
+{
+  "schema_version": "1.1",
+  "meeting_id": "2026-08-03-daily-hop-standup",
+  "status": "ready",
+  "source": {
+    "transcript_path": "01-transcripts/daily-calls/parsed/2026-08-03-daily-hop-standup.md",
+    "meeting_date": "2026-08-03",
+    "content_sha256": "63ca4d4307ea494acfd867d33404f1c5a948fb4ac3219d78590adff26db7638c"
+  },
+  "decisions": [
+    {
+      "id": "CAND-DEC-001",
+      "title": "The NDA is acknowledged electronically, not by DocuSign; one full signature at the end",
+      "statement": "The applicant bank acknowledges the NDA as an electronic agreement — name, title and date captured, accept and move on — instead of executing it through DocuSign. No e-sign workflow runs at the NDA step. A single full signature is taken at the end of the journey, so the partner is not asked to sign through DocuSign several times.",
+      "evidence": [
+        {
+          "location": "t:0:11:31",
+          "excerpt": "how the customer was going to acknowledge that NDA instead of it being a DocuSign, it being an electronic agreement, capturing their name, their title, and the date like Jonathan had suggested"
+        },
+        {
+          "location": "t:0:12:57",
+          "excerpt": "So basically we are saying let's not have any e-sign workflow as part of NDA. Have it a digital signature or accept, I accept and move on."
+        },
+        {
+          "location": "t:0:13:10",
+          "excerpt": "Yeah, and then at the very end, you know, we'll do the full signature and..."
+        },
+        {
+          "location": "t:0:13:18",
+          "excerpt": "you don't you don't go onto a FinTech website anymore and sign a legal agreement with DocuSign. Everybody's just doing, you know, accept terms and conditions. I think the more that we can lean that direction, the better."
+        }
+      ],
+      "owner": "Joel Olivares",
+      "confidence": "medium",
+      "confidence_note": "Shantanu Wadodkar states the outcome, Joel Olivares confirms it and adds the end-of-journey signature, Shawn Main endorses the direction. Unsettled: Jonathan has not confirmed the electronic acknowledgement (CAND-Q-001), and Shawn allows a true e-sign if there is a legal reason.",
+      "routing": [
+        {
+          "repo": "react-frontend",
+          "area": "step-02-nda"
+        },
+        {
+          "repo": "wf-orchestration",
+          "area": "step-02-nda"
+        },
+        {
+          "repo": "integration-wrapper",
+          "area": "docusign"
+        }
+      ]
+    },
+    {
+      "id": "CAND-DEC-002",
+      "title": "Run the HOP stack inside Databricks; a separate external Postgres instance is not used",
+      "statement": "The application runs inside Databricks as far as possible, using native Databricks components where they exist, rather than standing up separate infrastructure. Persistence is LakeBase inside Databricks rather than a separate external Postgres database; whether that is one instance or several does not matter. The stated aim is to keep the infrastructure footprint as collapsed as possible.",
+      "evidence": [
+        {
+          "location": "t:0:08:17",
+          "excerpt": "Main goal is to keep this as collapsed as possible. So on the first question on separate Postgres database, I'd like to keep everything in LinkBase and just have a single instance that we run there. Or it doesn't matter if it's multiple, but I'd like to run it all in Databricks."
+        },
+        {
+          "location": "t:0:08:17",
+          "excerpt": "So I would say that would be our going in position architecturally. Trying to keep trying to trying to minimize how much infrastructure we actually have to leverage if there is a native component from Databricks that we can leverage."
+        }
+      ],
+      "owner": "Shawn Main",
+      "confidence": "medium",
+      "confidence_note": "Shawn Main calls it \"our going in position architecturally\" — a starting stance, not a ratified design. Shantanu Wadodkar's team had not concluded its own design, and database versus lakehouse tables is still open (CAND-Q-002). \"LinkBase\" in the source is LakeBase.",
+      "routing": [
+        {
+          "repo": "wf-orchestration",
+          "area": "architecture"
+        }
+      ]
+    },
+    {
+      "id": "CAND-DEC-003",
+      "title": "Authentication and authorization run outside Databricks, on Azure",
+      "statement": "User authentication and authorization — including the authorization API and Azure External ID — sit outside the Databricks deployment, in Azure, because there is no advantage to placing them inside Databricks. This is the named exception to running everything in Databricks. The public application UI is likewise a separate deployment outside the Databricks deployment.",
+      "evidence": [
+        {
+          "location": "t:0:09:27",
+          "excerpt": "OK, OK, but definitely some of the components which are like, you know, Azure authentication and all, which cannot be part of it, will be separated."
+        },
+        {
+          "location": "t:0:09:34",
+          "excerpt": "Yeah, yeah, yeah, just like, yeah, you know, Azure external IDs, things like that."
+        },
+        {
+          "location": "t:0:05:41",
+          "excerpt": "Our Azure. You know, cloud will have authentication or authorization, user authentication, authorization API. Staying separate may not be part of the data bricks because we feel staying outside will be easy and better."
+        }
+      ],
+      "owner": "Shawn Main",
+      "confidence": "medium",
+      "confidence_note": "Shantanu Wadodkar proposes the carve-out and Shawn Main agrees, naming Azure External ID. What else sits outside is not enumerated — Shawn says \"things like that\" — and the UI-as-separate-deployment half was Shantanu's intent, not something Shawn answered.",
+      "routing": [
+        {
+          "repo": "wf-orchestration",
+          "area": "architecture"
+        },
+        {
+          "repo": "react-frontend",
+          "area": "authentication"
+        }
+      ]
+    },
+    {
+      "id": "CAND-DEC-004",
+      "title": "The RAFA report app runs on Hazel's own infrastructure, not connected into Vantage",
+      "statement": "The RAFA/UBPR report is not treated as an integration that reaches into Vantage. Its code base is brought over and the app is run on Hazel's infrastructure, inside Databricks like the rest of the stack. Whether it is embedded in the HOP code base or kept as a separate part of it is explicitly left open.",
+      "evidence": [
+        {
+          "location": "t:0:08:17",
+          "excerpt": "The UBPR report or the ROPA report, I wouldn't. treat that as connecting into Vantage. We just need to bring that code base and run the app on Hazel's infrastructure. And whether it's embedded or just a part of the code base, I don't know if that necessarily matters, but I'd want to run everything within Databricks as much as possible."
+        },
+        {
+          "location": "t:0:04:40",
+          "excerpt": "Also spending some time reviewing how this Rafa Vantage Databricks versus Hazel Databricks will have connections and separations."
+        }
+      ],
+      "owner": "Shawn Main",
+      "confidence": "medium",
+      "confidence_note": "Shawn Main answers the Vantage-versus-Hazel Databricks question directly and is not contested. The report's name is corrupted — \"the ROPA report\", later \"the UBPR or rougher report\" — both resolving to the RAFA report already in the ledger. Nobody said who moves the code base.",
+      "routing": [
+        {
+          "repo": "wf-orchestration",
+          "area": "rafa-report"
+        }
+      ]
+    },
+    {
+      "id": "CAND-DEC-005",
+      "title": "Build the minimal existing flow now; assume a risk-based approach rather than adding gates",
+      "statement": "The build team continues with the flows it already has, kept as minimal as possible, and does not add further document or questionnaire requirements ahead of the requirement set being settled. The working assumption for what is asked of a bank is a risk-based approach. Only foundational elements — such as a workflow engine that supports later adaptation — are built in up front.",
+      "evidence": [
+        {
+          "location": "t:0:22:26",
+          "excerpt": "obviously we need to probably flush that out first, but whatever you guys start building, if you, because I know you guys want to get building, I think that's a good approach is let's just keep it as minimal as possible right now with y'all's flows that you have and then just assume we're going to have a risk. based approach to what we ask."
+        },
+        {
+          "location": "t:0:22:56",
+          "excerpt": "Sounds good. Thank you."
+        },
+        {
+          "location": "t:0:13:18",
+          "excerpt": "don't want to put too many of those things in out the gate other than maybe the foundational elements like the workflow engine or whatever we might need to support ongoing adaptations of this"
+        }
+      ],
+      "owner": "Shawn Main",
+      "confidence": "medium",
+      "confidence_note": "Shawn Main gives the direction as the senior voice and Shantanu Wadodkar accepts it twice. What \"as minimal as possible\" excludes is not enumerated; the only concrete instance is not adding the Wolfsberg requirement while it is unsettled (CAND-Q-004).",
+      "routing": [
+        {
+          "repo": "react-frontend",
+          "area": "onboarding"
+        },
+        {
+          "repo": "wf-orchestration",
+          "area": "onboarding"
+        }
+      ]
+    },
+    {
+      "id": "CAND-DEC-006",
+      "title": "Onboarding is risk-adjusted: acceptance grants limited access, diligence raises limits",
+      "statement": "A bank that is accepted gets instant access to an account and a transaction limit derived from basic risk criteria — the RAFA/UBPR score and comparable regulatory facts — without first completing extensive due diligence. Moving to a higher limit is what triggers deeper diligence about flows, organisation and customers. The intent is to make it easier for banks to onboard and start transacting, with risk adjustment rather than questionnaires as the gate.",
+      "evidence": [
+        {
+          "location": "t:0:19:46",
+          "excerpt": "Can we do something like that with banks to where they're accepted, whether they, you know, we call them a member or you know, you know, whatever, but once they're accepted. They get instant access into an account. There's not a lot of due diligence requirements behind that."
+        },
+        {
+          "location": "t:0:19:46",
+          "excerpt": "Then if you want to move on to the next stage, then we may want to know more about your flows, the organization, you know, who their customers are, et cetera, et cetera. Then that's when they can up their limits to the next stage."
+        },
+        {
+          "location": "t:0:22:21",
+          "excerpt": "I think that is fine, absolutely."
+        }
+      ],
+      "owner": "Shawn Main",
+      "confidence": "medium",
+      "confidence_note": "Shawn Main proposes it as the better goal, asks for objections and gets acceptance from Shantanu Wadodkar. He then says the requirement set must be flushed out first, and the tiers, criteria and limit values are all illustrative. Not buildable yet — see CAND-Q-005.",
+      "routing": [
+        {
+          "repo": "wf-orchestration",
+          "area": "risk-assessment"
+        },
+        {
+          "repo": "react-frontend",
+          "area": "onboarding"
+        }
+      ]
+    },
+    {
+      "id": "CAND-DEC-007",
+      "title": "The blank Wolfsberg questionnaire PDF is removed; upload only for banks that hold one",
+      "statement": "The onboarding flow no longer offers a blank Wolfsberg questionnaire PDF. A potential partner that already holds a completed questionnaire is given the option to upload it; a partner that does not have one is not blocked and continues. This came out of the user-experience session with Norma Saenz and Mary Campos.",
+      "evidence": [
+        {
+          "location": "t:0:10:23",
+          "excerpt": "We wanted to revisit the whole NDA, make sure that we remove the blank Wolfberg questionnaire PDF. So give the option to upload it for those For the potential partners that do have it, and then if they don't, we keep moving"
+        },
+        {
+          "location": "t:0:10:23",
+          "excerpt": "We did meet with Norma and Mary Campos for user experience, and those are some of the major suggestions that we took away from that."
+        }
+      ],
+      "owner": "Joel Olivares",
+      "confidence": "low",
+      "confidence_note": "Framed as a takeaway to keep top of mind rather than a call made here, and nobody responded to it directly. It narrows Q-001 by eliminating the downloadable-template option. It may be moot: Shawn Main later says the questionnaire may not be required at all (CAND-Q-004).",
+      "routing": [
+        {
+          "repo": "react-frontend",
+          "area": "step-03-documents"
+        }
+      ]
+    },
+    {
+      "id": "CAND-DEC-008",
+      "title": "The workflow must not hard-code Vantage's requirements; Vantage is a reference only",
+      "statement": "The workflow is built so that it is not Vantage-specific. Vantage is used as a reference for what onboarding looks like, but its requirements are not the fixed shape of the product: another bank onboarding into Hazel may want a different settlement bank, and that settlement bank may impose its own requirements which must be supportable.",
+      "evidence": [
+        {
+          "location": "t:0:13:18",
+          "excerpt": "I'd kind of like to keep in mind that this workflow may not be Vantage only, right? It could be another bank that we're helping onboard into Hazel, but then that bank wants to utilize a separate settlement bank."
+        },
+        {
+          "location": "t:0:13:18",
+          "excerpt": "I want to use Vantage as a reference, but not like, you know, the hard-coded state of what we need to look like."
+        },
+        {
+          "location": "t:0:15:05",
+          "excerpt": "Sounds good. Yeah, I think I think we are good. David, I'll message you"
+        }
+      ],
+      "owner": "Shawn Main",
+      "confidence": "low",
+      "confidence_note": "Stated as something to keep in mind, not a call, and no mechanism was discussed — nothing on configuration or per-settlement-bank rules. Shantanu Wadodkar's \"Sounds good\" closes a turn covering four topics. Promoted because it constrains requirements drawn from Vantage.",
+      "routing": [
+        {
+          "repo": "wf-orchestration",
+          "area": "architecture"
+        },
+        {
+          "repo": "react-frontend",
+          "area": "onboarding"
+        }
+      ]
+    },
+    {
+      "id": "CAND-DEC-009",
+      "title": "Infrastructure is provisioned by the infrastructure team as code through CI/CD",
+      "statement": "Infrastructure that needs to be built is automated and deployed by David Gonzalez and Zeb using infrastructure as code in a traditional CI/CD process, so the build team spends its time on development rather than provisioning.",
+      "evidence": [
+        {
+          "location": "t:0:15:41",
+          "excerpt": "make sure we segregate duties. That way you guys can focus on true development, getting things built. If there's infrastructure that needs to be built, our goal is to have them automate and deploy all of that using infrastructure as code in a traditional CICD process. That way you guys don't have to spend a ton of time on that."
+        }
+      ],
+      "owner": "Shawn Main",
+      "confidence": "low",
+      "confidence_note": "Stated by Shawn Main as \"our goal\", and the actual split of duties is the agenda of a 1 o'clock call that had not happened when the meeting ended (CAND-Q-006). Promoted because it determines who owns deployment; the librarian may prefer to wait for that call.",
+      "routing": [
+        {
+          "repo": "none",
+          "area": "infrastructure"
+        }
+      ]
+    }
+  ],
+  "approved_changes": [],
+  "requested_changes": [],
+  "action_items": [
+    {
+      "id": "ACT-001",
+      "statement": "Produce one high-level architecture diagram for HOP: which Databricks components the workflow will use, which components deploy outside Databricks, the serverless components, and where data is stored.",
+      "evidence": [
+        {
+          "location": "t:0:05:41",
+          "excerpt": "We can spend time today and discuss and conclude. End of the day, we should have. One high-level diagram, really. That's where we are."
+        }
+      ],
+      "owner": "Shantanu Wadodkar",
+      "due_date": "2026-08-03"
+    },
+    {
+      "id": "ACT-002",
+      "statement": "Bring Shawn Main and David Gonzalez into the architecture design discussion.",
+      "evidence": [
+        {
+          "location": "t:0:08:17",
+          "excerpt": "A couple answers and yeah, Shawn to know, I'd like to be involved in that. And then obviously, I think David would be really helpful in that discussion as well."
+        }
+      ],
+      "owner": "Shantanu Wadodkar",
+      "due_date": "2026-08-03"
+    },
+    {
+      "id": "ACT-003",
+      "statement": "Send Shantanu Wadodkar the invitation to the 1 o'clock call with David Gonzalez and Zeb, to align on the duties and responsibilities of the infrastructure team versus the build team.",
+      "evidence": [
+        {
+          "location": "t:0:15:18",
+          "excerpt": "We have a call today at 1 o'clock, me, David, and Zeb. Shantanu, would you prefer to be on that just to kind of, so we can align on what their duties and responsibilities will be versus yours?"
+        },
+        {
+          "location": "t:0:15:41",
+          "excerpt": "Yeah, 1 o'clock our time, 2 o'clock yours. Yep. All right, I will send you that."
+        }
+      ],
+      "owner": "Shawn Main",
+      "due_date": "2026-08-03"
+    },
+    {
+      "id": "ACT-004",
+      "statement": "Message David Gonzalez around 2:30 to review the design work produced during the day.",
+      "evidence": [
+        {
+          "location": "t:0:15:05",
+          "excerpt": "David, I'll message you, you know, 2:30 around, and we'll catch up on. We'll review whatever we have as well, yeah."
+        }
+      ],
+      "owner": "Shantanu Wadodkar",
+      "due_date": "2026-08-03"
+    },
+    {
+      "id": "ACT-005",
+      "statement": "Update the prototype for the change to the NDA e-sign step and share it with the team.",
+      "evidence": [
+        {
+          "location": "t:0:17:15",
+          "excerpt": "We will update the prototype and we'll try to share that as well in one or two days based on this e-sign part."
+        }
+      ],
+      "owner": "Shantanu Wadodkar",
+      "due_date": "unknown"
+    },
+    {
+      "id": "ACT-006",
+      "statement": "Ask Aaron McWilliams to walk the team through an example RAFA/UBPR report, to confirm how the scores are produced and what the report contains.",
+      "evidence": [
+        {
+          "location": "t:0:02:55",
+          "excerpt": "Yes, I do believe that's how it works, but we can ask Aaron to show us her offer report as an example."
+        }
+      ],
+      "owner": "unknown",
+      "due_date": "unknown"
+    }
+  ],
+  "open_questions": [
+    {
+      "id": "CAND-Q-001",
+      "title": "Has Jonathan confirmed that an electronic NDA acknowledgement is acceptable?",
+      "question": "Is capturing the customer's name, title and date as an electronic agreement acceptable as acknowledgement of the NDA, instead of executing it through DocuSign? Norma Saenz sent the proposal to the team for review and is waiting to hear back from Jonathan.",
+      "evidence": [
+        {
+          "location": "t:0:11:31",
+          "excerpt": "I was just waiting to hear back from Jonathan to see if it was. That was what we were aiming towards just to make it a more seamless experience instead of having to do DocuSign several times throughout the journey if we could just do it all electronic."
+        },
+        {
+          "location": "t:0:13:18",
+          "excerpt": "Of course, if we do need wet ink or a true e-sign, then sure, for whatever, if there's a legal reason for that."
+        }
+      ],
+      "owner": "Jonathan",
+      "due_date": "unknown",
+      "confidence": "medium",
+      "confidence_note": "Only a first name is given and the source does not say what Jonathan's role is, so \"legal sign-off\" is an inference to confirm. The answer gates CAND-DEC-001: Shawn Main leaves room for a true e-sign if there is a legal reason.",
+      "blocking": [
+        "CAND-DEC-001"
+      ],
+      "routing": [
+        {
+          "repo": "wf-orchestration",
+          "area": "step-02-nda"
+        }
+      ]
+    },
+    {
+      "id": "CAND-Q-002",
+      "title": "Which Databricks components are used, and is data in a database or lakehouse tables?",
+      "question": "Which Databricks components will the end-to-end workflow leverage, which of them are serverless, and is application data stored in a database or as lakehouse tables? Raised as an open design item with the conclusion targeted for the same day.",
+      "evidence": [
+        {
+          "location": "t:0:05:41",
+          "excerpt": "What would be the serverless component? And if we are looking for setting up a data, is it going to be the data into the database? Do we want to have a database outside or is it going to be the lake? you know, like this tables into the database. So those discussions are on and we are trying to put together."
+        }
+      ],
+      "owner": "Shantanu Wadodkar",
+      "due_date": "2026-08-03",
+      "confidence": "medium",
+      "confidence_note": "Shantanu Wadodkar commits to concluding \"end of the day\" on the meeting date, so the due date is his own words — but he commits to a diagram, not to answering this. CAND-DEC-002 settles the outer choice and leaves database versus lakehouse tables open.",
+      "routing": [
+        {
+          "repo": "wf-orchestration",
+          "area": "architecture"
+        }
+      ]
+    },
+    {
+      "id": "CAND-Q-003",
+      "title": "What data is shared with a prospective partner before an NDA is in place?",
+      "question": "Between a partner's initial login and account creation and Hazel approving them, what information could be shared while no NDA has been executed? Joel Olivares raised the exposure created by deferring the full signature to the end of the journey and left it as something for the team to think about.",
+      "evidence": [
+        {
+          "location": "t:0:12:06",
+          "excerpt": "Of course, the little hiccup there would be like how much information would be potentially shared. between their initial login and creating an account and us approving them without an NDA, there could be some data there that could be potentially shared."
+        },
+        {
+          "location": "t:0:12:52",
+          "excerpt": "NDA anyway, so there is some some coverage. I just just something for us to think about."
+        }
+      ],
+      "owner": "unknown",
+      "due_date": "unknown",
+      "confidence": "high",
+      "routing": [
+        {
+          "repo": "wf-orchestration",
+          "area": "step-02-nda"
+        },
+        {
+          "repo": "react-frontend",
+          "area": "onboarding"
+        }
+      ]
+    },
+    {
+      "id": "CAND-Q-004",
+      "title": "Will the Wolfsberg questionnaire be required at all?",
+      "question": "Is the Wolfsberg questionnaire required as part of HOP onboarding, or is it dropped entirely in favour of a level of acceptance based on the bank being a regulated insured depository institution with a BSA policy on file? Shawn Main raised it twice and said the requirement set has to be settled before anything is built around it.",
+      "evidence": [
+        {
+          "location": "t:0:13:18",
+          "excerpt": "I think the same goes for something like the Wolfsburg questionnaire. I've heard that we may not even require that and let alone most banks won't have it."
+        },
+        {
+          "location": "t:0:22:26",
+          "excerpt": "So, you know, I know there's been conversations around the Wolfsburg and what we're going to do and what we're going to require. So, I mean, obviously we need to probably flush that out first"
+        }
+      ],
+      "owner": "unknown",
+      "due_date": "unknown",
+      "confidence": "high",
+      "confidence_note": "Unambiguously unresolved, and it reaches further than DEC-001: that record makes the questionnaire optional with a fallback set, while Shawn Main is contemplating removing the requirement outright, which would make the fallback unnecessary. Nobody was named to settle it.",
+      "blocking": [
+        "DEC-001"
+      ],
+      "routing": [
+        {
+          "repo": "react-frontend",
+          "area": "step-03-documents"
+        },
+        {
+          "repo": "wf-orchestration",
+          "area": "step-03-documents"
+        }
+      ]
+    },
+    {
+      "id": "CAND-Q-005",
+      "title": "What are the membership stages, what qualifies a bank for each, and what limits apply?",
+      "question": "How many onboarding stages are there, what does a bank get at each one, what risk criteria qualify it, and what transaction limits and permitted use cases attach to each stage? Chris Colson proposed a three-stage model taken from The Clearing House's RTP onboarding; Shawn Main accepted the risk-adjusted direction but said the requirements still have to be worked out.",
+      "evidence": [
+        {
+          "location": "t:0:18:20",
+          "excerpt": "would it make sense to break that up just so you could show more membership up front without having them to go through all of the due diligence and maybe not even transact? they can kind of move along with their own pace if you would. That was just the thought."
+        },
+        {
+          "location": "t:0:19:46",
+          "excerpt": "So I wanted to see if we could think about that risk adjusted approach. That way it's easier for banks to onboard and start leveraging it without having to go through a ton of questionnaires and other things."
+        }
+      ],
+      "owner": "unknown",
+      "due_date": "unknown",
+      "confidence": "high",
+      "confidence_note": "Clearly unresolved — Shawn Main asks for thoughts and closes with \"we need to probably flush that out first\". Nobody was assigned it. It is the specification CAND-DEC-006 needs before any of it can be built.",
+      "blocking": [
+        "CAND-DEC-006"
+      ],
+      "routing": [
+        {
+          "repo": "wf-orchestration",
+          "area": "onboarding"
+        }
+      ]
+    },
+    {
+      "id": "CAND-Q-006",
+      "title": "How are duties split between the infrastructure team and the build team?",
+      "question": "What are the respective duties and responsibilities of David Gonzalez and Zeb on infrastructure versus Shantanu Wadodkar's build team on development? Deferred to a 1 o'clock call on the day of the meeting.",
+      "evidence": [
+        {
+          "location": "t:0:15:18",
+          "excerpt": "so we can align on what their duties and responsibilities will be versus yours?"
+        },
+        {
+          "location": "t:0:15:41",
+          "excerpt": "Again, the goal of that call is, yeah, make sure we segregate duties."
+        }
+      ],
+      "owner": "Shawn Main",
+      "due_date": "2026-08-03",
+      "confidence": "medium",
+      "confidence_note": "Shawn Main convenes the call and sets its goal, so ownership of holding it is clear, but nobody was named to record the outcome. The date is the meeting date because the call was \"today at 1 o'clock\".",
+      "routing": [
+        {
+          "repo": "none",
+          "area": "infrastructure"
+        }
+      ]
+    },
+    {
+      "id": "CAND-Q-007",
+      "title": "Are RAFA scores generated quarterly as a fixed set of scores?",
+      "question": "Are the RAFA scores produced once a quarter, and are they a fixed set of scores? Asked directly by Smital Lunawat; Joel Olivares believed so but did not confirm it and proposed asking Aaron McWilliams to show an example report.",
+      "evidence": [
+        {
+          "location": "t:0:01:04",
+          "excerpt": "Like, I guess the Rafa scores are generated every quarter and they are a fixed set of scores, right?"
+        },
+        {
+          "location": "t:0:02:55",
+          "excerpt": "Yes, I do believe that's how it works, but we can ask Aaron to show us her offer report as an example."
+        }
+      ],
+      "owner": "unknown",
+      "due_date": "unknown",
+      "confidence": "high",
+      "confidence_note": "Answered with a belief, not a confirmation, and referred to Aaron McWilliams, who was absent and never accepted it (ACT-006). The answer matters for how often a bank's risk-adjusted limits can change under CAND-DEC-006.",
+      "routing": [
+        {
+          "repo": "wf-orchestration",
+          "area": "rafa-report"
+        }
+      ]
+    }
+  ],
+  "superseded_decisions": [],
+  "not_promoted": [
+    {
+      "topic": "Dropping the Wolfsberg questionnaire requirement entirely in favour of accepting a bank's BSA policy and regulated status",
+      "evidence": [
+        {
+          "location": "t:0:19:46",
+          "excerpt": "I think that might align a little bit with us potentially eliminating something like the Wolfsburg questionnaire and just having a level of acceptance because, you know, they've uploaded their BSA policy, they're, you know, they're an IDI, so they're an insured bank, they're regulated, etc. Yeah, so how much do we really need to know as a network? Probably less than we think."
+        }
+      ],
+      "reason": "no_agreement_reached",
+      "note": "Raised twice by Shawn Main and hedged both times (\"potentially\", \"we may not even require that\"), then handed to a future discussion. If it lands it reverses DEC-001 rather than narrowing it. Recorded as CAND-Q-004 so the conflict stays visible."
+    },
+    {
+      "topic": "A bank without a Wolfsberg questionnaire is not blocked and continues through the flow",
+      "evidence": [
+        {
+          "location": "t:0:10:23",
+          "excerpt": "For the potential partners that do have it, and then if they don't, we keep moving, so..."
+        }
+      ],
+      "reason": "restates_existing_record",
+      "note": "This is DEC-001, restated by Joel Olivares as a reminder from Friday's discussion. Only the new part — removing the blank questionnaire PDF — is promoted, as CAND-DEC-007."
+    },
+    {
+      "topic": "The three-stage membership model taken from The Clearing House RTP onboarding",
+      "evidence": [
+        {
+          "location": "t:0:18:20",
+          "excerpt": "One would be the network membership, and you just basically have a little bit of information about who you are, but you can't really do anything, but you're a member. So when you're ready to do something, you would kind of move on to phase two. Then phase two would be kind of that networking, permissioning, and diligence."
+        }
+      ],
+      "reason": "no_agreement_reached",
+      "note": "Chris Colson's proposal, offered as \"just the thought\". Shawn Main called it a good point but answered with a risk-adjusted limits model rather than adopting the three stages. The direction is CAND-DEC-006; the stages themselves are CAND-Q-005."
+    },
+    {
+      "topic": "An automatic $10 million a month transaction limit on acceptance",
+      "evidence": [
+        {
+          "location": "t:0:19:46",
+          "excerpt": "and that scores fine, you automatically get $10 million a month or something like that"
+        }
+      ],
+      "reason": "speculation_without_commitment",
+      "note": "Offered as an illustration of the shape of the model, hedged with \"or something like that\", by analogy to the $50,000 a consumer gets on signing up to Coinbase. No limit value was agreed. Do not let this figure reach a spec."
+    },
+    {
+      "topic": "Signing one single major document containing everything instead of a separate NDA",
+      "evidence": [
+        {
+          "location": "t:0:12:06",
+          "excerpt": "I think that the goal there was to have one, have the partner sign one major document and have everything in it instead of, you know, signing an NDA initially and then moving on."
+        }
+      ],
+      "reason": "speculation_without_commitment",
+      "note": "Joel Olivares calls it the goal, then raises the pre-NDA data exposure it creates and leaves that open. What was agreed is narrower: electronic acknowledgement at the NDA step, one full signature at the end (CAND-DEC-001)."
+    },
+    {
+      "topic": "Looping back to a partner through CoverBase for extra due diligence during the residual risk assessment",
+      "evidence": [
+        {
+          "location": "t:0:10:23",
+          "excerpt": "And I'll figure out another way to get a, if I need more due diligence, I'll figure something out within cover base as we do a residual risk assessment, maybe loop back to the partner and say, can you just answer this question for us or something"
+        }
+      ],
+      "reason": "speculation_without_commitment",
+      "note": "Joel Olivares says he will figure something out; the mechanism, the trigger and whether the loop-back lives in HOP or in CoverBase are all undetermined. Nothing here is buildable."
+    },
+    {
+      "topic": "Whether the RAFA report app is embedded in the HOP code base or kept separate",
+      "evidence": [
+        {
+          "location": "t:0:08:17",
+          "excerpt": "And whether it's embedded or just a part of the code base, I don't know if that necessarily matters"
+        }
+      ],
+      "reason": "explicitly_parked",
+      "note": "Shawn Main states the constraint that matters — run it on Hazel's infrastructure (CAND-DEC-004) — and explicitly declines to settle the packaging."
+    }
+  ],
+  "final_takeaways": [
+    "Nothing in this delta is authoritative. Every item is a candidate for librarian review.",
+    "9 candidate decisions, 7 open questions, 6 action items, 7 items deliberately not promoted.",
+    "The substantive change is CAND-DEC-001: the NDA becomes an electronic acknowledgement rather than a DocuSign e-signature, with one full signature at the end. The existing prototype models the NDA as a multi-state signing flow, so this is a build change (ACT-005).",
+    "CAND-Q-004 conflicts with DEC-001. Shawn Main is contemplating dropping the Wolfsberg questionnaire requirement outright, which would make DEC-001's fallback question set unnecessary rather than optional.",
+    "CAND-DEC-002 and CAND-DEC-003 are the first architectural calls in the ledger: everything inside Databricks on LakeBase, with authentication and the public UI outside it.",
+    "Three candidates are low confidence: CAND-DEC-007 (a UX takeaway restated, not decided here), CAND-DEC-008 (a design constraint with no mechanism) and CAND-DEC-009 (pre-empted by a call that had not yet happened).",
+    "CAND-DEC-002 bears on Q-002 in the registry — whether intake documents must be stored in Databricks — without answering it directly."
+  ],
+  "implementation_recommended": false,
+  "blocking_reasons": [
+    "All candidates require librarian approval before any record or ticket can be created.",
+    "CAND-DEC-001 is gated on Jonathan confirming that an electronic acknowledgement is acceptable in place of DocuSign (CAND-Q-001).",
+    "CAND-DEC-006 has no specification behind it — the stages, criteria and limits are all open (CAND-Q-005) — and CAND-DEC-005 explicitly says to keep building minimally until they are settled.",
+    "Only 2 of the 11 parsed transcripts have been extracted, so an earlier position this meeting changes may exist in the record without a DEC- id to supersede. No prior decision establishing DocuSign as the NDA mechanism exists in the registry, so CAND-DEC-001 cannot cite a supersedes_id."
+  ]
+}
