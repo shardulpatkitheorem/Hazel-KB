@@ -38,8 +38,8 @@
       "area": "step-03-documents"
     }
   ],
-  "spec_impact": "pending",
-  "implemented_by": [],
+  "spec_impact": "change:wolfsberg-optional-fallback",
+  "implemented_by": ["https://github.com/shardulpatkitheorem/hop-frontend-demo/pull/2"],
   "supersedes": null,
   "superseded_by": null,
   "approval": {

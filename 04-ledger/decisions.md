@@ -1,7 +1,7 @@
 <!-- GENERATED FILE — DO NOT EDIT.
      Source of truth: 04-ledger/decisions/*.json
      Regenerate:      python .ai/checks/build-registries.py
-     Records hash:    5e99956aa00076e4 -->
+     Records hash:    9e4f16605b76d7f1 -->
 
 # Decision Registry
 
@@ -13,7 +13,7 @@ Ordered by decision date. Decision IDs are identifiers, not sequence — never i
 
 | ID | Decision | Decided | Owner | Routes to | Spec |
 |---|---|---|---|---|---|
-| `DEC-001` | The Wolfsberg questionnaire is not mandatory; a fallback question set is asked in Hazel onboarding | 2026-07-27 | Joel Olivares | react-frontend/step-03-documents, wf-orchestration/step-03-documents | ⚠ pending |
+| `DEC-001` | The Wolfsberg questionnaire is not mandatory; a fallback question set is asked in Hazel onboarding | 2026-07-27 | Joel Olivares | react-frontend/step-03-documents, wf-orchestration/step-03-documents | change:wolfsberg-optional-fallback |
 | `DEC-002` | Signing the NDA in Hazel onboarding satisfies the Vanta trust-center NDA requirement | 2026-07-27 | Shawn | integration-wrapper/vanta, wf-orchestration/step-02-nda | ⚠ pending |
 | `DEC-003` | CoverBase risk scoring is internal-only; the member portal shows a general status | 2026-07-27 | unknown | react-frontend/member-portal, wf-orchestration/risk-assessment | ⚠ pending |
 | `DEC-004` | The bank confirms, corrects or declines CoverBase-prepared answers, with the source document shown | 2026-07-27 | unknown | react-frontend/step-04-risk-questions, integration-wrapper/coverbase | ⚠ pending |
@@ -28,7 +28,8 @@ A bank that does not hold a Wolfsberg questionnaire is not blocked. It answers a
 - **Source** `01-transcripts/daily-calls/parsed/2026-07-27-daily-hop-standup.md` (2026-07-27)
 - **Evidence** `t:0:16:02`, `t:0:27:38`, `t:0:28:04`
 - **Routes to** react-frontend/step-03-documents, wf-orchestration/step-03-documents
-- **Spec impact** pending
+- **Spec impact** change:wolfsberg-optional-fallback
+- **Implemented by** https://github.com/shardulpatkitheorem/hop-frontend-demo/pull/2
 - **Approved by** Shardul Patki on 2026-08-03
 
 ### DEC-002 — Signing the NDA in Hazel onboarding satisfies the Vanta trust-center NDA requirement
