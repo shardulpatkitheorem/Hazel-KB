@@ -1,0 +1,108 @@
+{
+  "schema_version": "1.0",
+  "meeting_id": "2026-08-03-daily-hop-standup",
+  "delta_path": "meetings/2026-08-03-daily-hop-standup/meeting-delta.json",
+  "delta_sha256": "04ad7d2dcd26423d75363f3b25a4b9a89b9f6c22aa11ad3882f7e89f231f8b25",
+  "reviewed_by": "Shardul Patki",
+  "reviewed_at": "2026-08-04T21:24:21Z",
+  "outcomes": [
+    {
+      "candidate_id": "CAND-DEC-001",
+      "outcome": "accepted",
+      "record_id": "DEC-005"
+    },
+    {
+      "candidate_id": "CAND-DEC-002",
+      "outcome": "deferred",
+      "reason": "They will be finalized in the future."
+    },
+    {
+      "candidate_id": "CAND-DEC-003",
+      "outcome": "accepted",
+      "record_id": "DEC-006"
+    },
+    {
+      "candidate_id": "CAND-DEC-004",
+      "outcome": "deferred",
+      "reason": "They will be finalized in the future."
+    },
+    {
+      "candidate_id": "CAND-DEC-005",
+      "outcome": "deferred",
+      "reason": "They will be finalized in the future."
+    },
+    {
+      "candidate_id": "CAND-DEC-006",
+      "outcome": "deferred",
+      "reason": "They will be finalized in the future."
+    },
+    {
+      "candidate_id": "CAND-DEC-007",
+      "outcome": "accepted",
+      "record_id": "DEC-007"
+    },
+    {
+      "candidate_id": "CAND-DEC-008",
+      "outcome": "accepted",
+      "record_id": "DEC-008"
+    },
+    {
+      "candidate_id": "CAND-DEC-009",
+      "outcome": "deferred",
+      "reason": "They will be finalized in the future."
+    },
+    {
+      "candidate_id": "CAND-Q-001",
+      "outcome": "accepted_amended",
+      "record_id": "Q-006",
+      "amendments": [
+        {
+          "field": "owner",
+          "from": "Jonathan",
+          "to": "unknown",
+          "note": "Owner rule. Jonathan does not speak in this meeting; Norma Saenz relays his suggestion and awaits his answer. A relayed position with the person silent is unknown."
+        }
+      ]
+    },
+    {
+      "candidate_id": "CAND-Q-002",
+      "outcome": "accepted",
+      "record_id": "Q-007"
+    },
+    {
+      "candidate_id": "CAND-Q-003",
+      "outcome": "accepted",
+      "record_id": "Q-008"
+    },
+    {
+      "candidate_id": "CAND-Q-004",
+      "outcome": "rejected",
+      "reason": "Not relevant."
+    },
+    {
+      "candidate_id": "CAND-Q-005",
+      "outcome": "accepted_amended",
+      "record_id": "Q-009",
+      "amendments": [
+        {
+          "field": "blocking",
+          "from": "[\"CAND-DEC-006\"]",
+          "to": "[]",
+          "note": "CAND-DEC-006 was deferred in this review, so no decision id exists for the question to block. The question text is unaltered."
+        }
+      ]
+    },
+    {
+      "candidate_id": "CAND-Q-006",
+      "outcome": "accepted",
+      "record_id": "Q-010"
+    },
+    {
+      "candidate_id": "CAND-Q-007",
+      "outcome": "rejected",
+      "reason": "Not relevant."
+    }
+  ],
+  "not_promoted_reviewed": true,
+  "note": "9 accepted (4 decisions, 5 questions), 5 deferred, 2 rejected. Q-009 records the membership stages, criteria and limits; the dependency it was extracted with — blocking CAND-DEC-006, the risk-adjusted onboarding decision — was dropped because that decision was deferred. If CAND-DEC-006 is promoted in a later review, restore the block. CAND-Q-004 (whether the Wolfsberg questionnaire is required at all) was rejected as not relevant; it was the candidate flagged as conflicting with DEC-001, so that conflict is not carried into the ledger. DEC-007 narrows the existing Q-001 by removing the downloadable-template option without closing it. Nothing was added by the librarian beyond the extractor's candidates."
+}

@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0",
+  "id": "Q-008",
+  "title": "What data is shared with a prospective partner before an NDA is in place?",
+  "question": "Between a partner's initial login and account creation and Hazel approving them, what information could be shared while no NDA has been executed? Joel Olivares raised the exposure created by deferring the full signature to the end of the journey and left it as something for the team to think about.",
+  "status": "open",
+  "owner": "unknown",
+  "raised_on": "2026-08-03",
+  "recorded_on": "2026-08-04",
+  "due_date": "unknown",
+  "origin": {
+    "kind": "meeting",
+    "meeting_id": "2026-08-03-daily-hop-standup",
+    "transcript_path": "01-transcripts/daily-calls/parsed/2026-08-03-daily-hop-standup.md",
+    "meeting_date": "2026-08-03",
+    "content_sha256": "63ca4d4307ea494acfd867d33404f1c5a948fb4ac3219d78590adff26db7638c"
+  },
+  "evidence": [
+    {
+      "location": "t:0:12:06",
+      "excerpt": "Of course, the little hiccup there would be like how much information would be potentially shared. between their initial login and creating an account and us approving them without an NDA, there could be some data there that could be potentially shared."
+    },
+    {
+      "location": "t:0:12:52",
+      "excerpt": "NDA anyway, so there is some some coverage. I just just something for us to think about."
+    }
+  ],
+  "blocking": [],
+  "routing": [
+    {
+      "repo": "wf-orchestration",
+      "area": "step-02-nda"
+    },
+    {
+      "repo": "react-frontend",
+      "area": "onboarding"
+    }
+  ],
+  "answer": null
+}

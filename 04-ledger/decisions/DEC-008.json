@@ -1,0 +1,49 @@
+{
+  "schema_version": "1.0",
+  "id": "DEC-008",
+  "title": "The workflow must not hard-code Vantage's requirements; Vantage is a reference only",
+  "statement": "The workflow is built so that it is not Vantage-specific. Vantage is used as a reference for what onboarding looks like, but its requirements are not the fixed shape of the product: another bank onboarding into Hazel may want a different settlement bank, and that settlement bank may impose its own requirements which must be supportable.",
+  "status": "active",
+  "decided_on": "2026-08-03",
+  "recorded_on": "2026-08-04",
+  "owner": "Shawn Main",
+  "origin": {
+    "kind": "meeting",
+    "meeting_id": "2026-08-03-daily-hop-standup",
+    "transcript_path": "01-transcripts/daily-calls/parsed/2026-08-03-daily-hop-standup.md",
+    "meeting_date": "2026-08-03",
+    "content_sha256": "63ca4d4307ea494acfd867d33404f1c5a948fb4ac3219d78590adff26db7638c"
+  },
+  "evidence": [
+    {
+      "location": "t:0:13:18",
+      "excerpt": "I'd kind of like to keep in mind that this workflow may not be Vantage only, right? It could be another bank that we're helping onboard into Hazel, but then that bank wants to utilize a separate settlement bank."
+    },
+    {
+      "location": "t:0:13:18",
+      "excerpt": "I want to use Vantage as a reference, but not like, you know, the hard-coded state of what we need to look like."
+    },
+    {
+      "location": "t:0:15:05",
+      "excerpt": "Sounds good. Yeah, I think I think we are good. David, I'll message you"
+    }
+  ],
+  "routing": [
+    {
+      "repo": "wf-orchestration",
+      "area": "architecture"
+    },
+    {
+      "repo": "react-frontend",
+      "area": "onboarding"
+    }
+  ],
+  "spec_impact": "pending",
+  "implemented_by": [],
+  "supersedes": null,
+  "superseded_by": null,
+  "approval": {
+    "approved_by": "Shardul Patki",
+    "approved_at": "2026-08-04T21:24:21Z"
+  }
+}
