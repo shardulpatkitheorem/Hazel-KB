@@ -16,7 +16,7 @@ AI outputs    ─┘                └─> GitHub Actions / LFS
 ## Repository structure
 
 - `00-context/`: client-provided source material and architecture context
-- `01-transcripts/`: offsite and dated daily-call transcripts
+- `01-transcripts/`: offsite, dated daily-call, and internal design-session transcripts
 - `02-design-and-workflows/`: workflow prototypes, mocks, and design specifications
 - `03-intermediate-ai-outputs/`: reusable prompts and proof-of-concept outputs
 - `04-ledger/`: append-only meeting deltas, decisions, open questions, and durable lessons
@@ -30,6 +30,7 @@ See [Hazel Meeting-to-Workflow AI Loop](docs/AI-MEETING-TO-WORKFLOW-LOOP.md) for
 
 - [Client-shared Vantage context](00-context/client-shared/README.md)
 - [Daily call transcripts](01-transcripts/daily-calls/README.md)
+- [Internal design sessions](01-transcripts/internal/README.md)
 - [Design and workflow assets](02-design-and-workflows/README.md)
 - [Prototype development specification](02-design-and-workflows/PROTOTYPE-SPEC.md)
 

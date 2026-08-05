@@ -5,7 +5,7 @@
 
 # Open Questions
 
-10 outstanding · 0 answered · generated 2026-08-04
+10 outstanding · 0 answered
 
 ## Outstanding
 
