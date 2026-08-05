@@ -42,6 +42,30 @@ DEC_REF = re.compile(r"\bDEC-([0-9]{3,})\b", re.IGNORECASE)
 CHANGE_REF = re.compile(r"openspec/changes/([a-z0-9][a-z0-9-]*)", re.IGNORECASE)
 
 
+def regenerate_registries() -> bool:
+    """Regenerate the markdown registries after writing to the ledger.
+
+    Any script that changes a record leaves decisions.md and open-questions.md
+    stale, and CI rejects a stale registry. Doing it here rather than printing a
+    reminder removes a step nobody remembers.
+    """
+    script = Path(__file__).resolve().parent / "build-registries.py"
+    if not script.is_file():
+        sys.stderr.write(f"warning: {script.name} not found; registries not "
+                         f"regenerated\n")
+        return False
+    result = subprocess.run([sys.executable, str(script)],
+                            capture_output=True, text=True, cwd=REPO)
+    if result.returncode != 0:
+        sys.stderr.write("warning: build-registries.py failed:\n"
+                         + result.stderr.strip() + "\n")
+        return False
+    for line in result.stdout.splitlines():
+        if line.startswith("WROTE"):
+            print(line)
+    return True
+
+
 def die(message: str, hint: str = "") -> None:
     sys.stderr.write(f"error: {message}\n")
     if hint:
@@ -199,10 +223,10 @@ def main() -> int:
         return 0
 
     print(f"DONE     {len(updated)} decision(s) linked")
+    regenerate_registries()
     print()
     print("Next:")
     print("  python .ai/checks/validate.py")
-    print("  python .ai/checks/build-registries.py")
     print("  git add -A && git commit -m \"feat(ledger): link decisions to "
           "their implementing PRs\"")
     return 0

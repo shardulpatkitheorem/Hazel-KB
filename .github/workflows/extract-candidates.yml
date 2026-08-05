@@ -130,7 +130,7 @@ jobs:
             # ledger, and cannot, because Write is scoped to the delta it
             # creates via the skill's own procedure.
             claude -p "/kb-extract $parsed" \
-              --allowedTools "Read,Grep,Glob,Bash(python .ai/checks/*)" \
+              --allowedTools "Read,Grep,Glob,Bash(python .ai/checks/*),Write" \
               --max-turns 40 \
               --output-format json \
               > "/tmp/extract-$(basename "$parsed").json" || {
@@ -151,24 +151,35 @@ jobs:
       - name: Summarise what was extracted
         if: steps.find.outputs.none == 'false'
         id: summary
+        env:
+          PARSED_FILES: ${{ steps.ingest.outputs.parsed }}
         run: |
           set -euo pipefail
           python - <<'PY' >> "$GITHUB_OUTPUT"
-          import json, pathlib, subprocess
+          import json, os, pathlib
 
-          changed = subprocess.run(
-              ["git", "status", "--porcelain", "meetings/"],
-              capture_output=True, text=True).stdout.split()
-          deltas = sorted(
-              p for p in pathlib.Path("meetings").glob("*/meeting-delta.json")
-              if p.name == "meeting-delta.json"
-          )
+          # Only the deltas produced by THIS run. Globbing meetings/ counts every
+          # delta in the repository, which made the PR title report the whole
+          # ledger's candidate count rather than what was just extracted.
+          wanted = set()
+          for line in os.environ.get("PARSED_FILES", "").splitlines():
+              line = line.strip()
+              if not line:
+                  continue
+              # 01-transcripts/<collection>/parsed/<id>.md -> meetings/<id>/
+              wanted.add(pathlib.Path(line).stem)
 
           lines, total_d, total_q = [], 0, 0
-          for path in deltas:
+          for meeting_id in sorted(wanted):
+              path = pathlib.Path("meetings") / meeting_id / "meeting-delta.json"
+              if not path.is_file():
+                  lines.append(f"### `{meeting_id}`\n\n"
+                               f"- No delta was produced.\n")
+                  continue
               doc = json.loads(path.read_text())
               d = len(doc.get("decisions", []))
               q = len(doc.get("open_questions", []))
+              a = len(doc.get("action_items", []))
               n = len(doc.get("not_promoted", []))
               low = sum(1 for x in doc.get("decisions", [])
                         if x.get("confidence") == "low")
@@ -179,14 +190,14 @@ jobs:
                   f"- **{d} candidate decision(s)**"
                   + (f", {low} low confidence" if low else "")
                   + f"\n- **{q} candidate question(s)**\n"
+                  f"- {a} action item(s)\n"
                   f"- {n} item(s) the extractor deliberately did not promote\n"
                   f"- Source: `{doc['source']['transcript_path']}`\n"
               )
 
-          body = "\n".join(lines)
           print("counts=%d decision(s), %d question(s)" % (total_d, total_q))
           print("body<<PRBODY")
-          print(body)
+          print("\n".join(lines))
           print("PRBODY")
           PY
 

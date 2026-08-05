@@ -35,6 +35,30 @@ TICKETS = LEDGER / "tickets"
 TARGETS = REPO / ".ai" / "contracts" / "repo-targets.json"
 
 
+def regenerate_registries() -> bool:
+    """Regenerate the markdown registries after writing to the ledger.
+
+    Any script that changes a record leaves decisions.md and open-questions.md
+    stale, and CI rejects a stale registry. Doing it here rather than printing a
+    reminder removes a step nobody remembers.
+    """
+    script = Path(__file__).resolve().parent / "build-registries.py"
+    if not script.is_file():
+        sys.stderr.write(f"warning: {script.name} not found; registries not "
+                         f"regenerated\n")
+        return False
+    result = subprocess.run([sys.executable, str(script)],
+                            capture_output=True, text=True, cwd=REPO)
+    if result.returncode != 0:
+        sys.stderr.write("warning: build-registries.py failed:\n"
+                         + result.stderr.strip() + "\n")
+        return False
+    for line in result.stdout.splitlines():
+        if line.startswith("WROTE"):
+            print(line)
+    return True
+
+
 def die(message: str, hint: str = "") -> None:
     sys.stderr.write(f"error: {message}\n")
     if hint:
@@ -361,11 +385,11 @@ def dispatch(decision_id: str, dry: bool, use_github: bool,
     # spec_impact stays "pending" until a spec change lands. Record the link.
     print()
     print(f"DONE     {len(created)} ticket(s) created for {decision_id}")
+    regenerate_registries()
     print()
     print("Next:")
     print("  python .ai/checks/validate.py")
-    print("  python .ai/checks/build-registries.py")
-    print(f"  git add 04-ledger/tickets/ && git commit -m "
+    print(f"  git add -A && git commit -m "
           f"\"feat(ledger): dispatch {decision_id}\"")
     return 0
 
