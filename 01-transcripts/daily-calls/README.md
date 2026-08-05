@@ -24,6 +24,7 @@ Searchable transcripts from Hazel and Theorem Labs working sessions.
 | 2026-07-30 | Daily HOP Standup | [Markdown](parsed/2026-07-30-daily-hop-standup.md) | [Text](raw/2026-07-30-daily-hop-standup.txt) |
 | 2026-07-31 | Daily HOP Standup | [Markdown](parsed/2026-07-31-daily-hop-standup.md) | [Text](raw/2026-07-31-daily-hop-standup.txt) |
 | 2026-08-03 | Daily HOP Standup | [Markdown](parsed/2026-08-03-daily-hop-standup.md) | [Text](raw/2026-08-03-daily-hop-standup.txt) |
+| 2026-08-04 | Daily HOP Standup | [Markdown](parsed/2026-08-04-daily-hop-standup.md) | [Text](raw/2026-08-04-daily-hop-standup.txt) |
 
 ## Ingestion convention
 
