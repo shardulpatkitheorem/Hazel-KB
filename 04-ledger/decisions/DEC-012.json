@@ -1,0 +1,57 @@
+{
+  "schema_version": "1.0",
+  "id": "DEC-012",
+  "title": "The NDA appears in the document repository as a completed activity, with a downloadable copy",
+  "statement": "The mutual NDA is surfaced to the applicant bank in the document repository as an activity record showing that it has been completed, rather than only inside the NDA step. The bank is additionally given the option to download the document, because a bank may want a PDF copy for its own records.",
+  "status": "active",
+  "decided_on": "2026-08-04",
+  "recorded_on": "2026-08-05",
+  "owner": "Aaron McWilliams",
+  "origin": {
+    "kind": "meeting",
+    "meeting_id": "2026-08-04-daily-hop-standup",
+    "transcript_path": "01-transcripts/daily-calls/parsed/2026-08-04-daily-hop-standup.md",
+    "meeting_date": "2026-08-04",
+    "content_sha256": "66282e1dfce0ed722d5e7148dc6b7b5026a1c0b19725d68da56948232d66af4c"
+  },
+  "evidence": [
+    {
+      "location": "t:0:16:43",
+      "excerpt": "we wanted to understand if under this tab should we be showing the mutual NDA or is it fine if we are showing it under the document repository?"
+    },
+    {
+      "location": "t:0:17:27",
+      "excerpt": "Yeah, just the activity that this has been done."
+    },
+    {
+      "location": "t:0:17:33",
+      "excerpt": "I think that's good."
+    },
+    {
+      "location": "t:0:17:39",
+      "excerpt": "Sometimes people might want the like a PDF version for themselves, which I think maybe Norma mentioned. So will there be a way for them to download it at some point or?"
+    },
+    {
+      "location": "t:0:17:52",
+      "excerpt": "Yeah, we can do that. We can provide them the option to download the document over here."
+    }
+  ],
+  "routing": [
+    {
+      "repo": "react-frontend",
+      "area": "document-repository"
+    },
+    {
+      "repo": "wf-orchestration",
+      "area": "step-02-nda"
+    }
+  ],
+  "spec_impact": "pending",
+  "implemented_by": [],
+  "supersedes": null,
+  "superseded_by": null,
+  "approval": {
+    "approved_by": "Shardul Patki",
+    "approved_at": "2026-08-05T23:24:49Z"
+  }
+}

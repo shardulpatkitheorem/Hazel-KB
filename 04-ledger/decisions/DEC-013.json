@@ -1,0 +1,45 @@
+{
+  "schema_version": "1.0",
+  "id": "DEC-013",
+  "title": "The Wolfsberg upload is labelled \"if applicable\"; one other document at that step stays required",
+  "statement": "The documents step no longer presents the Wolfsberg upload as something the bank must provide. It is relabelled to read as \"if applicable, completed Wolfsberg correspondent bank due diligence questionnaire\", because the current wording still implies an upload is needed. One other document at that step is explicitly not made optional and remains required.",
+  "status": "active",
+  "decided_on": "2026-08-04",
+  "recorded_on": "2026-08-05",
+  "owner": "Joel Olivares",
+  "origin": {
+    "kind": "meeting",
+    "meeting_id": "2026-08-04-daily-hop-standup",
+    "transcript_path": "01-transcripts/daily-calls/parsed/2026-08-04-daily-hop-standup.md",
+    "meeting_date": "2026-08-04",
+    "content_sha256": "66282e1dfce0ed722d5e7148dc6b7b5026a1c0b19725d68da56948232d66af4c"
+  },
+  "evidence": [
+    {
+      "location": "t:0:15:56",
+      "excerpt": "for the documents, we previously we were showing them as mandatory, but now they are not. Only this one is required. So. Should we remove it or is this also optional?"
+    },
+    {
+      "location": "t:0:16:25",
+      "excerpt": "No, that one can definitely not be optional. That one we do need to require. But on the top one, maybe say if applicable, completed Wolfberg correspondent bank due diligence questionnaire. Like, because the way it is right now, it still implies that they need to upload it."
+    },
+    {
+      "location": "t:0:23:58",
+      "excerpt": "And Olivia, you got a couple of changes with the e-signature and the Wolfsburg optional you'll make. And yeah, we confirmed the Wolfsburg is optional."
+    }
+  ],
+  "routing": [
+    {
+      "repo": "react-frontend",
+      "area": "step-03-documents"
+    }
+  ],
+  "spec_impact": "pending",
+  "implemented_by": [],
+  "supersedes": null,
+  "superseded_by": null,
+  "approval": {
+    "approved_by": "Shardul Patki",
+    "approved_at": "2026-08-05T23:24:49Z"
+  }
+}

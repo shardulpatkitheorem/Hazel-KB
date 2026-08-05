@@ -1,0 +1,57 @@
+{
+  "schema_version": "1.0",
+  "id": "DEC-009",
+  "title": "No Wolfsberg question set is asked of banks that do not hold the questionnaire",
+  "statement": "The questions contained in the Wolfsberg correspondent bank due diligence questionnaire are not asked anywhere in Hazel onboarding. A bank that holds a completed questionnaire may upload it, and that data is run against the CoverBase controls to produce a residual risk score. A bank that does not hold one is asked nothing in its place — it proceeds through the standard due diligence and risk questions, which every applicant answers regardless. A weaker residual risk score is accepted as the consequence.",
+  "status": "active",
+  "decided_on": "2026-08-04",
+  "recorded_on": "2026-08-05",
+  "owner": "unknown",
+  "origin": {
+    "kind": "meeting",
+    "meeting_id": "2026-08-04-daily-hop-standup",
+    "transcript_path": "01-transcripts/daily-calls/parsed/2026-08-04-daily-hop-standup.md",
+    "meeting_date": "2026-08-04",
+    "content_sha256": "66282e1dfce0ed722d5e7148dc6b7b5026a1c0b19725d68da56948232d66af4c"
+  },
+  "evidence": [
+    {
+      "location": "t:0:19:51",
+      "excerpt": "are these the questions that we are going to require, even though they do have it? So what about the questions in the Wolfberg? Where are those going to go in?"
+    },
+    {
+      "location": "t:0:20:06",
+      "excerpt": "We're not going to address them at all. We're not going to ask for them. That was a decision by Shawn and people above our pay grade that they want to make it as smooth as possible."
+    },
+    {
+      "location": "t:0:20:06",
+      "excerpt": "So we just decided all together to just take out the Wolfberg. If they have it, great. We'll get it and we'll use that data to create, run it against our controls and get a good residual risk score. If they don't have it, we're not going to ask questions about it."
+    },
+    {
+      "location": "t:0:21:37",
+      "excerpt": "Yeah, actually."
+    }
+  ],
+  "routing": [
+    {
+      "repo": "react-frontend",
+      "area": "step-03-documents"
+    },
+    {
+      "repo": "wf-orchestration",
+      "area": "step-03-documents"
+    },
+    {
+      "repo": "integration-wrapper",
+      "area": "coverbase"
+    }
+  ],
+  "spec_impact": "pending",
+  "implemented_by": [],
+  "supersedes": "DEC-001",
+  "superseded_by": null,
+  "approval": {
+    "approved_by": "Shardul Patki",
+    "approved_at": "2026-08-05T23:24:49Z"
+  }
+}

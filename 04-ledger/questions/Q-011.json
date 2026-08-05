@@ -1,0 +1,47 @@
+{
+  "schema_version": "1.0",
+  "id": "Q-011",
+  "title": "Has Tate signed off on the electronic NDA acknowledgement mock-up?",
+  "question": "Is the mock-up — name of the user, their title, the date, and their electronic acknowledgement, rendered to a PDF — acceptable as the NDA acknowledgement? Norma Saenz sent it and has had no reply. Aaron McWilliams spoke to Tate separately and relayed that signature, name and date are still required, then closed the topic with \"we'll verify that\".",
+  "status": "open",
+  "owner": "unknown",
+  "raised_on": "2026-08-04",
+  "recorded_on": "2026-08-05",
+  "due_date": "unknown",
+  "origin": {
+    "kind": "meeting",
+    "meeting_id": "2026-08-04-daily-hop-standup",
+    "transcript_path": "01-transcripts/daily-calls/parsed/2026-08-04-daily-hop-standup.md",
+    "meeting_date": "2026-08-04",
+    "content_sha256": "66282e1dfce0ed722d5e7148dc6b7b5026a1c0b19725d68da56948232d66af4c"
+  },
+  "evidence": [
+    {
+      "location": "t:0:05:27",
+      "excerpt": "I was just waiting for him to say if that was good"
+    },
+    {
+      "location": "t:0:05:27",
+      "excerpt": "But I haven't heard back from him. So yeah, I can send it over to you as well, Aaron."
+    },
+    {
+      "location": "t:0:05:59",
+      "excerpt": "so we'll verify that, but sounds like the NDA is figured out"
+    }
+  ],
+  "blocking": [
+    "DEC-005",
+    "DEC-010"
+  ],
+  "routing": [
+    {
+      "repo": "react-frontend",
+      "area": "step-02-nda"
+    },
+    {
+      "repo": "wf-orchestration",
+      "area": "step-02-nda"
+    }
+  ],
+  "answer": null
+}

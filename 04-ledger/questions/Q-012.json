@@ -1,0 +1,38 @@
+{
+  "schema_version": "1.0",
+  "id": "Q-012",
+  "title": "Which document at the documents step remains mandatory?",
+  "question": "Joel Olivares ruled that one document at the documents step cannot be made optional and must stay required, while the Wolfsberg upload becomes \"if applicable\". The transcript refers to it only as \"that one\" and \"this one\" against a screen share, so which document it is cannot be recovered from the source.",
+  "status": "open",
+  "owner": "unknown",
+  "raised_on": "2026-08-04",
+  "recorded_on": "2026-08-05",
+  "due_date": "unknown",
+  "origin": {
+    "kind": "meeting",
+    "meeting_id": "2026-08-04-daily-hop-standup",
+    "transcript_path": "01-transcripts/daily-calls/parsed/2026-08-04-daily-hop-standup.md",
+    "meeting_date": "2026-08-04",
+    "content_sha256": "66282e1dfce0ed722d5e7148dc6b7b5026a1c0b19725d68da56948232d66af4c"
+  },
+  "evidence": [
+    {
+      "location": "t:0:15:56",
+      "excerpt": "we previously we were showing them as mandatory, but now they are not. Only this one is required. So. Should we remove it or is this also optional?"
+    },
+    {
+      "location": "t:0:16:25",
+      "excerpt": "No, that one can definitely not be optional. That one we do need to require."
+    }
+  ],
+  "blocking": [
+    "DEC-013"
+  ],
+  "routing": [
+    {
+      "repo": "react-frontend",
+      "area": "step-03-documents"
+    }
+  ],
+  "answer": null
+}

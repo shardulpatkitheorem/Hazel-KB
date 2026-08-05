@@ -1,0 +1,94 @@
+{
+  "schema_version": "1.0",
+  "meeting_id": "2026-08-04-daily-hop-standup",
+  "delta_path": "meetings/2026-08-04-daily-hop-standup/meeting-delta.json",
+  "delta_sha256": "f4a73d5a822ef68bac49f87121976143f14ff1bff4b38ab52642c99b9072f067",
+  "reviewed_by": "Shardul Patki",
+  "reviewed_at": "2026-08-05T23:24:49Z",
+  "outcomes": [
+    {
+      "candidate_id": "CAND-DEC-001",
+      "outcome": "accepted_amended",
+      "record_id": "DEC-009",
+      "amendments": [
+        {
+          "field": "owner",
+          "from": "Shawn Main",
+          "to": "unknown",
+          "note": "Owner rule. Joel Olivares relayed the call — \"That was a decision by Shawn and people above our pay grade\" — and Shawn was not in the meeting, so the source does not show him accepting it. Statement, evidence and routing carried forward unchanged."
+        }
+      ]
+    },
+    {
+      "candidate_id": "CAND-DEC-002",
+      "outcome": "accepted_amended",
+      "record_id": "DEC-010",
+      "amendments": [
+        {
+          "field": "owner",
+          "from": "Tate",
+          "to": "unknown",
+          "note": "Owner rule. Aaron McWilliams relayed the requirement from a conversation held before the meeting — \"I talked to Tate about 30 minutes ago and he said...\" — and Tate was not present. Statement, evidence and routing carried forward unchanged."
+        }
+      ]
+    },
+    {
+      "candidate_id": "CAND-DEC-003",
+      "outcome": "accepted",
+      "record_id": "DEC-011"
+    },
+    {
+      "candidate_id": "CAND-DEC-004",
+      "outcome": "accepted",
+      "record_id": "DEC-012"
+    },
+    {
+      "candidate_id": "CAND-DEC-005",
+      "outcome": "accepted",
+      "record_id": "DEC-013"
+    },
+    {
+      "candidate_id": "CAND-DEC-006",
+      "outcome": "rejected",
+      "reason": "not relevant right now"
+    },
+    {
+      "candidate_id": "CAND-DEC-007",
+      "outcome": "rejected",
+      "reason": "not relevant right now"
+    },
+    {
+      "candidate_id": "CAND-Q-001",
+      "outcome": "accepted_amended",
+      "record_id": "Q-011",
+      "amendments": [
+        {
+          "field": "owner",
+          "from": "Tate",
+          "to": "unknown",
+          "note": "Owner rule. Tate is who the question is for, not someone shown accepting it — he was absent and silent. Question text, evidence, blocking and routing carried forward unchanged."
+        }
+      ]
+    },
+    {
+      "candidate_id": "CAND-Q-002",
+      "outcome": "accepted_amended",
+      "record_id": "Q-012",
+      "amendments": [
+        {
+          "field": "owner",
+          "from": "Joel Olivares",
+          "to": "unknown",
+          "note": "Owner rule. Joel Olivares answered it in the room against a screen share but never accepted an action to resolve it for the record, and it was never posed as an open item. Question text, evidence, blocking and routing carried forward unchanged."
+        }
+      ]
+    },
+    {
+      "candidate_id": "CAND-Q-003",
+      "outcome": "accepted",
+      "record_id": "Q-013"
+    }
+  ],
+  "not_promoted_reviewed": true,
+  "note": "DEC-009 supersedes DEC-001, which is set to status superseded with superseded_by DEC-009. DEC-001's fallback-question-set clause is reversed: no equivalent question set replaces the Wolfsberg questionnaire. This likely moots Q-005, which asks whether CoverBase accepts a fallback answer payload — left open pending a separate look. Q-011 may duplicate Q-006: the same mock-up awaiting the same sign-off, attributed to \"Tate\" on 2026-08-04 and to \"Jonathan\" on 2026-08-03, with neither source establishing whether these are one person. Librarian confirmed nothing settled in the source was missed by the candidates."
+}

@@ -1,0 +1,45 @@
+{
+  "schema_version": "1.0",
+  "id": "DEC-011",
+  "title": "The e-signature is sent only on the final package, after Hazel's internal review loop closes",
+  "statement": "The end-of-journey signature is not triggered when the applicant submits. The sequence is: the bank submits, Hazel reviews internally, the internal review may raise questions and there is back-and-forth with the bank, and only once everything is final does the document go out for e-signature. The version sent for signature is therefore the final document.",
+  "status": "active",
+  "decided_on": "2026-08-04",
+  "recorded_on": "2026-08-05",
+  "owner": "unknown",
+  "origin": {
+    "kind": "meeting",
+    "meeting_id": "2026-08-04-daily-hop-standup",
+    "transcript_path": "01-transcripts/daily-calls/parsed/2026-08-04-daily-hop-standup.md",
+    "meeting_date": "2026-08-04",
+    "content_sha256": "66282e1dfce0ed722d5e7148dc6b7b5026a1c0b19725d68da56948232d66af4c"
+  },
+  "evidence": [
+    {
+      "location": "t:0:02:38",
+      "excerpt": "yesterday we got a feedback that e-sign NDA needs to be changed to just a digital click and we should have NDA at the end"
+    },
+    {
+      "location": "t:0:03:14",
+      "excerpt": "Like in our review steps, what we talked about is you submitted, then it's a Hazel review, internal review, then internal review might have some questions. So there will be to and fro. And once that is all final, we are ready and we are seeing like this is all done final. That is a time we will. Send it for resign."
+    }
+  ],
+  "routing": [
+    {
+      "repo": "wf-orchestration",
+      "area": "step-02-nda"
+    },
+    {
+      "repo": "react-frontend",
+      "area": "onboarding"
+    }
+  ],
+  "spec_impact": "pending",
+  "implemented_by": [],
+  "supersedes": null,
+  "superseded_by": null,
+  "approval": {
+    "approved_by": "Shardul Patki",
+    "approved_at": "2026-08-05T23:24:49Z"
+  }
+}

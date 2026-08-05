@@ -1,0 +1,578 @@
+{
+  "schema_version": "1.1",
+  "meeting_id": "2026-08-04-daily-hop-standup",
+  "status": "ready",
+  "source": {
+    "transcript_path": "01-transcripts/daily-calls/parsed/2026-08-04-daily-hop-standup.md",
+    "meeting_date": "2026-08-04",
+    "content_sha256": "66282e1dfce0ed722d5e7148dc6b7b5026a1c0b19725d68da56948232d66af4c"
+  },
+  "decisions": [
+    {
+      "id": "CAND-DEC-001",
+      "title": "No Wolfsberg question set is asked of banks that do not hold the questionnaire",
+      "statement": "The questions contained in the Wolfsberg correspondent bank due diligence questionnaire are not asked anywhere in Hazel onboarding. A bank that holds a completed questionnaire may upload it, and that data is run against the CoverBase controls to produce a residual risk score. A bank that does not hold one is asked nothing in its place — it proceeds through the standard due diligence and risk questions, which every applicant answers regardless. A weaker residual risk score is accepted as the consequence.",
+      "evidence": [
+        {
+          "location": "t:0:19:51",
+          "excerpt": "are these the questions that we are going to require, even though they do have it? So what about the questions in the Wolfberg? Where are those going to go in?"
+        },
+        {
+          "location": "t:0:20:06",
+          "excerpt": "We're not going to address them at all. We're not going to ask for them. That was a decision by Shawn and people above our pay grade that they want to make it as smooth as possible."
+        },
+        {
+          "location": "t:0:20:06",
+          "excerpt": "So we just decided all together to just take out the Wolfberg. If they have it, great. We'll get it and we'll use that data to create, run it against our controls and get a good residual risk score. If they don't have it, we're not going to ask questions about it."
+        },
+        {
+          "location": "t:0:21:37",
+          "excerpt": "Yeah, actually."
+        }
+      ],
+      "owner": "Shawn Main",
+      "confidence": "medium",
+      "confidence_note": "The substance is unambiguous and nobody dissented — Joel Olivares answers Diana Plata's direct question flatly, says the group decided it together, and confirms Castaneda was good with it. Two attributes are not: the source names only \"Shawn\" and Joel reports the call second-hand as made by \"Shawn and people above our pay grade\", so the owner is inferred to be Shawn Main from the registry; and this reverses the fallback-question-set clause of DEC-001, which warrants a close look before approval.",
+      "routing": [
+        {
+          "repo": "react-frontend",
+          "area": "step-03-documents"
+        },
+        {
+          "repo": "wf-orchestration",
+          "area": "step-03-documents"
+        },
+        {
+          "repo": "integration-wrapper",
+          "area": "coverbase"
+        }
+      ],
+      "supersedes_id": "DEC-001"
+    },
+    {
+      "id": "CAND-DEC-002",
+      "title": "The electronic NDA acknowledgement captures signature, name and date and is retained as a PDF",
+      "statement": "The electronic acknowledgement that replaces the DocuSign NDA must capture three things: the signature, the name and the date. The mock-up form is the name of the user, their title, the date, and their electronic acknowledgement of what they are doing. The completed acknowledgement is rendered to a PDF and kept for record keeping.",
+      "evidence": [
+        {
+          "location": "t:0:05:06",
+          "excerpt": "I talked to Tate about 30 minutes ago and he said with the NDA that what he still thinks we need is the signature, name, and date. Can we get those three things in the electronic acknowledgement?"
+        },
+        {
+          "location": "t:0:05:21",
+          "excerpt": "Yes, yes, yes, I think that we, yes."
+        },
+        {
+          "location": "t:0:05:27",
+          "excerpt": "it was like the name of the user, the individual, their title, and the date, and then their electronic acknowledgement of what they're doing, and then we could knock it down into a PDF for record keeping"
+        }
+      ],
+      "owner": "Tate",
+      "confidence": "medium",
+      "confidence_note": "Aaron McWilliams relays the requirement from Tate as a firm one and both Shantanu Wadodkar and Norma Saenz confirm it can be met, so the substance is clear. What is not settled is sign-off: Norma Saenz has not heard back on the mock-up and Aaron McWilliams closes the topic with \"we'll verify that\" (CAND-Q-001). Note also that the source lists signature, name and date, while the mock-up Norma Saenz describes has name, title and date — whether a distinct signature element is additionally required is not resolved.",
+      "routing": [
+        {
+          "repo": "react-frontend",
+          "area": "step-02-nda"
+        },
+        {
+          "repo": "wf-orchestration",
+          "area": "step-02-nda"
+        }
+      ]
+    },
+    {
+      "id": "CAND-DEC-003",
+      "title": "The e-signature is sent only on the final package, after Hazel's internal review loop closes",
+      "statement": "The end-of-journey signature is not triggered when the applicant submits. The sequence is: the bank submits, Hazel reviews internally, the internal review may raise questions and there is back-and-forth with the bank, and only once everything is final does the document go out for e-signature. The version sent for signature is therefore the final document.",
+      "evidence": [
+        {
+          "location": "t:0:02:38",
+          "excerpt": "yesterday we got a feedback that e-sign NDA needs to be changed to just a digital click and we should have NDA at the end"
+        },
+        {
+          "location": "t:0:03:14",
+          "excerpt": "Like in our review steps, what we talked about is you submitted, then it's a Hazel review, internal review, then internal review might have some questions. So there will be to and fro. And once that is all final, we are ready and we are seeing like this is all done final. That is a time we will. Send it for resign."
+        }
+      ],
+      "owner": "unknown",
+      "confidence": "medium",
+      "confidence_note": "Shantanu Wadodkar states it as settled — \"one thing for sure\", \"that's what we are putting it together in a workflow\" — and Aaron McWilliams does not object, but he is describing what the build team is implementing from feedback received the day before rather than making the call, and nobody is named as having made it. DEC-005 already establishes a single signature at the end; what is new here is the trigger being the close of internal review.",
+      "routing": [
+        {
+          "repo": "wf-orchestration",
+          "area": "step-02-nda"
+        },
+        {
+          "repo": "react-frontend",
+          "area": "onboarding"
+        }
+      ]
+    },
+    {
+      "id": "CAND-DEC-004",
+      "title": "The NDA appears in the document repository as a completed activity, with a downloadable copy",
+      "statement": "The mutual NDA is surfaced to the applicant bank in the document repository as an activity record showing that it has been completed, rather than only inside the NDA step. The bank is additionally given the option to download the document, because a bank may want a PDF copy for its own records.",
+      "evidence": [
+        {
+          "location": "t:0:16:43",
+          "excerpt": "we wanted to understand if under this tab should we be showing the mutual NDA or is it fine if we are showing it under the document repository?"
+        },
+        {
+          "location": "t:0:17:27",
+          "excerpt": "Yeah, just the activity that this has been done."
+        },
+        {
+          "location": "t:0:17:33",
+          "excerpt": "I think that's good."
+        },
+        {
+          "location": "t:0:17:39",
+          "excerpt": "Sometimes people might want the like a PDF version for themselves, which I think maybe Norma mentioned. So will there be a way for them to download it at some point or?"
+        },
+        {
+          "location": "t:0:17:52",
+          "excerpt": "Yeah, we can do that. We can provide them the option to download the document over here."
+        }
+      ],
+      "owner": "Aaron McWilliams",
+      "confidence": "medium",
+      "confidence_note": "Aaron McWilliams approves the activity-record display outright. The download is his suggestion and Pallavi Bichpuriya accepts it, but he phrases it as a question ending \"at some point or?\" and no one said when it lands or whether the downloadable artefact is the acknowledgement PDF from CAND-DEC-002 or the mutual NDA itself.",
+      "routing": [
+        {
+          "repo": "react-frontend",
+          "area": "document-repository"
+        },
+        {
+          "repo": "wf-orchestration",
+          "area": "step-02-nda"
+        }
+      ]
+    },
+    {
+      "id": "CAND-DEC-005",
+      "title": "The Wolfsberg upload is labelled \"if applicable\"; one other document at that step stays required",
+      "statement": "The documents step no longer presents the Wolfsberg upload as something the bank must provide. It is relabelled to read as \"if applicable, completed Wolfsberg correspondent bank due diligence questionnaire\", because the current wording still implies an upload is needed. One other document at that step is explicitly not made optional and remains required.",
+      "evidence": [
+        {
+          "location": "t:0:15:56",
+          "excerpt": "for the documents, we previously we were showing them as mandatory, but now they are not. Only this one is required. So. Should we remove it or is this also optional?"
+        },
+        {
+          "location": "t:0:16:25",
+          "excerpt": "No, that one can definitely not be optional. That one we do need to require. But on the top one, maybe say if applicable, completed Wolfberg correspondent bank due diligence questionnaire. Like, because the way it is right now, it still implies that they need to upload it."
+        },
+        {
+          "location": "t:0:23:58",
+          "excerpt": "And Olivia, you got a couple of changes with the e-signature and the Wolfsburg optional you'll make. And yeah, we confirmed the Wolfsburg is optional."
+        }
+      ],
+      "owner": "Joel Olivares",
+      "confidence": "medium",
+      "confidence_note": "Joel Olivares rules on both documents and Pallavi Bichpuriya accepts; Aaron McWilliams books it as a confirmed change at the close. The exact label is hedged with \"maybe say\", and the document that stays required is referred to only as \"that one\" against a screen share, so it cannot be identified from the source (CAND-Q-002). \"Wolfberg\" and \"Wolfsburg\" in the source are Wolfsberg.",
+      "routing": [
+        {
+          "repo": "react-frontend",
+          "area": "step-03-documents"
+        }
+      ]
+    },
+    {
+      "id": "CAND-DEC-006",
+      "title": "Zeb is not invited to the daily HOP standup; a separate technical call is set up instead",
+      "statement": "Zeb is not brought onto the daily HOP standup, which stays focused on workflow and UX. The technical coordination happens in a separate, more technically focused catch-up between Zeb and the technical people on the Hazel and build sides.",
+      "evidence": [
+        {
+          "location": "t:0:09:52",
+          "excerpt": "They were actually open to being on this daily call. Um, at least for for the, you know, to get the initial context of the project and everything, so you might want to extend an invite to them to Zeb."
+        },
+        {
+          "location": "t:0:10:10",
+          "excerpt": "I feel like that's gonna be... a lot more technical and so I don't know if we want to have separate touch bases like we've really been dealing with the workflow and the UX pieces here. I just don't want them to jump on here and sit around or something but."
+        },
+        {
+          "location": "t:0:10:29",
+          "excerpt": "Well, perhaps it could just be more technically focused, like a just a quick catch-up call with Diram and Zeb and the tech tech from our side."
+        },
+        {
+          "location": "t:0:10:55",
+          "excerpt": "Well, I'll follow up with you after this meeting, David, and get contact info and I can help schedule kind of the next step there."
+        }
+      ],
+      "owner": "Aaron McWilliams",
+      "confidence": "medium",
+      "confidence_note": "Aaron McWilliams organises the meeting and makes the call; David Gonzalez and Shantanu Wadodkar both accept it and David Gonzalez proposes the replacement format. A process decision that changes no software. Cadence and attendees of the new call are not fixed, and \"Diram\"/\"DRM\" in the source is a name the transcript does not resolve.",
+      "routing": [
+        {
+          "repo": "none",
+          "area": "meeting-cadence"
+        }
+      ]
+    },
+    {
+      "id": "CAND-DEC-007",
+      "title": "Zeb covers database and Databricks infrastructure, CI/CD, and Databricks security",
+      "statement": "Of the split between the infrastructure partner and the build team, Zeb takes database infrastructure, Databricks infrastructure, CI/CD, and some of the security within Databricks. The relationship is framed as a partnership with continued joint working rather than a hand-off.",
+      "evidence": [
+        {
+          "location": "t:0:08:51",
+          "excerpt": "From the call, we tentatively figured out that most of the CICD and Databricks Infrastructure, they will cover. database Infrastructure, databricks and CICD, and some of the security from the databricks. Those are the three, four things they will cover."
+        },
+        {
+          "location": "t:0:08:32",
+          "excerpt": "I know this NDA is getting signed and all, but we were talking about we should have some discussion once that formal paperwork is signed up."
+        }
+      ],
+      "owner": "unknown",
+      "confidence": "low",
+      "confidence_note": "Shantanu Wadodkar says \"tentatively figured out\" and in the same breath says the structuring discussion should happen once Zeb's formal paperwork is signed — which it is not. Nobody is named as having made the call and nobody responded to it. Promoted only because it is the first concrete content against Q-010, which is otherwise unanswered; the librarian may prefer to hold it until the paperwork is signed.",
+      "routing": [
+        {
+          "repo": "none",
+          "area": "infrastructure"
+        }
+      ]
+    }
+  ],
+  "approved_changes": [],
+  "requested_changes": [],
+  "action_items": [
+    {
+      "id": "ACT-001",
+      "statement": "Resend the electronic acknowledgement mock-up to Tate, copying Aaron McWilliams, as a reminder to confirm it.",
+      "evidence": [
+        {
+          "location": "t:0:05:27",
+          "excerpt": "it was one of the things that I'd sent him as a mock-up, and Joel, I know I had sent it over to you and I was just waiting for him to say if that was good"
+        },
+        {
+          "location": "t:0:05:53",
+          "excerpt": "why don't you just resend it to him and copy me just so it's a reminder to."
+        }
+      ],
+      "owner": "Norma Saenz",
+      "due_date": "unknown"
+    },
+    {
+      "id": "ACT-002",
+      "statement": "Talk to Rocio about whether the NDA step can be removed from Vanta, and what that means for verifying that a data requester has genuinely started onboarding.",
+      "evidence": [
+        {
+          "location": "t:0:07:34",
+          "excerpt": "Let me talk to Rocio and see if she can figure something out on removing the NDA part. And what that means, though, that anybody is just going to ask for access."
+        },
+        {
+          "location": "t:0:23:58",
+          "excerpt": "Joel, you're checking with Rocio on our Vanta options."
+        }
+      ],
+      "owner": "Joel Olivares",
+      "due_date": "unknown"
+    },
+    {
+      "id": "ACT-003",
+      "statement": "Get contact details from David Gonzalez after the meeting and schedule the separate technical call with Zeb.",
+      "evidence": [
+        {
+          "location": "t:0:10:55",
+          "excerpt": "I'll follow up with you after this meeting, David, and get contact info and I can help schedule kind of the next step there."
+        },
+        {
+          "location": "t:0:23:37",
+          "excerpt": "I'll schedule, work with David to schedule something with Zeb."
+        }
+      ],
+      "owner": "Aaron McWilliams",
+      "due_date": "2026-08-04"
+    },
+    {
+      "id": "ACT-004",
+      "statement": "Chase Nathan for the review and approval that unblocks inviting the build team into the Azure/Databricks tenant, so dev box access can be finished.",
+      "evidence": [
+        {
+          "location": "t:0:12:28",
+          "excerpt": "we just need Nathan to review or just give the blessing that it's all right, and then we could send invites"
+        },
+        {
+          "location": "t:0:23:37",
+          "excerpt": "I'll follow up as well with Nathan to get finished the Dev Box access."
+        }
+      ],
+      "owner": "Aaron McWilliams",
+      "due_date": "unknown"
+    },
+    {
+      "id": "ACT-005",
+      "statement": "Apply the e-signature and Wolfsberg \"if applicable\" changes to the prototype and release it on Vercel.",
+      "evidence": [
+        {
+          "location": "t:0:21:54",
+          "excerpt": "we'll make the changes from today's call, and then we will release it on Versil."
+        },
+        {
+          "location": "t:0:23:58",
+          "excerpt": "you got a couple of changes with the e-signature and the Wolfsburg optional you'll make"
+        }
+      ],
+      "owner": "Pallavi Bichpuriya",
+      "due_date": "unknown"
+    },
+    {
+      "id": "ACT-006",
+      "statement": "Send Shardul Patki the SharePoint credentials and invite by e-mail — he never received any.",
+      "evidence": [
+        {
+          "location": "t:0:23:02",
+          "excerpt": "like I didn't, I didn't receive any like credentials at all"
+        },
+        {
+          "location": "t:0:23:07",
+          "excerpt": "Okay, you didn't get him? Okay, let me send that to you. I think I have your e-mail, send it through e-mail."
+        }
+      ],
+      "owner": "Hector Garcia",
+      "due_date": "unknown"
+    },
+    {
+      "id": "ACT-007",
+      "statement": "Follow up with Shawn Main on the easier-onboarding-with-limits concept and firm up whether it changes the current flow.",
+      "evidence": [
+        {
+          "location": "t:0:14:53",
+          "excerpt": "then I'll follow up with Shawn on that, seeing what he wants to do, because there were some ideas that would change this flow, or maybe just kind of break it apart a little bit. So we'll try and get that firmed up this week"
+        }
+      ],
+      "owner": "Aaron McWilliams",
+      "due_date": "unknown"
+    },
+    {
+      "id": "ACT-008",
+      "statement": "Hold the CoverBase configuration walkthrough with Joel Olivares.",
+      "evidence": [
+        {
+          "location": "t:0:13:00",
+          "excerpt": "I think there is a call today with Joel to go over the cover base kind of configuration. That's the another thing we are planning today."
+        }
+      ],
+      "owner": "Shantanu Wadodkar",
+      "due_date": "2026-08-04"
+    }
+  ],
+  "open_questions": [
+    {
+      "id": "CAND-Q-001",
+      "title": "Has Tate signed off on the electronic NDA acknowledgement mock-up?",
+      "question": "Is the mock-up — name of the user, their title, the date, and their electronic acknowledgement, rendered to a PDF — acceptable as the NDA acknowledgement? Norma Saenz sent it and has had no reply. Aaron McWilliams spoke to Tate separately and relayed that signature, name and date are still required, then closed the topic with \"we'll verify that\".",
+      "evidence": [
+        {
+          "location": "t:0:05:27",
+          "excerpt": "I was just waiting for him to say if that was good"
+        },
+        {
+          "location": "t:0:05:27",
+          "excerpt": "But I haven't heard back from him. So yeah, I can send it over to you as well, Aaron."
+        },
+        {
+          "location": "t:0:05:59",
+          "excerpt": "so we'll verify that, but sounds like the NDA is figured out"
+        }
+      ],
+      "owner": "Tate",
+      "confidence": "medium",
+      "confidence_note": "This may be the same outstanding sign-off as Q-006, where Norma Saenz was described as \"waiting to hear back from Jonathan\" on the same mock-up. The source gives only the first name \"Tate\" and never states his role, so whether Tate and Jonathan are the same person cannot be determined from the record — the librarian should merge or split accordingly.",
+      "due_date": "unknown",
+      "blocking": [
+        "DEC-005",
+        "CAND-DEC-002"
+      ],
+      "routing": [
+        {
+          "repo": "react-frontend",
+          "area": "step-02-nda"
+        },
+        {
+          "repo": "wf-orchestration",
+          "area": "step-02-nda"
+        }
+      ]
+    },
+    {
+      "id": "CAND-Q-002",
+      "title": "Which document at the documents step remains mandatory?",
+      "question": "Joel Olivares ruled that one document at the documents step cannot be made optional and must stay required, while the Wolfsberg upload becomes \"if applicable\". The transcript refers to it only as \"that one\" and \"this one\" against a screen share, so which document it is cannot be recovered from the source.",
+      "evidence": [
+        {
+          "location": "t:0:15:56",
+          "excerpt": "we previously we were showing them as mandatory, but now they are not. Only this one is required. So. Should we remove it or is this also optional?"
+        },
+        {
+          "location": "t:0:16:25",
+          "excerpt": "No, that one can definitely not be optional. That one we do need to require."
+        }
+      ],
+      "owner": "Joel Olivares",
+      "confidence": "medium",
+      "confidence_note": "Not unresolved in the room — it was answered against a shared screen — but unresolvable from the record, which is what makes it un-buildable. It is close to registry Q-004, which asks which documents gate due diligence and notes the requirement has no DEC- id behind it; a single answer likely settles both.",
+      "due_date": "unknown",
+      "blocking": [
+        "CAND-DEC-005"
+      ],
+      "routing": [
+        {
+          "repo": "react-frontend",
+          "area": "step-03-documents"
+        }
+      ]
+    },
+    {
+      "id": "CAND-Q-003",
+      "title": "Can the Vanta trust-center NDA step be removed, and how is a requester verified without it?",
+      "question": "Vanta presents the NDA a second time when a partner requests Hazel's security data through the Trust Center. Can that step be removed, given Vanta exists to evidence Hazel's security procedures for SOC certification? If it is removed, how does Hazel establish that a party asking for the data is a real bank already in the onboarding flow rather than a random requester?",
+      "evidence": [
+        {
+          "location": "t:0:05:59",
+          "excerpt": "I know that Shawn doesn't want, you know, the NDA to come up again from Vanta, but the question is, how do we prevent that?"
+        },
+        {
+          "location": "t:0:06:58",
+          "excerpt": "I don't think we can get rid of that no matter what because we're going to need... We're gonna need to, we're gonna need evidence of that"
+        },
+        {
+          "location": "t:0:08:07",
+          "excerpt": "And so I would have to go back and look to make sure Rio Bank exists and they're not just asking for data randomly."
+        },
+        {
+          "location": "t:0:08:17",
+          "excerpt": "So yeah, so that's another item we need to figure out how to work through."
+        }
+      ],
+      "owner": "Joel Olivares",
+      "confidence": "high",
+      "confidence_note": "Explicitly left unresolved by Aaron McWilliams and handed to Joel Olivares to take to Rocio (ACT-002). It bears directly on DEC-002, which records that the Hazel-flow NDA satisfies the Vanta requirement so the bank is not asked to sign twice — Joel Olivares says here he does not think it can be removed at all, and that removing it would replace an automated gate with a manual check.",
+      "due_date": "unknown",
+      "blocking": [
+        "DEC-002"
+      ],
+      "routing": [
+        {
+          "repo": "integration-wrapper",
+          "area": "vanta"
+        },
+        {
+          "repo": "wf-orchestration",
+          "area": "step-02-nda"
+        }
+      ]
+    }
+  ],
+  "superseded_decisions": [],
+  "not_promoted": [
+    {
+      "topic": "The NDA is a digital click / electronic acknowledgement rather than DocuSign, with the full signature at the end",
+      "evidence": [
+        {
+          "location": "t:0:04:19",
+          "excerpt": "they want to just do a digital signature for the NDA initially. And then at the very end is when they do that whole DocuSign process."
+        },
+        {
+          "location": "t:0:04:43",
+          "excerpt": "we were wanting to get the electronic acknowledgement opposed to a DocuSign being sent out to the customer"
+        },
+        {
+          "location": "t:0:15:32",
+          "excerpt": "For the NDA part. So we do not have the e-sign right now. We are giving a checkbox."
+        }
+      ],
+      "reason": "restates_existing_record",
+      "note": "This is DEC-005, re-explained for Aaron McWilliams on his return and demonstrated in the prototype. Only the genuinely new parts are promoted: the required fields and record-keeping PDF (CAND-DEC-002), the trigger for the end-of-journey signature (CAND-DEC-003), and the repository display (CAND-DEC-004)."
+    },
+    {
+      "topic": "A bank without a Wolfsberg questionnaire is not blocked; the upload is optional",
+      "evidence": [
+        {
+          "location": "t:0:18:58",
+          "excerpt": "If they do not have the Wolfsburg document, then they'll go to, they won't upload it, of course. They'll go to due diligence, they'll complete the due diligence."
+        },
+        {
+          "location": "t:0:19:47",
+          "excerpt": "No, Diana, there are two different things. They have to go through this anyway."
+        }
+      ],
+      "reason": "restates_existing_record",
+      "note": "Optionality is DEC-001 and DEC-007 restated in answer to Diana Plata. What is new — and reversing — is that no equivalent question set replaces the questionnaire's content, promoted as CAND-DEC-001."
+    },
+    {
+      "topic": "A separate Vanta account or tenant for Hazel, or a separate flow within Vanta",
+      "evidence": [
+        {
+          "location": "t:0:05:59",
+          "excerpt": "So is that, do we just need to get it? The different Vanta account for Hazel. Or can we create a separate, we can't do a separate flow within the Vanta, right?"
+        },
+        {
+          "location": "t:0:06:39",
+          "excerpt": "well, I don't think we're ready for a separate Vanta right now for like a different tenant. That's why we're using Vanta just to share Hazel Network data through the Trust Center. I don't know."
+        }
+      ],
+      "reason": "no_agreement_reached",
+      "note": "Aaron McWilliams asks and Joel Olivares answers with \"I don't think we're ready\" and \"I don't know\" twice. Not a ruling with a reason that the group accepted — the topic moves straight to asking Rocio whether the step can be removed instead (CAND-Q-003)."
+    },
+    {
+      "topic": "Looping back to a bank for more information to raise a weak residual risk score, or adjusting CoverBase controls to do it",
+      "evidence": [
+        {
+          "location": "t:0:20:06",
+          "excerpt": "If the residual risk score is low, we can always address some of those controls to up the score if we wanted a relationship with that vendor."
+        },
+        {
+          "location": "t:0:20:06",
+          "excerpt": "And then their residual risk score may not be great, but we can always follow up with them and say, well, we'd like a little bit more information on this and that."
+        }
+      ],
+      "reason": "speculation_without_commitment",
+      "note": "Joel Olivares offers it as the mitigation that makes CAND-DEC-001 tolerable, but the trigger, the mechanism and whether the loop-back lives in HOP or in CoverBase are all undetermined. The same idea was already declined for promotion from the 2026-08-03 standup."
+    },
+    {
+      "topic": "Easier onboarding with less due diligence and a transaction limit, modelled on The Clearing House",
+      "evidence": [
+        {
+          "location": "t:0:14:14",
+          "excerpt": "Chris and Shawn kind of brought up the concept of an easier onboarding with less due diligence and maybe a limit of how much someone could transact, kind of like the clearing house does. It seemed like that didn't change anything. Any of the current plans yet? Is that correct?"
+        },
+        {
+          "location": "t:0:14:45",
+          "excerpt": "I don't know if it was for this meeting, Aaron. I thought I think that was a, if I understand correctly, that was a discussion we were having with Josh."
+        }
+      ],
+      "reason": "restates_existing_record",
+      "note": "This is Q-009, raised only to check whether it had changed current plans. Diana Plata attributes it to a separate discussion with Josh and nothing was settled here. Aaron McWilliams' commitment to firm it up with Shawn Main is ACT-007; \"this week\" is not a date."
+    },
+    {
+      "topic": "Zeb joining the daily standup for a few days, or an alternating-day call, to get initial context",
+      "evidence": [
+        {
+          "location": "t:0:08:51",
+          "excerpt": "Maybe in a few days we can have those guys in our call, or maybe we can have... alternate the or maybe daily call with those guys at least to figure it out for initial few days."
+        }
+      ],
+      "reason": "withdrawn_by_speaker",
+      "note": "Shantanu Wadodkar floats it, Aaron McWilliams pushes back that the daily is a workflow and UX call, and Shantanu Wadodkar drops it (\"Yeah, with you\") in favour of the separate technical call promoted as CAND-DEC-006."
+    }
+  ],
+  "final_takeaways": [
+    "Nothing in this delta is authoritative. Every item is a candidate for librarian review.",
+    "7 candidate decisions, 3 open questions, 8 action items, 6 items deliberately not promoted.",
+    "CAND-DEC-001 reverses DEC-001 and is the item to review first: DEC-001 records that a bank without a Wolfsberg questionnaire answers an equivalent question set in Hazel onboarding, and Joel Olivares states here that those questions will not be asked at all. If approved it also moots Q-005, which asks whether CoverBase accepts a fallback answer payload.",
+    "CAND-DEC-003 is the only genuinely new NDA mechanic: the end-of-journey signature fires on the final package after Hazel's internal review loop closes, not on submission. Most of the rest of the NDA discussion restates DEC-005.",
+    "CAND-Q-003 is in tension with DEC-002. That record says the Hazel-flow NDA satisfies Vanta's requirement so no second NDA is presented; Joel Olivares says here he does not think the Vanta step can be removed at all, because it is the evidence Vanta exists to collect for SOC certification.",
+    "CAND-Q-001 may duplicate Q-006. The same mock-up is awaiting the same sign-off, attributed to \"Tate\" here and to \"Jonathan\" on 2026-08-03; the source does not establish whether these are one person.",
+    "CAND-DEC-007 is low confidence and partially answers Q-010: Shantanu Wadodkar calls the Zeb scope split \"tentatively figured out\" and says the real structuring discussion waits on Zeb's formal paperwork."
+  ],
+  "implementation_recommended": false,
+  "blocking_reasons": [
+    "All candidates require librarian approval before any record or ticket can be created.",
+    "CAND-DEC-001 carries supersedes_id DEC-001. Approving it as a fresh decision rather than a supersession would leave two contradictory records about whether a fallback question set exists.",
+    "CAND-DEC-002 and DEC-005 are both gated on a sign-off that has not arrived (CAND-Q-001), and the source is internally inconsistent about whether a distinct signature element sits alongside name, title and date.",
+    "CAND-DEC-005 cannot be built as recorded until CAND-Q-002 identifies which document at the documents step stays mandatory.",
+    "The build team still has no Azure/Databricks tenant access — the environment is built but invites are blocked on Nathan's approval (ACT-004)."
+  ]
+}

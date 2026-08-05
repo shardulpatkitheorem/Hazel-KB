@@ -1,11 +1,11 @@
 <!-- GENERATED FILE — DO NOT EDIT.
      Source of truth: 04-ledger/questions/*.json
      Regenerate:      python .ai/checks/build-registries.py
-     Records hash:    4319d2aa97e82aa7 -->
+     Records hash:    2aebea3bd32f77f7 -->
 
 # Open Questions
 
-10 outstanding · 0 answered
+13 outstanding · 0 answered
 
 ## Outstanding
 
@@ -21,6 +21,9 @@
 | `Q-008` | What data is shared with a prospective partner before an NDA is in place? | ⚠ unowned | ⚠ no date | 2026-08-03 | — |
 | `Q-009` | What are the membership stages, what qualifies a bank for each, and what limits apply? | ⚠ unowned | ⚠ no date | 2026-08-03 | — |
 | `Q-010` | How are duties split between the infrastructure team and the build team? | Shawn Main | 2026-08-03 | 2026-08-03 | — |
+| `Q-011` | Has Tate signed off on the electronic NDA acknowledgement mock-up? | ⚠ unowned | ⚠ no date | 2026-08-04 | `DEC-005`, `DEC-010` |
+| `Q-012` | Which document at the documents step remains mandatory? | ⚠ unowned | ⚠ no date | 2026-08-04 | `DEC-013` |
+| `Q-013` | Can the Vanta trust-center NDA step be removed, and how is a requester verified without it? | Joel Olivares | ⚠ no date | 2026-08-04 | `DEC-002` |
 
 ## Detail
 
@@ -116,3 +119,33 @@ What are the respective duties and responsibilities of David Gonzalez and Zeb on
 - **Raised** 2026-08-03 · `01-transcripts/daily-calls/parsed/2026-08-03-daily-hop-standup.md` (2026-08-03)
 - **Evidence** `t:0:15:18`, `t:0:15:41`
 - **Concerns** none/infrastructure
+
+### Q-011 — Has Tate signed off on the electronic NDA acknowledgement mock-up?
+
+Is the mock-up — name of the user, their title, the date, and their electronic acknowledgement, rendered to a PDF — acceptable as the NDA acknowledgement? Norma Saenz sent it and has had no reply. Aaron McWilliams spoke to Tate separately and relayed that signature, name and date are still required, then closed the topic with "we'll verify that".
+
+- **Owner** unknown · no committed date
+- **Raised** 2026-08-04 · `01-transcripts/daily-calls/parsed/2026-08-04-daily-hop-standup.md` (2026-08-04)
+- **Evidence** `t:0:05:27`, `t:0:05:27`, `t:0:05:59`
+- **Blocks** `DEC-005`, `DEC-010`
+- **Concerns** react-frontend/step-02-nda, wf-orchestration/step-02-nda
+
+### Q-012 — Which document at the documents step remains mandatory?
+
+Joel Olivares ruled that one document at the documents step cannot be made optional and must stay required, while the Wolfsberg upload becomes "if applicable". The transcript refers to it only as "that one" and "this one" against a screen share, so which document it is cannot be recovered from the source.
+
+- **Owner** unknown · no committed date
+- **Raised** 2026-08-04 · `01-transcripts/daily-calls/parsed/2026-08-04-daily-hop-standup.md` (2026-08-04)
+- **Evidence** `t:0:15:56`, `t:0:16:25`
+- **Blocks** `DEC-013`
+- **Concerns** react-frontend/step-03-documents
+
+### Q-013 — Can the Vanta trust-center NDA step be removed, and how is a requester verified without it?
+
+Vanta presents the NDA a second time when a partner requests Hazel's security data through the Trust Center. Can that step be removed, given Vanta exists to evidence Hazel's security procedures for SOC certification? If it is removed, how does Hazel establish that a party asking for the data is a real bank already in the onboarding flow rather than a random requester?
+
+- **Owner** Joel Olivares · no committed date
+- **Raised** 2026-08-04 · `01-transcripts/daily-calls/parsed/2026-08-04-daily-hop-standup.md` (2026-08-04)
+- **Evidence** `t:0:05:59`, `t:0:06:58`, `t:0:08:07`, `t:0:08:17`
+- **Blocks** `DEC-002`
+- **Concerns** integration-wrapper/vanta, wf-orchestration/step-02-nda

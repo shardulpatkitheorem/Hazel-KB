@@ -1,0 +1,49 @@
+{
+  "schema_version": "1.0",
+  "id": "DEC-010",
+  "title": "The electronic NDA acknowledgement captures signature, name and date and is retained as a PDF",
+  "statement": "The electronic acknowledgement that replaces the DocuSign NDA must capture three things: the signature, the name and the date. The mock-up form is the name of the user, their title, the date, and their electronic acknowledgement of what they are doing. The completed acknowledgement is rendered to a PDF and kept for record keeping.",
+  "status": "active",
+  "decided_on": "2026-08-04",
+  "recorded_on": "2026-08-05",
+  "owner": "unknown",
+  "origin": {
+    "kind": "meeting",
+    "meeting_id": "2026-08-04-daily-hop-standup",
+    "transcript_path": "01-transcripts/daily-calls/parsed/2026-08-04-daily-hop-standup.md",
+    "meeting_date": "2026-08-04",
+    "content_sha256": "66282e1dfce0ed722d5e7148dc6b7b5026a1c0b19725d68da56948232d66af4c"
+  },
+  "evidence": [
+    {
+      "location": "t:0:05:06",
+      "excerpt": "I talked to Tate about 30 minutes ago and he said with the NDA that what he still thinks we need is the signature, name, and date. Can we get those three things in the electronic acknowledgement?"
+    },
+    {
+      "location": "t:0:05:21",
+      "excerpt": "Yes, yes, yes, I think that we, yes."
+    },
+    {
+      "location": "t:0:05:27",
+      "excerpt": "it was like the name of the user, the individual, their title, and the date, and then their electronic acknowledgement of what they're doing, and then we could knock it down into a PDF for record keeping"
+    }
+  ],
+  "routing": [
+    {
+      "repo": "react-frontend",
+      "area": "step-02-nda"
+    },
+    {
+      "repo": "wf-orchestration",
+      "area": "step-02-nda"
+    }
+  ],
+  "spec_impact": "pending",
+  "implemented_by": [],
+  "supersedes": null,
+  "superseded_by": null,
+  "approval": {
+    "approved_by": "Shardul Patki",
+    "approved_at": "2026-08-05T23:24:49Z"
+  }
+}

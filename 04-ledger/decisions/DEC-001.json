@@ -3,7 +3,7 @@
   "id": "DEC-001",
   "title": "The Wolfsberg questionnaire is not mandatory; a fallback question set is asked in Hazel onboarding",
   "statement": "A bank that does not hold a Wolfsberg questionnaire is not blocked. It answers an equivalent set of questions inside the Hazel onboarding flow instead, and that data is pushed to CoverBase. The questions are asked by the Hazel-built onboarding rather than by CoverBase directly. A bank that does hold a Wolfsberg document continues on the existing path.",
-  "status": "active",
+  "status": "superseded",
   "decided_on": "2026-07-27",
   "recorded_on": "2026-08-03",
   "owner": "Joel Olivares",
@@ -41,7 +41,7 @@
   "spec_impact": "change:wolfsberg-optional-fallback",
   "implemented_by": ["https://github.com/shardulpatkitheorem/hop-frontend-demo/pull/2"],
   "supersedes": null,
-  "superseded_by": null,
+  "superseded_by": "DEC-009",
   "approval": {
     "approved_by": "Shardul Patki",
     "approved_at": "2026-08-03T17:55:31Z"

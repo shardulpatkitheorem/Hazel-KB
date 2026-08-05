@@ -1,0 +1,50 @@
+{
+  "schema_version": "1.0",
+  "id": "Q-013",
+  "title": "Can the Vanta trust-center NDA step be removed, and how is a requester verified without it?",
+  "question": "Vanta presents the NDA a second time when a partner requests Hazel's security data through the Trust Center. Can that step be removed, given Vanta exists to evidence Hazel's security procedures for SOC certification? If it is removed, how does Hazel establish that a party asking for the data is a real bank already in the onboarding flow rather than a random requester?",
+  "status": "open",
+  "owner": "Joel Olivares",
+  "raised_on": "2026-08-04",
+  "recorded_on": "2026-08-05",
+  "due_date": "unknown",
+  "origin": {
+    "kind": "meeting",
+    "meeting_id": "2026-08-04-daily-hop-standup",
+    "transcript_path": "01-transcripts/daily-calls/parsed/2026-08-04-daily-hop-standup.md",
+    "meeting_date": "2026-08-04",
+    "content_sha256": "66282e1dfce0ed722d5e7148dc6b7b5026a1c0b19725d68da56948232d66af4c"
+  },
+  "evidence": [
+    {
+      "location": "t:0:05:59",
+      "excerpt": "I know that Shawn doesn't want, you know, the NDA to come up again from Vanta, but the question is, how do we prevent that?"
+    },
+    {
+      "location": "t:0:06:58",
+      "excerpt": "I don't think we can get rid of that no matter what because we're going to need... We're gonna need to, we're gonna need evidence of that"
+    },
+    {
+      "location": "t:0:08:07",
+      "excerpt": "And so I would have to go back and look to make sure Rio Bank exists and they're not just asking for data randomly."
+    },
+    {
+      "location": "t:0:08:17",
+      "excerpt": "So yeah, so that's another item we need to figure out how to work through."
+    }
+  ],
+  "blocking": [
+    "DEC-002"
+  ],
+  "routing": [
+    {
+      "repo": "integration-wrapper",
+      "area": "vanta"
+    },
+    {
+      "repo": "wf-orchestration",
+      "area": "step-02-nda"
+    }
+  ],
+  "answer": null
+}
