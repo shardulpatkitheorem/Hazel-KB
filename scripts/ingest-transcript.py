@@ -46,7 +46,22 @@ VERBATIM_SUFFIXES = {".txt", ".md"}
 PRESETS: tuple[tuple[str, str | None, tuple[str, ...]], ...] = (
     ("standup", "Daily HOP Standup", ("daily-standup", "hop", "project-status")),
     ("kickoff", None, ("onboarding", "kickoff", "requirements")),
+    # Matched last: a slug containing an earlier keyword keeps resolving to it.
+    ("internal", "Theorem Internal Design Session",
+     ("internal", "design-session", "theorem-labs")),
 )
+
+# The confidentiality stamped into the parsed frontmatter, keyed by collection.
+# Anything not listed keeps the default, so existing collections are unaffected.
+#
+# This is a label for humans, not a control. Nothing reads it: no contract in
+# .ai/contracts/ declares the field, validate.py discards frontmatter before it
+# hashes a body, and /kb-extract drops it, so it never reaches a delta,
+# decision, question or ticket. Do not reach for it as a security boundary —
+# what actually separates internal material from the client-facing record is
+# which collection a transcript is ingested into.
+CONFIDENTIALITY_BY_COLLECTION = {"internal": "internal"}
+DEFAULT_CONFIDENTIALITY = "client-confidential"
 
 DATED_NAME_PATTERN = re.compile(r"^(\d{4}-\d{2}-\d{2})-(.+)$")
 DATE_PATTERN = re.compile(r"^\d{4}-\d{2}-\d{2}$")
@@ -167,6 +182,7 @@ def build_document(
     source_name: str,
     body: str,
     newline: str,
+    confidentiality: str = DEFAULT_CONFIDENTIALITY,
 ) -> str:
     """Assemble the parsed Markdown file.
 
@@ -189,7 +205,7 @@ def build_document(
         'version: "1.0"',
         "tags:",
         *[f'  - "{tag}"' for tag in tags],
-        'confidentiality: "client-confidential"',
+        f'confidentiality: "{confidentiality}"',
         f'source_file: "../raw/{source_name}"',
         f'content_sha256: "{content_sha256}"',
         "---",
@@ -400,7 +416,12 @@ def ingest(args: argparse.Namespace) -> int:
     if raw_body is None and source.suffix.lower() in VERBATIM_SUFFIXES:
         newline = detect_newline(body)
 
-    document = build_document(title, date, tags, f"{basename}{suffix}", body, newline)
+    confidentiality = CONFIDENTIALITY_BY_COLLECTION.get(
+        args.collection, DEFAULT_CONFIDENTIALITY
+    )
+    document = build_document(
+        title, date, tags, f"{basename}{suffix}", body, newline, confidentiality
+    )
 
     # Step 3: index row.
     row = build_index_row(date, title, basename, suffix)

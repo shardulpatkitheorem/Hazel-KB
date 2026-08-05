@@ -5,7 +5,7 @@
 
 # Decision Registry
 
-8 active · 0 superseded · generated 2026-08-04
+8 active · 0 superseded
 
 Ordered by decision date. Decision IDs are identifiers, not sequence — never infer chronology from them.
 

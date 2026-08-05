@@ -14,7 +14,13 @@ on:
   push:
     branches: [main]
     paths:
-      - '01-transcripts/**/raw/**'
+      # Only formats extract_body() in scripts/ingest-transcript.py can read.
+      # A bare '01-transcripts/**/raw/**' also matched housekeeping files such
+      # as .gitkeep, which start a run that then dies on "No extractor for ''".
+      - '01-transcripts/**/raw/**.txt'
+      - '01-transcripts/**/raw/**.md'
+      - '01-transcripts/**/raw/**.docx'
+      - '01-transcripts/**/raw/**.pdf'
   workflow_dispatch:
     inputs:
       transcript:
@@ -50,9 +56,13 @@ jobs:
           if [ -n "${{ inputs.transcript }}" ]; then
             FILES="${{ inputs.transcript }}"
           else
-            # Added or modified raw transcripts in this push.
+            # Added or modified raw transcripts in this push. The extension
+            # list mirrors the `paths:` trigger above: the trigger decides
+            # whether this workflow runs at all, but a push that also touches
+            # a readable transcript still reaches here carrying every other
+            # raw/ file in the same commit, so both need the same filter.
             FILES=$(git diff --name-only --diff-filter=AM HEAD~1 HEAD \
-                    | grep -E '^01-transcripts/.*/raw/' || true)
+                    | grep -E '^01-transcripts/.*/raw/.*\.(txt|md|docx|pdf)$' || true)
           fi
 
           if [ -z "$FILES" ]; then
@@ -90,13 +100,19 @@ jobs:
           PARSED=""
           while IFS= read -r raw; do
             [ -z "$raw" ] && continue
-            echo "::group::Ingesting $raw"
-            python scripts/ingest-transcript.py "$raw" --force
-            echo "::endgroup::"
 
-            # The parsed path is derived from the raw path by convention.
+            # Both the collection and the parsed path follow from the raw path
+            # by convention. The collection must be passed explicitly: the
+            # script defaults to daily-calls, which would file a transcript
+            # from any other collection into the wrong one.
             base=$(basename "${raw%.*}")
             dir=$(dirname "$(dirname "$raw")")
+
+            echo "::group::Ingesting $raw"
+            python scripts/ingest-transcript.py "$raw" --force \
+              --collection "$(basename "$dir")"
+            echo "::endgroup::"
+
             PARSED="${PARSED}${dir}/parsed/${base}.md"$'\n'
           done <<< "${{ steps.find.outputs.files }}"
 

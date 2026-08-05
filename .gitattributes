@@ -1,0 +1,29 @@
+# Line endings are pinned so the same content produces the same bytes on every
+# machine. Without this, git checks the repository out as CRLF on Windows and
+# LF on Linux, which caused generated registries to compare as stale on CI while
+# passing locally, and produces whole-file diffs when a Windows and a Linux
+# machine touch the same file.
+#
+# After adding this file, run once to normalise what is already committed:
+#
+#     git add --renormalize .
+#     git commit -m "chore: normalise line endings"
+
+* text=auto eol=lf
+
+# Windows-only scripts must keep CRLF or some shells refuse to run them.
+*.ps1   text eol=crlf
+*.cmd   text eol=crlf
+*.bat   text eol=crlf
+
+# Binary — never translate, never diff as text.
+*.pdf   binary
+*.docx  binary
+*.xlsx  binary
+*.pptx  binary
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.gif   binary
+*.ico   binary
+*.zip   binary

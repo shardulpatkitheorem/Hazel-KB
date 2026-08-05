@@ -41,6 +41,52 @@ except ImportError:
     raise SystemExit(2)
 
 
+# --- console encoding -------------------------------------------------------
+#
+# The report below uses an arrow, a box-drawing rule, em dashes and an
+# ellipsis. On Windows the console and any redirected pipe default to a legacy
+# code page (cp1252 here) that cannot encode them, so print() raised
+# UnicodeEncodeError from inside report() and the process exited 1 with a
+# traceback while its own result was ok: true — the check failed a repository
+# it had just passed, and .ai/AGENTS.md tells agents to run it.
+#
+# Ask for UTF-8 first; errors="replace" means a stream that still cannot
+# represent a character degrades it instead of raising. If the stream cannot be
+# reconfigured at all (it may be a StringIO under test), fall back to ASCII
+# equivalents rather than dropping the characters from the source.
+
+
+def _prefer_utf8(stream: object) -> bool:
+    """Switch *stream* to UTF-8 and report whether non-ASCII output is safe."""
+    try:
+        stream.reconfigure(encoding="utf-8", errors="replace")
+    except (AttributeError, OSError, ValueError):
+        pass
+    encoding = getattr(stream, "encoding", None) or "ascii"
+    try:
+        "→─—…".encode(encoding)
+    except (LookupError, UnicodeEncodeError):
+        return False
+    return True
+
+
+UNICODE_OK = _prefer_utf8(sys.stdout)
+
+ASCII_FALLBACKS = {"→": "->", "─": "-", "—": "--", "…": "..."}
+
+
+def emit(text: str = "") -> None:
+    """Print one line, degrading typographic characters when unsupported.
+
+    Covers text this module composes and text carried in a finding's message
+    or hint, which is why it wraps every line rather than only the glyphs.
+    """
+    if not UNICODE_OK:
+        for char, plain in ASCII_FALLBACKS.items():
+            text = text.replace(char, plain)
+    print(text)
+
+
 REPO = Path(__file__).resolve().parents[2]
 CONTRACTS = REPO / ".ai" / "contracts"
 LEDGER = REPO / "04-ledger"
@@ -478,19 +524,19 @@ def report(f: Findings, as_json: bool) -> int:
     width = 74
     for item in f.errors + f.warnings:
         tag = "ERROR  " if item["level"] == "error" else "WARN   "
-        print(f"{tag} {item['where']}")
-        print(f"        {item['message']}")
+        emit(f"{tag} {item['where']}")
+        emit(f"        {item['message']}")
         if item["hint"]:
-            print(f"        → {item['hint']}")
-        print()
+            emit(f"        → {item['hint']}")
+        emit()
 
-    print("─" * width)
+    emit("─" * width)
     if f.ok and not f.warnings:
-        print("PASS   all artifacts valid")
+        emit("PASS   all artifacts valid")
     elif f.ok:
-        print(f"PASS   {len(f.warnings)} warning(s), 0 errors")
+        emit(f"PASS   {len(f.warnings)} warning(s), 0 errors")
     else:
-        print(f"FAIL   {len(f.errors)} error(s), {len(f.warnings)} warning(s)")
+        emit(f"FAIL   {len(f.errors)} error(s), {len(f.warnings)} warning(s)")
     return 0 if f.ok else 1
 
 
