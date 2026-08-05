@@ -130,7 +130,7 @@ jobs:
             # ledger, and cannot, because Write is scoped to the delta it
             # creates via the skill's own procedure.
             claude -p "/kb-extract $parsed" \
-              --allowedTools "Read,Grep,Glob,Bash(python .ai/checks/*),Write" \
+              --allowedTools "Read,Grep,Glob,Bash(python .ai/checks/*)" \
               --max-turns 40 \
               --output-format json \
               > "/tmp/extract-$(basename "$parsed").json" || {
