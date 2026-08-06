@@ -1,0 +1,52 @@
+{
+  "schema_version": "1.0",
+  "id": "Q-014",
+  "title": "Can the FDIC number be validated against an FDIC API before an account is created?",
+  "question": "Can the institution name and FDIC number entered on the initial form be checked against a public FDIC bank lookup API while the applicant is typing them — so that no fake account is created and a login is only issued to a verified FDIC institution — or must the check wait until after the form is submitted? Pallavi Bichpuriya reported that such an API appears to exist and Joel Olivares endorsed the approach, but the team still has to research it.",
+  "status": "open",
+  "owner": "Pallavi Bichpuriya",
+  "raised_on": "2026-07-31",
+  "recorded_on": "2026-08-06",
+  "due_date": "unknown",
+  "origin": {
+    "kind": "meeting",
+    "meeting_id": "2026-07-31-daily-hop-standup",
+    "transcript_path": "01-transcripts/daily-calls/parsed/2026-07-31-daily-hop-standup.md",
+    "meeting_date": "2026-07-31",
+    "content_sha256": "93eec6dfd253c633745d8e15b1d2a99c295936acc9741333739ff21ff9e9fca6"
+  },
+  "evidence": [
+    {
+      "location": "t:0:12:33",
+      "excerpt": "is there any way that we check through some APIs that the FDIC number that the person is trying to input is right, or only after the submission of the form we'll be checking that the institution name and FDIC number is matching?"
+    },
+    {
+      "location": "t:0:12:55",
+      "excerpt": "I think after the form, I don't know how to do it before that. Do you have any ideas?"
+    },
+    {
+      "location": "t:0:13:06",
+      "excerpt": "unless when they're signing up, we can verify that it's a true FDIC institution before we give them a login, then that would work. Otherwise, we'll have to wait till after we get the account."
+    },
+    {
+      "location": "t:0:14:13",
+      "excerpt": "We still have to see, do more research on it, but that is the higher level details that we found out right now."
+    }
+  ],
+  "blocking": [],
+  "routing": [
+    {
+      "repo": "react-frontend",
+      "area": "step-01-eligibility"
+    },
+    {
+      "repo": "integration-wrapper",
+      "area": "fdic"
+    },
+    {
+      "repo": "wf-orchestration",
+      "area": "eligibility-screening"
+    }
+  ],
+  "answer": null
+}

@@ -1,0 +1,45 @@
+{
+  "schema_version": "1.0",
+  "id": "DEC-014",
+  "title": "The residual risk score and the yes/no result are not automated and require manual oversight",
+  "statement": "The Coverbase side of intake is not fully automated. Running the residual risk, generating the report and averaging it out into the yes/no result given back to the applicant requires manual oversight, and may involve routing the case to Hazel's internal subject-matter experts to review. This is accepted as a bottleneck inside an intake that is otherwise to be as fast as possible.",
+  "status": "active",
+  "decided_on": "2026-07-31",
+  "recorded_on": "2026-08-06",
+  "owner": "Joel Olivares",
+  "origin": {
+    "kind": "meeting",
+    "meeting_id": "2026-07-31-daily-hop-standup",
+    "transcript_path": "01-transcripts/daily-calls/parsed/2026-07-31-daily-hop-standup.md",
+    "meeting_date": "2026-07-31",
+    "content_sha256": "93eec6dfd253c633745d8e15b1d2a99c295936acc9741333739ff21ff9e9fca6"
+  },
+  "evidence": [
+    {
+      "location": "t:0:03:13",
+      "excerpt": "I know that there is a little bottleneck on the cover-based side, or there will be"
+    },
+    {
+      "location": "t:0:03:13",
+      "excerpt": "which is running the residual risk and generating the report, getting that average out so that we can give them a yes/no result. That part cannot be automated as it does require manual oversight and potentially even sending it out to some of my SMEs internally to review."
+    }
+  ],
+  "routing": [
+    {
+      "repo": "wf-orchestration",
+      "area": "risk-assessment"
+    },
+    {
+      "repo": "integration-wrapper",
+      "area": "coverbase"
+    }
+  ],
+  "spec_impact": "pending",
+  "implemented_by": [],
+  "supersedes": null,
+  "superseded_by": null,
+  "approval": {
+    "approved_by": "Shardul Patki",
+    "approved_at": "2026-08-06T00:00:00Z"
+  }
+}

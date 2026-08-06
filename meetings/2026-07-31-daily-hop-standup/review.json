@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0",
+  "meeting_id": "2026-07-31-daily-hop-standup",
+  "delta_path": "meetings/2026-07-31-daily-hop-standup/meeting-delta.json",
+  "delta_sha256": "49ecda85f223ca71f9d59d8675bc3d2f0289fc8e2af0c45f42450d0338600147",
+  "reviewed_by": "Shardul Patki",
+  "reviewed_at": "2026-08-06T00:00:00Z",
+  "outcomes": [
+    {
+      "candidate_id": "CAND-DEC-001",
+      "outcome": "accepted",
+      "record_id": "DEC-014"
+    },
+    {
+      "candidate_id": "CAND-DEC-002",
+      "outcome": "accepted",
+      "record_id": "DEC-015"
+    },
+    {
+      "candidate_id": "CAND-DEC-003",
+      "outcome": "accepted",
+      "record_id": "DEC-016"
+    },
+    {
+      "candidate_id": "CAND-Q-001",
+      "outcome": "rejected",
+      "reason": "Already answered. E-sign is only for account creation."
+    },
+    {
+      "candidate_id": "CAND-Q-002",
+      "outcome": "accepted",
+      "record_id": "Q-014"
+    }
+  ],
+  "not_promoted_reviewed": true,
+  "note": "Backfill review: this source predates the 2026-08-03 and 2026-08-04 standups already in the registry, so every candidate was read against records written after it. All four accepted records keep the owner the extractor proposed — the owner rule weakened nothing, as Joel Olivares states DEC-014, DEC-015 and DEC-016 in his own turns and Pallavi Bichpuriya accepts the FDIC research at t:0:13:29 and t:0:14:13. No supersessions. The librarian confirmed nothing settled in the source was left uncovered by the candidate set."
+}

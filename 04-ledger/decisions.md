@@ -1,11 +1,11 @@
 <!-- GENERATED FILE — DO NOT EDIT.
      Source of truth: 04-ledger/decisions/*.json
      Regenerate:      python .ai/checks/build-registries.py
-     Records hash:    6bbeecc4f3ce375d -->
+     Records hash:    938a0d7f46e9a2b2 -->
 
 # Decision Registry
 
-12 active · 1 superseded
+15 active · 1 superseded
 
 Ordered by decision date. Decision IDs are identifiers, not sequence — never infer chronology from them.
 
@@ -16,6 +16,9 @@ Ordered by decision date. Decision IDs are identifiers, not sequence — never i
 | `DEC-002` | Signing the NDA in Hazel onboarding satisfies the Vanta trust-center NDA requirement | 2026-07-27 | Shawn | integration-wrapper/vanta, wf-orchestration/step-02-nda | ⚠ pending |
 | `DEC-003` | CoverBase risk scoring is internal-only; the member portal shows a general status | 2026-07-27 | unknown | react-frontend/member-portal, wf-orchestration/risk-assessment | ⚠ pending |
 | `DEC-004` | The bank confirms, corrects or declines CoverBase-prepared answers, with the source document shown | 2026-07-27 | unknown | react-frontend/step-04-risk-questions, integration-wrapper/coverbase | ⚠ pending |
+| `DEC-014` | The residual risk score and the yes/no result are not automated and require manual oversight | 2026-07-31 | Joel Olivares | wf-orchestration/risk-assessment, integration-wrapper/coverbase | ⚠ pending |
+| `DEC-015` | The relaxed front-of-flow document requirements are scoped to FDIC-insured accounts | 2026-07-31 | Joel Olivares | react-frontend/step-03-documents, wf-orchestration/step-03-documents | ⚠ pending |
+| `DEC-016` | The signed NDA identifies the partner entity in its relationship header, not only the signer | 2026-07-31 | Joel Olivares | react-frontend/step-02-nda, wf-orchestration/step-02-nda | ⚠ pending |
 | `DEC-005` | The NDA is acknowledged electronically, not by DocuSign; one full signature at the end | 2026-08-03 | Joel Olivares | react-frontend/step-02-nda, wf-orchestration/step-02-nda, integration-wrapper/docusign | ⚠ pending |
 | `DEC-006` | Authentication and authorization run outside Databricks, on Azure | 2026-08-03 | Shawn Main | wf-orchestration/architecture, react-frontend/authentication | ⚠ pending |
 | `DEC-007` | The blank Wolfsberg questionnaire PDF is removed; upload only for banks that hold one | 2026-08-03 | Joel Olivares | react-frontend/step-03-documents | ⚠ pending |
@@ -60,6 +63,39 @@ Risk answers prepared by CoverBase are returned to the member bank for review. F
 - **Routes to** react-frontend/step-04-risk-questions, integration-wrapper/coverbase
 - **Spec impact** pending
 - **Approved by** Shardul Patki on 2026-08-03
+
+### DEC-014 — The residual risk score and the yes/no result are not automated and require manual oversight
+
+The Coverbase side of intake is not fully automated. Running the residual risk, generating the report and averaging it out into the yes/no result given back to the applicant requires manual oversight, and may involve routing the case to Hazel's internal subject-matter experts to review. This is accepted as a bottleneck inside an intake that is otherwise to be as fast as possible.
+
+- **Decided** 2026-07-31 by Joel Olivares · recorded 2026-08-06
+- **Source** `01-transcripts/daily-calls/parsed/2026-07-31-daily-hop-standup.md` (2026-07-31)
+- **Evidence** `t:0:03:13`, `t:0:03:13`
+- **Routes to** wf-orchestration/risk-assessment, integration-wrapper/coverbase
+- **Spec impact** pending
+- **Approved by** Shardul Patki on 2026-08-06
+
+### DEC-015 — The relaxed front-of-flow document requirements are scoped to FDIC-insured accounts
+
+Making the Wolfsberg questionnaire optional — and the wider removal of the friction points at the front of the flow — is limited to FDIC-insured accounts. Joel Olivares attaches the limit to the relaxation itself, and separately gives FDIC accounts as the reason he expects most residual risk reviews to be straightforward.
+
+- **Decided** 2026-07-31 by Joel Olivares · recorded 2026-08-06
+- **Source** `01-transcripts/daily-calls/parsed/2026-07-31-daily-hop-standup.md` (2026-07-31)
+- **Evidence** `t:0:11:19`, `t:0:03:13`
+- **Routes to** react-frontend/step-03-documents, wf-orchestration/step-03-documents
+- **Spec impact** pending
+- **Approved by** Shardul Patki on 2026-08-06
+
+### DEC-016 — The signed NDA identifies the partner entity in its relationship header, not only the signer
+
+The NDA that is digitally signed must name the party the agreement is between. Today the signer supplies name, title and date, but the header stating who the relationship is between is not pre-filled, so the executed PDF does not identify the partner that signed it. That counterparty information is to be populated; Coverbase is floated as a possible source but not established.
+
+- **Decided** 2026-07-31 by Joel Olivares · recorded 2026-08-06
+- **Source** `01-transcripts/daily-calls/parsed/2026-07-31-daily-hop-standup.md` (2026-07-31)
+- **Evidence** `t:0:10:30`, `t:0:10:30`, `t:0:11:18`
+- **Routes to** react-frontend/step-02-nda, wf-orchestration/step-02-nda
+- **Spec impact** pending
+- **Approved by** Shardul Patki on 2026-08-06
 
 ### DEC-005 — The NDA is acknowledged electronically, not by DocuSign; one full signature at the end
 

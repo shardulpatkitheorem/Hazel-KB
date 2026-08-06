@@ -1,11 +1,11 @@
 <!-- GENERATED FILE — DO NOT EDIT.
      Source of truth: 04-ledger/questions/*.json
      Regenerate:      python .ai/checks/build-registries.py
-     Records hash:    2aebea3bd32f77f7 -->
+     Records hash:    6c873b2749181c15 -->
 
 # Open Questions
 
-13 outstanding · 0 answered
+14 outstanding · 0 answered
 
 ## Outstanding
 
@@ -15,6 +15,7 @@
 | `Q-002` | Must intake process documents be stored in Databricks? | Joel Olivares | ⚠ no date | 2026-07-27 | — |
 | `Q-003` | Is GitHub access ready for the build team? | ⚠ unowned | ⚠ no date | 2026-07-27 | — |
 | `Q-004` | Which two documents gate due diligence, and where was that requirement decided? | ⚠ unowned | ⚠ no date | 2026-07-27 | — |
+| `Q-014` | Can the FDIC number be validated against an FDIC API before an account is created? | Pallavi Bichpuriya | ⚠ no date | 2026-07-31 | — |
 | `Q-005` | Does Coverbase accept a fallback answer payload in place of extracted Wolfsberg content? | ⚠ unowned | ⚠ no date | 2026-08-03 | `DEC-001` |
 | `Q-006` | Has Jonathan confirmed that an electronic NDA acknowledgement is acceptable? | ⚠ unowned | ⚠ no date | 2026-08-03 | `DEC-005` |
 | `Q-007` | Which Databricks components are used, and is data in a database or lakehouse tables? | Shantanu Wadodkar | 2026-08-03 | 2026-08-03 | — |
@@ -63,6 +64,15 @@ Which two documents must be in place before a member bank can continue to the du
 - **Raised** 2026-07-27 · `01-transcripts/daily-calls/parsed/2026-07-27-daily-hop-standup.md` (2026-07-27)
 - **Evidence** `l:49`
 - **Concerns** react-frontend/step-03-documents
+
+### Q-014 — Can the FDIC number be validated against an FDIC API before an account is created?
+
+Can the institution name and FDIC number entered on the initial form be checked against a public FDIC bank lookup API while the applicant is typing them — so that no fake account is created and a login is only issued to a verified FDIC institution — or must the check wait until after the form is submitted? Pallavi Bichpuriya reported that such an API appears to exist and Joel Olivares endorsed the approach, but the team still has to research it.
+
+- **Owner** Pallavi Bichpuriya · no committed date
+- **Raised** 2026-07-31 · `01-transcripts/daily-calls/parsed/2026-07-31-daily-hop-standup.md` (2026-07-31)
+- **Evidence** `t:0:12:33`, `t:0:12:55`, `t:0:13:06`, `t:0:14:13`
+- **Concerns** react-frontend/step-01-eligibility, integration-wrapper/fdic, wf-orchestration/eligibility-screening
 
 ### Q-005 — Does Coverbase accept a fallback answer payload in place of extracted Wolfsberg content?
 
