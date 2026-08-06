@@ -61,7 +61,7 @@ jobs:
             # whether this workflow runs at all, but a push that also touches
             # a readable transcript still reaches here carrying every other
             # raw/ file in the same commit, so both need the same filter.
-            FILES=$(git diff --name-only --diff-filter=AM HEAD~1 HEAD \
+            FILES=$(git diff --name-only --diff-filter=AMR HEAD~1 HEAD \
                     | grep -E '^01-transcripts/.*/raw/.*\.(txt|md|docx|pdf)$' || true)
           fi
 

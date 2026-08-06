@@ -1,0 +1,42 @@
+{
+  "schema_version": "1.0",
+  "id": "TKT-0003",
+  "decision_id": "DEC-009",
+  "title": "No Wolfsberg question set is asked of banks that do not hold the questionnaire",
+  "target": {
+    "repo": "react-frontend",
+    "area": "step-03-documents"
+  },
+  "direction": "The questions contained in the Wolfsberg correspondent bank due diligence questionnaire are not asked anywhere in Hazel onboarding. A bank that holds a completed questionnaire may upload it, and that data is run against the CoverBase controls to produce a residual risk score. A bank that does not hold one is asked nothing in its place \u2014 it proceeds through the standard due diligence and risk questions, which every applicant answers regardless. A weaker residual risk score is accepted as the consequence.",
+  "reasoning": "Recorded as DEC-009 from the 2026-08-04 meeting. No individual is recorded as the deciding authority.",
+  "acceptance_criteria": [
+    "A spec change exists in react-frontend covering the behaviour in DEC-009, in the step-03-documents area.",
+    "Every requirement added or modified by that change cites [DEC-009] in its requirement text.",
+    "Each new or modified requirement has at least one scenario.",
+    "The implementation satisfies the changed spec, and the PR references this issue."
+  ],
+  "evidence": [
+    {
+      "location": "t:0:19:51",
+      "excerpt": "are these the questions that we are going to require, even though they do have it? So what about the questions in the Wolfberg? Where are those going to go in?"
+    },
+    {
+      "location": "t:0:20:06",
+      "excerpt": "We're not going to address them at all. We're not going to ask for them. That was a decision by Shawn and people above our pay grade that they want to make it as smooth as possible."
+    },
+    {
+      "location": "t:0:20:06",
+      "excerpt": "So we just decided all together to just take out the Wolfberg. If they have it, great. We'll get it and we'll use that data to create, run it against our controls and get a good residual risk score. If they don't have it, we're not going to ask questions about it."
+    },
+    {
+      "location": "t:0:21:37",
+      "excerpt": "Yeah, actually."
+    }
+  ],
+  "authorized_by": {
+    "librarian": "Shardul Patki",
+    "authorized_at": "2026-08-05T23:24:49Z"
+  },
+  "status": "dispatched",
+  "dispatched_to": "https://github.com/shardulpatkitheorem/hop-frontend-demo/issues/4"
+}
