@@ -1,0 +1,270 @@
+Daily HOP Standup — Meeting Transcript
+Date: Wednesday, August 5, 2026, 12:00–12:30 PM CDT
+Organizer: Aaron McWilliams (Vantage Bank)
+========================================================
+
+[00:00:08] Aaron McWilliams: Hello, hello.
+
+[00:00:19] Smital Lunawat: How was your trip, Aaron?
+
+[00:00:22] Aaron McWilliams: It was great. It was really good. Thanks for asking. Thanks for keeping things moving while I was gone.
+
+[00:00:36] Smital Lunawat: Did you get time to catch up with everything or still?
+
+[00:00:41] Aaron McWilliams: No, I think so. My new secret is I either come in early or I take an extra day off so I can rest from vacation and get caught up on e-mail. And it worked this week again, so.
+
+[00:00:55] Smital Lunawat: Nice.
+
+[00:00:55] Aaron McWilliams: So I think I'm pretty much, yeah, up to speed. Let's see. Hey, Santiago. We've got another kind of bankwide intern update going on today. So right now, so I don't know if we'll have many other people, but I can jump through a couple updates I've had since yesterday. One is, we're getting closer on the access for you guys, but we do have a few more loops to jump through since we're trying to build a, this is kind of the first build of something separate between Hazel and Vantage. So even though it's just infrastructure, we've got another meeting tomorrow trying to iron those things out. So Still working on that. And then we talked about setting up another meeting with Zeb, but we're still working on their statement of work. And so talking with Shawn, I think it may be another week or two before we get that scheduled. unless there was something that you guys wanted to talk to them about again, but before we get the SOW.
+
+[00:02:32] Shantanu: No, I think, see Adam, you know the way you know Shawn and you visualizing definitely with the easy help from those guys, but once we get access, I think we will start doing few things so that you know we are not. literally waiting for them to come on board and, you know, start it from the day one, right? Some of the work we can start doing so that they review it and we move fast. So, yeah.
+
+[00:03:09] Aaron McWilliams: We'll keep moving forward with that. And then we talked about a few different NDA things, and so I don't think it'll affect what you guys are building, but I think we've got a way that I can keep some of our prospects getting 2 NDAs, one from me in the beginning, or I guess we're building it in the hot platform. And then the other one was from Vanta. So I think we have a way to remove them from getting it the second time in Vanta, which has been causing some confusion. So that's not a big change for you guys, but working through that on our end too. So I think those were. Most of my updates. The other one was we talked about making the Wolfsburg optional, but I'm still waiting for details on whether if they don't upload the optional, that means we will ask other questions. And so hopefully I'll get that confirmed today. So I think for now we just keep building with the Wolfsburg is optional and the question sets that we have. And if we need to add more questions in the future, that's good. But it was helpful to probably just level set and say like, hey, these questions that we're asking, you know, could change over time. So as we we build that, just keep that in mind that the list of questions may change here or there and we want to build with that. That thought, so... Those are my updates.
+
+[00:04:48] Shantanu: I think the questions you mentioned will, in reality, how we are trying to build is... These questions will come from... cover base and it will be whatever we define it in cover base. So if cover base has 10, it will pop up from there. We will not be hard coding anything in our application. That's what we have, yeah.
+
+[00:05:05] Aaron McWilliams: Ohh, okay. Oh, well, I like that. No, that's good. That's perfect, Ed.
+
+[00:05:21] Shantanu: We will let you know if that is possible in cover base. That is what we are trying to spend time reviewing the APIs, documentation and all. But our initial call with the cover base was, yes, they will provide everything. So. We started going through the APIs, we started checking what is possible with the APIs and all. As we are working on integration, we will come to know like the dynamic questions, how we are controlling it.
+
+[00:05:56] Aaron McWilliams: OK, yeah, I like that.
+
+[00:06:02] Shantanu: I think. Holloway, you want to give update what you were doing yesterday? Yeah, OK.
+
+[00:06:08] Pallavi Bichpuriya: Yes, yeah.
+
+[00:06:19] Shantanu: Yeah, I think, yeah, good.
+
+[00:06:26] Pallavi Bichpuriya: Everything is the same as before except that we added the additional information that we were getting. In cover base.
+
+[00:06:39] Shantanu: There is a one one form or one page we identified yesterday working with Joel that that information somehow needs to be captured in CoverBase else CoverBase doesn't perform. So we added.
+
+[00:06:54] Aaron McWilliams: Mm.
+
+[00:06:55] Shantanu: Yes, questions like institution profile.
+
+[00:07:03] Pallavi Bichpuriya: We have added these and the contacts. And...
+
+[00:07:07] Shantanu: No contact, I think we can skip it because that's, they cannot define who is going to be the. Contact. We are, why, why do you think we need this contact?
+
+[00:07:21] Aaron McWilliams: And. Well, it's on the page.
+
+[00:07:25] Shantanu: Yeah, it's on the page, but if you see what we are doing here, we are trying to simplify this workflow, right? So we are saying we know who you are, that's why we are allowing you to move forward. So his information is already there on a page we put together. Now if you are going to talk with...
+
+[00:07:41] Aaron McWilliams: Ohh, true.
+
+[00:07:44] Shantanu: The person E from a vantage or a B from a vantage, that's my call, right? Am I am I missing you in here?
+
+[00:07:51] Pallavi Bichpuriya: Yep, Corey.
+
+[00:07:55] Shantanu: Yeah, I don't think we need this area. Sorry.
+
+[00:07:56] Aaron McWilliams: Yeah, so... Yeah, I'm trying to think. We'll need it entered in cover base unless we want to remove that. I mean, I guess we could remove. Well, if we remove the, no, we can't remove it. Coverbase will need that answer, but we can auto-populate it since we already have it from earlier in the workflow, right?
+
+[00:08:23] Shantanu: Correct, correct, and that is where Smital and Pallavi, you'll have to understand how the API works. You see on our page on the right hand side, we have a option to say like collaborate, right?
+
+[00:08:24] Pallavi Bichpuriya: Team.
+
+[00:08:30] Aaron McWilliams: Mhm.
+
+[00:08:37] Pallavi Bichpuriya: E.
+
+[00:08:38] Shantanu: That is what is this is for, so. There is no point in asking. Extra thing because Power Base has it. If we really need, we should ask.
+
+[00:08:48] Aaron McWilliams: Mhm.
+
+[00:09:01] Pallavi Bichpuriya: And then... Come to the once the institution profile is done, we'll come to the India part. Same as before, accept it. And now the documents we have just mentioned, if it is applicable, then you can upload it. Nothing else, and then we have made this mandatory. Is this fine?
+
+[00:09:35] Aaron McWilliams: And. Shawn, I don't know if you have an opinion, but I would think that maybe we move the required document to the top, and then that way the optional one is below, and then maybe just some kind of note to make the optional stick out a little bit more.
+
+[00:09:42] Pallavi Bichpuriya: Okay, yeah. Yeah, OK.
+
+[00:09:54] Shawn Main: Yeah, yeah, I agree.
+
+[00:09:56] Aaron McWilliams: Well, and even, yeah, you kind of have an optional supporting documents underneath there, so maybe you move Wolfsburg in that section.
+
+[00:10:05] Pallavi Bichpuriya: Okay, okay.
+
+[00:10:11] Shantanu: Yeah, I wanted you to show those two documents what we were putting together, right? One is the design document we talked about, but the workflow, workflow, yeah.
+
+[00:10:17] Pallavi Bichpuriya: Wait, yeah.
+
+[00:10:27] Shantanu: Yeah, I think.
+
+[00:10:27] Aaron McWilliams: And then I have a thought on NDA when we go back to that, but go ahead.
+
+[00:10:34] Pallavi Bichpuriya: So...
+
+[00:10:34] Shantanu: Not sure if we can see it.
+
+[00:10:39] Pallavi Bichpuriya: Is it visible?
+
+[00:10:40] Shantanu: Ohh, it's okay, yeah.
+
+[00:10:41] Aaron McWilliams: There you go.
+
+[00:10:45] Shantanu: So, you know, we kind of putting this together because we realized that the workflow has some decisions and it has a screen screen links with it. So, today morning we were over your. Share it one morning. Today morning we are talking about the basically Rapha report. That review is mandatory before even allowing user to create user ID or secured access, yes or no, right? So that's where we thought, like, let's put it on a paper so that we understand. and then we can validate is it right or wrong. So this is what we put together as a workflow. So on a public side, public side in the Saenz without person getting a secured user ID and password, he can put his details. The details will be entered on a public inquiry page. That's it. So anybody can come there, even a hacker can come there and enter some information with FDIC numbers, the e-mail address and all. We get that detail, we store it in Hazel somewhere, not going to be in a cover base. But once we get that, we will do our Rafa, I mean, the validation, like, is this right organization? What is the score? Should we allow them to enroll participate in Hazard, yes or no? And once we validate that, we will send them an e-mail saying like, yes. you continue, right? And from that onward, they can create a user ID, password, and they can start the institution onboarding process wherein they are answering the questions and we are actually will start collecting. the data and pushing it on to the cover base. So the step number one has nothing to do with cover base. Moment that is approved, we will jump onto the step #2 and this data will go into the cover base now.
+
+[00:12:52] Aaron McWilliams: Mm.
+
+[00:13:03] Shantanu: Mm.
+
+[00:13:05] Smital Lunawat: Just a quick question on the step one. If you can move a little upward. So when the RAFA report based on whatever the decision is, there will be the manual review. And after the manual review, do we send the e-mail for an acceptance or a decline status? Tate. Or will we request them maybe additional documents like as a part of MVP one, do we consider the template C as another type that we want to consider?
+
+[00:13:46] Aaron McWilliams: I mean, at this point, it'll probably still be a manual response, but I don't, yeah, we haven't we haven't blocked out the what we would need from someone if they are declined based off of the RAPA rating, so maybe maybe we just had leave it open. And then we just have a manual way to trigger the yes portion.
+
+[00:14:13] Smital Lunawat: Okay, and is like after Rafa, do we need a manual check or is it like the Rafa score, whatever threshold we set would be the final decision to send the e-mail like?
+
+[00:14:27] Aaron McWilliams: Yeah, we'll, so we'll want, I think right now we're saying a one or two is a yes, a three or four is conditional, and we need to determine that. And then a five is a no. So, we need, yeah, we need to kind of figure out what to what to do with the three or four, but...
+
+[00:14:46] Smital Lunawat: Got it, got it. So when it is either one or two or five and six, let's say for now, do we automate sending the e-mail through SendGrid templates? Or because if that's the case, then it can be a quick process or do we for sure need? a manual check which will maybe like take around three to seven days to respond back.
+
+[00:15:14] Aaron McWilliams: No, I think we want to automate. that piece through SendGrid. And we don't have a new SendGrid tenant for Hazel set up yet. We use it for Vantage, and so we do need to answer that question. But the current plan is using SendGrid automatically, yeah.
+
+[00:15:35] Shantanu: Yeah, so Smital sending the e-mail is automatic, but should we consider them for onboarding, yes or no, is a manual review.
+
+[00:15:49] Smital Lunawat: Okay, so e-mail will be sent then if it is a yes or a no, only according to that an e-mail will be sent because on the UI we are telling them that thank you, we will reach out to you back in a couple of days.
+
+[00:16:05] Shantanu: That's right.
+
+[00:16:07] Smital Lunawat: So, then...
+
+[00:16:07] Shantanu: You have to have some internal workflow, some CRM light application wherein someone is tracking this all, validating it and checking and clicking a button that.
+
+[00:16:14] Smital Lunawat: Mhm.
+
+[00:16:26] Shantanu: Yes, they are thumbs up ready for onboarding.
+
+[00:16:29] Smital Lunawat: Got it, got it. Okay.
+
+[00:16:31] Aaron McWilliams: So, Shawn, is that correct? I was thinking that if we had a one or two score that we would automatically send them a code so they could continue the process without a manual review.
+
+[00:16:42] Shawn Main: Yeah, there really shouldn't need to be manual review. I mean, the rough report's going to tell us, and then the rule should just be whatever we set and configure. If it's two, if it's three, whatever that is, then they're fine. I mean, what we're trying to get to is that, yeah, effectively any IDI or credit union or whoever, that is an insured institution, they're regulated, they've got CAMEL scores or ratings. As long as they're that, we're going to admit them. We're not going to not admit them. What changes, what ultimately really changes is, do they have some higher level of transaction capability based on the risk of who they are as an institution because they serve a certain customer base or they don't have a good BSA?
+
+[00:17:13] Shantanu: Paccone.
+
+[00:17:26] Shawn Main: team or whatever, that's really what we're trying to get to is, again, we're trying not to be exclusive.
+
+[00:17:32] Shantanu: So, this, this is... Correct. I think this is good, Shawn. The question is, will there be will there be a chance that we will have a manual review for in any case?
+
+[00:17:46] Shawn Main: Yes, so I would put it as if there are one and two in our offer report, they're automatic. If there are three, that would be human review. If they're below, you know, below the three, like there are four or five, it's an automatic, you know, decline or we might say three and four is a review. But yeah, I would say yes, there's those kind of three states.
+
+[00:17:48] Shantanu: E. Correct. So, Smital, you know the answer is we will have to build that process, internal process, and there will have to be some logic as well. Like if the score is about this, then send an e-mail and have them continue right away.
+
+[00:18:22] Smital Lunawat: Right, right. Okay, so is it safe to say that after we get a Rafa score, which should be, which is usually present in the database? So I think Rafa already has, Rafa works on scores every quarter. So every quarter. an institution has a score which is already stored in some database present in the Vantage Databricks platform. Now this, so can we fetch this score directly? And if we are fetching the score directly, then it will be a very quick yes or a no process when we are not considering the. need of proof for the MVP one part as of now. And we will just have to set the threshold logic about if it is a one or two or it will be a yes. If it is like some other number, then it is a no or something like that.
+
+[00:19:23] Shawn Main: Yeah, I would make it simple at the gate. One or two is an automatic guess. Anything else is a human review and we'll just start there and then obviously we'll make that configurable in the future. But for MVP, that's an easy way to do it.
+
+[00:19:36] Smital Lunawat: Right, and just wanted to check, like, do you think we can access this Rafa database directly? Like the database, let's say there are columns in the database table that give us the score, which is present in the Vantage Databricks. So can we use this database directly, or do we copy the whole architecture into the Hazel network? Because we plan to make Hazel a complete new entity.
+
+[00:20:05] Shawn Main: Yeah, I mean, Hazel is going to be its own entity. We will run our own, you know, version of the Rafa report. I think that's the easiest. We don't need to keep it separate or do API calls. We just need to make it part of this. I think we just fold it in.
+
+[00:20:20] Smital Lunawat: So do we say that copying the whole graph architecture back again into the Hazel?
+
+[00:20:28] Shawn Main: Yeah, yeah, I would do that. It does not need to run Advantage, so it's fine. It can run fully in Hazel.
+
+[00:20:39] Smital Lunawat: Okay, so no API calls outside of Hazel. We make one inside the Hazel. Okay.
+
+[00:20:45] Shawn Main: Yeah, yeah, we can treat this as part of hop.
+
+[00:20:48] Smital Lunawat: Okay, sounds good.
+
+[00:20:54] Shawn Main: No, Shawn, that does that doesn't mean we we don't make it something that we could partition off in the future. Like, you don't have to fully integrate it, but it it it'll run on all the same infrastructure internal. We can use it as if it's part of Hop.
+
+[00:20:54] Aaron McWilliams: And then on that.
+
+[00:21:10] Shawn Main: Does that make sense?
+
+[00:21:12] Shantanu: So, something like a proxy setup will have to do, so data stays there, but the API for the Hazel will always be treated as the database API to get the, or you know, the score from the system, right?
+
+[00:21:28] Shawn Main: Yeah, you can do it that way, or you know, it's a mini app within Hop, you know, just a miniature engine that you can call and talk to and use APIs, so it's decoupled slightly. That's up to you guys. I don't have a preference if you just go straight to the database for the data or go to the API, it's probably all, you know. All 1/2 dozen or the other.
+
+[00:21:52] Shantanu: Chris is asking where are we storing the raffle report?
+
+[00:21:53] Smital Lunawat: So. So to answer your question, Chris, right now, the Rapha report scores are present in a table in the Databricks, which is a part of the Vantage Network or the Vantage Data Bricks database right now.
+
+[00:22:20] Aaron McWilliams: And then also in step one, is there a FDIC certificate number check? That's like at the very first Express Interest page.
+
+[00:22:33] Pallavi Bichpuriya: Yeah, Breeze.
+
+[00:22:33] Smital Lunawat: Sofia. Yeah, go ahead, Pallavi.
+
+[00:22:37] Pallavi Bichpuriya: Yeah, we do have it. We will be doing this at the back end. We'll clarify, we'll validate if it is there or not, if it is correct or not.
+
+[00:22:53] Aaron McWilliams: Yeah, so I think, yeah, those are the two main things here in step one we're looking forward. And if they both, you know, pass the criteria as we said, then we'll move forward automatically.
+
+[00:23:08] Smital Lunawat: Just a quick question here. I think the current Rafa application, if Aaron, if you can check it once, that it checks something called as RSSDID.
+
+[00:23:23] Aaron McWilliams: Oh yeah. Um...
+
+[00:23:26] Smital Lunawat: So, we can do...
+
+[00:23:27] Aaron McWilliams: Shawn, do you know what the difference is there? Between FDIC number and RSS ID.
+
+[00:23:36] Shawn Main: Yeah, the RSS ID is the, you know, from the UBPR report that that identifies uniquely a bank within the Uniform Bank performance reports. The FDIC is probably a certificate number. I think that's what you guys are referencing. They're different.
+
+[00:23:54] Smital Lunawat: So in the initial form, we will also have to take RSSD ID and do we also need the FDIC check in place? Because then we'll have to use some other API for the FDIC. As per my understanding, I might be wrong here.
+
+[00:24:13] Shawn Main: Honestly, I think there's no point kind of calling out to a separate system. The UVPR and what's tracked from an RSSID perspective is, you know, is the same data effectively. I mean, FDIC maybe has slightly different data if... Bank doesn't file a report, but I would just use the raffle report for now and we can expand that later. If you look at the FFIC website, they have basically a little search thing that says, hey, look for Vantage Bank. And it'll pull up their charter number, which should match their, I'm pretty sure that matches the FDIC cert. I need to check on that, but it then shows them their RSID number. Most banks know their RSID number.
+
+[00:25:00] Smital Lunawat: So for now, can we replace the FDIC with RSSD ID because RSSD ID is exactly linked with the RAFA report that the current generation of the UBPR from the FFIC public portal. So.
+
+[00:25:16] Shawn Main: I think that's fine, but what I would do is I would actually just put in a search, a little search thing where they start typing in their name of their bank and it just searches the UBPR data that we have. And pull that up.
+
+[00:25:29] Smital Lunawat: So. Yeah, I think we had a discussion around this early on and according to what Joel had on this take was to not add a lookup bar exactly because like in because if we add a lookup then It can be a security threat where bots or anyone can just randomly add in, also add in something into the search in the lookup and they'll run the query to the API too.
+
+[00:26:03] Shantanu: So, I...
+
+[00:26:04] Shawn Main: It's all it's all public data, yeah.
+
+[00:26:07] Shantanu: Yeah, so Smital, I think I got the problem and I think we will have to figure out some solution. You know, both the things are valid. What Sean is saying is right, but we have to see what easily we can do. Let's figure it out. This is all on that first page wherein we are asking correct me.
+
+[00:26:25] Smital Lunawat: First page, yes, perfect.
+
+[00:26:27] Shantanu: The FDIC numbers are pretty generic information, so everybody knows what my number should be, so that's why we are going with that. The other numbers and details are pretty complicated. Let's review the database, what we have it, and we'll figure it out from there.
+
+[00:26:39] Smital Lunawat: Mm. Okay, that sounds good, yeah.
+
+[00:26:51] Shantanu: From Nick, you know, tomorrow, day after tomorrow, we might not have anything to show because we are going to spend time on to the cover base API and we will spend time checking what is available there, how to integrate and all. Also, we will spend some time on whatever we have it, we can build it on a. You know, over the front-end, like application, once we get access to the... You know, the the Azure and all infrastructure will will have better kind of a better step defined to, you know, to plan a idea.
+
+[00:27:36] Aaron McWilliams: That makes sense.
+
+[00:27:45] Smital Lunawat: So do we walk ahead in the journey or do we figure out one section at a time?
+
+[00:27:53] Aaron McWilliams: One thing I was going to say here, just to clarify, that NDA is not required for cover base. So... It's just one of the steps before that.
+
+[00:28:09] Smital Lunawat: So that, okay, that is another question that so we after as soon as the user enters the HOP portal, they will do the NDA or they will do the basic inquiry form that we just showed you today that Cobase would need to start the process.
+
+[00:28:28] Aaron McWilliams: I think it'd be good to do NDA first, once they sign in. And that way we can keep the institution profile and all the questions are basically together with inside of Coverbase. So yeah.
+
+[00:28:42] Smital Lunawat: Leal. Okay, sounds good. So, and this NDA is the one without DocuSign. The first one is just an exception of terms and conditions, sort of a tick box.
+
+[00:28:57] Aaron McWilliams: Yes, and we just need to add the, make sure we get the signature name and date in there. I saw it yesterday, but.
+
+[00:29:14] Smital Lunawat: And then, so okay, we'll switch these positions. Then we have the document where we'll move Wolfberg's to the next section as you recommended. Then again, these documents will then go to the database and to cover base as well. And then we have.
+
+[00:29:23] Aaron McWilliams: Mhm.
+
+[00:29:34] Smital Lunawat: due diligence. So the document that the user upload, we store it on our end and then we share it with our base.
+
+[00:29:45] Shantanu: Yeah, I think that's all technical discussions with the rule figure it out to you.
+
+[00:29:45] Smital Lunawat: Have. Yeah, okay, okay, yeah, and then I think it's it is.
+
+[00:29:50] Aaron McWilliams: Yeah, and I, and I do need to drop, but if you guys need to keep keep talking again.
+
+[00:29:57] Shantanu: No, I think we we are good for the call, yeah.
+
+[00:29:58] Smital Lunawat: I think we are good, yeah, we are good, yeah.
+
+[00:30:04] Shantanu: Any any other question from your side for us? If not, then we are good to close.
+
+[00:30:04] Aaron McWilliams: Rick. Not for me.
+
+[00:30:11] Shantanu: Yeah, okay. I think, yeah, Aaron will track the infrastructure login. You are doing that. I will catch up tomorrow again. Thank you. Bye bye.
+
+[00:30:20] Aaron McWilliams: Okay. Thanks everybody. Bye.
+
+[00:30:23] Shantanu: Thank you. Bye-bye.
+
+[00:30:25] Shardul Patki: I.
