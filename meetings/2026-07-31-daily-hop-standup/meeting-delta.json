@@ -1,0 +1,363 @@
+{
+  "schema_version": "1.1",
+  "meeting_id": "2026-07-31-daily-hop-standup",
+  "status": "ready",
+  "source": {
+    "transcript_path": "01-transcripts/daily-calls/parsed/2026-07-31-daily-hop-standup.md",
+    "meeting_date": "2026-07-31",
+    "content_sha256": "93eec6dfd253c633745d8e15b1d2a99c295936acc9741333739ff21ff9e9fca6"
+  },
+  "decisions": [
+    {
+      "id": "CAND-DEC-001",
+      "title": "The residual risk score and the yes/no result are not automated and require manual oversight",
+      "statement": "The Coverbase side of intake is not fully automated. Running the residual risk, generating the report and averaging it out into the yes/no result given back to the applicant requires manual oversight, and may involve routing the case to Hazel's internal subject-matter experts to review. This is accepted as a bottleneck inside an intake that is otherwise to be as fast as possible.",
+      "evidence": [
+        {
+          "location": "t:0:03:13",
+          "excerpt": "I know that there is a little bottleneck on the cover-based side, or there will be"
+        },
+        {
+          "location": "t:0:03:13",
+          "excerpt": "which is running the residual risk and generating the report, getting that average out so that we can give them a yes/no result. That part cannot be automated as it does require manual oversight and potentially even sending it out to some of my SMEs internally to review."
+        }
+      ],
+      "owner": "Joel Olivares",
+      "confidence": "medium",
+      "confidence_note": "Joel Olivares owns the Coverbase side and states the constraint flatly — \"cannot be automated as it does require manual oversight\" — with no dissent, so the substance is not in doubt. What the source does not establish is who performs the review, what triggers an SME referral, or how long the step may take; Joel Olivares says he doubts SME referral will usually be needed. It reads as him reporting a property of the process rather than a call taken in the room, which is why it is not high. It is adjacent to but distinct from DEC-003, which says the score is internal-only — this says the result itself is human-gated.",
+      "routing": [
+        {
+          "repo": "wf-orchestration",
+          "area": "risk-assessment"
+        },
+        {
+          "repo": "integration-wrapper",
+          "area": "coverbase"
+        }
+      ]
+    },
+    {
+      "id": "CAND-DEC-002",
+      "title": "The relaxed front-of-flow document requirements are scoped to FDIC-insured accounts",
+      "statement": "Making the Wolfsberg questionnaire optional — and the wider removal of the friction points at the front of the flow — is limited to FDIC-insured accounts. Joel Olivares attaches the limit to the relaxation itself, and separately gives FDIC accounts as the reason he expects most residual risk reviews to be straightforward.",
+      "evidence": [
+        {
+          "location": "t:0:11:19",
+          "excerpt": "Of course, this is only going to be for FDIC accounts."
+        },
+        {
+          "location": "t:0:03:13",
+          "excerpt": "I doubt that that will be the case because most of it will be straightforward, especially with the FDIC Accounts."
+        }
+      ],
+      "owner": "Joel Olivares",
+      "confidence": "low",
+      "confidence_note": "A one-line aside with no discussion and no response from anyone. What \"this\" scopes cannot be settled from the source: it may limit only the Wolfsberg relaxation, or the whole set of front-of-flow removals named in the same turn, or it may record an assumption that every applicant is FDIC-insured, in which case it constrains nothing. It is promoted because no later record carries the limit at all — DEC-007, DEC-009 and DEC-013 all state the Wolfsberg relaxation unconditionally — and because a non-FDIC applicant path would need requirements nobody has stated. DEC-008 requires the workflow not to be built around one bank's requirements, which makes an unexamined eligibility scope worth a look. The librarian may reasonably prefer to convert this into an open question rather than a decision.",
+      "routing": [
+        {
+          "repo": "react-frontend",
+          "area": "step-03-documents"
+        },
+        {
+          "repo": "wf-orchestration",
+          "area": "step-03-documents"
+        }
+      ]
+    },
+    {
+      "id": "CAND-DEC-003",
+      "title": "The signed NDA identifies the partner entity in its relationship header, not only the signer",
+      "statement": "The NDA that is digitally signed must name the party the agreement is between. Today the signer supplies name, title and date, but the header stating who the relationship is between is not pre-filled, so the executed PDF does not identify the partner that signed it. That counterparty information is to be populated; Coverbase is floated as a possible source but not established.",
+      "evidence": [
+        {
+          "location": "t:0:10:30",
+          "excerpt": "But at the very top of that NDA, it talks about who the relationship is between and it doesn't auto fill their information."
+        },
+        {
+          "location": "t:0:10:30",
+          "excerpt": "But to make sure that that PDF document that is digitally signed, they actually refer to the partner that is actually signing it. So if we can just look into that, that'd be pretty great."
+        },
+        {
+          "location": "t:0:11:18",
+          "excerpt": "Yeah, sounds good."
+        }
+      ],
+      "owner": "Joel Olivares",
+      "confidence": "low",
+      "confidence_note": "Joel Olivares raises it as something he noticed and closes with \"if we can just look into that, that'd be pretty great\", which Smital Lunawat accepts — closer to commissioning an investigation (ACT-004) than to settling a requirement, and the mechanism is explicitly unknown (\"maybe we can get that from an API from Coverbase, I don't know\"). The requirement itself is nonetheless unambiguous and is not covered by DEC-010, which lists only signature, name and date as the captured fields. Note the source describes the DocuSign version of the NDA; DEC-005 has since replaced that step with an electronic acknowledgement, so the librarian should confirm the requirement still attaches to the acknowledgement PDF.",
+      "routing": [
+        {
+          "repo": "react-frontend",
+          "area": "step-02-nda"
+        },
+        {
+          "repo": "wf-orchestration",
+          "area": "step-02-nda"
+        }
+      ]
+    }
+  ],
+  "approved_changes": [],
+  "requested_changes": [],
+  "action_items": [
+    {
+      "id": "ACT-001",
+      "statement": "Finish loading the intake form and the control sets into the Coverbase sandbox so the environment is usable Monday morning.",
+      "evidence": [
+        {
+          "location": "t:0:07:57",
+          "excerpt": "I'm still bringing in the intake form and I'm bringing in the control sets. So that's going to take probably the better part of today and then we'll be ready to go Monday morning."
+        }
+      ],
+      "owner": "Joel Olivares",
+      "due_date": "2026-07-31"
+    },
+    {
+      "id": "ACT-002",
+      "statement": "Create test banks in the Coverbase sandbox once the intake questions are in place.",
+      "evidence": [
+        {
+          "location": "t:0:08:14",
+          "excerpt": "And I'll create some fake banks and stuff like that."
+        }
+      ],
+      "owner": "Joel Olivares",
+      "due_date": "unknown"
+    },
+    {
+      "id": "ACT-003",
+      "statement": "Generate a Coverbase sandbox API key, work through the export and import API fields, and try to establish the connection with dummy data.",
+      "evidence": [
+        {
+          "location": "t:0:06:08",
+          "excerpt": "So this is the mandatory thing we need is a URL and a key so we can get going from here."
+        },
+        {
+          "location": "t:0:08:39",
+          "excerpt": "we'll keep on creating our dummy data here and we'll see how the API works or what is available in API and then we'll try to see if we can connect with it."
+        }
+      ],
+      "owner": "Shantanu Wadodkar",
+      "due_date": "unknown"
+    },
+    {
+      "id": "ACT-004",
+      "statement": "Look into where the NDA's counterparty details can be pulled from — possibly a Coverbase API — so the signed document names the partner.",
+      "evidence": [
+        {
+          "location": "t:0:10:30",
+          "excerpt": "So maybe we can get that from an API from Coverbase, I don't know."
+        },
+        {
+          "location": "t:0:11:18",
+          "excerpt": "Yeah, sounds good."
+        }
+      ],
+      "owner": "Smital Lunawat",
+      "due_date": "unknown"
+    },
+    {
+      "id": "ACT-005",
+      "statement": "Research the Bank FDIC lookup API and confirm whether the institution name and FDIC number can be validated as they are entered.",
+      "evidence": [
+        {
+          "location": "t:0:13:29",
+          "excerpt": "We were thinking if while entering the FDIC number, we send them to some API that verifies something called, I think, Bank FDIC API is available."
+        },
+        {
+          "location": "t:0:14:13",
+          "excerpt": "We still have to see, do more research on it"
+        }
+      ],
+      "owner": "Pallavi Bichpuriya",
+      "due_date": "unknown"
+    },
+    {
+      "id": "ACT-006",
+      "statement": "Get the cyber review of the tenant and cloud PC setup completed, then create cloud PC accounts for the build team.",
+      "evidence": [
+        {
+          "location": "t:0:09:35",
+          "excerpt": "we're just waiting on cyber to go over it. And then probably next week, we can create an account, the cloud PC account for you all."
+        },
+        {
+          "location": "t:0:09:35",
+          "excerpt": "And then on Tuesday or Wednesday, we probably can create the cloud PCs."
+        }
+      ],
+      "owner": "Robert Ramirez",
+      "due_date": "unknown"
+    }
+  ],
+  "open_questions": [
+    {
+      "id": "CAND-Q-001",
+      "title": "Is e-signature reduced to one use case, and is it the NDA or account creation?",
+      "question": "The team is trying to reduce e-signature — DocuSign, or Prelim's — to a single use case in the flow: either the NDA or the account-creation paperwork. Smital Lunawat asked whether that had been decided; Joel Olivares said it was still under discussion and would be reviewed on Monday.",
+      "evidence": [
+        {
+          "location": "t:0:10:13",
+          "excerpt": "Just wanted to check, is there a decision made on the NDA signing part? Like, I think we are trying to reduce using DocuSign or prelims to 1 use case. Either it is NDA or the account creation part."
+        },
+        {
+          "location": "t:0:10:30",
+          "excerpt": "That's still under discussion. We can review that on Monday."
+        }
+      ],
+      "owner": "Joel Olivares",
+      "due_date": "unknown",
+      "confidence": "medium",
+      "confidence_note": "Explicitly unresolved in the source, so it was a genuine open question on 2026-07-31 — but this delta backfills a meeting that later ones have overtaken. DEC-005 (2026-08-03) settles it: the NDA is acknowledged electronically and a single signature is taken at the end of the journey. It should be recorded as the antecedent of DEC-005, or dropped, rather than opened as outstanding. \"prelims\" in the source is Prelim, the account-opening provider named elsewhere in this project. \"Monday\" is 2026-08-03 but no date was said aloud.",
+      "routing": [
+        {
+          "repo": "wf-orchestration",
+          "area": "step-02-nda"
+        },
+        {
+          "repo": "integration-wrapper",
+          "area": "docusign"
+        }
+      ]
+    },
+    {
+      "id": "CAND-Q-002",
+      "title": "Can the FDIC number be validated against an FDIC API before an account is created?",
+      "question": "Can the institution name and FDIC number entered on the initial form be checked against a public FDIC bank lookup API while the applicant is typing them — so that no fake account is created and a login is only issued to a verified FDIC institution — or must the check wait until after the form is submitted? Pallavi Bichpuriya reported that such an API appears to exist and Joel Olivares endorsed the approach, but the team still has to research it.",
+      "evidence": [
+        {
+          "location": "t:0:12:33",
+          "excerpt": "is there any way that we check through some APIs that the FDIC number that the person is trying to input is right, or only after the submission of the form we'll be checking that the institution name and FDIC number is matching?"
+        },
+        {
+          "location": "t:0:12:55",
+          "excerpt": "I think after the form, I don't know how to do it before that. Do you have any ideas?"
+        },
+        {
+          "location": "t:0:13:06",
+          "excerpt": "unless when they're signing up, we can verify that it's a true FDIC institution before we give them a login, then that would work. Otherwise, we'll have to wait till after we get the account."
+        },
+        {
+          "location": "t:0:14:13",
+          "excerpt": "We still have to see, do more research on it, but that is the higher level details that we found out right now."
+        }
+      ],
+      "owner": "Pallavi Bichpuriya",
+      "due_date": "unknown",
+      "confidence": "high",
+      "confidence_note": "Explicitly left as research: Joel Olivares asked \"is that something we can see on Monday?\" and Pallavi Bichpuriya answered that more research is needed, so no date was committed. The answer moves where account creation sits — an inline check gates the login, a post-submission check does not. Pallavi Bichpuriya also states the sequencing that the Rafa scoring check runs after form submission; the 2026-07-16 kickoff delta proposed a Rafa pre-screen at the very start of the journey, and no DEC- record exists for either, so the ordering has nothing authoritative behind it.",
+      "routing": [
+        {
+          "repo": "react-frontend",
+          "area": "step-01-eligibility"
+        },
+        {
+          "repo": "integration-wrapper",
+          "area": "fdic"
+        },
+        {
+          "repo": "wf-orchestration",
+          "area": "eligibility-screening"
+        }
+      ]
+    }
+  ],
+  "superseded_decisions": [],
+  "not_promoted": [
+    {
+      "topic": "The Wolfsberg questionnaire is optional and the blank PDF form is not issued",
+      "evidence": [
+        {
+          "location": "t:0:02:12",
+          "excerpt": "we've decided to make the Wolfberg document optional for those that have it and for those that don't. We don't want to make it mandatory. So we're not going to make them fill out that form, the PDF form. The reason for that is we did go through a customer experience with our team and it just seems a little cumbersome to go through different stages."
+        },
+        {
+          "location": "t:0:03:04",
+          "excerpt": "Yeah, yeah, I think that makes sense. At least for MVP, that should be okay."
+        },
+        {
+          "location": "t:0:11:19",
+          "excerpt": "If they have it, great. If they don't, then we move on."
+        }
+      ],
+      "reason": "restates_existing_record",
+      "note": "This is DEC-007 in substance, including its rationale — Joel Olivares cites the same customer-experience session. It matters for a different reason: DEC-007 is recorded as decided 2026-08-03, and here on 2026-07-31 Joel Olivares reports it as already decided, among \"updates that were just developed earlier today\". This transcript, not the 2026-08-03 standup, is the origin, and the registry date is three days late. The librarian may want to re-date DEC-007 and add this source. The FDIC scope limit attached to the same thread is the only new content and is promoted as CAND-DEC-002."
+    },
+    {
+      "topic": "Keeping the Vanta Trust Center NDA as an automatic compliance step, and removing the NDA requirement at the front of the flow",
+      "evidence": [
+        {
+          "location": "t:0:11:19",
+          "excerpt": "And honestly, we might leave that NDA because I do need the NDA in the Aventa or Trust Center side. So I'm going to keep that as an automatic for compliance."
+        },
+        {
+          "location": "t:0:11:19",
+          "excerpt": "We talked about the idea of having the NDA where we have it now through the life cycle of a partner, because we might share information with them back and forth long before they get to the trust center. So we'll need an NDA long before that."
+        },
+        {
+          "location": "t:0:11:19",
+          "excerpt": "I know that there was a lot of like hot points, like the NDA requirement at the beginning, the Wolfberg PDF, we're going to remove all that if we can."
+        }
+      ],
+      "reason": "speculation_without_commitment",
+      "note": "One turn, two incompatible positions, no response from anyone. Joel Olivares says Hazel needs an NDA early in the partner lifecycle because information is exchanged long before the Trust Center — and then names \"the NDA requirement at the beginning\" as a friction point to be removed \"if we can\". Both halves are hedged (\"we might leave\", \"if we can\"). The Vanta half contradicts DEC-002, which records that signing in the Hazel flow satisfies Vanta's requirement so the bank is not asked to sign a second time; it is not promoted as a reversal because the source establishes no outcome, and registry Q-013 shows the same question still open on 2026-08-04. The lifecycle remark is context for Q-008 (what is shared before an NDA is in place) rather than an answer to it. \"Aventa\" in the source is Vanta."
+    },
+    {
+      "topic": "How the DocuSign connection is set up",
+      "evidence": [
+        {
+          "location": "t:0:08:54",
+          "excerpt": "we need some connections for DocuSign and all. Maybe we can discuss that tomorrow or later."
+        },
+        {
+          "location": "t:0:09:11",
+          "excerpt": "Okay, Monday."
+        }
+      ],
+      "reason": "explicitly_parked",
+      "note": "Deferred to Monday by agreement with no content discussed at all. Distinct from CAND-Q-001, which asks which single use case e-signature is reduced to; this is the integration mechanics."
+    },
+    {
+      "topic": "Following up with a bank on Wolfsberg-related controls through Coverbase rather than through the portal",
+      "evidence": [
+        {
+          "location": "t:0:02:12",
+          "excerpt": "I will probably still go through some of my controls about it, and then if I want to follow up with them, I'll just follow up through cover base."
+        }
+      ],
+      "reason": "speculation_without_commitment",
+      "note": "\"Probably\" and \"if I want to\" — Joel Olivares describes his own likely working habit, not a workflow requirement, and nobody responded. This is the earliest appearance of the loop-back-for-more-information idea that was also declined for promotion from the 2026-08-03 and 2026-08-04 standups; the trigger and the mechanism have never been specified."
+    },
+    {
+      "topic": "Deleting or regenerating Joel Olivares' existing Coverbase API key",
+      "evidence": [
+        {
+          "location": "t:0:06:12",
+          "excerpt": "Okay, so I can delete my key, right? Because I do have a key."
+        },
+        {
+          "location": "t:0:06:34",
+          "excerpt": "Yeah, we can. I think we can generate it from here, or you hold your key for now."
+        }
+      ],
+      "reason": "no_agreement_reached",
+      "note": "Left as an either/or — \"I think so\", then \"or you hold your key for now\". Trivial mechanics rather than a design question, but it is the one thread in the Coverbase access discussion that was not closed, and ACT-003 assumes the build team generates its own key."
+    }
+  ],
+  "final_takeaways": [
+    "Nothing in this delta is authoritative. Every item is a candidate for librarian review.",
+    "3 candidate decisions, 2 open questions, 6 action items, 5 items deliberately not promoted.",
+    "This is a backfill. 2026-07-31 predates the 2026-08-03 and 2026-08-04 standups already in the registry, so every candidate has to be read against records that were written after it.",
+    "DEC-007's decided date looks wrong. Joel Olivares reports the Wolfsberg PDF removal here as already decided, with the same customer-experience rationale DEC-007 cites, three days before the meeting that record is sourced to. Worth correcting before this source is filed as a restatement.",
+    "CAND-DEC-002 is the only new Wolfsberg content: the relaxation is scoped to FDIC accounts. No later record carries that limit, and DEC-008 requires the workflow not to be built around one bank's requirements. It rests on a single unexamined sentence, so it may belong as an open question instead.",
+    "Joel Olivares' NDA turn at 11:19 contradicts DEC-002 — he says he will keep the Vanta Trust Center NDA as an automatic compliance step — but it also contradicts itself in the same turn and drew no response, so it is not promoted. Q-013 shows the question still open on 2026-08-04.",
+    "CAND-Q-001 is already answered by DEC-005 (2026-08-03) and should be filed as its antecedent or dropped, not opened as outstanding."
+  ],
+  "implementation_recommended": false,
+  "blocking_reasons": [
+    "All candidates require librarian approval before any record or ticket can be created.",
+    "This source is older than records already in the registry. Approving its candidates without re-reading DEC-005, DEC-007, DEC-009 and DEC-013 risks re-opening settled ground or double-recording the Wolfsberg relaxation.",
+    "CAND-DEC-002 and CAND-DEC-003 are both low confidence and each turns on a single sentence that nobody in the room examined.",
+    "CAND-DEC-003 describes the DocuSign-era NDA; DEC-005 has since replaced that step with an electronic acknowledgement, so whether the counterparty-header requirement still applies needs confirming before it can be built.",
+    "CAND-Q-002 gates the intake form design: whether FDIC validation runs inline or after submission changes whether account creation is gated on a verified institution."
+  ]
+}

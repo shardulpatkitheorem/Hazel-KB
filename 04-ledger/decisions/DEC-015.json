@@ -1,0 +1,45 @@
+{
+  "schema_version": "1.0",
+  "id": "DEC-015",
+  "title": "The relaxed front-of-flow document requirements are scoped to FDIC-insured accounts",
+  "statement": "Making the Wolfsberg questionnaire optional — and the wider removal of the friction points at the front of the flow — is limited to FDIC-insured accounts. Joel Olivares attaches the limit to the relaxation itself, and separately gives FDIC accounts as the reason he expects most residual risk reviews to be straightforward.",
+  "status": "active",
+  "decided_on": "2026-07-31",
+  "recorded_on": "2026-08-06",
+  "owner": "Joel Olivares",
+  "origin": {
+    "kind": "meeting",
+    "meeting_id": "2026-07-31-daily-hop-standup",
+    "transcript_path": "01-transcripts/daily-calls/parsed/2026-07-31-daily-hop-standup.md",
+    "meeting_date": "2026-07-31",
+    "content_sha256": "93eec6dfd253c633745d8e15b1d2a99c295936acc9741333739ff21ff9e9fca6"
+  },
+  "evidence": [
+    {
+      "location": "t:0:11:19",
+      "excerpt": "Of course, this is only going to be for FDIC accounts."
+    },
+    {
+      "location": "t:0:03:13",
+      "excerpt": "I doubt that that will be the case because most of it will be straightforward, especially with the FDIC Accounts."
+    }
+  ],
+  "routing": [
+    {
+      "repo": "react-frontend",
+      "area": "step-03-documents"
+    },
+    {
+      "repo": "wf-orchestration",
+      "area": "step-03-documents"
+    }
+  ],
+  "spec_impact": "pending",
+  "implemented_by": [],
+  "supersedes": null,
+  "superseded_by": null,
+  "approval": {
+    "approved_by": "Shardul Patki",
+    "approved_at": "2026-08-06T00:00:00Z"
+  }
+}

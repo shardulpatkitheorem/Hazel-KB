@@ -1,0 +1,49 @@
+{
+  "schema_version": "1.0",
+  "id": "DEC-016",
+  "title": "The signed NDA identifies the partner entity in its relationship header, not only the signer",
+  "statement": "The NDA that is digitally signed must name the party the agreement is between. Today the signer supplies name, title and date, but the header stating who the relationship is between is not pre-filled, so the executed PDF does not identify the partner that signed it. That counterparty information is to be populated; Coverbase is floated as a possible source but not established.",
+  "status": "active",
+  "decided_on": "2026-07-31",
+  "recorded_on": "2026-08-06",
+  "owner": "Joel Olivares",
+  "origin": {
+    "kind": "meeting",
+    "meeting_id": "2026-07-31-daily-hop-standup",
+    "transcript_path": "01-transcripts/daily-calls/parsed/2026-07-31-daily-hop-standup.md",
+    "meeting_date": "2026-07-31",
+    "content_sha256": "93eec6dfd253c633745d8e15b1d2a99c295936acc9741333739ff21ff9e9fca6"
+  },
+  "evidence": [
+    {
+      "location": "t:0:10:30",
+      "excerpt": "But at the very top of that NDA, it talks about who the relationship is between and it doesn't auto fill their information."
+    },
+    {
+      "location": "t:0:10:30",
+      "excerpt": "But to make sure that that PDF document that is digitally signed, they actually refer to the partner that is actually signing it. So if we can just look into that, that'd be pretty great."
+    },
+    {
+      "location": "t:0:11:18",
+      "excerpt": "Yeah, sounds good."
+    }
+  ],
+  "routing": [
+    {
+      "repo": "react-frontend",
+      "area": "step-02-nda"
+    },
+    {
+      "repo": "wf-orchestration",
+      "area": "step-02-nda"
+    }
+  ],
+  "spec_impact": "pending",
+  "implemented_by": [],
+  "supersedes": null,
+  "superseded_by": null,
+  "approval": {
+    "approved_by": "Shardul Patki",
+    "approved_at": "2026-08-06T00:00:00Z"
+  }
+}
