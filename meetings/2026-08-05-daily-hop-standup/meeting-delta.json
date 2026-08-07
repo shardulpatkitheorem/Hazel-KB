@@ -1,0 +1,805 @@
+{
+  "schema_version": "1.1",
+  "meeting_id": "2026-08-05-daily-hop-standup",
+  "status": "ready",
+  "source": {
+    "transcript_path": "01-transcripts/daily-calls/parsed/2026-08-05-daily-hop-standup.md",
+    "meeting_date": "2026-08-05",
+    "content_sha256": "73b88d43b86b78106b318fd962a5042b91015b72d3cb7713dfc73573f51b9e52"
+  },
+  "decisions": [
+    {
+      "id": "CAND-DEC-001",
+      "title": "Onboarding question sets are driven by CoverBase configuration, not hard-coded in the Hazel application",
+      "statement": "The questions asked during institution onboarding are defined in CoverBase and rendered from whatever CoverBase holds — if CoverBase is configured with ten questions, ten appear. Nothing is hard-coded in the Hazel application, so the question set can change over time without a code change. This answers Aaron McWilliams' request that the build assume the list of questions will change.",
+      "evidence": [
+        {
+          "location": "t:0:03:09",
+          "excerpt": "just keep that in mind that the list of questions may change here or there and we want to build with that."
+        },
+        {
+          "location": "t:0:04:48",
+          "excerpt": "These questions will come from... cover base and it will be whatever we define it in cover base. So if cover base has 10, it will pop up from there. We will not be hard coding anything in our application."
+        },
+        {
+          "location": "t:0:05:05",
+          "excerpt": "Ohh, okay. Oh, well, I like that. No, that's good. That's perfect, Ed."
+        }
+      ],
+      "owner": "Shantanu Wadodkar",
+      "confidence": "medium",
+      "confidence_note": "Shantanu Wadodkar states it as the way the build already works and Aaron McWilliams endorses it outright, so the intent is unambiguous. What is not established is feasibility: seconds later Shantanu Wadodkar says \"We will let you know if that is possible in cover base\" and that the team is still reading the CoverBase API documentation (CAND-Q-006). The decision is therefore a design commitment made before the integration was proven.",
+      "routing": [
+        {
+          "repo": "integration-wrapper",
+          "area": "coverbase"
+        },
+        {
+          "repo": "react-frontend",
+          "area": "step-04-risk-questions"
+        },
+        {
+          "repo": "wf-orchestration",
+          "area": "step-04-risk-questions"
+        }
+      ]
+    },
+    {
+      "id": "CAND-DEC-002",
+      "title": "Contact details CoverBase requires are auto-populated from earlier workflow data, not asked again",
+      "statement": "CoverBase requires an institution profile — including a contacts answer — before it will run. The contacts section is not presented to the applicant as a question: the workflow already knows who the user is from earlier steps, and that information is auto-populated into the CoverBase answer instead. The wider principle Shantanu Wadodkar states is that nothing is asked twice when CoverBase or an earlier step already holds it.",
+      "evidence": [
+        {
+          "location": "t:0:07:03",
+          "excerpt": "We have added these and the contacts. And..."
+        },
+        {
+          "location": "t:0:07:07",
+          "excerpt": "No contact, I think we can skip it because that's, they cannot define who is going to be the. Contact."
+        },
+        {
+          "location": "t:0:07:56",
+          "excerpt": "Coverbase will need that answer, but we can auto-populate it since we already have it from earlier in the workflow, right?"
+        },
+        {
+          "location": "t:0:08:23",
+          "excerpt": "Correct, correct, and that is where Smital and Pallavi, you'll have to understand how the API works."
+        }
+      ],
+      "owner": "Aaron McWilliams",
+      "confidence": "medium",
+      "confidence_note": "Aaron McWilliams resolves the disagreement himself — he first says the field cannot be removed because CoverBase needs the answer, then rules that it is auto-populated — and Shantanu Wadodkar confirms with \"Correct, correct\". The substance is clear. Two attributes are not: which earlier step supplies the contact data is never named, and the discussion runs against a screen share, so which fields make up \"the contacts\" section cannot be recovered from the source.",
+      "routing": [
+        {
+          "repo": "react-frontend",
+          "area": "institution-profile"
+        },
+        {
+          "repo": "integration-wrapper",
+          "area": "coverbase"
+        },
+        {
+          "repo": "wf-orchestration",
+          "area": "institution-profile"
+        }
+      ]
+    },
+    {
+      "id": "CAND-DEC-003",
+      "title": "Required documents move to the top of the documents step; Wolfsberg moves into optional supporting documents",
+      "statement": "The documents step is reordered so the required document sits at the top and optional documents sit below it. The Wolfsberg questionnaire upload moves into the existing \"optional supporting documents\" section, and the optional items are given some form of visual note so they stand out as optional.",
+      "evidence": [
+        {
+          "location": "t:0:09:35",
+          "excerpt": "I would think that maybe we move the required document to the top, and then that way the optional one is below, and then maybe just some kind of note to make the optional stick out a little bit more."
+        },
+        {
+          "location": "t:0:09:54",
+          "excerpt": "Yeah, yeah, I agree."
+        },
+        {
+          "location": "t:0:09:56",
+          "excerpt": "you kind of have an optional supporting documents underneath there, so maybe you move Wolfsburg in that section."
+        },
+        {
+          "location": "t:0:29:14",
+          "excerpt": "we'll switch these positions. Then we have the document where we'll move Wolfberg's to the next section as you recommended."
+        }
+      ],
+      "owner": "Aaron McWilliams",
+      "confidence": "medium",
+      "confidence_note": "Aaron McWilliams proposes it, Shawn Main agrees explicitly, Pallavi Bichpuriya accepts, and Smital Lunawat books it as a committed change at the close of the call — so it is settled as a change. The presentation of the optional note is hedged (\"maybe just some kind of note\") and left to the build team. The required document is again referred to only as \"the required document\" against a screen share, which is the same gap registry Q-012 records. \"Wolfsburg\"/\"Wolfberg\" in the source is Wolfsberg.",
+      "routing": [
+        {
+          "repo": "react-frontend",
+          "area": "step-03-documents"
+        }
+      ]
+    },
+    {
+      "id": "CAND-DEC-004",
+      "title": "Eligibility screening runs on a public pre-login page; no account and no CoverBase data until it passes",
+      "statement": "Onboarding splits into two steps. Step one is a public inquiry page requiring no user ID or password, where an applicant enters institution details including an FDIC certificate number and an e-mail address. That data is stored in Hazel only and never reaches CoverBase. Hazel then validates the institution — an FDIC certificate number check performed on the back end, plus the RAFA report — and if both pass, an e-mail invites the applicant to create a user ID and password. Only in step two, after that gate, does the applicant answer onboarding questions and does data flow into CoverBase.",
+      "evidence": [
+        {
+          "location": "t:0:10:45",
+          "excerpt": "So on a public side, public side in the Saenz without person getting a secured user ID and password, he can put his details. The details will be entered on a public inquiry page."
+        },
+        {
+          "location": "t:0:10:45",
+          "excerpt": "We get that detail, we store it in Hazel somewhere, not going to be in a cover base."
+        },
+        {
+          "location": "t:0:10:45",
+          "excerpt": "So the step number one has nothing to do with cover base. Moment that is approved, we will jump onto the step #2 and this data will go into the cover base now."
+        },
+        {
+          "location": "t:0:22:37",
+          "excerpt": "Yeah, we do have it. We will be doing this at the back end. We'll clarify, we'll validate if it is there or not, if it is correct or not."
+        },
+        {
+          "location": "t:0:22:53",
+          "excerpt": "those are the two main things here in step one we're looking forward. And if they both, you know, pass the criteria as we said, then we'll move forward automatically."
+        }
+      ],
+      "owner": "Aaron McWilliams",
+      "confidence": "medium",
+      "confidence_note": "Shantanu Wadodkar presents the two-step workflow explicitly for validation — \"let's put it on a paper so that we understand. and then we can validate is it right or wrong\" — rather than as a settled call. The meeting then worked through it in detail without anyone disputing the shape, and Aaron McWilliams closes step one by naming its two gate criteria and confirming automatic progression. What remains unfixed is which institution identifier the public page collects (CAND-Q-003) and what happens to applicants who do not clear the gate (CAND-Q-002).",
+      "routing": [
+        {
+          "repo": "react-frontend",
+          "area": "step-01-eligibility"
+        },
+        {
+          "repo": "wf-orchestration",
+          "area": "eligibility-screening"
+        },
+        {
+          "repo": "integration-wrapper",
+          "area": "coverbase"
+        }
+      ]
+    },
+    {
+      "id": "CAND-DEC-005",
+      "title": "For MVP a RAFA score of 1 or 2 admits automatically; anything else goes to human review",
+      "statement": "The eligibility gate is scored from the RAFA report. For MVP, a score of one or two is an automatic yes and the applicant continues without any human involvement. Any other score routes to human review. The thresholds are to be made configurable later, but the simple two-state rule is what is built now. The underlying intent Shawn Main gives is that Hazel is not trying to be exclusive: any insured, regulated institution is admitted, and what varies by risk is the transaction capability they get, not whether they are let in.",
+      "evidence": [
+        {
+          "location": "t:0:16:31",
+          "excerpt": "I was thinking that if we had a one or two score that we would automatically send them a code so they could continue the process without a manual review."
+        },
+        {
+          "location": "t:0:16:42",
+          "excerpt": "Yeah, there really shouldn't need to be manual review. I mean, the rough report's going to tell us, and then the rule should just be whatever we set and configure."
+        },
+        {
+          "location": "t:0:17:46",
+          "excerpt": "so I would put it as if there are one and two in our offer report, they're automatic. If there are three, that would be human review."
+        },
+        {
+          "location": "t:0:19:23",
+          "excerpt": "Yeah, I would make it simple at the gate. One or two is an automatic guess. Anything else is a human review and we'll just start there and then obviously we'll make that configurable in the future. But for MVP, that's an easy way to do it."
+        }
+      ],
+      "owner": "Shawn Main",
+      "confidence": "high",
+      "confidence_note": "Shawn Main is asked directly by Aaron McWilliams and rules on it twice, converging on the simple MVP form; Smital Lunawat accepts and moves on. Note for the librarian that this sits alongside, not against, DEC-014: DEC-014 governs the CoverBase residual risk score later in due diligence, this governs the RAFA pre-screen at the gate. \"RAPA\", \"Rafa\", \"raffle\" and \"offer report\" in the source are all RAFA.",
+      "routing": [
+        {
+          "repo": "wf-orchestration",
+          "area": "eligibility-screening"
+        },
+        {
+          "repo": "react-frontend",
+          "area": "step-01-eligibility"
+        }
+      ]
+    },
+    {
+      "id": "CAND-DEC-006",
+      "title": "The eligibility outcome e-mail is sent automatically through SendGrid",
+      "statement": "Once the eligibility outcome is determined, the e-mail telling the applicant whether they may continue is sent automatically using SendGrid templates rather than composed by hand. The applicant-facing UI on the public page says only that Hazel will reach out in a couple of days. The e-mail send is automated even where the underlying admit/decline judgement is a human one.",
+      "evidence": [
+        {
+          "location": "t:0:14:46",
+          "excerpt": "do we automate sending the e-mail through SendGrid templates?"
+        },
+        {
+          "location": "t:0:15:14",
+          "excerpt": "No, I think we want to automate. that piece through SendGrid. And we don't have a new SendGrid tenant for Hazel set up yet. We use it for Vantage, and so we do need to answer that question. But the current plan is using SendGrid automatically, yeah."
+        },
+        {
+          "location": "t:0:15:35",
+          "excerpt": "Yeah, so Smital sending the e-mail is automatic, but should we consider them for onboarding, yes or no, is a manual review."
+        }
+      ],
+      "owner": "Aaron McWilliams",
+      "confidence": "medium",
+      "confidence_note": "Aaron McWilliams calls it and Shantanu Wadodkar restates it to Smital Lunawat unchallenged, so the mechanism is settled as the current plan. Aaron McWilliams qualifies it as \"the current plan\" and flags in the same breath that Hazel has no SendGrid tenant of its own — it uses Vantage's — which he names as an unanswered question (CAND-Q-004). Which outcomes trigger an e-mail is also unsettled while CAND-Q-002 is open.",
+      "routing": [
+        {
+          "repo": "wf-orchestration",
+          "area": "notifications"
+        },
+        {
+          "repo": "integration-wrapper",
+          "area": "sendgrid"
+        }
+      ]
+    },
+    {
+      "id": "CAND-DEC-007",
+      "title": "The RAFA report runs inside Hazel as part of HOP, not by calling Vantage",
+      "statement": "Hazel runs its own version of the RAFA report on its own infrastructure, as part of HOP. The RAFA architecture currently living in Vantage's Databricks is reproduced inside Hazel rather than reached across the network, so there are no API calls out of Hazel to Vantage for the score. Shawn Main notes this does not preclude partitioning the engine off later — it need not be fully integrated, but it runs on the same internal infrastructure and can be treated as part of HOP.",
+      "evidence": [
+        {
+          "location": "t:0:20:05",
+          "excerpt": "Yeah, I mean, Hazel is going to be its own entity. We will run our own, you know, version of the Rafa report. I think that's the easiest. We don't need to keep it separate or do API calls. We just need to make it part of this. I think we just fold it in."
+        },
+        {
+          "location": "t:0:20:28",
+          "excerpt": "Yeah, yeah, I would do that. It does not need to run Advantage, so it's fine. It can run fully in Hazel."
+        },
+        {
+          "location": "t:0:20:39",
+          "excerpt": "Okay, so no API calls outside of Hazel. We make one inside the Hazel. Okay."
+        },
+        {
+          "location": "t:0:20:45",
+          "excerpt": "Yeah, yeah, we can treat this as part of hop."
+        }
+      ],
+      "owner": "Shawn Main",
+      "confidence": "high",
+      "confidence_note": "Smital Lunawat asks the question directly — read Vantage's Databricks table or copy the architecture into Hazel — and Shawn Main answers it three times without hedging; Smital Lunawat reads the conclusion back and it is confirmed. Consistent with DEC-008, which holds that Vantage is a reference rather than a dependency. The internal shape (direct database read versus a decoupled mini-app with APIs) is explicitly left to the build team — CAND-Q-005.",
+      "routing": [
+        {
+          "repo": "wf-orchestration",
+          "area": "architecture"
+        },
+        {
+          "repo": "wf-orchestration",
+          "area": "eligibility-screening"
+        }
+      ]
+    },
+    {
+      "id": "CAND-DEC-008",
+      "title": "No separate FDIC system is called at the gate; the UBPR data Hazel holds is the source",
+      "statement": "Institution verification at the eligibility gate does not call out to a separate FDIC system. The UBPR data behind the RAFA report tracks effectively the same information via the RSSD ID, so Hazel uses the RAFA report for now and expands the check later if needed. Shawn Main's stated exception is that the FDIC may hold slightly different data for a bank that has not filed a report.",
+      "evidence": [
+        {
+          "location": "t:0:23:54",
+          "excerpt": "So in the initial form, we will also have to take RSSD ID and do we also need the FDIC check in place? Because then we'll have to use some other API for the FDIC."
+        },
+        {
+          "location": "t:0:24:13",
+          "excerpt": "Honestly, I think there's no point kind of calling out to a separate system. The UVPR and what's tracked from an RSSID perspective is, you know, is the same data effectively."
+        },
+        {
+          "location": "t:0:24:13",
+          "excerpt": "but I would just use the raffle report for now and we can expand that later"
+        }
+      ],
+      "owner": "Shawn Main",
+      "confidence": "medium",
+      "confidence_note": "Shawn Main rules it out with a reason and nobody disputes that part. It bears directly on registry Q-014, which asks whether the FDIC number can be validated against a public FDIC API — this says no external call is made at all. Two things stop it being high confidence: Pallavi Bichpuriya said minutes earlier that an FDIC certificate number check is already implemented on the back end without stating what it calls, and Shantanu Wadodkar closes the topic by defending the FDIC number as the field to collect because banks know it, then defers the whole identifier question (CAND-Q-003). \"UVPR\" is UBPR; \"raffle report\" is the RAFA report.",
+      "routing": [
+        {
+          "repo": "integration-wrapper",
+          "area": "fdic"
+        },
+        {
+          "repo": "wf-orchestration",
+          "area": "eligibility-screening"
+        }
+      ]
+    },
+    {
+      "id": "CAND-DEC-009",
+      "title": "The NDA is the first step after sign-in, ahead of the institution profile and CoverBase questions",
+      "statement": "The NDA is not a CoverBase requirement — it is one of the steps that precedes CoverBase entirely. Once an applicant signs in to the HOP portal, the NDA is the first thing they do, before the basic inquiry form and the institution profile. Sequencing it first keeps the institution profile and all the onboarding questions together as one block inside CoverBase.",
+      "evidence": [
+        {
+          "location": "t:0:27:53",
+          "excerpt": "One thing I was going to say here, just to clarify, that NDA is not required for cover base. So... It's just one of the steps before that."
+        },
+        {
+          "location": "t:0:28:09",
+          "excerpt": "so we after as soon as the user enters the HOP portal, they will do the NDA or they will do the basic inquiry form that we just showed you today that Cobase would need to start the process."
+        },
+        {
+          "location": "t:0:28:28",
+          "excerpt": "I think it'd be good to do NDA first, once they sign in. And that way we can keep the institution profile and all the questions are basically together with inside of Coverbase."
+        },
+        {
+          "location": "t:0:28:42",
+          "excerpt": "Leal. Okay, sounds good."
+        }
+      ],
+      "owner": "Aaron McWilliams",
+      "confidence": "medium",
+      "confidence_note": "Smital Lunawat asks the ordering question directly, Aaron McWilliams answers with a reason and she accepts, so it is settled enough to build. The phrasing is a preference (\"I think it'd be good to\") rather than a ruling, and nobody restated it as a confirmed change at the close. Note the interaction with CAND-DEC-004: sign-in only happens after the eligibility gate, so this NDA sits at the top of step two, not on the public page.",
+      "routing": [
+        {
+          "repo": "wf-orchestration",
+          "area": "step-02-nda"
+        },
+        {
+          "repo": "react-frontend",
+          "area": "onboarding"
+        }
+      ]
+    },
+    {
+      "id": "CAND-DEC-010",
+      "title": "An internal review console is required for the human eligibility-review step",
+      "statement": "The human review path needs somewhere to happen. An internal, CRM-light application is required in which a Hazel operator tracks incoming inquiries, validates them, and clicks a button to mark an applicant ready for onboarding. Alongside it sits threshold logic that decides, from the RAFA score, whether to send the continue e-mail immediately or route to that queue.",
+      "evidence": [
+        {
+          "location": "t:0:16:07",
+          "excerpt": "You have to have some internal workflow, some CRM light application wherein someone is tracking this all, validating it and checking and clicking a button that."
+        },
+        {
+          "location": "t:0:16:26",
+          "excerpt": "Yes, they are thumbs up ready for onboarding."
+        },
+        {
+          "location": "t:0:17:48",
+          "excerpt": "So, Smital, you know the answer is we will have to build that process, internal process, and there will have to be some logic as well. Like if the score is about this, then send an e-mail and have them continue right away."
+        }
+      ],
+      "owner": "unknown",
+      "confidence": "low",
+      "confidence_note": "Shantanu Wadodkar states it as a requirement and Smital Lunawat accepts, but nobody with authority over scope ruled on it and Aaron McWilliams and Shawn Main did not respond. It is arguably just Shantanu Wadodkar describing an implication of the human-review path rather than a decision to build a tool. It is also stated before Shawn Main narrows human review to non-1-or-2 scores, so its size is unclear, and nothing was said about whether this is in MVP scope. Promoted because a build team cannot deliver CAND-DEC-005 without somewhere for the human review to happen, and the librarian should decide whether that is a decision or a consequence.",
+      "routing": [
+        {
+          "repo": "react-frontend",
+          "area": "ops-portal"
+        },
+        {
+          "repo": "wf-orchestration",
+          "area": "eligibility-screening"
+        }
+      ]
+    }
+  ],
+  "approved_changes": [],
+  "requested_changes": [],
+  "action_items": [
+    {
+      "id": "ACT-001",
+      "statement": "Confirm whether a bank that does not upload the optional Wolfsberg questionnaire is asked other questions instead.",
+      "evidence": [
+        {
+          "location": "t:0:03:09",
+          "excerpt": "The other one was we talked about making the Wolfsburg optional, but I'm still waiting for details on whether if they don't upload the optional, that means we will ask other questions."
+        },
+        {
+          "location": "t:0:03:09",
+          "excerpt": "And so hopefully I'll get that confirmed today."
+        }
+      ],
+      "owner": "Aaron McWilliams",
+      "due_date": "2026-08-05"
+    },
+    {
+      "id": "ACT-002",
+      "statement": "Track the Hazel/Vantage infrastructure access work through the follow-up meeting so the build team gets logins.",
+      "evidence": [
+        {
+          "location": "t:0:00:55",
+          "excerpt": "we're getting closer on the access for you guys, but we do have a few more loops to jump through"
+        },
+        {
+          "location": "t:0:00:55",
+          "excerpt": "we've got another meeting tomorrow trying to iron those things out"
+        },
+        {
+          "location": "t:0:30:11",
+          "excerpt": "Aaron will track the infrastructure login."
+        }
+      ],
+      "owner": "Aaron McWilliams",
+      "due_date": "unknown"
+    },
+    {
+      "id": "ACT-003",
+      "statement": "Schedule the meeting with Zeb once their statement of work is complete — expected to be another week or two.",
+      "evidence": [
+        {
+          "location": "t:0:00:55",
+          "excerpt": "we talked about setting up another meeting with Zeb, but we're still working on their statement of work. And so talking with Shawn, I think it may be another week or two before we get that scheduled."
+        }
+      ],
+      "owner": "Aaron McWilliams",
+      "due_date": "unknown"
+    },
+    {
+      "id": "ACT-004",
+      "statement": "Work through the CoverBase APIs and documentation to establish what the integration supports, in particular how dynamic question sets are controlled.",
+      "evidence": [
+        {
+          "location": "t:0:05:21",
+          "excerpt": "As we are working on integration, we will come to know like the dynamic questions, how we are controlling it."
+        },
+        {
+          "location": "t:0:26:51",
+          "excerpt": "tomorrow, day after tomorrow, we might not have anything to show because we are going to spend time on to the cover base API and we will spend time checking what is available there, how to integrate and all."
+        }
+      ],
+      "owner": "Shantanu Wadodkar",
+      "due_date": "unknown"
+    },
+    {
+      "id": "ACT-005",
+      "statement": "Reorder the documents step — required document to the top, Wolfsberg upload into the optional supporting documents section.",
+      "evidence": [
+        {
+          "location": "t:0:29:14",
+          "excerpt": "we'll switch these positions. Then we have the document where we'll move Wolfberg's to the next section as you recommended."
+        }
+      ],
+      "owner": "Pallavi Bichpuriya",
+      "due_date": "unknown"
+    },
+    {
+      "id": "ACT-006",
+      "statement": "Review the RAFA database to establish which institution identifiers are actually available, then settle what the public inquiry page collects.",
+      "evidence": [
+        {
+          "location": "t:0:26:27",
+          "excerpt": "Let's review the database, what we have it, and we'll figure it out from there."
+        }
+      ],
+      "owner": "Shantanu Wadodkar",
+      "due_date": "unknown"
+    },
+    {
+      "id": "ACT-007",
+      "statement": "Confirm whether the charter number shown on the FFIEC public search matches the FDIC certificate number.",
+      "evidence": [
+        {
+          "location": "t:0:24:13",
+          "excerpt": "And it'll pull up their charter number, which should match their, I'm pretty sure that matches the FDIC cert. I need to check on that"
+        }
+      ],
+      "owner": "Shawn Main",
+      "due_date": "unknown"
+    }
+  ],
+  "open_questions": [
+    {
+      "id": "CAND-Q-001",
+      "title": "If a bank does not upload the optional Wolfsberg questionnaire, are other questions asked instead?",
+      "question": "Aaron McWilliams is still waiting for details on whether a bank that declines the optional Wolfsberg upload is then asked a different set of questions. He expected to have it confirmed on the day of the meeting, and told the team to keep building with Wolfsberg optional and the existing question sets in the meantime.",
+      "evidence": [
+        {
+          "location": "t:0:03:09",
+          "excerpt": "I'm still waiting for details on whether if they don't upload the optional, that means we will ask other questions"
+        },
+        {
+          "location": "t:0:03:09",
+          "excerpt": "So I think for now we just keep building with the Wolfsburg is optional and the question sets that we have."
+        }
+      ],
+      "owner": "Aaron McWilliams",
+      "due_date": "2026-08-05",
+      "confidence": "high",
+      "confidence_note": "Explicitly unresolved and owned, with a same-day target. It reopens exactly what DEC-009 settled the day before — that no question set replaces the Wolfsberg content — so if the answer comes back \"yes, we ask other questions\", DEC-009 is contradicted and registry Q-001 becomes live again. The librarian should read this against DEC-009 rather than as a fresh question.",
+      "blocking": [
+        "DEC-009"
+      ],
+      "routing": [
+        {
+          "repo": "react-frontend",
+          "area": "step-03-documents"
+        },
+        {
+          "repo": "wf-orchestration",
+          "area": "step-03-documents"
+        }
+      ]
+    },
+    {
+      "id": "CAND-Q-002",
+      "title": "What happens to an applicant who does not clear the RAFA gate automatically?",
+      "question": "For an applicant whose RAFA score routes to human review or to decline, what does the process do — send an acceptance or decline e-mail, request additional documents, or something else? What does the human reviewer actually assess, and what is required of a declined applicant? Aaron McWilliams says this has not been blocked out and proposes leaving it open.",
+      "evidence": [
+        {
+          "location": "t:0:13:05",
+          "excerpt": "do we send the e-mail for an acceptance or a decline status? Tate. Or will we request them maybe additional documents like as a part of MVP one"
+        },
+        {
+          "location": "t:0:13:46",
+          "excerpt": "we haven't we haven't blocked out the what we would need from someone if they are declined based off of the RAPA rating, so maybe maybe we just had leave it open"
+        },
+        {
+          "location": "t:0:14:27",
+          "excerpt": "So, we need, yeah, we need to kind of figure out what to what to do with the three or four, but..."
+        }
+      ],
+      "owner": "unknown",
+      "due_date": "unknown",
+      "confidence": "high",
+      "confidence_note": "Aaron McWilliams explicitly parks it and nobody takes ownership. Shawn Main later collapses the bands so that everything other than one or two is human review, which narrows the question but does not answer it — what the reviewer does and what a declined bank is told is still undefined. This blocks CAND-DEC-005 from being buildable end to end and blocks CAND-DEC-006 from knowing which outcomes send an e-mail.",
+      "blocking": [
+        "CAND-DEC-005",
+        "CAND-DEC-006"
+      ],
+      "routing": [
+        {
+          "repo": "wf-orchestration",
+          "area": "eligibility-screening"
+        },
+        {
+          "repo": "react-frontend",
+          "area": "ops-portal"
+        }
+      ]
+    },
+    {
+      "id": "CAND-Q-003",
+      "title": "Which institution identifier does the public inquiry page collect — FDIC certificate number or RSSD ID?",
+      "question": "The RAFA report keys on RSSD ID, so Smital Lunawat proposed replacing the FDIC certificate number on the initial form with the RSSD ID. Shawn Main said that was fine. Shantanu Wadodkar then argued the opposite way — every bank knows its FDIC number and the other identifiers are complicated — and deferred the decision to a review of what the RAFA database actually holds.",
+      "evidence": [
+        {
+          "location": "t:0:25:00",
+          "excerpt": "So for now, can we replace the FDIC with RSSD ID because RSSD ID is exactly linked with the RAFA report"
+        },
+        {
+          "location": "t:0:26:07",
+          "excerpt": "Yeah, so Smital, I think I got the problem and I think we will have to figure out some solution. You know, both the things are valid."
+        },
+        {
+          "location": "t:0:26:27",
+          "excerpt": "The FDIC numbers are pretty generic information, so everybody knows what my number should be, so that's why we are going with that. The other numbers and details are pretty complicated. Let's review the database, what we have it, and we'll figure it out from there."
+        }
+      ],
+      "owner": "Shantanu Wadodkar",
+      "due_date": "unknown",
+      "confidence": "high",
+      "confidence_note": "Shantanu Wadodkar closes the topic with \"we'll figure it out from there\", which is an explicit deferral, and commits his team to the database review that resolves it (ACT-006). Ownership is his by that commitment, not by anyone naming him. It determines the first field on the public inquiry page in CAND-DEC-004 and interacts with CAND-DEC-008, which assumes RSSD-keyed UBPR data is sufficient. \"RSS ID\", \"RSSID\" and \"RSID\" in the source are all RSSD ID.",
+      "blocking": [
+        "CAND-DEC-004",
+        "CAND-DEC-008"
+      ],
+      "routing": [
+        {
+          "repo": "react-frontend",
+          "area": "step-01-eligibility"
+        },
+        {
+          "repo": "wf-orchestration",
+          "area": "eligibility-screening"
+        }
+      ]
+    },
+    {
+      "id": "CAND-Q-004",
+      "title": "Does Hazel need its own SendGrid tenant, separate from Vantage's?",
+      "question": "Automated onboarding e-mail is planned on SendGrid, but there is no SendGrid tenant for Hazel — the instance in use belongs to Vantage. Aaron McWilliams names this as a question that needs answering.",
+      "evidence": [
+        {
+          "location": "t:0:15:14",
+          "excerpt": "And we don't have a new SendGrid tenant for Hazel set up yet. We use it for Vantage, and so we do need to answer that question."
+        }
+      ],
+      "owner": "unknown",
+      "due_date": "unknown",
+      "confidence": "medium",
+      "confidence_note": "Aaron McWilliams raises it as an outstanding item in one clause and moves straight on; nobody responds to it or picks it up. It is unambiguous that it is unanswered, but it is a single passing remark, so how much weight it carries is not established. It follows from Hazel being a separate entity from Vantage, the same principle behind CAND-DEC-007.",
+      "blocking": [
+        "CAND-DEC-006"
+      ],
+      "routing": [
+        {
+          "repo": "integration-wrapper",
+          "area": "sendgrid"
+        },
+        {
+          "repo": "none",
+          "area": "infrastructure"
+        }
+      ]
+    },
+    {
+      "id": "CAND-Q-005",
+      "title": "Is the in-Hazel RAFA engine reached by direct database access or by an internal API?",
+      "question": "Given that RAFA runs inside Hazel, does the workflow read the score straight from the database, or is RAFA a decoupled mini-app inside HOP exposing APIs? Shantanu Wadodkar proposed a proxy-style setup where the data stays put and Hazel always talks to a database API. Shawn Main said either is acceptable and explicitly handed the choice to the build team.",
+      "evidence": [
+        {
+          "location": "t:0:21:12",
+          "excerpt": "So, something like a proxy setup will have to do, so data stays there, but the API for the Hazel will always be treated as the database API to get the, or you know, the score from the system, right?"
+        },
+        {
+          "location": "t:0:21:28",
+          "excerpt": "it's a mini app within Hop, you know, just a miniature engine that you can call and talk to and use APIs, so it's decoupled slightly. That's up to you guys. I don't have a preference if you just go straight to the database for the data or go to the API"
+        }
+      ],
+      "owner": "unknown",
+      "due_date": "unknown",
+      "confidence": "medium",
+      "confidence_note": "Shawn Main delegates it to \"you guys\" without naming anyone, so the owner cannot be taken from the source — it is addressed to the build team in general, and the transcript does not establish who on it holds the design call. It is a deliberate deferral rather than an unresolved dispute, so the librarian may prefer to record it as a design task rather than an open question.",
+      "blocking": [
+        "CAND-DEC-007"
+      ],
+      "routing": [
+        {
+          "repo": "wf-orchestration",
+          "area": "architecture"
+        }
+      ]
+    },
+    {
+      "id": "CAND-Q-006",
+      "title": "Can CoverBase actually drive the onboarding question set dynamically?",
+      "question": "The build assumes the question set is defined in CoverBase and rendered from there with nothing hard-coded in Hazel. CoverBase said on the initial call that they will provide everything, but the team is still reading the API documentation and has not confirmed that dynamic question control is supported.",
+      "evidence": [
+        {
+          "location": "t:0:05:21",
+          "excerpt": "We will let you know if that is possible in cover base. That is what we are trying to spend time reviewing the APIs, documentation and all."
+        },
+        {
+          "location": "t:0:05:21",
+          "excerpt": "But our initial call with the cover base was, yes, they will provide everything. So. We started going through the APIs, we started checking what is possible with the APIs and all."
+        }
+      ],
+      "owner": "Shantanu Wadodkar",
+      "due_date": "unknown",
+      "confidence": "high",
+      "confidence_note": "Shantanu Wadodkar states plainly that he will report back on whether it is possible, and commits his team to the API review that answers it (ACT-004). It is closely related to registry Q-005, which asks whether CoverBase accepts a fallback answer payload — both turn on what the CoverBase intake API actually supports, and one investigation likely settles both.",
+      "blocking": [
+        "CAND-DEC-001"
+      ],
+      "routing": [
+        {
+          "repo": "integration-wrapper",
+          "area": "coverbase"
+        }
+      ]
+    }
+  ],
+  "superseded_decisions": [],
+  "not_promoted": [
+    {
+      "topic": "A three-band RAFA model — 1 or 2 yes, 3 or 4 conditional, 5 no — with a manual response and a manual trigger for the yes path",
+      "evidence": [
+        {
+          "location": "t:0:13:46",
+          "excerpt": "I mean, at this point, it'll probably still be a manual response"
+        },
+        {
+          "location": "t:0:14:27",
+          "excerpt": "Yeah, we'll, so we'll want, I think right now we're saying a one or two is a yes, a three or four is conditional, and we need to determine that. And then a five is a no."
+        }
+      ],
+      "reason": "withdrawn_by_speaker",
+      "note": "Aaron McWilliams describes it hedged throughout (\"probably\", \"maybe we just had leave it open\", \"we need to determine that\"), then takes it to Shawn Main, who rules for the simpler MVP form promoted as CAND-DEC-005. Aaron McWilliams does not press it. The three-band scheme may return when the thresholds are made configurable, but the meeting did not settle it."
+    },
+    {
+      "topic": "A bank-name search box on the public inquiry page that queries Hazel's UBPR data",
+      "evidence": [
+        {
+          "location": "t:0:25:16",
+          "excerpt": "what I would do is I would actually just put in a search, a little search thing where they start typing in their name of their bank and it just searches the UBPR data that we have."
+        },
+        {
+          "location": "t:0:25:29",
+          "excerpt": "according to what Joel had on this take was to not add a lookup bar exactly because like in because if we add a lookup then It can be a security threat where bots or anyone can just randomly add in, also add in something into the search in the lookup and they'll run the query to the API too."
+        },
+        {
+          "location": "t:0:26:04",
+          "excerpt": "It's all it's all public data, yeah."
+        }
+      ],
+      "reason": "no_agreement_reached",
+      "note": "Shawn Main proposes it, Smital Lunawat objects citing Joel Olivares' earlier ruling against a lookup bar on an unauthenticated page, Shawn Main counters that the data is public, and Shantanu Wadodkar closes with \"both the things are valid\" and defers. Neither side conceded. The identifier half of the same exchange is promoted as CAND-Q-003; this is the interaction-design half and is equally unsettled. Joel Olivares was not on this call to confirm or withdraw the position attributed to him."
+    },
+    {
+      "topic": "Removing the second Vanta NDA so prospects are not asked to sign twice",
+      "evidence": [
+        {
+          "location": "t:0:03:09",
+          "excerpt": "I think we've got a way that I can keep some of our prospects getting 2 NDAs, one from me in the beginning, or I guess we're building it in the hot platform. And then the other one was from Vanta. So I think we have a way to remove them from getting it the second time in Vanta, which has been causing some confusion."
+        }
+      ],
+      "reason": "speculation_without_commitment",
+      "note": "Aaron McWilliams reports progress against registry Q-013 but states no mechanism, names no decision, and says twice that he only thinks there is a way. He then adds it does not affect what the build team is doing. Worth flagging to the librarian as movement on Q-013, not as a resolution of it. \"Vanta\" here is the compliance platform; the \"hot platform\" is HOP."
+    },
+    {
+      "topic": "The NDA is an electronic tick-box acceptance of terms rather than DocuSign, capturing signature, name and date",
+      "evidence": [
+        {
+          "location": "t:0:28:42",
+          "excerpt": "So, and this NDA is the one without DocuSign. The first one is just an exception of terms and conditions, sort of a tick box."
+        },
+        {
+          "location": "t:0:28:57",
+          "excerpt": "Yes, and we just need to add the, make sure we get the signature name and date in there. I saw it yesterday, but."
+        }
+      ],
+      "reason": "restates_existing_record",
+      "note": "DEC-005 and DEC-010 restated as Smital Lunawat reads the flow back. The only new element in this exchange is where the NDA sits in the sequence, promoted as CAND-DEC-009. Note that Aaron McWilliams repeats the signature/name/date requirement here without saying it has been signed off, so registry Q-011 remains open."
+    },
+    {
+      "topic": "The Wolfsberg questionnaire upload is optional and marked \"if applicable\"",
+      "evidence": [
+        {
+          "location": "t:0:03:09",
+          "excerpt": "So I think for now we just keep building with the Wolfsburg is optional and the question sets that we have."
+        },
+        {
+          "location": "t:0:09:01",
+          "excerpt": "now the documents we have just mentioned, if it is applicable, then you can upload it. Nothing else, and then we have made this mandatory. Is this fine?"
+        }
+      ],
+      "reason": "restates_existing_record",
+      "note": "This is DEC-007 and DEC-013 demonstrated back in the prototype and confirmed as the interim build direction. What is new is the placement change, promoted as CAND-DEC-003, and Aaron McWilliams' outstanding query about whether other questions replace it, raised as CAND-Q-001."
+    },
+    {
+      "topic": "Uploaded documents are stored in Hazel's own database and then shared with CoverBase",
+      "evidence": [
+        {
+          "location": "t:0:29:14",
+          "excerpt": "Then again, these documents will then go to the database and to cover base as well."
+        },
+        {
+          "location": "t:0:29:34",
+          "excerpt": "due diligence. So the document that the user upload, we store it on our end and then we share it with our base."
+        },
+        {
+          "location": "t:0:29:45",
+          "excerpt": "Yeah, I think that's all technical discussions with the rule figure it out to you."
+        }
+      ],
+      "reason": "explicitly_parked",
+      "note": "Smital Lunawat states the storage model while walking the flow; Shantanu Wadodkar cuts it off as a technical detail to be worked out and the call ends. Nobody from the Hazel side responded. This is the same ground as registry Q-002, which asks whether intake documents must be stored in Databricks, and it remains unanswered. \"our base\" is CoverBase."
+    },
+    {
+      "topic": "Partitioning the RAFA engine off from HOP at some point in the future",
+      "evidence": [
+        {
+          "location": "t:0:20:54",
+          "excerpt": "that doesn't mean we we don't make it something that we could partition off in the future. Like, you don't have to fully integrate it, but it it it'll run on all the same infrastructure internal."
+        }
+      ],
+      "reason": "speculation_without_commitment",
+      "note": "Shawn Main's caveat on CAND-DEC-007 — a preference for keeping the option open, with no trigger, timeframe or requirement attached. Captured in the CAND-DEC-007 statement as context rather than promoted separately."
+    },
+    {
+      "topic": "Asking the applicant for contact names as part of the institution profile",
+      "evidence": [
+        {
+          "location": "t:0:07:03",
+          "excerpt": "We have added these and the contacts. And..."
+        },
+        {
+          "location": "t:0:07:55",
+          "excerpt": "Yeah, I don't think we need this area. Sorry."
+        }
+      ],
+      "reason": "withdrawn_by_speaker",
+      "note": "Pallavi Bichpuriya reports that a contacts section was added to match CoverBase; Shantanu Wadodkar argues it duplicates what the workflow already knows and withdraws it in the same exchange. The meeting did not decide \"no contacts\" — it decided how the data gets there, promoted as CAND-DEC-002."
+    }
+  ],
+  "final_takeaways": [
+    "Nothing in this delta is authoritative. Every item is a candidate for librarian review.",
+    "10 candidate decisions, 6 open questions, 7 action items, 8 items deliberately not promoted.",
+    "CAND-Q-001 is the item to read first: Aaron McWilliams says he is still waiting to learn whether banks that skip the Wolfsberg upload are asked other questions. DEC-009 was approved two days ago recording that they are not. Either DEC-009 was decided ahead of the confirmation it depends on, or Aaron McWilliams is not aware of it — the librarian should resolve which before the answer arrives.",
+    "CAND-DEC-005 and CAND-DEC-007 are the two high-confidence records, both called by Shawn Main: RAFA one-or-two admits automatically for MVP with everything else to human review, and RAFA runs entirely inside Hazel with no calls out to Vantage.",
+    "CAND-DEC-005 sits alongside DEC-014 rather than against it — DEC-014 governs the CoverBase residual risk score in due diligence, this governs the RAFA pre-screen at the gate. They should not be merged, but a reader of the registry will need the distinction spelled out.",
+    "CAND-DEC-008 bears on registry Q-014, which asks whether the FDIC number can be validated against a public FDIC API. Shawn Main's answer is that no external FDIC call is made at all — but Shantanu Wadodkar then defended keeping the FDIC number as the field collected, so CAND-Q-003 must settle before Q-014 can be closed.",
+    "CAND-DEC-004 describes a public, pre-authentication inquiry page that stores institution data in Hazel before any account exists. No decision covers what is retained for applicants who are declined, and the search-box exchange shows the team is already alive to the abuse surface — worth a look alongside registry Q-008."
+  ],
+  "implementation_recommended": false,
+  "blocking_reasons": [
+    "All candidates require librarian approval before any record or ticket can be created.",
+    "CAND-Q-001 puts DEC-009 in question. Until it is answered, the Wolfsberg fallback behaviour has one approved record and one contradicting statement from the person who owns the answer.",
+    "CAND-DEC-001 is a design commitment made before the CoverBase integration was proven — CAND-Q-006 must confirm CoverBase can drive the question set dynamically, and registry Q-005 asks a closely related question about the same API.",
+    "CAND-DEC-004 cannot be built as recorded until CAND-Q-003 fixes which institution identifier the public inquiry page collects.",
+    "CAND-DEC-005 has no defined behaviour for applicants who do not clear the gate automatically (CAND-Q-002), and CAND-DEC-010 — the console where that review would happen — is the lowest-confidence candidate in this delta.",
+    "The build team still has no infrastructure access; Aaron McWilliams reports another meeting is needed to resolve it (ACT-002), and Shantanu Wadodkar expects nothing to demonstrate for the next two days."
+  ]
+}
